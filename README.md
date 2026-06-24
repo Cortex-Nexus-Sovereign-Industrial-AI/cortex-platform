@@ -1,104 +1,107 @@
-# Cortex-Platform
+# 🏛️ CINIS NEXUS INDUSTRY OGOJA
 
-**CINIS Nexus Industry Ogoja** — Governance Repository & Official Platform Hub
+**Sovereign AI-Industrial Powerhouse**  
+Born in Ogoja, Nigeria • Engineered for Global Dominance  
+
+![Status](https://img.shields.io/badge/Status-Active-brightgreen) 
+![Governance](https://img.shields.io/badge/Governance-Sovereign-blue) 
+![Mode](https://img.shields.io/badge/Survival%20Mode-Maximum-red)
+
+**CEO & Founder:** Michael Ujuku Morim (Project 82736451092)  
+**Headquarters:** Ogoja, Cross River State, Nigeria  
+
+---
 
 ## Overview
 
-This repository serves as the official governance, documentation, and public-facing hub for **Cortex Intelligence Nexus Intel Solutions (CINIS)**, a technology initiative focused on artificial intelligence, automation, digital infrastructure, and innovation-driven development.
+Official governance hub for **Cortex Intelligence Nexus-Intel Solution (CINIS)** — delivering unbreakable multi-sector intelligence.
 
-**Operated Under:** Absolute Authority of Michael Ujuku Morim  
-**Headquarters:** Ogoja, Cross River State, Nigeria  
-**Governance Model:** Individual Proprietorship with Centralized Decision Authority
-
----
-
-## Repository Contents
-
-```
-├── README.md                  # This file - Repository overview
-├── GOVERNANCE.md             # Governance framework & authority structure
-├── ORGANIZATION.md           # Organizational structure & roles
-├── TECHNOLOGY_STACK.md       # Core technical assets & frameworks
-├── CODE_OF_CONDUCT.md        # Professional conduct standards
-├── OPERATIONS_MANUAL.md      # Internal operations & procedures
-├── MISSION_STATEMENT.md      # Formal mission, vision & values
-├── PARTNERSHIP_FRAMEWORK.md  # Collaboration & partnership terms
-├── PRIVACY_POLICY.md         # Data handling & privacy standards
-├── index.html               # Public homepage
-├── projects.html            # Projects portfolio page
-├── documents.html           # Corporate profile page
-└── styles.css               # Unified stylesheet
-```
+**Core Pillars:**
+- **MikeComplex AI** — Deep survival mode command core
+- **Shadow-Vault Security** — Invisible V8-torque fortress
+- **Bionic Survival Triad** — Neural + Robotic + Monetization Shield
+- **Bionic Puppy Module** 🐕 — Solar-powered 7-day resilience units
 
 ---
 
-## Key Initiatives
+## 🚀 Key Initiatives
 
-### 🔧 **Millions SDK**
-**Status:** Active  
-A foundational orchestration framework supporting AI operations, automation workflows, distributed system coordination, and intelligent deployment environments.
-- **Repository:** [Millions SDK](https://github.com/ujukumorim/millions-sdk)
-- **Focus:** AI Operations, Workflow Orchestration, Infrastructure Coordination
+**🔧 Millions SDK** — Autonomous monetization (invisible-web)  
+**🔐 Shadow-Vault** — Military-grade protection  
+**🐕 Bionic Puppy Module** — Adaptive hazard fighter  
 
-### 🔐 **Shadow-Vault Architecture**
-**Status:** Active  
-A security-focused framework emphasizing controlled data management, operational resilience, and infrastructure protection.
-- **Focus:** Data Security, Infrastructure Protection, Operational Resilience
+**📌 20 Million Pin AI Sup Module** (New)  
+Multi-dual specialist AI supporters. Each field has 5 dedicated AI supporters with extra hidden skills for creativity, robotics, business enterprise, and enterprise automation.
 
 ---
 
-## Mission & Focus
+## 🌍 Multi-Sector Strategic Focus
 
-**Mission:** To engineer advanced automation systems, intelligent infrastructure, and decentralized technology solutions that support sustainable innovation and operational efficiency.
+- Global in-seconds trucking intelligence  
+- Europe Expansion (decarbonized supply chains)  
+- Life-Cycle Robotics & Hidden Robotic Business Enterprises  
+- Industrial AI + 20M Pin AI Sup Modules (5 skills per specialist)  
+- Industry Ogoja-SSWORDS Governance  
 
-**Strategic Focus Areas:**
-- Artificial Intelligence Systems
-- Industrial Automation & Workflow Engineering
-- Digital Infrastructure Development
-- Research & Development
-- Knowledge Systems Architecture
-- Accessibility Technology
-- Open Innovation Frameworks
+**Mission:** Turn hazards into power. Build creativity through specialist AI supporters and hidden robotic enterprises.
 
 ---
 
-## Governance Authority
+## 📺 Media Section
 
-This platform operates under the **absolute authority** of **Michael Ujuku Morim**, Founder and Chief Executive Officer.
+**Watch & Explore CINIS in Action:**
 
-All strategic decisions, technology direction, governance policies, and operational authority are centralized and maintained by the Founder. See [GOVERNANCE.md](./GOVERNANCE.md) for detailed authority structure and decision-making framework.
+- **Bionic Puppy Module Demo** → [YouTube Video Placeholder](https://youtube.com/@cinisnexus)  
+- **Europe Expansion Vision** → [Strategic Overview](https://youtu.be/placeholder-europe)  
+- **Global Trucking Intelligence** → [Live Dashboard Reel](https://youtu.be/placeholder-trucking)  
+- **Shadow-Vault + Triad Showcase** → [Technical Deep Dive](https://youtu.be/placeholder-shadow)  
+
+**Gallery & Visuals:**  
+- [Bionic Puppy Units](images/puppy-module.jpg)  
+- [Robotic Enterprise Fleet](images/robotic-enterprise.jpg)  
+- [20M Pin AI Sup Network](images/ai-sup-module.jpg)  
+
+*(Add actual video links and image files to the `/images` folder after upload)*
 
 ---
 
-## Contact & Collaboration
+## Bionic Survival Triad + 20M Pin AI Sup
 
-**Email:** [cortexnexus@proton.me](mailto:cortexnexus@proton.me)  
+- **Neural Core** — Predictive foresight + 5 creativity skills per specialist  
+- **Robotic Layer** — Physical intervention + hidden robotic business enterprises  
+- **Monetization Shield** — Silent revenue with multi-dual supporter network  
+
+Each AI supporter field is backed by 5 extra specialized skills for maximum creativity and enterprise power.
+
+**Security:** PIA-inducted • Shadow-Vault sealed.
+
+---
+
+## Governance
+
+Absolute authority under Michael Ujuku Morim.  
+[→ GOVERNANCE.md](./GOVERNANCE.md)
+
+---
+
+## Contact & Partnership
+
+**Email:** cortexnexus@proton.me  
 **WhatsApp:** [+2349010251577](https://wa.me/2349010251577)  
-**Location:** Ogoja, Cross River State, Nigeria
 
-**Partnership Opportunities:** We welcome collaboration with developers, researchers, institutions, businesses, and innovation communities interested in building impactful technology solutions.
-
----
-
-## Documentation
-
-- **Governance & Operations:** See [GOVERNANCE.md](./GOVERNANCE.md), [OPERATIONS_MANUAL.md](./OPERATIONS_MANUAL.md)
-- **Technical Assets:** See [TECHNOLOGY_STACK.md](./TECHNOLOGY_STACK.md)
-- **Organizational Structure:** See [ORGANIZATION.md](./ORGANIZATION.md)
-- **Professional Standards:** See [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md)
-- **Privacy & Data:** See [PRIVACY_POLICY.md](./PRIVACY_POLICY.md)
-- **Partnerships:** See [PARTNERSHIP_FRAMEWORK.md](./PARTNERSHIP_FRAMEWORK.md)
+**Partners Welcome** — Europe & Global collaboration open.
 
 ---
 
 ## Repository Status
 
-- **Visibility:** Public
-- **Last Updated:** 2026-06-16
-- **Maintained by:** Michael Ujuku Morim (mikecomplexai-7)
-- **License:** Proprietary (CINIS Nexus)
+- **Visibility:** Public  
+- **Last Updated:** 2026-06-24  
+- **Maintained by:** Michael Ujuku Morim  
 
 ---
 
+**Michael Ujuku Morim commands. The nexus obeys.**  
+
 © 2026 **CINIS Nexus Industry Ogoja** — All Rights Reserved  
-Cortex Intelligence Nexus Intel Solution
+*From Ogoja roots to global bionic intelligence.*
