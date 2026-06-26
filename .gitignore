@@ -1,0 +1,60 @@
+# CINIS NEXUS .gitignore
+# Files and folders to exclude from Git tracking
+
+# Environment & Secrets
+.env
+.env.local
+.env.*.local
+.DS_Store
+Thumbs.db
+
+# IDE & Editor
+.vscode/
+.idea/
+*.swp
+*.SWO
+*~
+.sublime-project
+.sublime-workspace
+
+# OS
+.AppleDouble
+.AppleDB
+.LSOverride
+*
+ehthumbs.db
+
+# Node (if used for future build process)
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+package-lock.json
+
+# Build outputs
+/dist/
+/build/
+*.min.js
+*.min.css
+
+# Local development
+/local/
+/temp/
+/tmp/
+*.log
+
+# Secrets (never commit these)
+sk_live_*
+sk_test_*
+.secrets
+
+# Large files
+*.psd
+*.zip
+*.rar
+*.tar.gz
+video_*.mp4
+
+# Keep committed
+!.github/
+!.gitkeep
