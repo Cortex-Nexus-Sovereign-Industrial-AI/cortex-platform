@@ -282,4 +282,3 @@ Your payment system is now live. Every subscription:
 *Last updated: June 2026*  
 *Platform: CINIS NEXUS INDUSTRY OGOJA*  
 *Built by: MikeComplex AI*
-
