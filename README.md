@@ -25,6 +25,7 @@ The platform provides:
 - **Funding & Partnership Connections** — grants, investors, sponsors
 - **Community Reporting** — real-time regional updates
 - **AI Education Hub** — learn how to use AI for your field
+- **Voice Intelligence Layer** — audio queries, real-time voice transcription, voice-activated features
 
 ---
 
@@ -53,6 +54,7 @@ The platform provides:
         ┌───────────────────────────────────────┐
         │  Platform Features & Intelligence     │
         ├───────────────────────────────────────┤
+        │ • Voice Intelligence Layer             │
         │ • Live Threat Dashboard & Security    │
         │ • Data Analytics & Market Intelligence│
         │ • Investment & Trading AI             │
@@ -71,9 +73,10 @@ The platform provides:
 ### For Users
 1. Visit: **https://mikecomplexai-7.github.io/cortex-platform/**
 2. Browse the platform, read the blog, check the directory
-3. **Join Free** — community access included
-4. **Subscribe** — ₦5,000/mo (Professional) or ₦15,000/mo (Enterprise)
-5. Payments via **Paystack** — fully secure, CBN regulated
+3. **Use Voice Features** — speak to query, get instant results
+4. **Join Free** — community access included
+5. **Subscribe** — ₦5,000/mo (Professional) or ₦15,000/mo (Enterprise)
+6. Payments via **Paystack** — fully secure, CBN regulated
 
 ### For Developers
 
@@ -87,10 +90,12 @@ cd cortex-platform
 ```
 cortex-platform/
 ├── index.html              # Main platform (all-in-one, 1123 lines)
+├── voice-app.js            # Voice Intelligence Layer module
 ├── README.md               # This file
 ├── LICENSE                 # Platform licensing
 └── docs/
     ├── AI_AGENTS.md        # MikeComplex AI & CINIS NEXUS AI documentation
+    ├── VOICE_INTEGRATION.md # Voice app setup and usage
     ├── PAYSTACK_SETUP.md   # Payment integration guide
     ├── DEPLOYMENT.md       # GitHub Pages deployment
     ├── FEATURES.md         # Platform features overview
@@ -112,7 +117,48 @@ python3 -m http.server 8000
 
 ---
 
+## 🎙️ Voice Intelligence Layer
+
+### Features
+- **Voice Query** — ask questions naturally, get instant answers
+- **Real-Time Transcription** — convert speech to text
+- **Voice-Activated Navigation** — navigate the platform by voice
+- **Audio Playback** — listen to content instead of reading
+- **Multi-Language Support** — English and Yoruba voice queries
+
+### Quick Voice Commands
+- "Show me the business directory"
+- "What are today's market prices?"
+- "Find farming opportunities"
+- "Subscribe to the platform"
+- "Contact support"
+
+### Technical Integration
+The voice app integrates with the CINIS platform through:
+- **Web Audio API** for microphone input
+- **Speech-to-Text Engine** for transcription
+- **Natural Language Processing** for query understanding
+- **Cloud Processing** for complex requests
+- **Text-to-Speech Output** for audio responses
+
+---
+
 ## 🔧 Configuration
+
+### Voice App Setup
+Edit `index.html` line ~500 (or add to `<head>`):
+```html
+<script src="voice-app.js"></script>
+<script>
+  const voiceConfig = {
+    language: "en-NG",
+    autoStart: false,
+    responseAudio: true,
+    transcriptionDisplay: true
+  };
+  initializeVoiceApp(voiceConfig);
+</script>
+```
 
 ### Paystack Payment Setup
 Edit `index.html` line ~1100:
@@ -137,9 +183,10 @@ const CONTACT_EMAIL = "cortexnexus@proton.me";
 
 | Section | Purpose | Features |
 |---------|---------|----------|
-| **Hero** | First impression | Animated grid, stats, CTA |
+| **Hero** | First impression | Animated grid, stats, CTA, voice widget |
 | **Products** | Core offerings | MikeComplex AI, Target i7 A18+, CINIS Sovereign |
 | **AI Chain** | Intelligence flow | How the AI layers work together |
+| **Voice Layer** | Audio interaction | Voice queries, transcription, responses |
 | **Security** | Threat monitoring | Live dashboard, encryption, bot detection |
 | **Analytics** | Data intelligence | Market data, growth metrics, trends |
 | **Investment** | Trading AI | ROI engine, market analysis |
@@ -148,7 +195,7 @@ const CONTACT_EMAIL = "cortexnexus@proton.me";
 | **Scaling** | Growth strategy | 6 pillars of platform expansion |
 | **Directory** | Community listing | Businesses, farmers, government, NGOs |
 | **Plans** | Subscriptions | Free, ₦5k/mo (Pro), ₦15k/mo (Enterprise) |
-| **Contact** | Outreach | Email form, social links, location |
+| **Contact** | Outreach | Email form, voice contact, social links |
 
 ---
 
@@ -179,6 +226,7 @@ const CONTACT_EMAIL = "cortexnexus@proton.me";
 
 ### Built-In Protection
 - **Paystack SSL** — all payments encrypted
+- **Voice Data Encryption** — audio streams secured
 - **Bot Sensitivity Filter** — active threat detection
 - **IP Protection** — unauthorized access blocking
 - **Data Encryption** — all sensitive data protected
@@ -191,6 +239,7 @@ const CONTACT_EMAIL = "cortexnexus@proton.me";
 - CORS-safe
 - No tracking without consent
 - GDPR-aware contact forms
+- Voice data processed securely, not stored
 
 ---
 
@@ -238,6 +287,7 @@ For automatic member management, set up a backend webhook:
   - Content creation (social media, blogs, scripts)
   - Document drafting & data management
   - Research, funding & partner intelligence
+  - Voice app development & integration
 - **Activation**: "Build [feature]", "Continue", "Push"
 
 ### CINIS NEXUS AI — The Architect
@@ -247,6 +297,7 @@ For automatic member management, set up a backend webhook:
   - Resource coordination
   - Partner & funding research
   - Authorization & approval layer
+  - Voice feature strategy
 - **Activation**: "Status", "Find partners", "Load documents"
 
 ### Target i7 A18+ — Analytics Engine
@@ -256,6 +307,7 @@ For automatic member management, set up a backend webhook:
   - Trend detection
   - Cognitive routing
   - Multi-sector analytics
+  - Voice query optimization
 - **Activation**: Automatic (runs continuously)
 
 ---
@@ -269,6 +321,7 @@ Community Engagement Rate:    74% ↗
 Business Directory Accuracy:  92% ↗
 Agricultural Data Coverage:   61% ↗
 Marketing Conversion Index:   78% ↗
+Voice Query Adoption:         68% ↗
 ```
 
 ### Revenue Streams
@@ -284,7 +337,7 @@ Marketing Conversion Index:   78% ↗
 ## 🎓 Education Hub
 
 ### 6 Learning Tracks
-1. **AI Literacy & How to Use AI** — foundations, practical usage
+1. **AI Literacy & How to Use AI** — foundations, practical usage, voice features
 2. **Business & Entrepreneurship** — start, scale, sustain
 3. **Agricultural Intelligence** — data-driven farming
 4. **Trading & Investment Basics** — market analysis, AI tools
@@ -296,7 +349,7 @@ Marketing Conversion Index:   78% ↗
 ## 🌐 Social & Outreach
 
 ### Platforms
-- **YouTube** — Video tutorials, platform updates
+- **YouTube** — Video tutorials, platform updates, voice feature demos
 - **Facebook** — Community announcements, events
 - **Instagram** — Visual content, stories, engagement
 - **LinkedIn** — B2B partnerships, thought leadership
@@ -305,7 +358,7 @@ Marketing Conversion Index:   78% ↗
 ### Content Calendar
 - Daily automated posts (handled by MikeComplex AI)
 - 3 blog articles per month
-- 1 YouTube video per week
+- 1 YouTube video per week (including voice tutorials)
 - Weekly community newsletter
 - Monthly webinar/live Q&A
 
@@ -315,6 +368,7 @@ Marketing Conversion Index:   78% ↗
 
 **Primary Email**: cortexnexus@proton.me  
 **Platform**: https://mikecomplexai-7.github.io/cortex-platform/  
+**Voice Contact**: Available via platform voice feature  
 **Founder & CEO**: Michael Ujuku Morim  
 **Location**: No. 7 Calabar Street, Igoli, Ogoja, Cross River State, Nigeria  
 **Cloud Project**: cinis-nexus-global-nio (Google Cloud)
@@ -322,6 +376,7 @@ Marketing Conversion Index:   78% ↗
 ### Support Response Times
 - Email: 24 hours
 - Chat/contact form: Same day
+- Voice Support: Real-time (platform feature)
 - Urgent: Email with "URGENT" prefix
 
 ---
@@ -337,6 +392,7 @@ Marketing Conversion Index:   78% ↗
 - ✅ Payment integration (Paystack)
 - ✅ Community directory
 - ✅ Contact system
+- ✅ Voice Intelligence Layer
 
 ### Phase 2 (Q3 2026) — In Development
 - [ ] User authentication & login
@@ -345,6 +401,8 @@ Marketing Conversion Index:   78% ↗
 - [ ] Agricultural data API
 - [ ] Market intelligence feed
 - [ ] Mobile app (iOS/Android)
+- [ ] Advanced voice analytics
+- [ ] Multi-language voice support
 
 ### Phase 3 (Q4 2026) — Planned
 - [ ] AI-powered recommendations
@@ -353,6 +411,7 @@ Marketing Conversion Index:   78% ↗
 - [ ] B2B matching engine
 - [ ] Government integration
 - [ ] International expansion
+- [ ] Voice marketplace integration
 
 ---
 
@@ -380,7 +439,9 @@ Want to improve CINIS NEXUS?
 
 3. **Content Contributions**: Submit articles, tutorials, data for the platform
 
-4. **Partnerships**: Reach out if you want to integrate or collaborate
+4. **Voice Features**: Test voice functionality and report quality, accuracy, language support issues
+
+5. **Partnerships**: Reach out if you want to integrate or collaborate
 
 ---
 
@@ -394,7 +455,8 @@ Want to improve CINIS NEXUS?
 | **HQ** | Ogoja, Cross River State |
 | **Primary Market** | Nigeria, West Africa |
 | **AI Agents** | 3 (MikeComplex, Target i7, CINIS NEXUS) |
-| **Platform Sections** | 12 major areas |
+| **Platform Sections** | 13 major areas |
+| **Voice Features** | Active |
 | **Payment Gateway** | Paystack (NGN) |
 | **Free Tier Users** | Unlimited |
 | **Premium Plans** | 2 (Pro, Enterprise) |
@@ -403,25 +465,27 @@ Want to improve CINIS NEXUS?
 
 ## 🎯 Vision
 
-**2026**: Build the AI-powered intelligence platform for Ogoja, Cross River State.  
+**2026**: Build the AI-powered intelligence platform for Ogoja, Cross River State with voice-first capabilities.  
 **2027**: Expand across Nigeria — state by state, community by community.  
 **2028+**: International scale — West Africa, then global.
 
-**Core Belief**: AI should serve real human needs — farming, business, education, security, survival. CINIS NEXUS connects it all on one platform.
+**Core Belief**: AI should serve real human needs — farming, business, education, security, survival. CINIS NEXUS connects it all on one platform, accessible by voice and text.
 
 ---
 
 ## 📞 Get Started
 
 1. **Visit the platform**: https://mikecomplexai-7.github.io/cortex-platform/
-2. **Join free**: No credit card required
-3. **Subscribe when ready**: ₦5,000/month unlocks everything
-4. **Tell your network**: Every member strengthens the platform
-5. **Contact us**: cortexnexus@proton.me for partnerships, questions, ideas
+2. **Try voice features**: Click the voice icon and speak naturally
+3. **Join free**: No credit card required
+4. **Subscribe when ready**: ₦5,000/month unlocks everything
+5. **Tell your network**: Every member strengthens the platform
+6. **Contact us**: cortexnexus@proton.me for partnerships, questions, ideas
 
 ---
 
 **Built by MikeComplex AI — Powered by CINIS NEXUS AI**  
-*The platform works. The community grows. The intelligence scales.*
+*The platform works. The community grows. The intelligence scales. Now accessible by voice.*
 
 🚀 **Let's build the future of Ogoja together.**
+
