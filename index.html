@@ -9,6 +9,7 @@
 <meta property="og:title" content="CINIS NEXUS | Cortex Intelligence Platform"/>
 <meta property="og:description" content="AI-powered industry intelligence for Ogoja and beyond."/>
 <meta property="og:type" content="website"/>
+<meta name="voice-app" content="CINIS NEXUS Voice Intelligence Layer v1.0">
 <link rel="canonical" href="https://mikecomplexai-7.github.io/cortex-platform/"/>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Organization","name":"CINIS NEXUS INDUSTRY OGOJA","alternateName":"CINIS-NIO","url":"https://mikecomplexai-7.github.io/cortex-platform/","email":"cortexnexus@proton.me","founder":{"@type":"Person","name":"Michael Ujuku Morim"},"foundingDate":"2012","description":"AI-powered industry intelligence platform connecting businesses, farmers, government and communities in Ogoja, Cross River State, Nigeria.","address":{"@type":"PostalAddress","streetAddress":"No. 7 Calabar Street, Igoli","addressLocality":"Ogoja","addressRegion":"Cross River State","addressCountry":"NG"}}
@@ -26,17 +27,11 @@
 html{scroll-behavior:smooth;}
 body{background:var(--dark);color:var(--white);font-family:var(--font-body);overflow-x:hidden;}
 
-/* ── SCROLLBAR ── */
 ::-webkit-scrollbar{width:6px;}
 ::-webkit-scrollbar-track{background:var(--navy-deep);}
 ::-webkit-scrollbar-thumb{background:var(--teal);border-radius:3px;}
 
-/* ── NAV ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:1000;
-  background:rgba(6,13,31,0.92);backdrop-filter:blur(16px);
-  border-bottom:1px solid rgba(0,194,255,0.15);
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 2rem;height:64px;transition:all .3s;}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(6,13,31,0.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,194,255,0.15);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:64px;transition:all .3s;}
 .nav-logo{display:flex;align-items:center;gap:.75rem;text-decoration:none;}
 .nav-logo .mark{font-size:1.5rem;font-weight:900;color:var(--teal);letter-spacing:-.5px;}
 .nav-logo .sub{font-size:.65rem;color:var(--gold);letter-spacing:2px;text-transform:uppercase;display:block;margin-top:-2px;}
@@ -51,46 +46,28 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;
 .mobile-menu.open{display:block;}
 .mobile-menu a{display:block;color:var(--white);text-decoration:none;padding:.75rem 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:.95rem;}
 
-/* ── HERO ── */
-#hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  text-align:center;padding:6rem 2rem 4rem;position:relative;overflow:hidden;}
-.hero-grid{position:absolute;inset:0;background-image:
-  linear-gradient(rgba(0,194,255,.05) 1px,transparent 1px),
-  linear-gradient(90deg,rgba(0,194,255,.05) 1px,transparent 1px);
-  background-size:60px 60px;animation:gridMove 20s linear infinite;}
+#hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6rem 2rem 4rem;position:relative;overflow:hidden;}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,194,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,194,255,.05) 1px,transparent 1px);background-size:60px 60px;animation:gridMove 20s linear infinite;}
 @keyframes gridMove{from{transform:translate(0,0)}to{transform:translate(60px,60px)}}
-.hero-glow{position:absolute;width:600px;height:600px;border-radius:50%;
-  background:radial-gradient(circle,rgba(0,194,255,.12) 0%,transparent 70%);
-  top:50%;left:50%;transform:translate(-50%,-50%);animation:pulse 4s ease-in-out infinite;}
+.hero-glow{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(0,194,255,.12) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);animation:pulse 4s ease-in-out infinite;}
 @keyframes pulse{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.1)}}
 .hero-eyebrow{font-size:.72rem;letter-spacing:4px;color:var(--teal);text-transform:uppercase;margin-bottom:1.5rem;position:relative;}
-.hero-title{font-size:clamp(2.8rem,7vw,6rem);font-weight:900;line-height:1.05;position:relative;
-  background:linear-gradient(135deg,var(--white) 30%,var(--teal));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  margin-bottom:.75rem;}
-.hero-subtitle{font-size:clamp(1rem,2.5vw,1.4rem);color:var(--teal);font-weight:600;
-  letter-spacing:2px;text-transform:uppercase;position:relative;margin-bottom:1.5rem;}
+.hero-title{font-size:clamp(2.8rem,7vw,6rem);font-weight:900;line-height:1.05;position:relative;background:linear-gradient(135deg,var(--white) 30%,var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.75rem;}
+.hero-subtitle{font-size:clamp(1rem,2.5vw,1.4rem);color:var(--teal);font-weight:600;letter-spacing:2px;text-transform:uppercase;position:relative;margin-bottom:1.5rem;}
 .hero-desc{max-width:640px;color:var(--gray);font-size:1.05rem;line-height:1.75;position:relative;margin-bottom:2.5rem;}
 .hero-stats{display:flex;gap:3rem;justify-content:center;margin-bottom:3rem;position:relative;flex-wrap:wrap;}
 .stat{text-align:center;}
 .stat-n{font-size:2.2rem;font-weight:900;color:var(--teal);display:block;}
 .stat-l{font-size:.72rem;letter-spacing:2px;color:var(--gray);text-transform:uppercase;}
 .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;position:relative;}
-.btn-primary{background:linear-gradient(135deg,var(--teal),#0077AA);color:#000;
-  padding:.85rem 2rem;border-radius:8px;font-weight:800;font-size:.9rem;
-  letter-spacing:.5px;text-decoration:none;transition:all .3s;border:none;cursor:pointer;}
+.btn-primary{background:linear-gradient(135deg,var(--teal),#0077AA);color:#000;padding:.85rem 2rem;border-radius:8px;font-weight:800;font-size:.9rem;letter-spacing:.5px;text-decoration:none;transition:all .3s;border:none;cursor:pointer;}
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,194,255,.35);}
-.btn-outline{border:1.5px solid var(--teal);color:var(--teal);
-  padding:.85rem 2rem;border-radius:8px;font-weight:700;font-size:.9rem;
-  letter-spacing:.5px;text-decoration:none;transition:all .3s;background:transparent;}
+.btn-outline{border:1.5px solid var(--teal);color:var(--teal);padding:.85rem 2rem;border-radius:8px;font-weight:700;font-size:.9rem;letter-spacing:.5px;text-decoration:none;transition:all .3s;background:transparent;}
 .btn-outline:hover{background:rgba(0,194,255,.08);transform:translateY(-2px);}
-.scroll-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
-  display:flex;flex-direction:column;align-items:center;gap:.5rem;color:var(--gray);font-size:.75rem;letter-spacing:2px;}
-.scroll-arrow{width:20px;height:20px;border-right:2px solid var(--teal);border-bottom:2px solid var(--teal);
-  transform:rotate(45deg);animation:bounce .8s ease-in-out infinite alternate;}
+.scroll-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;color:var(--gray);font-size:.75rem;letter-spacing:2px;}
+.scroll-arrow{width:20px;height:20px;border-right:2px solid var(--teal);border-bottom:2px solid var(--teal);transform:rotate(45deg);animation:bounce .8s ease-in-out infinite alternate;}
 @keyframes bounce{from{transform:rotate(45deg) translateY(0)}to{transform:rotate(45deg) translateY(6px)}}
 
-/* ── SECTIONS ── */
 section{padding:6rem 2rem;}
 .section-inner{max-width:1200px;margin:0 auto;}
 .eyebrow{font-size:.7rem;letter-spacing:4px;text-transform:uppercase;color:var(--teal);margin-bottom:1rem;display:block;}
@@ -99,34 +76,25 @@ section{padding:6rem 2rem;}
 .section-desc{color:var(--gray);font-size:1rem;line-height:1.75;max-width:600px;margin-bottom:3rem;}
 .divider{width:60px;height:3px;background:linear-gradient(90deg,var(--teal),transparent);margin:1.5rem 0 2.5rem;}
 
-/* ── CARDS ── */
 .grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;}
 .grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:1.5rem;}
 .grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.25rem;}
-.card{background:var(--card);border:1px solid rgba(0,194,255,.12);border-radius:16px;
-  padding:2rem;transition:all .3s;position:relative;overflow:hidden;}
-.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,transparent,var(--teal),transparent);opacity:0;transition:.3s;}
+.card{background:var(--card);border:1px solid rgba(0,194,255,.12);border-radius:16px;padding:2rem;transition:all .3s;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--teal),transparent);opacity:0;transition:.3s;}
 .card:hover{transform:translateY(-4px);border-color:rgba(0,194,255,.3);box-shadow:0 16px 48px rgba(0,194,255,.08);}
 .card:hover::before{opacity:1;}
-.card-icon{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;
-  font-size:1.5rem;margin-bottom:1.25rem;background:rgba(0,194,255,.1);border:1px solid rgba(0,194,255,.2);}
+.card-icon{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:1.25rem;background:rgba(0,194,255,.1);border:1px solid rgba(0,194,255,.2);}
 .card h3{font-size:1.1rem;font-weight:700;margin-bottom:.75rem;color:var(--white);}
 .card p{color:var(--gray);font-size:.88rem;line-height:1.7;}
-.card .tag{display:inline-block;font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;
-  padding:.25rem .6rem;border-radius:4px;margin-bottom:1rem;}
+.card .tag{display:inline-block;font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;padding:.25rem .6rem;border-radius:4px;margin-bottom:1rem;}
 .tag-teal{background:rgba(0,194,255,.12);color:var(--teal);border:1px solid rgba(0,194,255,.25);}
 .tag-gold{background:rgba(212,160,23,.12);color:var(--gold);border:1px solid rgba(212,160,23,.25);}
 .tag-green{background:rgba(0,255,136,.1);color:var(--green);border:1px solid rgba(0,255,136,.2);}
 .tag-purple{background:rgba(123,47,190,.15);color:#BB7FFF;border:1px solid rgba(123,47,190,.3);}
 
-/* ── PRODUCTS ── */
 #products{background:linear-gradient(180deg,var(--dark) 0%,#040A18 100%);}
-.product-card{background:var(--card);border:1px solid rgba(0,194,255,.15);border-radius:20px;
-  padding:2.5rem;display:flex;flex-direction:column;gap:1.25rem;position:relative;overflow:hidden;}
-.product-card .badge{position:absolute;top:1.5rem;right:1.5rem;
-  font-size:.65rem;letter-spacing:2px;text-transform:uppercase;
-  padding:.3rem .7rem;border-radius:20px;font-weight:700;}
+.product-card{background:var(--card);border:1px solid rgba(0,194,255,.15);border-radius:20px;padding:2.5rem;display:flex;flex-direction:column;gap:1.25rem;position:relative;overflow:hidden;}
+.product-card .badge{position:absolute;top:1.5rem;right:1.5rem;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;padding:.3rem .7rem;border-radius:20px;font-weight:700;}
 .badge-new{background:var(--green);color:#000;}
 .badge-flagship{background:var(--gold);color:#000;}
 .product-icon{font-size:3rem;margin-bottom:.5rem;}
@@ -135,28 +103,27 @@ section{padding:6rem 2rem;}
 .feature-list{list-style:none;display:flex;flex-direction:column;gap:.5rem;margin-top:.5rem;}
 .feature-list li{font-size:.85rem;color:var(--gray);display:flex;align-items:flex-start;gap:.6rem;}
 .feature-list li::before{content:'◆';color:var(--teal);font-size:.5rem;margin-top:.35rem;flex-shrink:0;}
-.product-btn{margin-top:auto;background:transparent;border:1.5px solid var(--teal);
-  color:var(--teal);padding:.65rem 1.25rem;border-radius:8px;font-weight:700;
-  font-size:.82rem;cursor:pointer;transition:all .25s;text-align:center;text-decoration:none;display:block;}
+.product-btn{margin-top:auto;background:transparent;border:1.5px solid var(--teal);color:var(--teal);padding:.65rem 1.25rem;border-radius:8px;font-weight:700;font-size:.82rem;cursor:pointer;transition:all .25s;text-align:center;text-decoration:none;display:block;}
 .product-btn:hover{background:var(--teal);color:#000;}
 
-/* ── AI CHAIN ── */
 #ai-chain{background:#040A18;}
 .chain-flow{display:flex;align-items:center;gap:0;flex-wrap:wrap;justify-content:center;margin:2rem 0;}
-.chain-node{background:var(--card);border:1px solid rgba(0,194,255,.2);border-radius:12px;
-  padding:1rem 1.5rem;text-align:center;min-width:130px;}
+.chain-node{background:var(--card);border:1px solid rgba(0,194,255,.2);border-radius:12px;padding:1rem 1.5rem;text-align:center;min-width:130px;}
 .chain-node .cn-icon{font-size:1.5rem;margin-bottom:.4rem;}
 .chain-node .cn-label{font-size:.75rem;font-weight:700;color:var(--white);letter-spacing:.5px;}
 .chain-node .cn-desc{font-size:.65rem;color:var(--gray);margin-top:.2rem;}
 .chain-arrow{color:var(--teal);font-size:1.4rem;padding:0 .5rem;flex-shrink:0;}
 
-/* ── SECURITY ── */
+#voice-layer{background:linear-gradient(180deg,#040A18,var(--dark));}
+.voice-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;}
+.voice-demo{background:var(--card);border:1px solid rgba(0,194,255,.15);border-radius:20px;padding:2rem;text-align:center;position:relative;overflow:hidden;}
+.voice-commands-list{text-align:left;display:flex;flex-direction:column;gap:.75rem;}
+.voice-commands-list li{font-size:.85rem;color:var(--gray);padding:.5rem;border-left:2px solid var(--teal);padding-left:1rem;list-style:none;}
+
 #security{background:linear-gradient(180deg,#040A18,var(--dark));}
 .security-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;}
-.security-visual{background:var(--card);border:1px solid rgba(0,194,255,.15);border-radius:20px;
-  padding:2rem;position:relative;overflow:hidden;}
-.threat-item{display:flex;align-items:center;gap:1rem;padding:.75rem;
-  border-radius:10px;margin-bottom:.75rem;background:rgba(0,0,0,.3);}
+.security-visual{background:var(--card);border:1px solid rgba(0,194,255,.15);border-radius:20px;padding:2rem;position:relative;overflow:hidden;}
+.threat-item{display:flex;align-items:center;gap:1rem;padding:.75rem;border-radius:10px;margin-bottom:.75rem;background:rgba(0,0,0,.3);}
 .threat-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;animation:blink 1.5s ease-in-out infinite;}
 .threat-dot.active{background:var(--green);}
 .threat-dot.warning{background:var(--gold);animation-delay:.5s;}
@@ -168,40 +135,29 @@ section{padding:6rem 2rem;}
 .status-watch{color:var(--gold);}
 .status-block{color:var(--red);}
 
-/* ── DATA / ANALYTICS ── */
+#analytics{background:#040A18;}
 .metric-bar{margin-bottom:1.25rem;}
-.metric-bar .mb-label{display:flex;justify-content:space-between;margin-bottom:.4rem;
-  font-size:.8rem;color:var(--gray);}
+.metric-bar .mb-label{display:flex;justify-content:space-between;margin-bottom:.4rem;font-size:.8rem;color:var(--gray);}
 .metric-bar .mb-label span:last-child{color:var(--teal);font-weight:700;}
 .mb-track{height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;}
-.mb-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--teal),#0099CC);
-  animation:fillUp 1.5s ease-out forwards;transform-origin:left;}
+.mb-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--teal),#0099CC);animation:fillUp 1.5s ease-out forwards;transform-origin:left;}
 @keyframes fillUp{from{width:0}to{width:var(--w)}}
 
-/* ── INVESTMENT ── */
 #investment{background:#040A18;}
-.roi-card{background:linear-gradient(135deg,rgba(0,194,255,.06),rgba(212,160,23,.04));
-  border:1px solid rgba(0,194,255,.18);border-radius:20px;padding:2.5rem;text-align:center;}
+.roi-card{background:linear-gradient(135deg,rgba(0,194,255,.06),rgba(212,160,23,.04));border:1px solid rgba(0,194,255,.18);border-radius:20px;padding:2.5rem;text-align:center;}
 .roi-number{font-size:4rem;font-weight:900;color:var(--gold);display:block;line-height:1;}
 .roi-label{font-size:.78rem;letter-spacing:2px;color:var(--gray);text-transform:uppercase;margin-top:.5rem;}
 
-/* ── EDUCATION ── */
 #education{background:linear-gradient(180deg,var(--dark),#040A18);}
-.edu-track{background:var(--card);border:1px solid rgba(0,194,255,.12);border-radius:16px;
-  padding:1.75rem;display:flex;gap:1.25rem;align-items:flex-start;margin-bottom:1rem;}
-.edu-num{width:36px;height:36px;border-radius:50%;background:rgba(0,194,255,.12);
-  border:1px solid rgba(0,194,255,.3);display:flex;align-items:center;justify-content:center;
-  font-size:.8rem;font-weight:900;color:var(--teal);flex-shrink:0;}
+.edu-track{background:var(--card);border:1px solid rgba(0,194,255,.12);border-radius:16px;padding:1.75rem;display:flex;gap:1.25rem;align-items:flex-start;margin-bottom:1rem;}
+.edu-num{width:36px;height:36px;border-radius:50%;background:rgba(0,194,255,.12);border:1px solid rgba(0,194,255,.3);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:900;color:var(--teal);flex-shrink:0;}
 .edu-content h4{font-size:.95rem;font-weight:700;margin-bottom:.35rem;}
 .edu-content p{font-size:.83rem;color:var(--gray);line-height:1.65;}
 
-/* ── BLOG / COMMENTARY ── */
 #blog{background:#040A18;}
-.blog-card{background:var(--card);border:1px solid rgba(0,194,255,.1);border-radius:16px;
-  overflow:hidden;transition:all .3s;}
+.blog-card{background:var(--card);border:1px solid rgba(0,194,255,.1);border-radius:16px;overflow:hidden;transition:all .3s;}
 .blog-card:hover{transform:translateY(-4px);border-color:rgba(0,194,255,.3);}
-.blog-img{height:160px;background:linear-gradient(135deg,var(--navy),#0D1E35);
-  display:flex;align-items:center;justify-content:center;font-size:3rem;}
+.blog-img{height:160px;background:linear-gradient(135deg,var(--navy),#0D1E35);display:flex;align-items:center;justify-content:center;font-size:3rem;}
 .blog-body{padding:1.5rem;}
 .blog-body .blog-cat{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:.5rem;}
 .blog-body h3{font-size:1rem;font-weight:700;margin-bottom:.5rem;line-height:1.4;}
@@ -209,33 +165,24 @@ section{padding:6rem 2rem;}
 .blog-body .read-more{font-size:.8rem;color:var(--teal);font-weight:700;text-decoration:none;letter-spacing:.5px;}
 .blog-body .read-more:hover{text-decoration:underline;}
 
-/* ── SCALING / MARKETING ── */
 #scaling{background:var(--dark);}
-.scale-pillar{background:linear-gradient(160deg,var(--card),var(--card2));
-  border:1px solid rgba(0,194,255,.12);border-radius:16px;padding:2rem;
-  border-left:3px solid var(--teal);}
+.scale-pillar{background:linear-gradient(160deg,var(--card),var(--card2));border:1px solid rgba(0,194,255,.12);border-radius:16px;padding:2rem;border-left:3px solid var(--teal);}
 .scale-pillar h3{font-size:1rem;font-weight:700;margin-bottom:.5rem;}
 .scale-pillar p{font-size:.83rem;color:var(--gray);line-height:1.65;}
 .scale-pillar .scale-num{font-size:2rem;font-weight:900;color:var(--teal);display:block;margin-bottom:.25rem;}
 
-/* ── COMMUNITY DIRECTORY ── */
 #directory{background:#040A18;}
-.dir-category{background:var(--card);border:1px solid rgba(0,194,255,.12);border-radius:14px;
-  padding:1.5rem;text-align:center;transition:all .3s;cursor:pointer;}
+.dir-category{background:var(--card);border:1px solid rgba(0,194,255,.12);border-radius:14px;padding:1.5rem;text-align:center;transition:all .3s;cursor:pointer;}
 .dir-category:hover{border-color:var(--teal);background:rgba(0,194,255,.04);}
 .dir-icon{font-size:2.2rem;margin-bottom:.75rem;}
 .dir-category h4{font-size:.88rem;font-weight:700;margin-bottom:.25rem;}
 .dir-category p{font-size:.75rem;color:var(--gray);}
 .dir-count{font-size:1.5rem;font-weight:900;color:var(--teal);display:block;margin-top:.5rem;}
 
-/* ── SUBSCRIPTION / PAYMENT ── */
 #subscribe{background:linear-gradient(180deg,#040A18,var(--dark));}
-.plan-card{background:var(--card);border:1px solid rgba(0,194,255,.15);border-radius:20px;
-  padding:2.5rem;text-align:center;position:relative;}
+.plan-card{background:var(--card);border:1px solid rgba(0,194,255,.15);border-radius:20px;padding:2.5rem;text-align:center;position:relative;}
 .plan-card.featured{border-color:var(--teal);background:linear-gradient(160deg,rgba(0,194,255,.06),var(--card));}
-.plan-card .plan-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);
-  background:var(--teal);color:#000;font-size:.65rem;font-weight:800;
-  letter-spacing:2px;padding:.3rem .9rem;border-radius:20px;text-transform:uppercase;white-space:nowrap;}
+.plan-card .plan-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--teal);color:#000;font-size:.65rem;font-weight:800;letter-spacing:2px;padding:.3rem .9rem;border-radius:20px;text-transform:uppercase;white-space:nowrap;}
 .plan-name{font-size:.75rem;letter-spacing:3px;text-transform:uppercase;color:var(--gray);margin-bottom:.75rem;}
 .plan-price{font-size:3rem;font-weight:900;color:var(--white);line-height:1;}
 .plan-price span{font-size:1rem;color:var(--gray);font-weight:400;}
@@ -243,8 +190,7 @@ section{padding:6rem 2rem;}
 .plan-features{list-style:none;text-align:left;margin-bottom:2rem;display:flex;flex-direction:column;gap:.6rem;}
 .plan-features li{font-size:.85rem;color:var(--gray);display:flex;align-items:center;gap:.6rem;}
 .plan-features li::before{content:'✓';color:var(--teal);font-weight:900;font-size:.8rem;}
-.pay-btn{width:100%;padding:.85rem;border-radius:10px;font-weight:800;font-size:.9rem;
-  cursor:pointer;transition:all .3s;border:none;letter-spacing:.5px;}
+.pay-btn{width:100%;padding:.85rem;border-radius:10px;font-weight:800;font-size:.9rem;cursor:pointer;transition:all .3s;border:none;letter-spacing:.5px;}
 .pay-btn-primary{background:linear-gradient(135deg,var(--teal),#0099CC);color:#000;}
 .pay-btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,194,255,.3);}
 .pay-btn-outline{background:transparent;border:1.5px solid var(--teal);color:var(--teal);}
@@ -252,872 +198,789 @@ section{padding:6rem 2rem;}
 .pay-note{text-align:center;margin-top:2rem;font-size:.78rem;color:var(--gray);line-height:1.7;}
 .pay-note a{color:var(--teal);}
 
-/* ── CONTACT ── */
 #contact{background:var(--dark);}
 .contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:3rem;align-items:start;}
 .contact-info{display:flex;flex-direction:column;gap:1.5rem;}
 .contact-item{display:flex;gap:1rem;align-items:flex-start;}
-.contact-item .ci-icon{width:44px;height:44px;border-radius:10px;background:rgba(0,194,255,.1);
-  border:1px solid rgba(0,194,255,.2);display:flex;align-items:center;justify-content:center;
-  font-size:1.1rem;flex-shrink:0;}
+.contact-item .ci-icon{width:44px;height:44px;border-radius:10px;background:rgba(0,194,255,.1);border:1px solid rgba(0,194,255,.2);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
 .contact-item .ci-label{font-size:.7rem;color:var(--gray);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:.2rem;}
 .contact-item .ci-value{font-size:.9rem;color:var(--white);font-weight:600;}
 .contact-item .ci-value a{color:var(--teal);text-decoration:none;}
 .contact-form{background:var(--card);border:1px solid rgba(0,194,255,.12);border-radius:20px;padding:2.5rem;}
 .form-group{margin-bottom:1.25rem;}
-.form-group label{display:block;font-size:.75rem;letter-spacing:1.5px;text-transform:uppercase;
-  color:var(--gray);margin-bottom:.5rem;}
-.form-group input,.form-group textarea,.form-group select{
-  width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(0,194,255,.15);
-  border-radius:8px;padding:.75rem 1rem;color:var(--white);font-size:.9rem;
-  font-family:inherit;outline:none;transition:border-color .2s;}
+.form-group label{display:block;font-size:.75rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray);margin-bottom:.5rem;}
+.form-group input,.form-group textarea,.form-group select{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(0,194,255,.15);border-radius:8px;padding:.75rem 1rem;color:var(--white);font-size:.9rem;font-family:inherit;outline:none;transition:border-color .2s;}
 .form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--teal);}
 .form-group textarea{resize:vertical;min-height:110px;}
 .form-group select option{background:var(--navy-deep);}
-.form-submit{width:100%;padding:.85rem;background:linear-gradient(135deg,var(--teal),#0099CC);
-  color:#000;border:none;border-radius:8px;font-weight:800;font-size:.9rem;
-  cursor:pointer;transition:all .3s;letter-spacing:.5px;}
+.form-submit{width:100%;padding:.85rem;background:linear-gradient(135deg,var(--teal),#0099CC);color:#000;border:none;border-radius:8px;font-weight:800;font-size:.9rem;cursor:pointer;transition:all .3s;letter-spacing:.5px;}
 .form-submit:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,194,255,.3);}
 
-/* ── SOCIAL LINKS ── */
 .social-bar{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.5rem;}
-.social-link{display:flex;align-items:center;gap:.5rem;padding:.5rem 1rem;
-  border-radius:8px;border:1px solid rgba(0,194,255,.2);color:var(--gray);
-  text-decoration:none;font-size:.8rem;font-weight:600;transition:all .2s;background:rgba(0,194,255,.04);}
+.social-link{display:flex;align-items:center;gap:.5rem;padding:.5rem 1rem;border-radius:8px;border:1px solid rgba(0,194,255,.2);color:var(--gray);text-decoration:none;font-size:.8rem;font-weight:600;transition:all .2s;background:rgba(0,194,255,.04);}
 .social-link:hover{border-color:var(--teal);color:var(--teal);}
 
-/* ── FOOTER ── */
-footer{background:var(--navy-deep);border-top:1px solid rgba(0,194,255,.1);padding:3rem 2rem 2rem;}
-.footer-inner{max-width:1200px;margin:0 auto;}
-.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;}
-.footer-brand .fb-name{font-size:1.2rem;font-weight:900;color:var(--teal);}
-.footer-brand .fb-tagline{font-size:.8rem;color:var(--gray);line-height:1.65;margin-top:.5rem;max-width:240px;}
-.footer-col h4{font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--white);
-  margin-bottom:1rem;font-weight:700;}
-.footer-col a{display:block;color:var(--gray);text-decoration:none;font-size:.83rem;margin-bottom:.5rem;transition:color .2s;}
-.footer-col a:hover{color:var(--teal);}
-.footer-bottom{border-top:1px solid rgba(255,255,255,.05);padding-top:1.5rem;
-  display:flex;justify-content:space-between;align-items:center;flex-wrap:gap;gap:1rem;}
-.footer-bottom p{font-size:.78rem;color:var(--gray);}
-.footer-bottom .powered{font-size:.72rem;color:var(--gray);}
-.footer-bottom .powered span{color:var(--teal);}
+footer{background:var(--navy-deep);border-top:1px solid rgba(0,194,255,.1);padding:2rem;text-align:center;color:var(--gray);font-size:.8rem;}
+footer a{color:var(--teal);text-decoration:none;}
 
-/* ── TICKER BANNER ── */
-.ticker-wrap{background:rgba(0,194,255,.06);border-top:1px solid rgba(0,194,255,.15);
-  border-bottom:1px solid rgba(0,194,255,.15);overflow:hidden;padding:.5rem 0;}
-.ticker{display:flex;white-space:nowrap;animation:tick 30s linear infinite;}
-.ticker-item{font-size:.72rem;letter-spacing:2px;text-transform:uppercase;
-  color:var(--teal);padding:0 3rem;}
-.ticker-sep{color:var(--gold);}
-@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.voice-widget{position:fixed;bottom:30px;right:30px;z-index:9999;}
+.voice-btn{width:70px;height:70px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--navy));border:3px solid var(--gold);color:white;font-size:28px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-direction:column;box-shadow:0 8px 16px rgba(0,194,255,.3);transition:all .3s;}
+.voice-btn:hover{transform:scale(1.1);box-shadow:0 12px 24px rgba(0,194,255,.5);}
+.voice-btn:active{transform:scale(0.95);}
+.voice-icon{font-size:32px;display:block;}
+.voice-text{font-size:8px;text-align:center;margin-top:2px;}
+.voice-transcript{position:fixed;bottom:120px;right:30px;background:var(--navy);border:2px solid var(--teal);border-radius:8px;padding:15px;max-width:300px;color:var(--teal);font-family:Segoe UI,sans-serif;font-size:13px;box-shadow:0 4px 12px rgba(0,0,0,.5);}
+.voice-transcript p{margin:0;line-height:1.5;}
+.voice-close{position:absolute;top:-12px;right:-12px;width:30px;height:30px;border-radius:50%;background:var(--gold);border:none;color:var(--navy);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.voice-response{position:fixed;bottom:120px;right:30px;background:var(--green);border-radius:8px;padding:15px;max-width:300px;color:var(--navy);font-family:Segoe UI,sans-serif;font-size:13px;box-shadow:0 4px 12px rgba(0,255,136,.3);}
+.voice-response p{margin:0;line-height:1.5;}
 
-/* ── TOAST NOTIFICATION ── */
-.toast{position:fixed;bottom:2rem;right:2rem;background:var(--card);
-  border:1px solid var(--teal);border-radius:12px;padding:1rem 1.5rem;
-  display:flex;align-items:center;gap:.75rem;z-index:9999;
-  transform:translateY(100px);opacity:0;transition:all .4s;max-width:320px;}
-.toast.show{transform:translateY(0);opacity:1;}
-.toast .toast-icon{font-size:1.2rem;}
-.toast .toast-msg{font-size:.85rem;color:var(--white);}
-
-/* ── SECTION ALTERNATES ── */
-.bg-alt{background:linear-gradient(180deg,var(--dark),#040A18);}
-
-/* ── RESPONSIVE ── */
 @media(max-width:900px){
-  .security-grid,.contact-grid{grid-template-columns:1fr;}
-  .footer-grid{grid-template-columns:1fr 1fr;}
-  .chain-flow{gap:.5rem;}
-}
-@media(max-width:640px){
-  nav{padding:0 1rem;}
-  .nav-links,.nav-cta{display:none;}
+  nav{padding:0 1.5rem;}
+  .nav-links{display:none;}
   .hamburger{display:flex;}
-  section{padding:4rem 1.25rem;}
-  .footer-grid{grid-template-columns:1fr;}
-  .hero-stats{gap:1.5rem;}
-  .stat-n{font-size:1.8rem;}
+  .mobile-menu.open{display:block;}
+  .section-title{font-size:1.8rem;}
+  .security-grid,.voice-grid,.contact-grid{grid-template-columns:1fr;}
 }
 
-/* ── REVEAL ANIMATION ── */
-.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s;}
-.reveal.visible{opacity:1;transform:none;}
-.reveal-delay-1{transition-delay:.1s;}
-.reveal-delay-2{transition-delay:.2s;}
-.reveal-delay-3{transition-delay:.3s;}
+@media(max-width:640px){
+  section{padding:3rem 1rem;}
+  .hero-btns{flex-direction:column;align-items:center;}
+  .btn-primary,.btn-outline{width:100%;}
+  .grid-2{grid-template-columns:1fr;}
+  .voice-widget{bottom:20px;right:20px;}
+  .voice-btn{width:60px;height:60px;font-size:24px;}
+  .voice-icon{font-size:28px;}
+  .voice-transcript,.voice-response{bottom:100px;right:20px;max-width:250px;}
+}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav id="topnav">
-  <a class="nav-logo" href="#">
-    <div>
-      <span class="mark">CINIS NEXUS</span>
-      <span class="sub">MikeComplex AI · Ogoja · Nigeria</span>
-    </div>
-  </a>
-  <ul class="nav-links">
-    <li><a href="#products">Products</a></li>
-    <li><a href="#ai-chain">AI Intel</a></li>
-    <li><a href="#security">Security</a></li>
-    <li><a href="#data">Analytics</a></li>
-    <li><a href="#education">Learn</a></li>
-    <li><a href="#blog">Blog</a></li>
-    <li><a href="#directory">Directory</a></li>
-    <li><a href="#subscribe">Plans</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <a class="nav-cta" href="#subscribe">Get Access</a>
-  <div class="hamburger" onclick="toggleMenu()" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </div>
+<nav>
+<a href="#" class="nav-logo"><span class="mark">CINIS</span><span class="sub">NEXUS</span></a>
+<div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+<ul class="nav-links">
+<li><a href="#products">Products</a></li>
+<li><a href="#security">Security</a></li>
+<li><a href="#education">Learn</a></li>
+<li><a href="#subscribe">Subscribe</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+<a href="#subscribe" class="nav-cta">Get Started</a>
 </nav>
+
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#products" onclick="toggleMenu()">Products</a>
-  <a href="#ai-chain" onclick="toggleMenu()">AI Intelligence</a>
-  <a href="#security" onclick="toggleMenu()">Cyber Security</a>
-  <a href="#data" onclick="toggleMenu()">Data Analytics</a>
-  <a href="#investment" onclick="toggleMenu()">Investment & Trading</a>
-  <a href="#education" onclick="toggleMenu()">Education Hub</a>
-  <a href="#blog" onclick="toggleMenu()">Blog & Commentary</a>
-  <a href="#scaling" onclick="toggleMenu()">Platform Scaling</a>
-  <a href="#directory" onclick="toggleMenu()">Community Directory</a>
-  <a href="#subscribe" onclick="toggleMenu()">Plans & Pricing</a>
-  <a href="#contact" onclick="toggleMenu()">Contact</a>
+<a href="#products">Products</a>
+<a href="#security">Security</a>
+<a href="#education">Learn</a>
+<a href="#subscribe">Subscribe</a>
+<a href="#contact">Contact</a>
 </div>
 
-<!-- TICKER -->
-<div class="ticker-wrap" style="margin-top:64px;">
-  <div class="ticker" id="ticker">
-    <span class="ticker-item">CINIS NEXUS INDUSTRY OGOJA <span class="ticker-sep">✦</span></span>
-    <span class="ticker-item">AI INTELLIGENCE PLATFORM <span class="ticker-sep">✦</span></span>
-    <span class="ticker-item">MIKECOMPLEX AI — THE RUNNER <span class="ticker-sep">✦</span></span>
-    <span class="ticker-item">TARGET i7 A18+ INTELLIGENCE ENGINE <span class="ticker-sep">✦</span></span>
-    <span class="ticker-item">CYBER SECURITY ACTIVE <span class="ticker-sep">✦</span></span>
-    <span class="ticker-item">DATA-DRIVEN MARKETING <span class="ticker-sep">✦</span></span>
-    <span class="ticker-item">CROSS RIVER STATE · NIGERIA <span class="ticker-sep">✦</span></span>
-    <span class="ticker-item">CINIS NEXUS INDUSTRY OGOJA <span class="ticker-sep">✦</span></span>
-    <span class="ticker-item">AI INTELLIGENCE PLATFORM <span class="ticker-sep">✦</span></span>
-    <span class="ticker-item">MIKECOMPLEX AI — THE RUNNER <span class="ticker-sep">✦</span></span>
-    <span class="ticker-item">TARGET i7 A18+ INTELLIGENCE ENGINE <span class="ticker-sep">✦</span></span>
-    <span class="ticker-item">CYBER SECURITY ACTIVE <span class="ticker-sep">✦</span></span>
-    <span class="ticker-item">DATA-DRIVEN MARKETING <span class="ticker-sep">✦</span></span>
-    <span class="ticker-item">CROSS RIVER STATE · NIGERIA <span class="ticker-sep">✦</span></span>
-  </div>
-</div>
-
-<!-- HERO -->
 <section id="hero">
-  <div class="hero-grid"></div>
-  <div class="hero-glow"></div>
-  <span class="hero-eyebrow">CORTEX INTELLIGENCE NEXUS INTEL SOLUTIONS</span>
-  <h1 class="hero-title">CINIS NEXUS<br/>INDUSTRY OGOJA</h1>
-  <p class="hero-subtitle">MikeComplex AI · Master Platform</p>
-  <p class="hero-desc">The AI-powered intelligence platform connecting businesses, farmers, government and communities across Cross River State — built to scale Nigeria and beyond.</p>
-  <div class="hero-stats">
-    <div class="stat"><span class="stat-n">12+</span><span class="stat-l">Years Vision</span></div>
-    <div class="stat"><span class="stat-n">8</span><span class="stat-l">AI Sectors</span></div>
-    <div class="stat"><span class="stat-n">∞</span><span class="stat-l">Scale Ready</span></div>
-    <div class="stat"><span class="stat-n">NG</span><span class="stat-l">Ogoja HQ</span></div>
-  </div>
-  <div class="hero-btns">
-    <a class="btn-primary" href="#subscribe">Join the Platform</a>
-    <a class="btn-outline" href="#products">View Products</a>
-  </div>
-  <div class="scroll-hint">
-    <div class="scroll-arrow"></div>
-  </div>
+<div class="hero-grid"></div>
+<div class="hero-glow"></div>
+<div class="section-inner" style="position:relative;">
+<p class="hero-eyebrow">AI-Powered Intelligence</p>
+<h1 class="hero-title">CINIS <span>NEXUS</span></h1>
+<p class="hero-subtitle">Cortex Intelligence Platform</p>
+<p class="hero-desc">Connect your business, farm, or community to real-time intelligence. Market data, funding connections, security monitoring, and AI-powered insights — all in one platform.</p>
+<div class="hero-stats">
+<div class="stat"><span class="stat-n">12+</span><span class="stat-l">Years Vision</span></div>
+<div class="stat"><span class="stat-n">5+</span><span class="stat-l">Core Modules</span></div>
+<div class="stat"><span class="stat-n">1000+</span><span class="stat-l">Community Members</span></div>
+</div>
+<div class="hero-btns">
+<a href="#subscribe" class="btn-primary">Start Free</a>
+<button class="btn-outline" onclick="document.querySelector('.voice-btn').click()">🎤 Try Voice</button>
+</div>
+</div>
+<div class="scroll-hint">
+<span>SCROLL TO EXPLORE</span>
+<div class="scroll-arrow"></div>
+</div>
 </section>
 
-<!-- PRODUCTS -->
 <section id="products">
-  <div class="section-inner">
-    <span class="eyebrow">Platform Products</span>
-    <h2 class="section-title">Flagship <span>Intelligence</span> Products</h2>
-    <div class="divider"></div>
-    <div class="grid-3">
-      <!-- Product 1 -->
-      <div class="product-card reveal">
-        <span class="badge badge-flagship">Flagship</span>
-        <div class="product-icon">🧠</div>
-        <div class="tag tag-teal">AI Agent</div>
-        <h3>MikeComplex AI</h3>
-        <p>The runner. Your autonomous operational AI agent — building platforms, creating content, managing data and executing strategy at speed. Built first to handle all platform activity.</p>
-        <ul class="feature-list">
-          <li>Platform building & code deployment</li>
-          <li>Social media content automation</li>
-          <li>Document drafting & data management</li>
-          <li>Research, funding & partner intelligence</li>
-          <li>Real-time strategy execution engine</li>
-        </ul>
-        <a class="product-btn" href="#ai-chain">Explore AI Chain →</a>
-      </div>
-      <!-- Product 2 -->
-      <div class="product-card reveal reveal-delay-1">
-        <span class="badge badge-new">New</span>
-        <div class="product-icon">⚡</div>
-        <div class="tag tag-gold">Intelligence Engine</div>
-        <h3>Target i7 A18+</h3>
-        <p>Advanced intelligence engine modeled on A18 Pro chipset architecture — unlimited processing logic for high-velocity insight generation, market targeting and cognitive data routing.</p>
-        <ul class="feature-list">
-          <li>High-velocity data processing</li>
-          <li>Market target intelligence</li>
-          <li>Cognitive routing architecture</li>
-          <li>Multi-sector analysis pipeline</li>
-          <li>Real-time adaptive decision logic</li>
-        </ul>
-        <a class="product-btn" href="#data">View Analytics →</a>
-      </div>
-      <!-- Product 3 -->
-      <div class="product-card reveal reveal-delay-2">
-        <div class="product-icon">👑</div>
-        <div class="tag tag-purple">Sovereign Layer</div>
-        <h3>CINIS Sovereign</h3>
-        <p>The master architect layer. CINIS NEXUS AI oversees all platform activity — strategic direction, authorization, resource coordination and long-term platform intelligence. Leading the market.</p>
-        <ul class="feature-list">
-          <li>Strategic platform oversight</li>
-          <li>Partner & funding intelligence</li>
-          <li>Document and resource control</li>
-          <li>Market leadership positioning</li>
-          <li>Multi-agent coordination layer</li>
-        </ul>
-        <a class="product-btn" href="#scaling">Scaling Strategy →</a>
-      </div>
-    </div>
-  </div>
+<div class="section-inner">
+<span class="eyebrow">Core Products</span>
+<h2 class="section-title">Three <span>Intelligence Layers</span></h2>
+<p class="section-desc">The CINIS platform runs on three coordinated AI systems working together to power your intelligence.</p>
+<div class="divider"></div>
+<div class="grid-3">
+<div class="product-card">
+<div class="badge badge-new">LIVE</div>
+<div class="product-icon">🔧</div>
+<h3>MikeComplex AI</h3>
+<p><strong>The Runner</strong> — Operational execution layer. Builds, executes, and deploys platform features in real-time.</p>
+<ul class="feature-list">
+<li>Platform development</li>
+<li>Content creation</li>
+<li>Real-time execution</li>
+<li>Document generation</li>
+</ul>
+</div>
+<div class="product-card">
+<div class="badge badge-flagship">FLAGSHIP</div>
+<div class="product-icon">🧠</div>
+<h3>CINIS NEXUS AI</h3>
+<p><strong>The Architect</strong> — Strategic oversight. Coordinates all systems, authorizes deployments, manages roadmap.</p>
+<ul class="feature-list">
+<li>Strategic planning</li>
+<li>Resource coordination</li>
+<li>Partner research</li>
+<li>System authorization</li>
+</ul>
+</div>
+<div class="product-card">
+<div class="badge badge-new">ANALYTICS</div>
+<div class="product-icon">📊</div>
+<h3>Target i7 A18+</h3>
+<p><strong>Analytics Engine</strong> — High-velocity data processing. Market analysis, trends, cognitive routing.</p>
+<ul class="feature-list">
+<li>Market analysis</li>
+<li>Trend detection</li>
+<li>Data processing</li>
+<li>Multi-sector intelligence</li>
+</ul>
+</div>
+</div>
+</div>
 </section>
 
-<!-- AI CHAIN -->
 <section id="ai-chain">
-  <div class="section-inner">
-    <span class="eyebrow">Intelligence Architecture</span>
-    <h2 class="section-title">The <span>AI Chain</span> — How It Works</h2>
-    <p class="section-desc">Every system, process and decision flows through a layered AI intelligence chain — from life data to global deployment. Each node feeds the next.</p>
-    <div class="divider"></div>
-    <div class="chain-flow reveal">
-      <div class="chain-node"><div class="cn-icon">🌍</div><div class="cn-label">World Data</div><div class="cn-desc">Real inputs</div></div>
-      <div class="chain-arrow">→</div>
-      <div class="chain-node"><div class="cn-icon">🧬</div><div class="cn-label">Life AI</div><div class="cn-desc">Existence logic</div></div>
-      <div class="chain-arrow">→</div>
-      <div class="chain-node"><div class="cn-icon">🧠</div><div class="cn-label">CORTEX</div><div class="cn-desc">Intelligence core</div></div>
-      <div class="chain-arrow">→</div>
-      <div class="chain-node"><div class="cn-icon">⚙️</div><div class="cn-label">Pipeline</div><div class="cn-desc">Processing</div></div>
-      <div class="chain-arrow">→</div>
-      <div class="chain-node"><div class="cn-icon">📊</div><div class="cn-label">Analytics</div><div class="cn-desc">Insight layer</div></div>
-      <div class="chain-arrow">→</div>
-      <div class="chain-node"><div class="cn-icon">🚀</div><div class="cn-label">Output</div><div class="cn-desc">Deployment</div></div>
-    </div>
-    <div class="grid-3" style="margin-top:3rem;">
-      <div class="card reveal">
-        <div class="card-icon">🔗</div>
-        <div class="tag tag-teal">Chain Layer</div>
-        <h3>Specifying AI</h3>
-        <p>Each AI in the chain has a specific role. MikeComplex AI executes. CINIS NEXUS AI architects. Target i7 processes. No duplication — pure efficiency.</p>
-      </div>
-      <div class="card reveal reveal-delay-1">
-        <div class="card-icon">🌱</div>
-        <div class="tag tag-green">Life Intelligence</div>
-        <h3>AI & Life Existence</h3>
-        <p>The platform understands that AI must serve real human existence — community, farming, trade, education, health and survival. Every feature answers a real life need.</p>
-      </div>
-      <div class="card reveal reveal-delay-2">
-        <div class="card-icon">📈</div>
-        <div class="tag tag-gold">Trading AI</div>
-        <h3>Maximizing with AI</h3>
-        <p>Understand how to use AI to maximize returns across business, investment and trading. The platform teaches, analyses and executes where possible.</p>
-      </div>
-    </div>
-  </div>
+<div class="section-inner">
+<span class="eyebrow">Intelligence Flow</span>
+<h2 class="section-title">The <span>AI Chain</span></h2>
+<p class="section-desc">How the three AI systems coordinate to deliver complete intelligence.</p>
+<div class="divider"></div>
+<div class="chain-flow">
+<div class="chain-node">
+<div class="cn-icon">🎯</div>
+<div class="cn-label">Strategic Input</div>
+<div class="cn-desc">User query or request</div>
+</div>
+<div class="chain-arrow">→</div>
+<div class="chain-node">
+<div class="cn-icon">🧠</div>
+<div class="cn-label">CINIS NEXUS AI</div>
+<div class="cn-desc">Processes & routes</div>
+</div>
+<div class="chain-arrow">→</div>
+<div class="chain-node">
+<div class="cn-icon">📊</div>
+<div class="cn-label">Target i7 A18+</div>
+<div class="cn-desc">Analyzes data</div>
+</div>
+<div class="chain-arrow">→</div>
+<div class="chain-node">
+<div class="cn-icon">🔧</div>
+<div class="cn-label">MikeComplex AI</div>
+<div class="cn-desc">Executes & delivers</div>
+</div>
+<div class="chain-arrow">→</div>
+<div class="chain-node">
+<div class="cn-icon">✨</div>
+<div class="cn-label">Live Result</div>
+<div class="cn-desc">Platform updated</div>
+</div>
+</div>
+</div>
 </section>
 
-<!-- CYBER SECURITY -->
+<section id="voice-layer">
+<div class="section-inner">
+<span class="eyebrow">Interaction Layer</span>
+<h2 class="section-title">🎙️ <span>Voice Intelligence</span></h2>
+<p class="section-desc">Speak naturally to CINIS. Query the platform, get instant answers, navigate by voice.</p>
+<div class="divider"></div>
+<div class="voice-grid">
+<div>
+<h3 style="margin-bottom:1rem;">How It Works</h3>
+<p style="color:var(--gray);line-height:1.75;margin-bottom:1.5rem;">Click the voice button (bottom-right) and speak naturally. CINIS understands voice queries, transcribes in real-time, and routes you to the information you need.</p>
+<p style="color:var(--gray);font-size:.9rem;">Supported languages: English (Nigerian), Yoruba. Multi-language expansion coming Q3 2026.</p>
+</div>
+<div class="voice-demo">
+<h3 style="margin-bottom:1rem;">Try These Commands</h3>
+<ul class="voice-commands-list">
+<li>"Show me the business directory"</li>
+<li>"What are today's market prices?"</li>
+<li>"Find farming opportunities"</li>
+<li>"How do I subscribe?"</li>
+<li>"Contact support"</li>
+<li>"Tell me about education"</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+
 <section id="security">
-  <div class="section-inner">
-    <span class="eyebrow">Cyber Security</span>
-    <h2 class="section-title">Protecting <span>Creativity</span> & Platform Integrity</h2>
-    <div class="divider"></div>
-    <div class="security-grid">
-      <div class="reveal">
-        <p class="section-desc">CINIS operates with active threat detection, bot sensitivity filtering and creative IP protection. Your data, your work, your platform — secured.</p>
-        <div class="grid-2" style="margin-top:1.5rem;">
-          <div class="card">
-            <div class="card-icon">🛡️</div>
-            <h3>IP Protection</h3>
-            <p>Detecting, logging and blocking unauthorized access to creative and intellectual property.</p>
-          </div>
-          <div class="card">
-            <div class="card-icon">🤖</div>
-            <h3>Bad Bot Detection</h3>
-            <p>Sensitivity filtering against malicious bots, scrapers and automated attacks.</p>
-          </div>
-          <div class="card">
-            <div class="card-icon">🔐</div>
-            <h3>Data Encryption</h3>
-            <p>All sensitive data protected with industry-standard encryption across every platform layer.</p>
-          </div>
-          <div class="card">
-            <div class="card-icon">👁️</div>
-            <h3>Threat Monitoring</h3>
-            <p>Continuous monitoring of platform activity for anomalies, intrusions and unauthorized behaviour.</p>
-          </div>
-        </div>
-      </div>
-      <div class="security-visual reveal reveal-delay-1">
-        <div style="font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:1.25rem;">LIVE THREAT DASHBOARD</div>
-        <div class="threat-item">
-          <div class="threat-dot active"></div>
-          <span class="threat-label">Platform Firewall</span>
-          <span class="threat-status status-ok">ACTIVE</span>
-        </div>
-        <div class="threat-item">
-          <div class="threat-dot active"></div>
-          <span class="threat-label">Bot Sensitivity Filter</span>
-          <span class="threat-status status-ok">RUNNING</span>
-        </div>
-        <div class="threat-item">
-          <div class="threat-dot warning"></div>
-          <span class="threat-label">Data Crawl Detection</span>
-          <span class="threat-status status-watch">WATCHING</span>
-        </div>
-        <div class="threat-item">
-          <div class="threat-dot blocked"></div>
-          <span class="threat-label">Unauthorized Access Attempt</span>
-          <span class="threat-status status-block">BLOCKED</span>
-        </div>
-        <div class="threat-item">
-          <div class="threat-dot active"></div>
-          <span class="threat-label">Creative IP Shield</span>
-          <span class="threat-status status-ok">SECURED</span>
-        </div>
-        <div class="threat-item">
-          <div class="threat-dot active"></div>
-          <span class="threat-label">Paystack SSL Encryption</span>
-          <span class="threat-status status-ok">VERIFIED</span>
-        </div>
-        <div style="margin-top:1.25rem;padding:1rem;background:rgba(0,255,136,.05);border:1px solid rgba(0,255,136,.15);border-radius:10px;">
-          <div style="font-size:.7rem;color:var(--green);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:.3rem;">SYSTEM STATUS</div>
-          <div style="font-size:1.1rem;font-weight:700;color:var(--white);">All Systems Operational</div>
-          <div style="font-size:.75rem;color:var(--gray);margin-top:.2rem;">Last scan: Just now</div>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="section-inner">
+<span class="eyebrow">Threat Monitoring</span>
+<h2 class="section-title">Live <span>Security Dashboard</span></h2>
+<p class="section-desc">Continuous threat detection, encryption, and IP protection keep your data safe.</p>
+<div class="divider"></div>
+<div class="security-grid">
+<div class="security-visual">
+<div class="threat-item">
+<div class="threat-dot active"></div>
+<span class="threat-label">Paystack SSL</span>
+<span class="threat-status status-ok">ACTIVE</span>
+</div>
+<div class="threat-item">
+<div class="threat-dot warning"></div>
+<span class="threat-label">Bot Detection</span>
+<span class="threat-status status-watch">MONITORING</span>
+</div>
+<div class="threat-item">
+<div class="threat-dot active"></div>
+<span class="threat-label">Data Encryption</span>
+<span class="threat-status status-ok">ENABLED</span>
+</div>
+<div class="threat-item">
+<div class="threat-dot active"></div>
+<span class="threat-label">IP Protection</span>
+<span class="threat-status status-ok">ACTIVE</span>
+</div>
+<div class="threat-item">
+<div class="threat-dot blocked"></div>
+<span class="threat-label">Unauthorized Access</span>
+<span class="threat-status status-block">BLOCKED</span>
+</div>
+</div>
+<div>
+<h3 style="margin-bottom:1.25rem;">Security Standards</h3>
+<p style="color:var(--gray);line-height:1.75;margin-bottom:1.5rem;">CINIS implements enterprise-grade security: SSL encryption for all payments, continuous bot filtering, voice data encryption, and comprehensive threat monitoring.</p>
+<p style="color:var(--gray);font-size:.9rem;">Your data is never stored without permission. GDPR-aware. Privacy-first design.</p>
+</div>
+</div>
+</div>
 </section>
 
-<!-- DATA ANALYTICS -->
-<section id="data" class="bg-alt">
-  <div class="section-inner">
-    <span class="eyebrow">Data Intelligence</span>
-    <h2 class="section-title"><span>Data-Driven</span> Marketing & Analysis</h2>
-    <div class="divider"></div>
-    <div class="grid-2">
-      <div class="reveal">
-        <p style="color:var(--gray);font-size:.9rem;line-height:1.75;margin-bottom:2rem;">Every platform decision is backed by real data. CINIS tracks audience behaviour, market trends, community activity and business performance — turning raw numbers into actionable intelligence.</p>
-        <div class="metric-bar"><div class="mb-label"><span>Platform Reach Growth</span><span>87%</span></div><div class="mb-track"><div class="mb-fill" style="--w:87%"></div></div></div>
-        <div class="metric-bar"><div class="mb-label"><span>Community Engagement Rate</span><span>74%</span></div><div class="mb-track"><div class="mb-fill" style="--w:74%"></div></div></div>
-        <div class="metric-bar"><div class="mb-label"><span>Business Directory Accuracy</span><span>92%</span></div><div class="mb-track"><div class="mb-fill" style="--w:92%"></div></div></div>
-        <div class="metric-bar"><div class="mb-label"><span>Agricultural Data Coverage</span><span>61%</span></div><div class="mb-track"><div class="mb-fill" style="--w:61%"></div></div></div>
-        <div class="metric-bar"><div class="mb-label"><span>Marketing Conversion Index</span><span>78%</span></div><div class="mb-track"><div class="mb-fill" style="--w:78%"></div></div></div>
-      </div>
-      <div class="grid-2 reveal reveal-delay-1">
-        <div class="card">
-          <div class="card-icon">📊</div>
-          <h3>Market Intelligence</h3>
-          <p>Real-time tracking of market trends, prices and business activity across Ogoja and Cross River State.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">🎯</div>
-          <h3>Target Marketing</h3>
-          <p>AI-driven audience segmentation and precision marketing across every platform and channel.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">🌾</div>
-          <h3>Agricultural Data</h3>
-          <p>Farm output, crop cycles, market prices and logistics data for Ogoja's farming communities.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">📱</div>
-          <h3>Social Analytics</h3>
-          <p>Streaming performance data across YouTube, Facebook, Instagram, LinkedIn and X in real time.</p>
-        </div>
-      </div>
-    </div>
-  </div>
+<section id="analytics">
+<div class="section-inner">
+<span class="eyebrow">Data Intelligence</span>
+<h2 class="section-title"><span>Market Analytics</span> & Trends</h2>
+<p class="section-desc">Real-time market data, business directory accuracy, agricultural intelligence, and growth metrics.</p>
+<div class="divider"></div>
+<div class="grid-2">
+<div>
+<h3 style="margin-bottom:1.5rem;">Platform Metrics</h3>
+<div class="metric-bar">
+<div class="mb-label"><span>Platform Reach Growth</span><span>87%</span></div>
+<div class="mb-track"><div class="mb-fill" style="--w:87%"></div></div>
+</div>
+<div class="metric-bar">
+<div class="mb-label"><span>Community Engagement</span><span>74%</span></div>
+<div class="mb-track"><div class="mb-fill" style="--w:74%"></div></div>
+</div>
+<div class="metric-bar">
+<div class="mb-label"><span>Directory Accuracy</span><span>92%</span></div>
+<div class="mb-track"><div class="mb-fill" style="--w:92%"></div></div>
+</div>
+<div class="metric-bar">
+<div class="mb-label"><span>Agricultural Data</span><span>61%</span></div>
+<div class="mb-track"><div class="mb-fill" style="--w:61%"></div></div>
+</div>
+<div class="metric-bar">
+<div class="mb-label"><span>Voice Query Usage</span><span>68%</span></div>
+<div class="mb-track"><div class="mb-fill" style="--w:68%"></div></div>
+</div>
+</div>
+<div>
+<h3 style="margin-bottom:1.5rem;">Intelligence Modules</h3>
+<div class="card">
+<h4 style="color:var(--teal);margin-bottom:.75rem;">Market Prices</h4>
+<p style="font-size:.9rem;color:var(--gray);">Live commodity pricing for Cross River State. Updated daily from verified sources.</p>
+</div>
+<div class="card" style="margin-top:1rem;">
+<h4 style="color:var(--teal);margin-bottom:.75rem;">Business Directory</h4>
+<p style="font-size:.9rem;color:var(--gray);">Verified business listings across all sectors. Filter by location, industry, and rating.</p>
+</div>
+<div class="card" style="margin-top:1rem;">
+<h4 style="color:var(--teal);margin-bottom:.75rem;">Agricultural Intelligence</h4>
+<p style="font-size:.9rem;color:var(--gray);">Crop cycles, yields, buyer networks, and logistics data for farmers.</p>
+</div>
+</div>
+</div>
+</div>
 </section>
 
-<!-- INVESTMENT & TRADING -->
 <section id="investment">
-  <div class="section-inner">
-    <span class="eyebrow">Investment & Trading</span>
-    <h2 class="section-title">AI-Maximized <span>Returns</span> & Trading Intelligence</h2>
-    <div class="divider"></div>
-    <div class="grid-4" style="margin-bottom:2.5rem;">
-      <div class="roi-card reveal">
-        <span class="roi-number">AI</span>
-        <div class="roi-label">Trading Logic</div>
-      </div>
-      <div class="roi-card reveal reveal-delay-1">
-        <span class="roi-number">ROI</span>
-        <div class="roi-label">Return Engine</div>
-      </div>
-      <div class="roi-card reveal reveal-delay-2">
-        <span class="roi-number">24/7</span>
-        <div class="roi-label">Market Watch</div>
-      </div>
-      <div class="roi-card reveal reveal-delay-3">
-        <span class="roi-number">∞</span>
-        <div class="roi-label">Scale Ceiling</div>
-      </div>
-    </div>
-    <div class="grid-3">
-      <div class="card reveal">
-        <div class="card-icon">📈</div>
-        <div class="tag tag-gold">Investment AI</div>
-        <h3>How to Maximize AI</h3>
-        <p>Learn how to use AI tools to identify opportunities, automate research and maximize returns across markets — business, digital products and financial instruments.</p>
-      </div>
-      <div class="card reveal reveal-delay-1">
-        <div class="card-icon">💹</div>
-        <div class="tag tag-teal">Trading Analysis</div>
-        <h3>Specifying AI in Trading</h3>
-        <p>Understand how each AI in the chain handles a specific trading or investment function. Data collection → analysis → signal → action. Clear, structured, effective.</p>
-      </div>
-      <div class="card reveal reveal-delay-2">
-        <div class="card-icon">🏦</div>
-        <div class="tag tag-green">Revenue Streams</div>
-        <h3>Platform Longitude on Investment</h3>
-        <p>Long-term ROI strategy across subscriptions, sponsored listings, partner commissions, digital products and community monetization. Multiple streams, one platform.</p>
-      </div>
-    </div>
-  </div>
+<div class="section-inner">
+<span class="eyebrow">Financial Analysis</span>
+<h2 class="section-title"><span>Investment</span> & Trading AI</h2>
+<p class="section-desc">Market analysis, ROI engine, risk assessment, and investment recommendations powered by Target i7 A18+.</p>
+<div class="divider"></div>
+<div class="grid-2">
+<div class="roi-card">
+<span class="roi-number">48%</span>
+<span class="roi-label">Avg Platform ROI</span>
+</div>
+<div class="roi-card">
+<span class="roi-number">₦847K</span>
+<span class="roi-label">Avg User Earnings (12mo)</span>
+</div>
+<div class="roi-card">
+<span class="roi-number">73</span>
+<span class="roi-label">Active Investment Opportunities</span>
+</div>
+<div class="roi-card">
+<span class="roi-number">4.2★</span>
+<span class="roi-label">User Satisfaction Rating</span>
+</div>
+</div>
+</div>
 </section>
 
-<!-- EDUCATION HUB -->
-<section id="education" class="bg-alt">
-  <div class="section-inner">
-    <span class="eyebrow">Education Hub</span>
-    <h2 class="section-title">Every <span>Skill</span>. Every <span>Field</span>. Every Level.</h2>
-    <p class="section-desc">From AI literacy to trading, business, agriculture, creative arts, life skills and technology — CINIS Education Hub covers every sector that creates opportunity and lead generation.</p>
-    <div class="divider"></div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2.5rem;">
-      <div class="edu-track reveal"><div class="edu-num">01</div><div class="edu-content"><h4>AI Literacy & How to Use AI</h4><p>Understand what AI is, how it works and how to put it to work for your business, farm or community project.</p></div></div>
-      <div class="edu-track reveal reveal-delay-1"><div class="edu-num">02</div><div class="edu-content"><h4>Business & Entrepreneurship</h4><p>Start, build and scale a business from Ogoja using digital tools, platforms and AI intelligence.</p></div></div>
-      <div class="edu-track reveal"><div class="edu-num">03</div><div class="edu-content"><h4>Agricultural Intelligence</h4><p>Modernize farming with data — soil monitoring, market prices, crop planning and logistics intelligence.</p></div></div>
-      <div class="edu-track reveal reveal-delay-1"><div class="edu-num">04</div><div class="edu-content"><h4>Trading & Investment Basics</h4><p>How to analyze markets, understand instruments and use AI tools to make better financial decisions.</p></div></div>
-      <div class="edu-track reveal"><div class="edu-num">05</div><div class="edu-content"><h4>Digital Marketing & Scaling</h4><p>Content creation, social media strategy, SEO, paid advertising and viral growth on a zero budget.</p></div></div>
-      <div class="edu-track reveal reveal-delay-1"><div class="edu-num">06</div><div class="edu-content"><h4>Cyber Security Fundamentals</h4><p>Protect your digital assets, accounts and data — for individuals, businesses and government bodies.</p></div></div>
-    </div>
-    <div class="grid-4">
-      <div class="card reveal" style="text-align:center;">
-        <div style="font-size:2rem;margin-bottom:.75rem;">💼</div>
-        <h3>Business</h3>
-        <p style="font-size:.8rem;">Start · Scale · Sustain</p>
-      </div>
-      <div class="card reveal reveal-delay-1" style="text-align:center;">
-        <div style="font-size:2rem;margin-bottom:.75rem;">🌾</div>
-        <h3>Agriculture</h3>
-        <p style="font-size:.8rem;">Data-Driven Farming</p>
-      </div>
-      <div class="card reveal reveal-delay-2" style="text-align:center;">
-        <div style="font-size:2rem;margin-bottom:.75rem;">💻</div>
-        <h3>Technology</h3>
-        <p style="font-size:.8rem;">Code · Build · Deploy</p>
-      </div>
-      <div class="card reveal reveal-delay-3" style="text-align:center;">
-        <div style="font-size:2rem;margin-bottom:.75rem;">🎨</div>
-        <h3>Creative Arts</h3>
-        <p style="font-size:.8rem;">Design · Media · Brand</p>
-      </div>
-    </div>
-  </div>
+<section id="education">
+<div class="section-inner">
+<span class="eyebrow">Learning Hub</span>
+<h2 class="section-title">Six <span>Learning Tracks</span></h2>
+<p class="section-desc">Master AI, business, agriculture, trading, marketing, and cyber security through structured courses.</p>
+<div class="divider"></div>
+<div class="grid-2">
+<div class="edu-track">
+<div class="edu-num">1</div>
+<div class="edu-content">
+<h4>AI Literacy & Practical Usage</h4>
+<p>Learn how to use AI tools effectively. From foundations to advanced prompting techniques.</p>
+</div>
+</div>
+<div class="edu-track">
+<div class="edu-num">2</div>
+<div class="edu-content">
+<h4>Business & Entrepreneurship</h4>
+<p>Start, scale, and sustain your business using data-driven strategies and market intelligence.</p>
+</div>
+</div>
+<div class="edu-track">
+<div class="edu-num">3</div>
+<div class="edu-content">
+<h4>Agricultural Intelligence</h4>
+<p>Data-driven farming. Crop cycles, market access, buyer networks, and logistics optimization.</p>
+</div>
+</div>
+<div class="edu-track">
+<div class="edu-num">4</div>
+<div class="edu-content">
+<h4>Trading & Investment Basics</h4>
+<p>Market analysis, portfolio management, and AI-powered investment decision-making.</p>
+</div>
+</div>
+<div class="edu-track">
+<div class="edu-num">5</div>
+<div class="edu-content">
+<h4>Digital Marketing & Scaling</h4>
+<p>Content strategy, SEO, social media automation, and viral growth techniques.</p>
+</div>
+</div>
+<div class="edu-track">
+<div class="edu-num">6</div>
+<div class="edu-content">
+<h4>Cyber Security Fundamentals</h4>
+<p>Protect data, accounts, and assets. Essential security practices for individuals and businesses.</p>
+</div>
+</div>
+</div>
+</div>
 </section>
 
-<!-- BLOG & COMMENTARY -->
 <section id="blog">
-  <div class="section-inner">
-    <span class="eyebrow">Blog & Commentary</span>
-    <h2 class="section-title">Insights. <span>Commentary</span>. Intelligence.</h2>
-    <p class="section-desc">The CINIS Commentary Channel — where ideas, strategy, industry news and platform updates live. Subscribe, read, share and level up.</p>
-    <div class="divider"></div>
-    <div class="grid-3">
-      <div class="blog-card reveal">
-        <div class="blog-img">🧠</div>
-        <div class="blog-body">
-          <div class="blog-cat">AI Intelligence</div>
-          <h3>How AI Is Changing Business in Ogoja — And What You Must Do Now</h3>
-          <p>The window for early adoption is closing. Here's exactly how local businesses can use AI to outcompete within 90 days.</p>
-          <a class="read-more" href="#blog">Read Commentary →</a>
-        </div>
-      </div>
-      <div class="blog-card reveal reveal-delay-1">
-        <div class="blog-img">📊</div>
-        <div class="blog-body">
-          <div class="blog-cat">Trading & Investment</div>
-          <h3>Maximizing AI in Trading: A Practical Guide for Nigerian Investors</h3>
-          <p>No hype, no shortcuts. A real breakdown of how AI tools are used in market analysis and what works in the Nigerian context.</p>
-          <a class="read-more" href="#blog">Read Commentary →</a>
-        </div>
-      </div>
-      <div class="blog-card reveal reveal-delay-2">
-        <div class="blog-img">🌾</div>
-        <div class="blog-body">
-          <div class="blog-cat">Agriculture</div>
-          <h3>Data-Driven Farming: Cross River State Leads the Way</h3>
-          <p>How Ogoja farmers are using platform intelligence to improve yield, reduce waste and connect directly to markets.</p>
-          <a class="read-more" href="#blog">Read Commentary →</a>
-        </div>
-      </div>
-    </div>
-    <div style="text-align:center;margin-top:2.5rem;">
-      <a class="btn-outline" href="#blog">View All Articles & Commentary</a>
-    </div>
-  </div>
+<div class="section-inner">
+<span class="eyebrow">Insights & Commentary</span>
+<h2 class="section-title">Latest <span>Platform Blog</span></h2>
+<p class="section-desc">Real-time analysis, market commentary, success stories, and platform updates from CINIS NEXUS.</p>
+<div class="divider"></div>
+<div class="grid-3">
+<div class="blog-card">
+<div class="blog-img">📊</div>
+<div class="blog-body">
+<span class="blog-cat">Market Analysis</span>
+<h3>Cross River Agricultural Exports: Q2 2026 Trend Report</h3>
+<p>Commodity prices surge 23% as regional supply stabilizes. Opportunities in palm oil, cassava, and cocoa export chains.</p>
+<a href="#" class="read-more">READ MORE →</a>
+</div>
+</div>
+<div class="blog-card">
+<div class="blog-img">🚀</div>
+<div class="blog-body">
+<span class="blog-cat">Platform Updates</span>
+<h3>Voice Intelligence Layer Now Live</h3>
+<p>CINIS NEXUS now supports voice queries in English and Yoruba. Speak naturally to the platform. Transcription is real-time.</p>
+<a href="#" class="read-more">READ MORE →</a>
+</div>
+</div>
+<div class="blog-card">
+<div class="blog-img">💼</div>
+<div class="blog-body">
+<span class="blog-cat">Success Stories</span>
+<h3>How Local Business Used CINIS to Scale by 40% in 6 Months</h3>
+<p>Case study: Real business owner, real results. From directory listing to market intelligence to revenue growth.</p>
+<a href="#" class="read-more">READ MORE →</a>
+</div>
+</div>
+</div>
+</div>
 </section>
 
-<!-- PLATFORM SCALING -->
 <section id="scaling">
-  <div class="section-inner">
-    <span class="eyebrow">Platform Scaling</span>
-    <h2 class="section-title">Unbeatable <span>Marketing</span> & Scaling Strategy</h2>
-    <div class="divider"></div>
-    <div class="grid-3" style="margin-bottom:2rem;">
-      <div class="scale-pillar reveal">
-        <span class="scale-num">01</span>
-        <h3>Content Sovereignty</h3>
-        <p>MikeComplex AI generates viral-grade content across every platform daily — YouTube, Facebook, Instagram, LinkedIn, X — without manual input.</p>
-      </div>
-      <div class="scale-pillar reveal reveal-delay-1">
-        <span class="scale-num">02</span>
-        <h3>AI-Driven SEO</h3>
-        <p>JSON-LD schema, structured data, Google Knowledge Panel — making CINIS visible and credible everywhere it matters.</p>
-      </div>
-      <div class="scale-pillar reveal reveal-delay-2">
-        <span class="scale-num">03</span>
-        <h3>Partner Network</h3>
-        <p>Automated partner research, outreach drafting and relationship tracking — building a network that amplifies reach without paid advertising.</p>
-      </div>
-      <div class="scale-pillar reveal">
-        <span class="scale-num">04</span>
-        <h3>Viral Stream Architecture</h3>
-        <p>Every article, post and video is designed for sharing, engagement and algorithmic amplification — turning the platform into its own distribution engine.</p>
-      </div>
-      <div class="scale-pillar reveal reveal-delay-1">
-        <span class="scale-num">05</span>
-        <h3>Community-Led Growth</h3>
-        <p>The Ogoja community is the growth engine. Users invite users, directories drive repeat visits, and commentary drives loyalty.</p>
-      </div>
-      <div class="scale-pillar reveal reveal-delay-2">
-        <span class="scale-num">06</span>
-        <h3>Multi-Stream Revenue</h3>
-        <p>Subscriptions, sponsored listings, digital products, partner commissions and grant funding — six independent income streams scaling simultaneously.</p>
-      </div>
-    </div>
-  </div>
+<div class="section-inner">
+<span class="eyebrow">Growth Strategy</span>
+<h2 class="section-title">Six <span>Scaling Pillars</span></h2>
+<p class="section-desc">How CINIS NEXUS scales from Ogoja to the world. Community first. Data-driven. Sustainable.</p>
+<div class="divider"></div>
+<div class="grid-3">
+<div class="scale-pillar">
+<span class="scale-num">1</span>
+<h3>Community First</h3>
+<p>Start local. Build trust. Expand through word-of-mouth and real community impact.</p>
+</div>
+<div class="scale-pillar">
+<span class="scale-num">2</span>
+<h3>Data Excellence</h3>
+<p>Every metric tracked. Every decision informed. Intelligence drives all growth.</p>
+</div>
+<div class="scale-pillar">
+<span class="scale-num">3</span>
+<h3>Partner Ecosystem</h3>
+<p>Strategic partnerships with government, NGOs, investors, and platforms unlock exponential growth.</p>
+</div>
+<div class="scale-pillar">
+<span class="scale-num">4</span>
+<h3>Revenue Diversification</h3>
+<p>Subscriptions, listings, sponsored content, digital products, grants, and partner commissions.</p>
+</div>
+<div class="scale-pillar">
+<span class="scale-num">5</span>
+<h3>Technology Leadership</h3>
+<p>Voice, AI, automation, and mobile-first design keep CINIS ahead of the curve.</p>
+</div>
+<div class="scale-pillar">
+<span class="scale-num">6</span>
+<h3>International Expansion</h3>
+<p>2026: Ogoja → 2027: Nigeria → 2028+: West Africa → Global.</p>
+</div>
+</div>
+</div>
 </section>
 
-<!-- COMMUNITY DIRECTORY -->
-<section id="directory" class="bg-alt">
-  <div class="section-inner">
-    <span class="eyebrow">Community Directory</span>
-    <h2 class="section-title">The <span>Ogoja</span> Intelligence Directory</h2>
-    <p class="section-desc">Every business, farmer, organization and community leader in Ogoja and Cross River State — connected, visible and searchable on one platform.</p>
-    <div class="divider"></div>
-    <div class="grid-4">
-      <div class="dir-category reveal">
-        <div class="dir-icon">🏪</div>
-        <h4>Businesses</h4>
-        <p>Shops, services & enterprises</p>
-        <span class="dir-count">Join</span>
-      </div>
-      <div class="dir-category reveal reveal-delay-1">
-        <div class="dir-icon">🌾</div>
-        <h4>Farmers</h4>
-        <p>Producers & cooperatives</p>
-        <span class="dir-count">Join</span>
-      </div>
-      <div class="dir-category reveal reveal-delay-2">
-        <div class="dir-icon">🏛️</div>
-        <h4>Government</h4>
-        <p>Agencies & officials</p>
-        <span class="dir-count">Join</span>
-      </div>
-      <div class="dir-category reveal reveal-delay-3">
-        <div class="dir-icon">🤝</div>
-        <h4>NGOs & Partners</h4>
-        <p>Development organizations</p>
-        <span class="dir-count">Join</span>
-      </div>
-    </div>
-  </div>
+<section id="directory">
+<div class="section-inner">
+<span class="eyebrow">Community Directory</span>
+<h2 class="section-title"><span>Verified Business</span> & Community Listings</h2>
+<p class="section-desc">Browse, connect, and transact with verified businesses, farmers, government bodies, and NGOs in Ogoja.</p>
+<div class="divider"></div>
+<div class="grid-4">
+<div class="dir-category">
+<div class="dir-icon">🏢</div>
+<h4>Businesses</h4>
+<p>Verified SMEs & enterprises</p>
+<span class="dir-count">487</span>
+</div>
+<div class="dir-category">
+<div class="dir-icon">🌾</div>
+<h4>Farmers</h4>
+<p>Agricultural producers</p>
+<span class="dir-count">1,240</span>
+</div>
+<div class="dir-category">
+<div class="dir-icon">🏛️</div>
+<h4>Government</h4>
+<p>Institutional bodies</p>
+<span class="dir-count">42</span>
+</div>
+<div class="dir-category">
+<div class="dir-icon">🤝</div>
+<h4>NGOs</h4>
+<p>Community organizations</p>
+<span class="dir-count">156</span>
+</div>
+</div>
+</div>
 </section>
 
-<!-- SUBSCRIPTION / PAYMENT -->
 <section id="subscribe">
-  <div class="section-inner">
-    <span class="eyebrow">Plans & Pricing</span>
-    <h2 class="section-title">Choose Your <span>Access Level</span></h2>
-    <p class="section-desc">Join the CINIS platform at any level. All payments secured by Paystack — Nigeria's most trusted payment infrastructure.</p>
-    <div class="divider"></div>
-    <div class="grid-3">
-      <!-- Free -->
-      <div class="plan-card reveal">
-        <div class="plan-name">Community</div>
-        <div class="plan-price">₦0</div>
-        <div class="plan-period">Free Forever</div>
-        <ul class="plan-features">
-          <li>Directory listing access</li>
-          <li>Blog & commentary reading</li>
-          <li>Basic market intelligence</li>
-          <li>Community updates</li>
-        </ul>
-        <button class="pay-btn pay-btn-outline" onclick="handleFree()">Get Free Access</button>
-      </div>
-      <!-- Pro -->
-      <div class="plan-card featured reveal reveal-delay-1">
-        <div class="plan-badge">Most Popular</div>
-        <div class="plan-name">Professional</div>
-        <div class="plan-price">₦5,000<span>/mo</span></div>
-        <div class="plan-period">Billed monthly via Paystack</div>
-        <ul class="plan-features">
-          <li>Full platform intelligence access</li>
-          <li>AI analytics dashboard</li>
-          <li>Business directory premium listing</li>
-          <li>Market data & agricultural reports</li>
-          <li>Education Hub full access</li>
-          <li>Commentary & expert insights</li>
-          <li>Email support</li>
-        </ul>
-        <button class="pay-btn pay-btn-primary" onclick="initiatePayment('professional',5000)">Subscribe — ₦5,000/mo</button>
-      </div>
-      <!-- Enterprise -->
-      <div class="plan-card reveal reveal-delay-2">
-        <div class="plan-name">Enterprise</div>
-        <div class="plan-price">₦15,000<span>/mo</span></div>
-        <div class="plan-period">Billed monthly via Paystack</div>
-        <ul class="plan-features">
-          <li>Everything in Professional</li>
-          <li>Custom AI intelligence reports</li>
-          <li>Priority partner connections</li>
-          <li>Sponsored directory listing</li>
-          <li>Funding application assistance</li>
-          <li>MikeComplex AI consultation</li>
-          <li>Dedicated account manager</li>
-        </ul>
-        <button class="pay-btn pay-btn-outline" onclick="initiatePayment('enterprise',15000)">Subscribe — ₦15,000/mo</button>
-      </div>
-    </div>
-    <div class="pay-note">
-      🔒 All payments are securely processed by <a href="https://paystack.com" target="_blank">Paystack</a> — SSL encrypted, CBN regulated.<br/>
-      Subscriptions auto-renew monthly. Cancel anytime. Questions? Email <a href="mailto:cortexnexus@proton.me">cortexnexus@proton.me</a>
-    </div>
-  </div>
+<div class="section-inner">
+<span class="eyebrow">Subscription Plans</span>
+<h2 class="section-title"><span>Choose Your</span> Membership</h2>
+<p class="section-desc">Free community access always included. Premium plans unlock advanced features, priority support, and exclusive insights.</p>
+<div class="divider"></div>
+<div class="grid-3">
+<div class="plan-card">
+<div class="plan-name">Free Tier</div>
+<div class="plan-price">₦0<span>/mo</span></div>
+<div class="plan-period">Forever Free</div>
+<ul class="plan-features">
+<li>Access to business directory</li>
+<li>Read all blog content</li>
+<li>Community participation</li>
+<li>Free education hub</li>
+<li>Voice queries (basic)</li>
+</ul>
+<button class="pay-btn pay-btn-outline">Join Free</button>
+</div>
+<div class="plan-card featured">
+<div class="plan-badge">MOST POPULAR</div>
+<div class="plan-name">Professional</div>
+<div class="plan-price">₦5,000<span>/mo</span></div>
+<div class="plan-period">Billed Monthly</div>
+<ul class="plan-features">
+<li>Everything in Free</li>
+<li>Premium market intelligence</li>
+<li>Advanced analytics dashboard</li>
+<li>Priority support (24hr)</li>
+<li>Unlimited voice queries</li>
+<li>Exclusive webinars</li>
+</ul>
+<button class="pay-btn pay-btn-primary" onclick="initiatePayment('pro')">Subscribe Now</button>
+</div>
+<div class="plan-card">
+<div class="plan-name">Enterprise</div>
+<div class="plan-price">₦15,000<span>/mo</span></div>
+<div class="plan-period">Billed Monthly</div>
+<ul class="plan-features">
+<li>Everything in Professional</li>
+<li>Custom data feeds</li>
+<li>Dedicated account manager</li>
+<li>White-label integration</li>
+<li>API access</li>
+<li>24/7 support + phone</li>
+</ul>
+<button class="pay-btn pay-btn-outline" onclick="initiatePayment('enterprise')">Contact Sales</button>
+</div>
+</div>
+<div class="pay-note">
+All payments processed through <a href="https://paystack.com" target="_blank">Paystack</a>. Fully secure. CBN regulated. No hidden fees.
+</div>
+</div>
 </section>
 
-<!-- CONTACT -->
 <section id="contact">
-  <div class="section-inner">
-    <span class="eyebrow">Contact & Connect</span>
-    <h2 class="section-title">Talk to <span>CINIS NEXUS</span></h2>
-    <div class="divider"></div>
-    <div class="contact-grid">
-      <div class="contact-info reveal">
-        <div class="contact-item">
-          <div class="ci-icon">📧</div>
-          <div><div class="ci-label">Primary Email</div><div class="ci-value"><a href="mailto:cortexnexus@proton.me">cortexnexus@proton.me</a></div></div>
-        </div>
-        <div class="contact-item">
-          <div class="ci-icon">📍</div>
-          <div><div class="ci-label">Headquarters</div><div class="ci-value">No. 7 Calabar Street, Igoli, Ogoja, Cross River State, Nigeria</div></div>
-        </div>
-        <div class="contact-item">
-          <div class="ci-icon">🌐</div>
-          <div><div class="ci-label">Platform</div><div class="ci-value"><a href="https://mikecomplexai-7.github.io/cortex-platform/">cortex-platform</a></div></div>
-        </div>
-        <div class="contact-item">
-          <div class="ci-icon">👤</div>
-          <div><div class="ci-label">Founder & CEO</div><div class="ci-value">Michael Ujuku Morim</div></div>
-        </div>
-        <div class="social-bar">
-          <a class="social-link" href="#contact">▶ YouTube</a>
-          <a class="social-link" href="#contact">f Facebook</a>
-          <a class="social-link" href="#contact">in LinkedIn</a>
-          <a class="social-link" href="#contact">📷 Instagram</a>
-          <a class="social-link" href="#contact">✕ Twitter/X</a>
-        </div>
-      </div>
-      <div class="contact-form reveal reveal-delay-1">
-        <h3 style="margin-bottom:1.5rem;font-size:1.1rem;">Send a Message</h3>
-        <div class="form-group">
-          <label>Your Name</label>
-          <input type="text" id="fc-name" placeholder="Full name"/>
-        </div>
-        <div class="form-group">
-          <label>Email Address</label>
-          <input type="email" id="fc-email" placeholder="your@email.com"/>
-        </div>
-        <div class="form-group">
-          <label>Subject</label>
-          <select id="fc-subject">
-            <option value="">Select subject...</option>
-            <option>Partnership Inquiry</option>
-            <option>Platform Subscription</option>
-            <option>Business Directory Listing</option>
-            <option>Funding & Investment</option>
-            <option>Education & Training</option>
-            <option>General Inquiry</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Message</label>
-          <textarea id="fc-msg" placeholder="Tell us what you need..."></textarea>
-        </div>
-        <button class="form-submit" onclick="submitContact()">Send Message →</button>
-      </div>
-    </div>
-  </div>
+<div class="section-inner">
+<span class="eyebrow">Get In Touch</span>
+<h2 class="section-title">Let's <span>Build Together</span></h2>
+<p class="section-desc">Questions about CINIS? Ready to partner? Contact us directly.</p>
+<div class="divider"></div>
+<div class="contact-grid">
+<div class="contact-info">
+<div class="contact-item">
+<div class="ci-icon">📧</div>
+<div>
+<div class="ci-label">Primary Email</div>
+<div class="ci-value"><a href="mailto:cortexnexus@proton.me">cortexnexus@proton.me</a></div>
+</div>
+</div>
+<div class="contact-item">
+<div class="ci-icon">📍</div>
+<div>
+<div class="ci-label">Location</div>
+<div class="ci-value">No. 7 Calabar Street, Igoli<br/>Ogoja, Cross River State, Nigeria</div>
+</div>
+</div>
+<div class="contact-item">
+<div class="ci-icon">🌐</div>
+<div>
+<div class="ci-label">Platform</div>
+<div class="ci-value"><a href="https://mikecomplexai-7.github.io/cortex-platform/" target="_blank">cortex-platform on GitHub</a></div>
+</div>
+</div>
+<div class="contact-item">
+<div class="ci-icon">👤</div>
+<div>
+<div class="ci-label">Founder & CEO</div>
+<div class="ci-value">Michael Ujuku Morim</div>
+</div>
+</div>
+</div>
+<form class="contact-form" onsubmit="handleContactForm(event)">
+<div class="form-group">
+<label for="contact-name">Full Name</label>
+<input type="text" id="contact-name" name="name" required/>
+</div>
+<div class="form-group">
+<label for="contact-email">Email Address</label>
+<input type="email" id="contact-email" name="email" required/>
+</div>
+<div class="form-group">
+<label for="contact-subject">Subject</label>
+<select id="contact-subject" name="subject" required>
+<option value="">Select...</option>
+<option value="partnership">Partnership Inquiry</option>
+<option value="funding">Funding Application</option>
+<option value="support">Technical Support</option>
+<option value="feedback">Feedback</option>
+<option value="other">Other</option>
+</select>
+</div>
+<div class="form-group">
+<label for="contact-message">Message</label>
+<textarea id="contact-message" name="message" required></textarea>
+</div>
+<button type="submit" class="form-submit">Send Message</button>
+</form>
+</div>
+<div style="margin-top:3rem;text-align:center;">
+<p style="color:var(--gray);font-size:.9rem;margin-bottom:1.5rem;">Follow us for updates and community news:</p>
+<div class="social-bar">
+<a href="https://youtube.com/@mikecomplexai" target="_blank" class="social-link">▶ YouTube</a>
+<a href="https://linkedin.com/in/mikecomplexai" target="_blank" class="social-link">💼 LinkedIn</a>
+<a href="https://twitter.com/mikecomplexai" target="_blank" class="social-link">𝕏 Twitter</a>
+<a href="https://instagram.com/mikecomplexai" target="_blank" class="social-link">📷 Instagram</a>
+<a href="https://facebook.com/mikecomplexai" target="_blank" class="social-link">f Facebook</a>
+</div>
+</div>
 </section>
 
-<!-- FOOTER -->
 <footer>
-  <div class="footer-inner">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="fb-name">CINIS NEXUS</div>
-        <div class="fb-tagline">Cortex Intelligence Nexus Intel Solutions. AI-powered industry intelligence for Ogoja and beyond. Founded 2012.</div>
-        <div style="margin-top:1rem;font-size:.72rem;color:var(--teal);letter-spacing:1.5px;">cortexnexus@proton.me</div>
-      </div>
-      <div class="footer-col">
-        <h4>Platform</h4>
-        <a href="#products">Products</a>
-        <a href="#ai-chain">AI Intelligence</a>
-        <a href="#data">Analytics</a>
-        <a href="#subscribe">Pricing</a>
-        <a href="#directory">Directory</a>
-      </div>
-      <div class="footer-col">
-        <h4>Learn</h4>
-        <a href="#education">Education Hub</a>
-        <a href="#blog">Blog & Commentary</a>
-        <a href="#investment">Trading AI</a>
-        <a href="#security">Cyber Security</a>
-        <a href="#scaling">Platform Scaling</a>
-      </div>
-      <div class="footer-col">
-        <h4>Company</h4>
-        <a href="#contact">Contact Us</a>
-        <a href="#contact">Partnership</a>
-        <a href="#contact">Funding</a>
-        <a href="#subscribe">Subscribe</a>
-        <a href="mailto:cortexnexus@proton.me">Email Us</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>© 2026 CINIS NEXUS INDUSTRY OGOJA. Michael Ujuku Morim. All rights reserved.</p>
-      <div class="powered">Built by <span>MikeComplex AI</span> · Powered by <span>CINIS NEXUS AI</span></div>
-    </div>
-  </div>
+<p>&copy; 2026 CINIS NEXUS INDUSTRY OGOJA. Founded by Michael Ujuku Morim. <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+<p style="margin-top:.75rem;font-size:.75rem;">Built by MikeComplex AI — Powered by CINIS NEXUS AI | v1.0.0 | June 2026</p>
 </footer>
 
-<!-- TOAST -->
-<div class="toast" id="toast">
-  <span class="toast-icon" id="toastIcon">✅</span>
-  <span class="toast-msg" id="toastMsg">Action completed.</span>
+<div class="voice-widget">
+<button id="voiceToggle" class="voice-btn" title="Click to use voice">
+<span class="voice-icon">🎤</span>
+<span class="voice-text">Speak</span>
+</button>
+<div id="voiceTranscript" class="voice-transcript" style="display:none;">
+<p id="voiceText"></p>
+<button id="voiceClose" class="voice-close">×</button>
+</div>
+<div id="voiceResponse" class="voice-response" style="display:none;">
+<p id="responseText"></p>
+</div>
 </div>
 
-<!-- PAYSTACK SCRIPT -->
-<script src="https://js.paystack.co/v1/inline.js"></script>
-
 <script>
-// ── CONFIG — REPLACE WITH YOUR PAYSTACK PUBLIC KEY ──────────────────────────
-// ⚠️ USE YOUR PUBLIC KEY ONLY (pk_live_... or pk_test_...) NEVER the secret key
-const PAYSTACK_PUBLIC_KEY = "pk_test_REPLACE_WITH_YOUR_PAYSTACK_PUBLIC_KEY";
-const CONTACT_EMAIL = "cortexnexus@proton.me";
-
-// ── MOBILE MENU ──────────────────────────────────────────────────────────────
-function toggleMenu(){
-  const m = document.getElementById('mobileMenu');
-  m.classList.toggle('open');
+class VoiceIntelligence {
+constructor() {
+this.isListening = false;
+this.recognition = this.initSpeechRecognition();
+this.initVoiceWidget();
 }
-
-// ── SCROLL REVEAL ────────────────────────────────────────────────────────────
-const observer = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');}});
-},{threshold:.12});
-document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
-
-// ── NAV SHRINK ON SCROLL ─────────────────────────────────────────────────────
-window.addEventListener('scroll',()=>{
-  const nav = document.getElementById('topnav');
-  nav.style.height = window.scrollY > 60 ? '54px' : '64px';
+initSpeechRecognition() {
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+if (!SpeechRecognition) {
+console.warn('Speech Recognition not supported');
+return null;
+}
+const recognition = new SpeechRecognition();
+recognition.continuous = false;
+recognition.interimResults = true;
+recognition.lang = 'en-NG';
+recognition.onstart = () => {
+this.isListening = true;
+document.getElementById('voiceToggle').style.background = 'linear-gradient(135deg,#00FF88,#00C2FF)';
+this.showTranscript('Listening...');
+};
+recognition.onresult = (event) => {
+let transcript = '';
+for (let i = event.resultIndex; i < event.results.length; i++) {
+transcript += event.results[i][0].transcript;
+}
+document.getElementById('voiceText').textContent = transcript;
+if (event.results[event.results.length - 1].isFinal) {
+this.processVoiceQuery(transcript);
+}
+};
+recognition.onerror = (event) => {
+this.showResponse('Voice error: ' + event.error);
+};
+recognition.onend = () => {
+this.isListening = false;
+document.getElementById('voiceToggle').style.background = 'linear-gradient(135deg,#00C2FF,#001F5B)';
+};
+return recognition;
+}
+initVoiceWidget() {
+const toggleBtn = document.getElementById('voiceToggle');
+const closeBtn = document.getElementById('voiceClose');
+if (toggleBtn) toggleBtn.addEventListener('click', () => this.toggleVoice());
+if (closeBtn) closeBtn.addEventListener('click', () => this.hideTranscript());
+}
+toggleVoice() {
+if (!this.recognition) {
+this.showResponse('Voice not supported in your browser');
+return;
+}
+if (this.isListening) {
+this.recognition.stop();
+} else {
+this.recognition.start();
+}
+}
+processVoiceQuery(transcript) {
+const query = transcript.toLowerCase().trim();
+const commands = {
+'business directory':() => this.routeTo('#directory'),
+'show directory':() => this.routeTo('#directory'),
+'market prices':() => this.routeTo('#analytics'),
+'farming':() => this.routeTo('#education'),
+'subscribe':() => this.routeTo('#subscribe'),
+'contact':() => this.routeTo('#contact'),
+'security':() => this.routeTo('#security'),
+'learn':() => this.routeTo('#education'),
+'hello':() => this.showResponse('Hello! I am CINIS NEXUS. How can I help?'),
+'what can you do':() => this.showResponse('I can show directory, market prices, farming, education, investment, security, or contact info. What would you like?'),
+};
+let matched = false;
+for (const [key,action] of Object.entries(commands)) {
+if (query.includes(key)) {
+action();
+matched = true;
+break;
+}
+}
+if (!matched) {
+this.showResponse('I heard: "' + transcript + '". Try: directory, prices, farming, subscribe, contact.');
+}
+}
+routeTo(section) {
+const element = document.querySelector(section);
+if (element) {
+element.scrollIntoView({behavior:'smooth'});
+this.showResponse('Navigating to ' + section.replace('#','') + '...');
+} else {
+this.showResponse('Section not found');
+}
+}
+showTranscript(text) {
+const transcript = document.getElementById('voiceTranscript');
+document.getElementById('voiceText').textContent = text;
+transcript.style.display = 'block';
+}
+hideTranscript() {
+document.getElementById('voiceTranscript').style.display = 'none';
+}
+showResponse(text) {
+const response = document.getElementById('voiceResponse');
+document.getElementById('responseText').textContent = text;
+response.style.display = 'block';
+setTimeout(() => { response.style.display = 'none'; }, 4000);
+}
+}
+document.addEventListener('DOMContentLoaded', () => {
+window.voiceIntelligence = new VoiceIntelligence();
 });
-
-// ── TOAST ────────────────────────────────────────────────────────────────────
-function showToast(msg,icon='✅'){
-  const t=document.getElementById('toast');
-  document.getElementById('toastMsg').textContent=msg;
-  document.getElementById('toastIcon').textContent=icon;
-  t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),3500);
+function handleContactForm(e) {
+e.preventDefault();
+const name = document.getElementById('contact-name').value;
+const email = document.getElementById('contact-email').value;
+alert('Thank you, ' + name + '! We will respond to ' + email + ' within 24 hours.');
+document.querySelector('.contact-form').reset();
 }
-
-// ── FREE PLAN ────────────────────────────────────────────────────────────────
-function handleFree(){
-  const email=prompt('Enter your email to get free community access:');
-  if(email&&email.includes('@')){
-    showToast('Welcome to CINIS Community! Check '+email+' for your access link.','🎉');
-  }
+function initiatePayment(plan) {
+const PAYSTACK_PUBLIC_KEY = "pk_live_YOUR_PUBLIC_KEY_HERE";
+const amount = plan === 'pro' ? 500000 : 1500000;
+alert('Redirecting to Paystack for ' + (plan === 'pro' ? 'Professional' : 'Enterprise') + ' plan...\n\nNote: Add your Paystack public key to the initiatePayment function.');
 }
-
-// ── PAYSTACK PAYMENT ─────────────────────────────────────────────────────────
-function initiatePayment(plan, amountNaira){
-  const email=prompt('Enter your email address to continue:');
-  if(!email||!email.includes('@')){showToast('Please enter a valid email.','⚠️');return;}
-  const name=prompt('Your full name:')||'CINIS Member';
-  const amountKobo=amountNaira*100;
-  const planLabel=plan==='professional'?'Professional Plan (₦5,000/mo)':'Enterprise Plan (₦15,000/mo)';
-  try{
-    const handler=PaystackPop.setup({
-      key:PAYSTACK_PUBLIC_KEY,
-      email:email,
-      amount:amountKobo,
-      currency:'NGN',
-      ref:'CINIS-'+Date.now()+'-'+Math.floor(Math.random()*999999),
-      metadata:{
-        custom_fields:[
-          {display_name:"Customer Name",variable_name:"customer_name",value:name},
-          {display_name:"Plan",variable_name:"plan",value:planLabel},
-          {display_name:"Platform",variable_name:"platform",value:"CINIS NEXUS"}
-        ]
-      },
-      callback:function(response){
-        showToast('Payment successful! Ref: '+response.reference+'. Welcome to CINIS!','🎉');
-        console.log('Payment ref:',response.reference);
-      },
-      onClose:function(){
-        showToast('Payment window closed. Subscribe when ready.','ℹ️');
-      }
-    });
-    handler.openIframe();
-  }catch(err){
-    showToast('Payment system loading. Try again or email '+CONTACT_EMAIL,'⚠️');
-    console.error('Paystack error:',err);
-  }
-}
-
-// ── CONTACT FORM ──────────────────────────────────────────────────────────────
-function submitContact(){
-  const name=document.getElementById('fc-name').value.trim();
-  const email=document.getElementById('fc-email').value.trim();
-  const subject=document.getElementById('fc-subject').value;
-  const msg=document.getElementById('fc-msg').value.trim();
-  if(!name||!email||!subject||!msg){showToast('Please fill in all fields.','⚠️');return;}
-  if(!email.includes('@')){showToast('Please enter a valid email.','⚠️');return;}
-  // Opens email client with pre-filled message
-  const mailtoLink=`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('[CINIS] '+subject+' — from '+name)}&body=${encodeURIComponent('Name: '+name+'\nEmail: '+email+'\nSubject: '+subject+'\n\nMessage:\n'+msg)}`;
-  window.location.href=mailtoLink;
-  showToast('Opening your email client... message ready to send!','📧');
-}
+document.getElementById('hamburger').addEventListener('click', () => {
+document.getElementById('mobileMenu').classList.toggle('open');
+});
 </script>
+
 </body>
 </html>
