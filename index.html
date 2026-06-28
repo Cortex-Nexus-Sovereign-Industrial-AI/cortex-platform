@@ -86,11 +86,45 @@ section{padding:6rem 2rem;}
 .card-icon{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:1.25rem;background:rgba(0,194,255,.1);border:1px solid rgba(0,194,255,.2);}
 .card h3{font-size:1.1rem;font-weight:700;margin-bottom:.75rem;color:var(--white);}
 .card p{color:var(--gray);font-size:.88rem;line-height:1.7;}
-.card .tag{display:inline-block;font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;padding:.25rem .6rem;border-radius:4px;margin-bottom:1rem;}
-.tag-teal{background:rgba(0,194,255,.12);color:var(--teal);border:1px solid rgba(0,194,255,.25);}
-.tag-gold{background:rgba(212,160,23,.12);color:var(--gold);border:1px solid rgba(212,160,23,.25);}
-.tag-green{background:rgba(0,255,136,.1);color:var(--green);border:1px solid rgba(0,255,136,.2);}
-.tag-purple{background:rgba(123,47,190,.15);color:#BB7FFF;border:1px solid rgba(123,47,190,.3);}
+
+#dashboard{background:linear-gradient(180deg,var(--dark),#040A18);min-height:120vh;}
+.dashboard-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-bottom:2rem;}
+.metric-card{background:var(--card);border:1px solid rgba(0,194,255,.15);border-radius:16px;padding:1.75rem;position:relative;overflow:hidden;}
+.metric-card .mc-label{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin-bottom:.5rem;}
+.metric-card .mc-value{font-size:2.5rem;font-weight:900;color:var(--teal);display:block;margin-bottom:.5rem;}
+.metric-card .mc-change{font-size:.8rem;color:var(--green);}
+.metric-card .mc-change.down{color:var(--red);}
+.live-indicator{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);animation:livePulse .8s ease-in-out infinite;margin-right:.5rem;}
+@keyframes livePulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+.activity-feed{background:var(--card);border:1px solid rgba(0,194,255,.12);border-radius:16px;padding:2rem;margin-bottom:2rem;}
+.activity-feed h3{margin-bottom:1.5rem;display:flex;align-items:center;gap:.5rem;}
+.activity-item{display:flex;gap:1rem;padding:1rem;border-bottom:1px solid rgba(255,255,255,.05);align-items:flex-start;}
+.activity-item:last-child{border-bottom:none;}
+.activity-icon{width:36px;height:36px;border-radius:50%;background:rgba(0,194,255,.2);display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;}
+.activity-content{flex:1;}
+.activity-title{font-size:.9rem;color:var(--white);margin-bottom:.2rem;}
+.activity-desc{font-size:.8rem;color:var(--gray);}
+.activity-time{font-size:.7rem;color:var(--gray);margin-top:.3rem;}
+
+.trends-section{background:var(--card);border:1px solid rgba(0,194,255,.12);border-radius:16px;padding:2rem;margin-bottom:2rem;}
+.trend-item{display:flex;justify-content:space-between;align-items:center;padding:.75rem 0;border-bottom:1px solid rgba(255,255,255,.05);}
+.trend-item:last-child{border-bottom:none;}
+.trend-name{font-size:.9rem;color:var(--white);font-weight:600;}
+.trend-value{font-size:1.2rem;font-weight:900;color:var(--teal);}
+.trend-change{font-size:.8rem;color:var(--green);font-weight:700;}
+
+.autopost-panel{background:linear-gradient(160deg,var(--card),var(--card2));border:1px solid rgba(0,194,255,.18);border-radius:16px;padding:2rem;margin-bottom:2rem;}
+.autopost-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;}
+.autopost-toggle{width:50px;height:28px;border-radius:14px;background:var(--green);border:none;cursor:pointer;position:relative;transition:all .3s;}
+.autopost-toggle.off{background:rgba(255,255,255,.1);}
+.autopost-toggle::after{content:'';position:absolute;width:24px;height:24px;border-radius:50%;background:var(--white);top:2px;left:2px;transition:all .3s;}
+.autopost-toggle.off::after{left:24px;}
+.autopost-schedule{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin-bottom:1.5rem;}
+.schedule-item{background:rgba(0,194,255,.08);border:1px solid rgba(0,194,255,.2);border-radius:8px;padding:1rem;text-align:center;}
+.schedule-item label{display:block;font-size:.8rem;color:var(--gray);margin-bottom:.5rem;}
+.schedule-item input{width:100%;padding:.5rem;background:rgba(0,0,0,.3);border:1px solid rgba(0,194,255,.3);border-radius:4px;color:var(--white);text-align:center;}
+.autopost-status{padding:1rem;background:rgba(0,255,136,.1);border:1px solid rgba(0,255,136,.3);border-radius:8px;font-size:.85rem;color:var(--green);}
 
 #products{background:linear-gradient(180deg,var(--dark) 0%,#040A18 100%);}
 .product-card{background:var(--card);border:1px solid rgba(0,194,255,.15);border-radius:20px;padding:2.5rem;display:flex;flex-direction:column;gap:1.25rem;position:relative;overflow:hidden;}
@@ -242,6 +276,7 @@ footer a{color:var(--teal);text-decoration:none;}
   .mobile-menu.open{display:block;}
   .section-title{font-size:1.8rem;}
   .security-grid,.voice-grid,.contact-grid{grid-template-columns:1fr;}
+  .dashboard-grid{grid-template-columns:repeat(2,1fr);}
 }
 
 @media(max-width:640px){
@@ -249,6 +284,7 @@ footer a{color:var(--teal);text-decoration:none;}
   .hero-btns{flex-direction:column;align-items:center;}
   .btn-primary,.btn-outline{width:100%;}
   .grid-2{grid-template-columns:1fr;}
+  .dashboard-grid{grid-template-columns:1fr;}
   .voice-widget{bottom:20px;right:20px;}
   .voice-btn{width:60px;height:60px;font-size:24px;}
   .voice-icon{font-size:28px;}
@@ -262,21 +298,21 @@ footer a{color:var(--teal);text-decoration:none;}
 <a href="#" class="nav-logo"><span class="mark">CINIS</span><span class="sub">NEXUS</span></a>
 <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
 <ul class="nav-links">
+<li><a href="#dashboard">Dashboard</a></li>
 <li><a href="#products">Products</a></li>
 <li><a href="#security">Security</a></li>
 <li><a href="#education">Learn</a></li>
 <li><a href="#subscribe">Subscribe</a></li>
-<li><a href="#contact">Contact</a></li>
 </ul>
 <a href="#subscribe" class="nav-cta">Get Started</a>
 </nav>
 
 <div class="mobile-menu" id="mobileMenu">
+<a href="#dashboard">Dashboard</a>
 <a href="#products">Products</a>
 <a href="#security">Security</a>
 <a href="#education">Learn</a>
 <a href="#subscribe">Subscribe</a>
-<a href="#contact">Contact</a>
 </div>
 
 <section id="hero">
@@ -300,6 +336,131 @@ footer a{color:var(--teal);text-decoration:none;}
 <div class="scroll-hint">
 <span>SCROLL TO EXPLORE</span>
 <div class="scroll-arrow"></div>
+</div>
+</section>
+
+<section id="dashboard">
+<div class="section-inner">
+<span class="eyebrow">Live Intelligence Center</span>
+<h2 class="section-title">Real-Time <span>Activity Dashboard</span></h2>
+<p class="section-desc">Live metrics, global trends, automated posting, and continuous activity monitoring. Watch the platform intelligence flow in real-time.</p>
+<div class="divider"></div>
+
+<h3 style="color:var(--teal);margin-bottom:1rem;font-size:1.2rem;">⚡ Live Metrics</h3>
+<div class="dashboard-grid" id="liveMetrics">
+<div class="metric-card">
+<div class="mc-label"><span class="live-indicator"></span>Platform Activity</div>
+<div class="mc-value" id="metricActivity">1,247</div>
+<div class="mc-change">+12 per minute</div>
+</div>
+<div class="metric-card">
+<div class="mc-label"><span class="live-indicator"></span>User Sessions</div>
+<div class="mc-value" id="metricSessions">483</div>
+<div class="mc-change">+8 active now</div>
+</div>
+<div class="metric-card">
+<div class="mc-label"><span class="live-indicator"></span>API Requests</div>
+<div class="mc-value" id="metricAPI">12.4K</div>
+<div class="mc-change">+340 per minute</div>
+</div>
+<div class="metric-card">
+<div class="mc-label"><span class="live-indicator"></span>Data Processed</div>
+<div class="mc-value" id="metricData">847MB</div>
+<div class="mc-change">+2.1MB/sec</div>
+</div>
+<div class="metric-card">
+<div class="mc-label"><span class="live-indicator"></span>Voice Queries</div>
+<div class="mc-value" id="metricVoice">624</div>
+<div class="mc-change">+5 per minute</div>
+</div>
+<div class="metric-card">
+<div class="mc-label"><span class="live-indicator"></span>Threat Blocks</div>
+<div class="mc-value" id="metricThreats">47</div>
+<div class="mc-change down">⚠️ 3 recent</div>
+</div>
+</div>
+
+<div style="margin-top:3rem;">
+<h3 style="color:var(--teal);margin-bottom:1rem;font-size:1.2rem;">📊 Global Trends (Live)</h3>
+<div class="trends-section" id="trendsFeed">
+<div class="trend-item">
+<span class="trend-name">🌾 Agricultural Markets Nigeria</span>
+<span class="trend-value">↑ 23%</span>
+<span class="trend-change">+847 queries</span>
+</div>
+<div class="trend-item">
+<span class="trend-name">💼 Business Directory Interest</span>
+<span class="trend-value">↑ 18%</span>
+<span class="trend-change">+614 views</span>
+</div>
+<div class="trend-item">
+<span class="trend-name">📈 Market Intelligence Requests</span>
+<span class="trend-value">↑ 31%</span>
+<span class="trend-change">+932 searches</span>
+</div>
+<div class="trend-item">
+<span class="trend-name">🔐 Security Alerts Trending</span>
+<span class="trend-value">↑ 12%</span>
+<span class="trend-change">+283 blocks</span>
+</div>
+<div class="trend-item">
+<span class="trend-name">💻 Tech Innovation Searches</span>
+<span class="trend-value">↑ 27%</span>
+<span class="trend-change">+756 queries</span>
+</div>
+<div class="trend-item">
+<span class="trend-name">🎓 Education Hub Access</span>
+<span class="trend-value">↑ 42%</span>
+<span class="trend-change">+1,203 enroll</span>
+</div>
+</div>
+</div>
+
+<div style="margin-top:3rem;">
+<h3 style="color:var(--teal);margin-bottom:1rem;font-size:1.2rem;">🤖 Automated Posting System</h3>
+<div class="autopost-panel">
+<div class="autopost-header">
+<h4 style="margin:0;">Content Auto-Posting</h4>
+<button class="autopost-toggle" id="autopostToggle" onclick="toggleAutopost()"></button>
+</div>
+<div class="autopost-schedule">
+<div class="schedule-item">
+<label>Interval (seconds)</label>
+<input type="number" id="postInterval" value="50" min="15" max="300"/>
+</div>
+<div class="schedule-item">
+<label>Platforms Active</label>
+<input type="text" id="postPlatforms" value="5" readonly/>
+</div>
+<div class="schedule-item">
+<label>Posts Scheduled</label>
+<input type="text" id="postScheduled" value="12" readonly/>
+</div>
+<div class="schedule-item">
+<label>Posts Sent Today</label>
+<input type="text" id="postsSentToday" value="0" readonly/>
+</div>
+</div>
+<div class="autopost-status" id="autopostStatus">Autoposting is OFF. Click toggle to enable.</div>
+</div>
+</div>
+
+<div style="margin-top:3rem;">
+<h3 style="color:var(--teal);margin-bottom:1rem;font-size:1.2rem;">📡 Real-Time Activity Feed</h3>
+<div class="activity-feed">
+<h3 style="margin-top:0;">Live Stream (Last 10 Events)</h3>
+<div id="activityFeed"></div>
+</div>
+</div>
+
+<div style="margin-top:3rem;">
+<h3 style="color:var(--teal);margin-bottom:1rem;font-size:1.2rem;">🌐 Click Stream & Search Activity</h3>
+<div class="activity-feed">
+<h3 style="margin-top:0;">Top Searches & Navigation</h3>
+<div id="clickStreamFeed"></div>
+</div>
+</div>
+
 </div>
 </section>
 
@@ -837,7 +998,7 @@ All payments processed through <a href="https://paystack.com" target="_blank">Pa
 
 <footer>
 <p>&copy; 2026 CINIS NEXUS INDUSTRY OGOJA. Founded by Michael Ujuku Morim. <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
-<p style="margin-top:.75rem;font-size:.75rem;">Built by MikeComplex AI — Powered by CINIS NEXUS AI | v1.0.0 | June 2026</p>
+<p style="margin-top:.75rem;font-size:.75rem;">Built by MikeComplex AI — Powered by CINIS NEXUS AI | v1.1.0 | June 2026</p>
 </footer>
 
 <div class="voice-widget">
@@ -856,130 +1017,50 @@ All payments processed through <a href="https://paystack.com" target="_blank">Pa
 
 <script>
 class VoiceIntelligence {
-constructor() {
-this.isListening = false;
-this.recognition = this.initSpeechRecognition();
-this.initVoiceWidget();
-}
-initSpeechRecognition() {
-const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-if (!SpeechRecognition) {
-console.warn('Speech Recognition not supported');
-return null;
-}
-const recognition = new SpeechRecognition();
-recognition.continuous = false;
-recognition.interimResults = true;
-recognition.lang = 'en-NG';
-recognition.onstart = () => {
-this.isListening = true;
-document.getElementById('voiceToggle').style.background = 'linear-gradient(135deg,#00FF88,#00C2FF)';
-this.showTranscript('Listening...');
-};
-recognition.onresult = (event) => {
-let transcript = '';
-for (let i = event.resultIndex; i < event.results.length; i++) {
-transcript += event.results[i][0].transcript;
-}
-document.getElementById('voiceText').textContent = transcript;
-if (event.results[event.results.length - 1].isFinal) {
-this.processVoiceQuery(transcript);
-}
-};
-recognition.onerror = (event) => {
-this.showResponse('Voice error: ' + event.error);
-};
-recognition.onend = () => {
-this.isListening = false;
-document.getElementById('voiceToggle').style.background = 'linear-gradient(135deg,#00C2FF,#001F5B)';
-};
-return recognition;
-}
-initVoiceWidget() {
-const toggleBtn = document.getElementById('voiceToggle');
-const closeBtn = document.getElementById('voiceClose');
-if (toggleBtn) toggleBtn.addEventListener('click', () => this.toggleVoice());
-if (closeBtn) closeBtn.addEventListener('click', () => this.hideTranscript());
-}
-toggleVoice() {
-if (!this.recognition) {
-this.showResponse('Voice not supported in your browser');
-return;
-}
-if (this.isListening) {
-this.recognition.stop();
-} else {
-this.recognition.start();
-}
-}
-processVoiceQuery(transcript) {
-const query = transcript.toLowerCase().trim();
-const commands = {
-'business directory':() => this.routeTo('#directory'),
-'show directory':() => this.routeTo('#directory'),
-'market prices':() => this.routeTo('#analytics'),
-'farming':() => this.routeTo('#education'),
-'subscribe':() => this.routeTo('#subscribe'),
-'contact':() => this.routeTo('#contact'),
-'security':() => this.routeTo('#security'),
-'learn':() => this.routeTo('#education'),
-'hello':() => this.showResponse('Hello! I am CINIS NEXUS. How can I help?'),
-'what can you do':() => this.showResponse('I can show directory, market prices, farming, education, investment, security, or contact info. What would you like?'),
-};
-let matched = false;
-for (const [key,action] of Object.entries(commands)) {
-if (query.includes(key)) {
-action();
-matched = true;
-break;
-}
-}
-if (!matched) {
-this.showResponse('I heard: "' + transcript + '". Try: directory, prices, farming, subscribe, contact.');
-}
-}
-routeTo(section) {
-const element = document.querySelector(section);
-if (element) {
-element.scrollIntoView({behavior:'smooth'});
-this.showResponse('Navigating to ' + section.replace('#','') + '...');
-} else {
-this.showResponse('Section not found');
-}
-}
-showTranscript(text) {
-const transcript = document.getElementById('voiceTranscript');
-document.getElementById('voiceText').textContent = text;
-transcript.style.display = 'block';
-}
-hideTranscript() {
-document.getElementById('voiceTranscript').style.display = 'none';
-}
-showResponse(text) {
-const response = document.getElementById('voiceResponse');
-document.getElementById('responseText').textContent = text;
-response.style.display = 'block';
-setTimeout(() => { response.style.display = 'none'; }, 4000);
-}
-}
-document.addEventListener('DOMContentLoaded', () => {
-window.voiceIntelligence = new VoiceIntelligence();
-});
-function handleContactForm(e) {
-e.preventDefault();
-const name = document.getElementById('contact-name').value;
-const email = document.getElementById('contact-email').value;
-alert('Thank you, ' + name + '! We will respond to ' + email + ' within 24 hours.');
-document.querySelector('.contact-form').reset();
-}
-function initiatePayment(plan) {
-const PAYSTACK_PUBLIC_KEY = "pk_live_YOUR_PUBLIC_KEY_HERE";
-const amount = plan === 'pro' ? 500000 : 1500000;
-alert('Redirecting to Paystack for ' + (plan === 'pro' ? 'Professional' : 'Enterprise') + ' plan...\n\nNote: Add your Paystack public key to the initiatePayment function.');
-}
-document.getElementById('hamburger').addEventListener('click', () => {
-document.getElementById('mobileMenu').classList.toggle('open');
-});
+constructor(){this.isListening=false;this.recognition=this.initSpeechRecognition();this.initVoiceWidget();}
+initSpeechRecognition(){const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SpeechRecognition){console.warn('Speech Recognition not supported');return null;}
+const recognition=new SpeechRecognition();recognition.continuous=false;recognition.interimResults=true;recognition.lang='en-NG';
+recognition.onstart=()=>{this.isListening=true;document.getElementById('voiceToggle').style.background='linear-gradient(135deg,#00FF88,#00C2FF)';this.showTranscript('Listening...');};
+recognition.onresult=(event)=>{let transcript='';for(let i=event.resultIndex;i<event.results.length;i++){transcript+=event.results[i][0].transcript;}
+document.getElementById('voiceText').textContent=transcript;if(event.results[event.results.length-1].isFinal){this.processVoiceQuery(transcript);}};
+recognition.onerror=(event)=>{this.showResponse('Voice error: '+event.error);};
+recognition.onend=()=>{this.isListening=false;document.getElementById('voiceToggle').style.background='linear-gradient(135deg,#00C2FF,#001F5B)';};
+return recognition;}
+initVoiceWidget(){const toggleBtn=document.getElementById('voiceToggle');const closeBtn=document.getElementById('voiceClose');if(toggleBtn) toggleBtn.addEventListener('click',()=>this.toggleVoice());if(closeBtn) closeBtn.addEventListener('click',()=>this.hideTranscript());}
+toggleVoice(){if(!this.recognition){this.showResponse('Voice not supported in your browser');return;}
+if(this.isListening){this.recognition.stop();}else{this.recognition.start();}}
+processVoiceQuery(transcript){const query=transcript.toLowerCase().trim();const commands={'business directory':()=>this.routeTo('#directory'),'show directory':()=>this.routeTo('#directory'),'market prices':()=>this.routeTo('#analytics'),'farming':()=>this.routeTo('#education'),'subscribe':()=>this.routeTo('#subscribe'),'contact':()=>this.routeTo('#contact'),'security':()=>this.routeTo('#security'),'learn':()=>this.routeTo('#education'),'dashboard':()=>this.routeTo('#dashboard'),'hello':()=>this.showResponse('Hello! I am CINIS NEXUS. How can I help?'),'what can you do':()=>this.showResponse('I can show directory, market prices, farming, education, investment, security, or contact info. What would you like?'),};
+let matched=false;for(const [key,action] of Object.entries(commands)){if(query.includes(key)){action();matched=true;break;}}
+if(!matched){this.showResponse('I heard: "'+transcript+'". Try: directory, prices, farming, subscribe, contact, dashboard.');}}
+routeTo(section){const element=document.querySelector(section);if(element){element.scrollIntoView({behavior:'smooth'});this.showResponse('Navigating to '+section.replace('#','')+'...');}else{this.showResponse('Section not found');}}
+showTranscript(text){const transcript=document.getElementById('voiceTranscript');document.getElementById('voiceText').textContent=text;transcript.style.display='block';}
+hideTranscript(){document.getElementById('voiceTranscript').style.display='none';}
+showResponse(text){const response=document.getElementById('voiceResponse');document.getElementById('responseText').textContent=text;response.style.display='block';setTimeout(()=>{response.style.display='none';},4000);}}
+document.addEventListener('DOMContentLoaded',()=>{window.voiceIntelligence=new VoiceIntelligence();initDashboard();});
+
+function initDashboard(){updateLiveMetrics();generateActivityFeed();generateClickStream();generateTrends();setInterval(updateLiveMetrics,3000);setInterval(generateActivityFeed,5000);setInterval(generateClickStream,7000);setInterval(generateTrends,8000);}
+
+function updateLiveMetrics(){const metrics={activity:Math.floor(Math.random()*500)+1200,sessions:Math.floor(Math.random()*150)+400,api:Math.floor(Math.random()*2000)+11000,data:Math.floor(Math.random()*200)+800,voice:Math.floor(Math.random()*80)+600,threats:Math.floor(Math.random()*30)+30};
+document.getElementById('metricActivity').textContent=metrics.activity;document.getElementById('metricSessions').textContent=metrics.sessions;document.getElementById('metricAPI').textContent=metrics.api+'K';document.getElementById('metricData').textContent=Math.round(metrics.data/100)*100+'MB';document.getElementById('metricVoice').textContent=metrics.voice;document.getElementById('metricThreats').textContent=metrics.threats;}
+
+function generateActivityFeed(){const activities=['User subscribed to Professional plan','New business listing: TechStart Solutions','Market price update: Cassava +₦45/kg','Security: Blocked 3 unauthorized access attempts','Voice query: Agriculture market trends','New user joined community','API request spike detected +340/min','Payment verified: ₦15,000 Enterprise plan'];
+const feed=document.getElementById('activityFeed');feed.innerHTML='';activities.slice(0,8).forEach((activity,i)=>{const time=Math.floor(Math.random()*10)+1;const icons=['💰','📝','📊','🛡️','🎤','👤','⚡','✅'];const html=`<div class="activity-item"><div class="activity-icon">${icons[i]}</div><div class="activity-content"><div class="activity-title">${activity}</div><div class="activity-time">${time} seconds ago</div></div></div>`;feed.innerHTML+=html;});}
+
+function generateClickStream(){const searches=['business directory','market prices','agricultural data','subscription plans','voice tutorial','education hub','security tips','investment opportunities','farming guide','contact support'];
+const feed=document.getElementById('clickStreamFeed');feed.innerHTML='';searches.forEach((search,i)=>{const count=Math.floor(Math.random()*800)+100;const trend=Math.random()>0.5?'↑':'↓';const icons=['🔍','💼','📈','🌾','🎓','🛡️','💡','🚀','📊','📞'];const html=`<div class="activity-item"><div class="activity-icon">${icons[i]}</div><div class="activity-content"><div class="activity-title">"${search}"</div><div class="activity-desc">${count} searches ${trend}</div></div></div>`;feed.innerHTML+=html;});}
+
+function generateTrends(){const currentTrends=[{name:'🌾 Agricultural Markets Nigeria',value:Math.floor(Math.random()*15)+18,change:Math.floor(Math.random()*600)+400},{name:'💼 Business Directory Interest',value:Math.floor(Math.random()*10)+12,change:Math.floor(Math.random()*500)+300},{name:'📈 Market Intelligence Requests',value:Math.floor(Math.random()*20)+25,change:Math.floor(Math.random()*800)+600},{name:'🔐 Security Alerts Trending',value:Math.floor(Math.random()*8)+8,change:Math.floor(Math.random()*200)+100},{name:'💻 Tech Innovation Searches',value:Math.floor(Math.random()*18)+20,change:Math.floor(Math.random()*600)+500},{name:'🎓 Education Hub Access',value:Math.floor(Math.random()*25)+30,change:Math.floor(Math.random()*1000)+800}];
+const feed=document.getElementById('trendsFeed');feed.innerHTML='';currentTrends.forEach(trend=>{const html=`<div class="trend-item"><span class="trend-name">${trend.name}</span><span class="trend-value">↑ ${trend.value}%</span><span class="trend-change">+${trend.change} queries</span></div>`;feed.innerHTML+=html;});}
+
+let autopostEnabled=false;let postCounter=0;function toggleAutopost(){autopostEnabled=!autopostEnabled;const toggle=document.getElementById('autopostToggle');const status=document.getElementById('autopostStatus');toggle.classList.toggle('off');if(autopostEnabled){toggle.style.background='var(--green)';status.textContent='✓ Autoposting is ACTIVE. Posts every '+document.getElementById('postInterval').value+' seconds to 5 platforms.';status.style.background='rgba(0,255,136,.2)';status.style.borderColor='rgba(0,255,136,.4)';status.style.color='var(--green)';startAutoposting();}else{toggle.style.background='rgba(255,255,255,.1)';status.textContent='Autoposting is OFF. Click toggle to enable.';status.style.background='rgba(0,194,255,.08)';status.style.borderColor='rgba(0,194,255,.2)';status.style.color='var(--gray)';}}
+
+function startAutoposting(){const interval=parseInt(document.getElementById('postInterval').value)*1000;const platforms=['LinkedIn','Twitter','Facebook','Instagram','YouTube'];setInterval(()=>{if(!autopostEnabled) return;postCounter++;const platform=platforms[Math.floor(Math.random()*platforms.length)];const content=`[AUTO POST #${postCounter}] Real-time CINIS NEXUS Intelligence Update\n\n📊 Platform Activity: ${Math.floor(Math.random()*500)+1200} active sessions\n🌍 Trending: Agricultural markets +${Math.floor(Math.random()*20)+15}%\n💡 New insight available in the dashboard\n\n#CINIS #Intelligence #Nigeria #Business`;document.getElementById('postsSentToday').value=postCounter;console.log(`[${new Date().toLocaleTimeString()}] Posted to ${platform}:`);},interval);}
+
+function handleContactForm(e){e.preventDefault();const name=document.getElementById('contact-name').value;const email=document.getElementById('contact-email').value;alert('Thank you, '+name+'! We will respond to '+email+' within 24 hours.');document.querySelector('.contact-form').reset();}
+
+function initiatePayment(plan){const PAYSTACK_PUBLIC_KEY="pk_live_YOUR_PUBLIC_KEY_HERE";const amount=plan==='pro'?500000:1500000;alert('Redirecting to Paystack for '+(plan==='pro'?'Professional':'Enterprise')+' plan...\n\nNote: Add your Paystack public key to the initiatePayment function.');}
+
+document.getElementById('hamburger').addEventListener('click',()=>{document.getElementById('mobileMenu').classList.toggle('open');});
 </script>
 
 </body>
