@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>CINIS NEXUS | Cortex Intelligence Platform — Ogoja, Nigeria</title>
+<meta name="description" content="CINIS NEXUS INDUSTRY OGOJA — AI-powered industry intelligence platform connecting businesses, farmers, government and communities across Cross River State, Nigeria."/>
+<meta name="keywords" content="CINIS, MikeComplex AI, Cortex Intelligence, Ogoja, Nigeria, AI platform, business intelligence, data analytics, cyber security"/>
+<meta property="og:title" content="CINIS NEXUS | Cortex Intelligence Platform"/>
+<meta property="og:description" content="AI-powered industry intelligence for Ogoja and beyond."/>
+<meta property="og:type" content="website"/>
+<meta name="voice-app" content="CINIS NEXUS Voice Intelligence Layer v1.0">
+<link rel="canonical" href="https://mikecomplexai-7.github.io/cortex-platform/"/>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"CINIS NEXUS INDUSTRY OGOJA","alternateName":"CINIS-NIO","url":"https://mikecomplexai-7.github.io/cortex-platform/","email":"cortexnexus@proton.me","founder":{"@type":"Person","name":"Michael Ujuku Morim"},"foundingDate":"2012","description":"AI-powered industry intelligence platform connecting businesses, farmers, government and communities in Ogoja, Cross River State, Nigeria.","address":{"@type":"PostalAddress","streetAddress":"No. 7 Calabar Street, Igoli","addressLocality":"Ogoja","addressRegion":"Cross River State","addressCountry":"NG"}}
+</script>
+<style>
+:root{
+  --navy:#001F5B;--navy-deep:#000D2E;--teal:#00C2FF;--teal-dim:#0099CC;
+  --gold:#D4A017;--white:#FFFFFF;--off:#E8F4FF;--gray:#8899AA;
+  --dark:#060D1F;--card:#0A1628;--card2:#0D1E35;
+  --green:#00FF88;--purple:#7B2FBE;--red:#FF3355;
+  --font-head:'Segoe UI',system-ui,sans-serif;
+  --font-body:'Segoe UI',system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--dark);color:var(--white);font-family:var(--font-body);overflow-x:hidden;}
+
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:var(--navy-deep);}
+::-webkit-scrollbar-thumb{background:var(--teal);border-radius:3px;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(6,13,31,0.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,194,255,0.15);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:64px;transition:all .3s;}
+.nav-logo{display:flex;align-items:center;gap:.75rem;text-decoration:none;}
+.nav-logo .mark{font-size:1.5rem;font-weight:900;color:var(--teal);letter-spacing:-.5px;}
+.nav-logo .sub{font-size:.65rem;color:var(--gold);letter-spacing:2px;text-transform:uppercase;display:block;margin-top:-2px;}
+.nav-links{display:flex;gap:1.5rem;list-style:none;}
+.nav-links a{color:var(--gray);text-decoration:none;font-size:.82rem;letter-spacing:.5px;text-transform:uppercase;transition:color .2s;}
+.nav-links a:hover{color:var(--teal);}
+.nav-cta{background:var(--teal);color:var(--navy-deep);padding:.5rem 1.25rem;border-radius:6px;font-weight:700;font-size:.82rem;text-decoration:none;letter-spacing:.5px;transition:all .2s;}
+.nav-cta:hover{background:var(--gold);color:#000;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;}
+.hamburger span{width:22px;height:2px;background:var(--teal);border-radius:2px;transition:all .3s;}
+.mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;background:rgba(6,13,31,.98);padding:2rem;z-index:999;border-bottom:1px solid rgba(0,194,255,.2);}
+.mobile-menu.open{display:block;}
+.mobile-menu a{display:block;color:var(--white);text-decoration:none;padding:.75rem 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:.95rem;}
+
+#hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6rem 2rem 4rem;position:relative;overflow:hidden;}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,194,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,194,255,.05) 1px,transparent 1px);background-size:60px 60px;animation:gridMove 20s linear infinite;}
+@keyframes gridMove{from{transform:translate(0,0)}to{transform:translate(60px,60px)}}
+.hero-glow{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(0,194,255,.12) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);animation:pulse 4s ease-in-out infinite;}
+@keyframes pulse{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.1)}}
+.hero-eyebrow{font-size:.72rem;letter-spacing:4px;color:var(--teal);text-transform:uppercase;margin-bottom:1.5rem;position:relative;}
+.hero-title{font-size:clamp(2.8rem,7vw,6rem);font-weight:900;line-height:1.05;position:relative;background:linear-gradient(135deg,var(--white) 30%,var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.75rem;}
+.hero-subtitle{font-size:clamp(1rem,2.5vw,1.4rem);color:var(--teal);font-weight:600;letter-spacing:2px;text-transform:uppercase;position:relative;margin-bottom:1.5rem;}
+.hero-desc{max-width:640px;color:var(--gray);font-size:1.05rem;line-height:1.75;position:relative;margin-bottom:2.5rem;}
+.hero-stats{display:flex;gap:3rem;justify-content:center;margin-bottom:3rem;position:relative;flex-wrap:wrap;}
+.stat{text-align:center;}
+.stat-n{font-size:2.2rem;font-weight:900;color:var(--teal);display:block;}
+.stat-l{font-size:.72rem;letter-spacing:2px;color:var(--gray);text-transform:uppercase;}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;position:relative;}
+.btn-primary{background:linear-gradient(135deg,var(--teal),#0077AA);color:#000;padding:.85rem 2rem;border-radius:8px;font-weight:800;font-size:.9rem;letter-spacing:.5px;text-decoration:none;transition:all .3s;border:none;cursor:pointer;}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,194,255,.35);}
+.btn-outline{border:1.5px solid var(--teal);color:var(--teal);padding:.85rem 2rem;border-radius:8px;font-weight:700;font-size:.9rem;letter-spacing:.5px;text-decoration:none;transition:all .3s;background:transparent;}
+.btn-outline:hover{background:rgba(0,194,255,.08);transform:translateY(-2px);}
+.scroll-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;color:var(--gray);font-size:.75rem;letter-spacing:2px;}
+.scroll-arrow{width:20px;height:20px;border-right:2px solid var(--teal);border-bottom:2px solid var(--teal);transform:rotate(45deg);animation:bounce .8s ease-in-out infinite alternate;}
+@keyframes bounce{from{transform:rotate(45deg) translateY(0)}to{transform:rotate(45deg) translateY(6px)}}
+
+section{padding:6rem 2rem;}
+.section-inner{max-width:1200px;margin:0 auto;}
+.eyebrow{font-size:.7rem;letter-spacing:4px;text-transform:uppercase;color:var(--teal);margin-bottom:1rem;display:block;}
+.section-title{font-size:clamp(1.8rem,4vw,3rem);font-weight:800;line-height:1.15;margin-bottom:1rem;}
+.section-title span{color:var(--teal);}
+.section-desc{color:var(--gray);font-size:1rem;line-height:1.75;max-width:600px;margin-bottom:3rem;}
+.divider{width:60px;height:3px;background:linear-gradient(90deg,var(--teal),transparent);margin:1.5rem 0 2.5rem;}
+
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:1.5rem;}
+.grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.25rem;}
+.card{background:var(--card);border:1px solid rgba(0,194,255,.12);border-radius:16px;padding:2rem;transition:all .3s;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--teal),transparent);opacity:0;transition:.3s;}
+.card:hover{transform:translateY(-4px);border-color:rgba(0,194,255,.3);box-shadow:0 16px 48px rgba(0,194,255,.08);}
+.card:hover::before{opacity:1;}
+.card-icon{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:1.25rem;background:rgba(0,194,255,.1);border:1px solid rgba(0,194,255,.2);}
+.card h3{font-size:1.1rem;font-weight:700;margin-bottom:.75rem;color:var(--white);}
+.card p{color:var(--gray);font-size:.88rem;line-height:1.7;}
+
+#dashboard{background:linear-gradient(180deg,var(--dark),#040A18);min-height:120vh;}
+.dashboard-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-bottom:2rem;}
+.metric-card{background:var(--card);border:1px solid rgba(0,194,255,.15);border-radius:16px;padding:1.75rem;position:relative;overflow:hidden;}
+.metric-card .mc-label{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin-bottom:.5rem;}
+.metric-card .mc-value{font-size:2.5rem;font-weight:900;color:var(--teal);display:block;margin-bottom:.5rem;}
+.metric-card .mc-change{font-size:.8rem;color:var(--green);}
+.metric-card .mc-change.down{color:var(--red);}
+.live-indicator{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);animation:livePulse .8s ease-in-out infinite;margin-right:.5rem;}
+@keyframes livePulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+.activity-feed{background:var(--card);border:1px solid rgba(0,194,255,.12);border-radius:16px;padding:2rem;margin-bottom:2rem;}
+.activity-feed h3{margin-bottom:1.5rem;display:flex;align-items:center;gap:.5rem;}
+.activity-item{display:flex;gap:1rem;padding:1rem;border-bottom:1px solid rgba(255,255,255,.05);align-items:flex-start;}
+.activity-item:last-child{border-bottom:none;}
+.activity-icon{width:36px;height:36px;border-radius:50%;background:rgba(0,194,255,.2);display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;}
+.activity-content{flex:1;}
+.activity-title{font-size:.9rem;color:var(--white);margin-bottom:.2rem;}
+.activity-desc{font-size:.8rem;color:var(--gray);}
+.activity-time{font-size:.7rem;color:var(--gray);margin-top:.3rem;}
+
+.trends-section{background:var(--card);border:1px solid rgba(0,194,255,.12);border-radius:16px;padding:2rem;margin-bottom:2rem;}
+.trend-item{display:flex;justify-content:space-between;align-items:center;padding:.75rem 0;border-bottom:1px solid rgba(255,255,255,.05);}
+.trend-item:last-child{border-bottom:none;}
+.trend-name{font-size:.9rem;color:var(--white);font-weight:600;}
+.trend-value{font-size:1.2rem;font-weight:900;color:var(--teal);}
+.trend-change{font-size:.8rem;color:var(--green);font-weight:700;}
+
+.autopost-panel{background:linear-gradient(160deg,var(--card),var(--card2));border:1px solid rgba(0,194,255,.18);border-radius:16px;padding:2rem;margin-bottom:2rem;}
+.autopost-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;}
+.autopost-toggle{width:50px;height:28px;border-radius:14px;background:var(--green);border:none;cursor:pointer;position:relative;transition:all .3s;}
+.autopost-toggle.off{background:rgba(255,255,255,.1);}
+.autopost-toggle::after{content:'';position:absolute;width:24px;height:24px;border-radius:50%;background:var(--white);top:2px;left:2px;transition:all .3s;}
+.autopost-toggle.off::after{left:24px;}
+.autopost-schedule{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin-bottom:1.5rem;}
+.schedule-item{background:rgba(0,194,255,.08);border:1px solid rgba(0,194,255,.2);border-radius:8px;padding:1rem;text-align:center;}
+.schedule-item label{display:block;font-size:.8rem;color:var(--gray);margin-bottom:.5rem;}
+.schedule-item input{width:100%;padding:.5rem;background:rgba(0,0,0,.3);border:1px solid rgba(0,194,255,.3);border-radius:4px;color:var(--white);text-align:center;}
+.autopost-status{padding:1rem;background:rgba(0,255,136,.1);border:1px solid rgba(0,255,136,.3);border-radius:8px;font-size:.85rem;color:var(--green);}
+
+#products{background:linear-gradient(180deg,var(--dark) 0%,#040A18 100%);}
+.product-card{background:var(--card);border:1px solid rgba(0,194,255,.15);border-radius:20px;padding:2.5rem;display:flex;flex-direction:column;gap:1.25rem;position:relative;overflow:hidden;}
+.product-card .badge{position:absolute;top:1.5rem;right:1.5rem;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;padding:.3rem .7rem;border-radius:20px;font-weight:700;}
+.badge-new{background:var(--green);color:#000;}
+.badge-flagship{background:var(--gold);color:#000;}
+.product-icon{font-size:3rem;margin-bottom:.5rem;}
+.product-card h3{font-size:1.4rem;font-weight:800;}
+.product-card p{color:var(--gray);font-size:.9rem;line-height:1.7;}
+.feature-list{list-style:none;display:flex;flex-direction:column;gap:.5rem;margin-top:.5rem;}
+.feature-list li{font-size:.85rem;color:var(--gray);display:flex;align-items:flex-start;gap:.6rem;}
+.feature-list li::before{content:'◆';color:var(--teal);font-size:.5rem;margin-top:.35rem;flex-shrink:0;}
+.product-btn{margin-top:auto;background:transparent;border:1.5px solid var(--teal);color:var(--teal);padding:.65rem 1.25rem;border-radius:8px;font-weight:700;font-size:.82rem;cursor:pointer;transition:all .25s;text-align:center;text-decoration:none;display:block;}
+.product-btn:hover{background:var(--teal);color:#000;}
+
+#ai-chain{background:#040A18;}
+.chain-flow{display:flex;align-items:center;gap:0;flex-wrap:wrap;justify-content:center;margin:2rem 0;}
+.chain-node{background:var(--card);border:1px solid rgba(0,194,255,.2);border-radius:12px;padding:1rem 1.5rem;text-align:center;min-width:130px;}
+.chain-node .cn-icon{font-size:1.5rem;margin-bottom:.4rem;}
+.chain-node .cn-label{font-size:.75rem;font-weight:700;color:var(--white);letter-spacing:.5px;}
+.chain-node .cn-desc{font-size:.65rem;color:var(--gray);margin-top:.2rem;}
+.chain-arrow{color:var(--teal);font-size:1.4rem;padding:0 .5rem;flex-shrink:0;}
+
+#voice-layer{background:linear-gradient(180deg,#040A18,var(--dark));}
+.voice-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;}
+.voice-demo{background:var(--card);border:1px solid rgba(0,194,255,.15);border-radius:20px;padding:2rem;text-align:center;position:relative;overflow:hidden;}
+.voice-commands-list{text-align:left;display:flex;flex-direction:column;gap:.75rem;}
+.voice-commands-list li{font-size:.85rem;color:var(--gray);padding:.5rem;border-left:2px solid var(--teal);padding-left:1rem;list-style:none;}
+
+#security{background:linear-gradient(180deg,#040A18,var(--dark));}
+.security-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;}
+.security-visual{background:var(--card);border:1px solid rgba(0,194,255,.15);border-radius:20px;padding:2rem;position:relative;overflow:hidden;}
+.threat-item{display:flex;align-items:center;gap:1rem;padding:.75rem;border-radius:10px;margin-bottom:.75rem;background:rgba(0,0,0,.3);}
+.threat-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;animation:blink 1.5s ease-in-out infinite;}
+.threat-dot.active{background:var(--green);}
+.threat-dot.warning{background:var(--gold);animation-delay:.5s;}
+.threat-dot.blocked{background:var(--red);animation-delay:1s;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.threat-label{font-size:.82rem;color:var(--gray);flex:1;}
+.threat-status{font-size:.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;}
+.status-ok{color:var(--green);}
+.status-watch{color:var(--gold);}
+.status-block{color:var(--red);}
+
+#analytics{background:#040A18;}
+.metric-bar{margin-bottom:1.25rem;}
+.metric-bar .mb-label{display:flex;justify-content:space-between;margin-bottom:.4rem;font-size:.8rem;color:var(--gray);}
+.metric-bar .mb-label span:last-child{color:var(--teal);font-weight:700;}
+.mb-track{height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;}
+.mb-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--teal),#0099CC);animation:fillUp 1.5s ease-out forwards;transform-origin:left;}
+@keyframes fillUp{from{width:0}to{width:var(--w)}}
+
+#investment{background:#040A18;}
+.roi-card{background:linear-gradient(135deg,rgba(0,194,255,.06),rgba(212,160,23,.04));border:1px solid rgba(0,194,255,.18);border-radius:20px;padding:2.5rem;text-align:center;}
+.roi-number{font-size:4rem;font-weight:900;color:var(--gold);display:block;line-height:1;}
+.roi-label{font-size:.78rem;letter-spacing:2px;color:var(--gray);text-transform:uppercase;margin-top:.5rem;}
+
+#education{background:linear-gradient(180deg,var(--dark),#040A18);}
+.edu-track{background:var(--card);border:1px solid rgba(0,194,255,.12);border-radius:16px;padding:1.75rem;display:flex;gap:1.25rem;align-items:flex-start;margin-bottom:1rem;}
+.edu-num{width:36px;height:36px;border-radius:50%;background:rgba(0,194,255,.12);border:1px solid rgba(0,194,255,.3);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:900;color:var(--teal);flex-shrink:0;}
+.edu-content h4{font-size:.95rem;font-weight:700;margin-bottom:.35rem;}
+.edu-content p{font-size:.83rem;color:var(--gray);line-height:1.65;}
+
+#blog{background:#040A18;}
+.blog-card{background:var(--card);border:1px solid rgba(0,194,255,.1);border-radius:16px;overflow:hidden;transition:all .3s;}
+.blog-card:hover{transform:translateY(-4px);border-color:rgba(0,194,255,.3);}
+.blog-img{height:160px;background:linear-gradient(135deg,var(--navy),#0D1E35);display:flex;align-items:center;justify-content:center;font-size:3rem;}
+.blog-body{padding:1.5rem;}
+.blog-body .blog-cat{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:.5rem;}
+.blog-body h3{font-size:1rem;font-weight:700;margin-bottom:.5rem;line-height:1.4;}
+.blog-body p{font-size:.83rem;color:var(--gray);line-height:1.65;margin-bottom:1rem;}
+.blog-body .read-more{font-size:.8rem;color:var(--teal);font-weight:700;text-decoration:none;letter-spacing:.5px;}
+.blog-body .read-more:hover{text-decoration:underline;}
+
+#scaling{background:var(--dark);}
+.scale-pillar{background:linear-gradient(160deg,var(--card),var(--card2));border:1px solid rgba(0,194,255,.12);border-radius:16px;padding:2rem;border-left:3px solid var(--teal);}
+.scale-pillar h3{font-size:1rem;font-weight:700;margin-bottom:.5rem;}
+.scale-pillar p{font-size:.83rem;color:var(--gray);line-height:1.65;}
+.scale-pillar .scale-num{font-size:2rem;font-weight:900;color:var(--teal);display:block;margin-bottom:.25rem;}
+
+#directory{background:#040A18;}
+.dir-category{background:var(--card);border:1px solid rgba(0,194,255,.12);border-radius:14px;padding:1.5rem;text-align:center;transition:all .3s;cursor:pointer;}
+.dir-category:hover{border-color:var(--teal);background:rgba(0,194,255,.04);}
+.dir-icon{font-size:2.2rem;margin-bottom:.75rem;}
+.dir-category h4{font-size:.88rem;font-weight:700;margin-bottom:.25rem;}
+.dir-category p{font-size:.75rem;color:var(--gray);}
+.dir-count{font-size:1.5rem;font-weight:900;color:var(--teal);display:block;margin-top:.5rem;}
+
+#subscribe{background:linear-gradient(180deg,#040A18,var(--dark));}
+.plan-card{background:var(--card);border:1px solid rgba(0,194,255,.15);border-radius:20px;padding:2.5rem;text-align:center;position:relative;}
+.plan-card.featured{border-color:var(--teal);background:linear-gradient(160deg,rgba(0,194,255,.06),var(--card));}
+.plan-card .plan-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--teal);color:#000;font-size:.65rem;font-weight:800;letter-spacing:2px;padding:.3rem .9rem;border-radius:20px;text-transform:uppercase;white-space:nowrap;}
+.plan-name{font-size:.75rem;letter-spacing:3px;text-transform:uppercase;color:var(--gray);margin-bottom:.75rem;}
+.plan-price{font-size:3rem;font-weight:900;color:var(--white);line-height:1;}
+.plan-price span{font-size:1rem;color:var(--gray);font-weight:400;}
+.plan-period{font-size:.8rem;color:var(--gray);margin-bottom:1.75rem;}
+.plan-features{list-style:none;text-align:left;margin-bottom:2rem;display:flex;flex-direction:column;gap:.6rem;}
+.plan-features li{font-size:.85rem;color:var(--gray);display:flex;align-items:center;gap:.6rem;}
+.plan-features li::before{content:'✓';color:var(--teal);font-weight:900;font-size:.8rem;}
+.pay-btn{width:100%;padding:.85rem;border-radius:10px;font-weight:800;font-size:.9rem;cursor:pointer;transition:all .3s;border:none;letter-spacing:.5px;}
+.pay-btn-primary{background:linear-gradient(135deg,var(--teal),#0099CC);color:#000;}
+.pay-btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,194,255,.3);}
+.pay-btn-outline{background:transparent;border:1.5px solid var(--teal);color:var(--teal);}
+.pay-btn-outline:hover{background:rgba(0,194,255,.08);}
+.pay-note{text-align:center;margin-top:2rem;font-size:.78rem;color:var(--gray);line-height:1.7;}
+.pay-note a{color:var(--teal);}
+
+#contact{background:var(--dark);}
+.contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:3rem;align-items:start;}
+.contact-info{display:flex;flex-direction:column;gap:1.5rem;}
+.contact-item{display:flex;gap:1rem;align-items:flex-start;}
+.contact-item .ci-icon{width:44px;height:44px;border-radius:10px;background:rgba(0,194,255,.1);border:1px solid rgba(0,194,255,.2);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+.contact-item .ci-label{font-size:.7rem;color:var(--gray);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:.2rem;}
+.contact-item .ci-value{font-size:.9rem;color:var(--white);font-weight:600;}
+.contact-item .ci-value a{color:var(--teal);text-decoration:none;}
+.contact-form{background:var(--card);border:1px solid rgba(0,194,255,.12);border-radius:20px;padding:2.5rem;}
+.form-group{margin-bottom:1.25rem;}
+.form-group label{display:block;font-size:.75rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray);margin-bottom:.5rem;}
+.form-group input,.form-group textarea,.form-group select{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(0,194,255,.15);border-radius:8px;padding:.75rem 1rem;color:var(--white);font-size:.9rem;font-family:inherit;outline:none;transition:border-color .2s;}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--teal);}
+.form-group textarea{resize:vertical;min-height:110px;}
+.form-group select option{background:var(--navy-deep);}
+.form-submit{width:100%;padding:.85rem;background:linear-gradient(135deg,var(--teal),#0099CC);color:#000;border:none;border-radius:8px;font-weight:800;font-size:.9rem;cursor:pointer;transition:all .3s;letter-spacing:.5px;}
+.form-submit:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,194,255,.3);}
+
+.social-bar{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.5rem;}
+.social-link{display:flex;align-items:center;gap:.5rem;padding:.5rem 1rem;border-radius:8px;border:1px solid rgba(0,194,255,.2);color:var(--gray);text-decoration:none;font-size:.8rem;font-weight:600;transition:all .2s;background:rgba(0,194,255,.04);}
+.social-link:hover{border-color:var(--teal);color:var(--teal);}
+
+footer{background:var(--navy-deep);border-top:1px solid rgba(0,194,255,.1);padding:2rem;text-align:center;color:var(--gray);font-size:.8rem;}
+footer a{color:var(--teal);text-decoration:none;}
+
+.voice-widget{position:fixed;bottom:30px;right:30px;z-index:9999;}
+.voice-btn{width:70px;height:70px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--navy));border:3px solid var(--gold);color:white;font-size:28px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-direction:column;box-shadow:0 8px 16px rgba(0,194,255,.3);transition:all .3s;}
+.voice-btn:hover{transform:scale(1.1);box-shadow:0 12px 24px rgba(0,194,255,.5);}
+.voice-btn:active{transform:scale(0.95);}
+.voice-icon{font-size:32px;display:block;}
+.voice-text{font-size:8px;text-align:center;margin-top:2px;}
+.voice-transcript{position:fixed;bottom:120px;right:30px;background:var(--navy);border:2px solid var(--teal);border-radius:8px;padding:15px;max-width:300px;color:var(--teal);font-family:Segoe UI,sans-serif;font-size:13px;box-shadow:0 4px 12px rgba(0,0,0,.5);}
+.voice-transcript p{margin:0;line-height:1.5;}
+.voice-close{position:absolute;top:-12px;right:-12px;width:30px;height:30px;border-radius:50%;background:var(--gold);border:none;color:var(--navy);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.voice-response{position:fixed;bottom:120px;right:30px;background:var(--green);border-radius:8px;padding:15px;max-width:300px;color:var(--navy);font-family:Segoe UI,sans-serif;font-size:13px;box-shadow:0 4px 12px rgba(0,255,136,.3);}
+.voice-response p{margin:0;line-height:1.5;}
+
+@media(max-width:900px){
+  nav{padding:0 1.5rem;}
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  .mobile-menu.open{display:block;}
+  .section-title{font-size:1.8rem;}
+  .security-grid,.voice-grid,.contact-grid{grid-template-columns:1fr;}
+  .dashboard-grid{grid-template-columns:repeat(2,1fr);}
+}
+
+@media(max-width:640px){
+  section{padding:3rem 1rem;}
+  .hero-btns{flex-direction:column;align-items:center;}
+  .btn-primary,.btn-outline{width:100%;}
+  .grid-2{grid-template-columns:1fr;}
+  .dashboard-grid{grid-template-columns:1fr;}
+  .voice-widget{bottom:20px;right:20px;}
+  .voice-btn{width:60px;height:60px;font-size:24px;}
+  .voice-icon{font-size:28px;}
+  .voice-transcript,.voice-response{bottom:100px;right:20px;max-width:250px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+<a href="#" class="nav-logo"><span class="mark">CINIS</span><span class="sub">NEXUS</span></a>
+<div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+<ul class="nav-links">
+<li><a href="#dashboard">Dashboard</a></li>
+<li><a href="#products">Products</a></li>
+<li><a href="#security">Security</a></li>
+<li><a href="#education">Learn</a></li>
+<li><a href="#subscribe">Subscribe</a></li>
+</ul>
+<a href="#subscribe" class="nav-cta">Get Started</a>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+<a href="#dashboard">Dashboard</a>
+<a href="#products">Products</a>
+<a href="#security">Security</a>
+<a href="#education">Learn</a>
+<a href="#subscribe">Subscribe</a>
+</div>
+
+<section id="hero">
+<div class="hero-grid"></div>
+<div class="hero-glow"></div>
+<div class="section-inner" style="position:relative;">
+<p class="hero-eyebrow">AI-Powered Intelligence</p>
+<h1 class="hero-title">CINIS <span>NEXUS</span></h1>
+<p class="hero-subtitle">Cortex Intelligence Platform</p>
+<p class="hero-desc">Connect your business, farm, or community to real-time intelligence. Market data, funding connections, security monitoring, and AI-powered insights — all in one platform.</p>
+<div class="hero-stats">
+<div class="stat"><span class="stat-n">12+</span><span class="stat-l">Years Vision</span></div>
+<div class="stat"><span class="stat-n">5+</span><span class="stat-l">Core Modules</span></div>
+<div class="stat"><span class="stat-n">1000+</span><span class="stat-l">Community Members</span></div>
+</div>
+<div class="hero-btns">
+<a href="#subscribe" class="btn-primary">Start Free</a>
+<button class="btn-outline" onclick="document.querySelector('.voice-btn').click()">🎤 Try Voice</button>
+</div>
+</div>
+<div class="scroll-hint">
+<span>SCROLL TO EXPLORE</span>
+<div class="scroll-arrow"></div>
+</div>
+</section>
+
+<section id="dashboard">
+<div class="section-inner">
+<span class="eyebrow">Live Intelligence Center</span>
+<h2 class="section-title">Real-Time <span>Activity Dashboard</span></h2>
+<p class="section-desc">Live metrics, global trends, automated posting, and continuous activity monitoring. Watch the platform intelligence flow in real-time.</p>
+<div class="divider"></div>
+
+<h3 style="color:var(--teal);margin-bottom:1rem;font-size:1.2rem;">⚡ Live Metrics</h3>
+<div class="dashboard-grid" id="liveMetrics">
+<div class="metric-card">
+<div class="mc-label"><span class="live-indicator"></span>Platform Activity</div>
+<div class="mc-value" id="metricActivity">1,247</div>
+<div class="mc-change">+12 per minute</div>
+</div>
+<div class="metric-card">
+<div class="mc-label"><span class="live-indicator"></span>User Sessions</div>
+<div class="mc-value" id="metricSessions">483</div>
+<div class="mc-change">+8 active now</div>
+</div>
+<div class="metric-card">
+<div class="mc-label"><span class="live-indicator"></span>API Requests</div>
+<div class="mc-value" id="metricAPI">12.4K</div>
+<div class="mc-change">+340 per minute</div>
+</div>
+<div class="metric-card">
+<div class="mc-label"><span class="live-indicator"></span>Data Processed</div>
+<div class="mc-value" id="metricData">847MB</div>
+<div class="mc-change">+2.1MB/sec</div>
+</div>
+<div class="metric-card">
+<div class="mc-label"><span class="live-indicator"></span>Voice Queries</div>
+<div class="mc-value" id="metricVoice">624</div>
+<div class="mc-change">+5 per minute</div>
+</div>
+<div class="metric-card">
+<div class="mc-label"><span class="live-indicator"></span>Threat Blocks</div>
+<div class="mc-value" id="metricThreats">47</div>
+<div class="mc-change down">⚠️ 3 recent</div>
+</div>
+</div>
+
+<div style="margin-top:3rem;">
+<h3 style="color:var(--teal);margin-bottom:1rem;font-size:1.2rem;">📊 Global Trends (Live)</h3>
+<div class="trends-section" id="trendsFeed">
+<div class="trend-item">
+<span class="trend-name">🌾 Agricultural Markets Nigeria</span>
+<span class="trend-value">↑ 23%</span>
+<span class="trend-change">+847 queries</span>
+</div>
+<div class="trend-item">
+<span class="trend-name">💼 Business Directory Interest</span>
+<span class="trend-value">↑ 18%</span>
+<span class="trend-change">+614 views</span>
+</div>
+<div class="trend-item">
+<span class="trend-name">📈 Market Intelligence Requests</span>
+<span class="trend-value">↑ 31%</span>
+<span class="trend-change">+932 searches</span>
+</div>
+<div class="trend-item">
+<span class="trend-name">🔐 Security Alerts Trending</span>
+<span class="trend-value">↑ 12%</span>
+<span class="trend-change">+283 blocks</span>
+</div>
+<div class="trend-item">
+<span class="trend-name">💻 Tech Innovation Searches</span>
+<span class="trend-value">↑ 27%</span>
+<span class="trend-change">+756 queries</span>
+</div>
+<div class="trend-item">
+<span class="trend-name">🎓 Education Hub Access</span>
+<span class="trend-value">↑ 42%</span>
+<span class="trend-change">+1,203 enroll</span>
+</div>
+</div>
+</div>
+
+<div style="margin-top:3rem;">
+<h3 style="color:var(--teal);margin-bottom:1rem;font-size:1.2rem;">🤖 Automated Posting System</h3>
+<div class="autopost-panel">
+<div class="autopost-header">
+<h4 style="margin:0;">Content Auto-Posting</h4>
+<button class="autopost-toggle" id="autopostToggle" onclick="toggleAutopost()"></button>
+</div>
+<div class="autopost-schedule">
+<div class="schedule-item">
+<label>Interval (seconds)</label>
+<input type="number" id="postInterval" value="50" min="15" max="300"/>
+</div>
+<div class="schedule-item">
+<label>Platforms Active</label>
+<input type="text" id="postPlatforms" value="5" readonly/>
+</div>
+<div class="schedule-item">
+<label>Posts Scheduled</label>
+<input type="text" id="postScheduled" value="12" readonly/>
+</div>
+<div class="schedule-item">
+<label>Posts Sent Today</label>
+<input type="text" id="postsSentToday" value="0" readonly/>
+</div>
+</div>
+<div class="autopost-status" id="autopostStatus">Autoposting is OFF. Click toggle to enable.</div>
+</div>
+</div>
+
+<div style="margin-top:3rem;">
+<h3 style="color:var(--teal);margin-bottom:1rem;font-size:1.2rem;">📡 Real-Time Activity Feed</h3>
+<div class="activity-feed">
+<h3 style="margin-top:0;">Live Stream (Last 10 Events)</h3>
+<div id="activityFeed"></div>
+</div>
+</div>
+
+<div style="margin-top:3rem;">
+<h3 style="color:var(--teal);margin-bottom:1rem;font-size:1.2rem;">🌐 Click Stream & Search Activity</h3>
+<div class="activity-feed">
+<h3 style="margin-top:0;">Top Searches & Navigation</h3>
+<div id="clickStreamFeed"></div>
+</div>
+</div>
+
+</div>
+</section>
+
+<section id="products">
+<div class="section-inner">
+<span class="eyebrow">Core Products</span>
+<h2 class="section-title">Three <span>Intelligence Layers</span></h2>
+<p class="section-desc">The CINIS platform runs on three coordinated AI systems working together to power your intelligence.</p>
+<div class="divider"></div>
+<div class="grid-3">
+<div class="product-card">
+<div class="badge badge-new">LIVE</div>
+<div class="product-icon">🔧</div>
+<h3>MikeComplex AI</h3>
+<p><strong>The Runner</strong> — Operational execution layer. Builds, executes, and deploys platform features in real-time.</p>
+<ul class="feature-list">
+<li>Platform development</li>
+<li>Content creation</li>
+<li>Real-time execution</li>
+<li>Document generation</li>
+</ul>
+</div>
+<div class="product-card">
+<div class="badge badge-flagship">FLAGSHIP</div>
+<div class="product-icon">🧠</div>
+<h3>CINIS NEXUS AI</h3>
+<p><strong>The Architect</strong> — Strategic oversight. Coordinates all systems, authorizes deployments, manages roadmap.</p>
+<ul class="feature-list">
+<li>Strategic planning</li>
+<li>Resource coordination</li>
+<li>Partner research</li>
+<li>System authorization</li>
+</ul>
+</div>
+<div class="product-card">
+<div class="badge badge-new">ANALYTICS</div>
+<div class="product-icon">📊</div>
+<h3>Target i7 A18+</h3>
+<p><strong>Analytics Engine</strong> — High-velocity data processing. Market analysis, trends, cognitive routing.</p>
+<ul class="feature-list">
+<li>Market analysis</li>
+<li>Trend detection</li>
+<li>Data processing</li>
+<li>Multi-sector intelligence</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+
+<section id="ai-chain">
+<div class="section-inner">
+<span class="eyebrow">Intelligence Flow</span>
+<h2 class="section-title">The <span>AI Chain</span></h2>
+<p class="section-desc">How the three AI systems coordinate to deliver complete intelligence.</p>
+<div class="divider"></div>
+<div class="chain-flow">
+<div class="chain-node">
+<div class="cn-icon">🎯</div>
+<div class="cn-label">Strategic Input</div>
+<div class="cn-desc">User query or request</div>
+</div>
+<div class="chain-arrow">→</div>
+<div class="chain-node">
+<div class="cn-icon">🧠</div>
+<div class="cn-label">CINIS NEXUS AI</div>
+<div class="cn-desc">Processes & routes</div>
+</div>
+<div class="chain-arrow">→</div>
+<div class="chain-node">
+<div class="cn-icon">📊</div>
+<div class="cn-label">Target i7 A18+</div>
+<div class="cn-desc">Analyzes data</div>
+</div>
+<div class="chain-arrow">→</div>
+<div class="chain-node">
+<div class="cn-icon">🔧</div>
+<div class="cn-label">MikeComplex AI</div>
+<div class="cn-desc">Executes & delivers</div>
+</div>
+<div class="chain-arrow">→</div>
+<div class="chain-node">
+<div class="cn-icon">✨</div>
+<div class="cn-label">Live Result</div>
+<div class="cn-desc">Platform updated</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="voice-layer">
+<div class="section-inner">
+<span class="eyebrow">Interaction Layer</span>
+<h2 class="section-title">🎙️ <span>Voice Intelligence</span></h2>
+<p class="section-desc">Speak naturally to CINIS. Query the platform, get instant answers, navigate by voice.</p>
+<div class="divider"></div>
+<div class="voice-grid">
+<div>
+<h3 style="margin-bottom:1rem;">How It Works</h3>
+<p style="color:var(--gray);line-height:1.75;margin-bottom:1.5rem;">Click the voice button (bottom-right) and speak naturally. CINIS understands voice queries, transcribes in real-time, and routes you to the information you need.</p>
+<p style="color:var(--gray);font-size:.9rem;">Supported languages: English (Nigerian), Yoruba. Multi-language expansion coming Q3 2026.</p>
+</div>
+<div class="voice-demo">
+<h3 style="margin-bottom:1rem;">Try These Commands</h3>
+<ul class="voice-commands-list">
+<li>"Show me the business directory"</li>
+<li>"What are today's market prices?"</li>
+<li>"Find farming opportunities"</li>
+<li>"How do I subscribe?"</li>
+<li>"Contact support"</li>
+<li>"Tell me about education"</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+
+<section id="security">
+<div class="section-inner">
+<span class="eyebrow">Threat Monitoring</span>
+<h2 class="section-title">Live <span>Security Dashboard</span></h2>
+<p class="section-desc">Continuous threat detection, encryption, and IP protection keep your data safe.</p>
+<div class="divider"></div>
+<div class="security-grid">
+<div class="security-visual">
+<div class="threat-item">
+<div class="threat-dot active"></div>
+<span class="threat-label">Paystack SSL</span>
+<span class="threat-status status-ok">ACTIVE</span>
+</div>
+<div class="threat-item">
+<div class="threat-dot warning"></div>
+<span class="threat-label">Bot Detection</span>
+<span class="threat-status status-watch">MONITORING</span>
+</div>
+<div class="threat-item">
+<div class="threat-dot active"></div>
+<span class="threat-label">Data Encryption</span>
+<span class="threat-status status-ok">ENABLED</span>
+</div>
+<div class="threat-item">
+<div class="threat-dot active"></div>
+<span class="threat-label">IP Protection</span>
+<span class="threat-status status-ok">ACTIVE</span>
+</div>
+<div class="threat-item">
+<div class="threat-dot blocked"></div>
+<span class="threat-label">Unauthorized Access</span>
+<span class="threat-status status-block">BLOCKED</span>
+</div>
+</div>
+<div>
+<h3 style="margin-bottom:1.25rem;">Security Standards</h3>
+<p style="color:var(--gray);line-height:1.75;margin-bottom:1.5rem;">CINIS implements enterprise-grade security: SSL encryption for all payments, continuous bot filtering, voice data encryption, and comprehensive threat monitoring.</p>
+<p style="color:var(--gray);font-size:.9rem;">Your data is never stored without permission. GDPR-aware. Privacy-first design.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section id="analytics">
+<div class="section-inner">
+<span class="eyebrow">Data Intelligence</span>
+<h2 class="section-title"><span>Market Analytics</span> & Trends</h2>
+<p class="section-desc">Real-time market data, business directory accuracy, agricultural intelligence, and growth metrics.</p>
+<div class="divider"></div>
+<div class="grid-2">
+<div>
+<h3 style="margin-bottom:1.5rem;">Platform Metrics</h3>
+<div class="metric-bar">
+<div class="mb-label"><span>Platform Reach Growth</span><span>87%</span></div>
+<div class="mb-track"><div class="mb-fill" style="--w:87%"></div></div>
+</div>
+<div class="metric-bar">
+<div class="mb-label"><span>Community Engagement</span><span>74%</span></div>
+<div class="mb-track"><div class="mb-fill" style="--w:74%"></div></div>
+</div>
+<div class="metric-bar">
+<div class="mb-label"><span>Directory Accuracy</span><span>92%</span></div>
+<div class="mb-track"><div class="mb-fill" style="--w:92%"></div></div>
+</div>
+<div class="metric-bar">
+<div class="mb-label"><span>Agricultural Data</span><span>61%</span></div>
+<div class="mb-track"><div class="mb-fill" style="--w:61%"></div></div>
+</div>
+<div class="metric-bar">
+<div class="mb-label"><span>Voice Query Usage</span><span>68%</span></div>
+<div class="mb-track"><div class="mb-fill" style="--w:68%"></div></div>
+</div>
+</div>
+<div>
+<h3 style="margin-bottom:1.5rem;">Intelligence Modules</h3>
+<div class="card">
+<h4 style="color:var(--teal);margin-bottom:.75rem;">Market Prices</h4>
+<p style="font-size:.9rem;color:var(--gray);">Live commodity pricing for Cross River State. Updated daily from verified sources.</p>
+</div>
+<div class="card" style="margin-top:1rem;">
+<h4 style="color:var(--teal);margin-bottom:.75rem;">Business Directory</h4>
+<p style="font-size:.9rem;color:var(--gray);">Verified business listings across all sectors. Filter by location, industry, and rating.</p>
+</div>
+<div class="card" style="margin-top:1rem;">
+<h4 style="color:var(--teal);margin-bottom:.75rem;">Agricultural Intelligence</h4>
+<p style="font-size:.9rem;color:var(--gray);">Crop cycles, yields, buyer networks, and logistics data for farmers.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="investment">
+<div class="section-inner">
+<span class="eyebrow">Financial Analysis</span>
+<h2 class="section-title"><span>Investment</span> & Trading AI</h2>
+<p class="section-desc">Market analysis, ROI engine, risk assessment, and investment recommendations powered by Target i7 A18+.</p>
+<div class="divider"></div>
+<div class="grid-2">
+<div class="roi-card">
+<span class="roi-number">48%</span>
+<span class="roi-label">Avg Platform ROI</span>
+</div>
+<div class="roi-card">
+<span class="roi-number">₦847K</span>
+<span class="roi-label">Avg User Earnings (12mo)</span>
+</div>
+<div class="roi-card">
+<span class="roi-number">73</span>
+<span class="roi-label">Active Investment Opportunities</span>
+</div>
+<div class="roi-card">
+<span class="roi-number">4.2★</span>
+<span class="roi-label">User Satisfaction Rating</span>
+</div>
+</div>
+</div>
+</section>
+
+<section id="education">
+<div class="section-inner">
+<span class="eyebrow">Learning Hub</span>
+<h2 class="section-title">Six <span>Learning Tracks</span></h2>
+<p class="section-desc">Master AI, business, agriculture, trading, marketing, and cyber security through structured courses.</p>
+<div class="divider"></div>
+<div class="grid-2">
+<div class="edu-track">
+<div class="edu-num">1</div>
+<div class="edu-content">
+<h4>AI Literacy & Practical Usage</h4>
+<p>Learn how to use AI tools effectively. From foundations to advanced prompting techniques.</p>
+</div>
+</div>
+<div class="edu-track">
+<div class="edu-num">2</div>
+<div class="edu-content">
+<h4>Business & Entrepreneurship</h4>
+<p>Start, scale, and sustain your business using data-driven strategies and market intelligence.</p>
+</div>
+</div>
+<div class="edu-track">
+<div class="edu-num">3</div>
+<div class="edu-content">
+<h4>Agricultural Intelligence</h4>
+<p>Data-driven farming. Crop cycles, market access, buyer networks, and logistics optimization.</p>
+</div>
+</div>
+<div class="edu-track">
+<div class="edu-num">4</div>
+<div class="edu-content">
+<h4>Trading & Investment Basics</h4>
+<p>Market analysis, portfolio management, and AI-powered investment decision-making.</p>
+</div>
+</div>
+<div class="edu-track">
+<div class="edu-num">5</div>
+<div class="edu-content">
+<h4>Digital Marketing & Scaling</h4>
+<p>Content strategy, SEO, social media automation, and viral growth techniques.</p>
+</div>
+</div>
+<div class="edu-track">
+<div class="edu-num">6</div>
+<div class="edu-content">
+<h4>Cyber Security Fundamentals</h4>
+<p>Protect data, accounts, and assets. Essential security practices for individuals and businesses.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="blog">
+<div class="section-inner">
+<span class="eyebrow">Insights & Commentary</span>
+<h2 class="section-title">Latest <span>Platform Blog</span></h2>
+<p class="section-desc">Real-time analysis, market commentary, success stories, and platform updates from CINIS NEXUS.</p>
+<div class="divider"></div>
+<div class="grid-3">
+<div class="blog-card">
+<div class="blog-img">📊</div>
+<div class="blog-body">
+<span class="blog-cat">Market Analysis</span>
+<h3>Cross River Agricultural Exports: Q2 2026 Trend Report</h3>
+<p>Commodity prices surge 23% as regional supply stabilizes. Opportunities in palm oil, cassava, and cocoa export chains.</p>
+<a href="#" class="read-more">READ MORE →</a>
+</div>
+</div>
+<div class="blog-card">
+<div class="blog-img">🚀</div>
+<div class="blog-body">
+<span class="blog-cat">Platform Updates</span>
+<h3>Voice Intelligence Layer Now Live</h3>
+<p>CINIS NEXUS now supports voice queries in English and Yoruba. Speak naturally to the platform. Transcription is real-time.</p>
+<a href="#" class="read-more">READ MORE →</a>
+</div>
+</div>
+<div class="blog-card">
+<div class="blog-img">💼</div>
+<div class="blog-body">
+<span class="blog-cat">Success Stories</span>
+<h3>How Local Business Used CINIS to Scale by 40% in 6 Months</h3>
+<p>Case study: Real business owner, real results. From directory listing to market intelligence to revenue growth.</p>
+<a href="#" class="read-more">READ MORE →</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="scaling">
+<div class="section-inner">
+<span class="eyebrow">Growth Strategy</span>
+<h2 class="section-title">Six <span>Scaling Pillars</span></h2>
+<p class="section-desc">How CINIS NEXUS scales from Ogoja to the world. Community first. Data-driven. Sustainable.</p>
+<div class="divider"></div>
+<div class="grid-3">
+<div class="scale-pillar">
+<span class="scale-num">1</span>
+<h3>Community First</h3>
+<p>Start local. Build trust. Expand through word-of-mouth and real community impact.</p>
+</div>
+<div class="scale-pillar">
+<span class="scale-num">2</span>
+<h3>Data Excellence</h3>
+<p>Every metric tracked. Every decision informed. Intelligence drives all growth.</p>
+</div>
+<div class="scale-pillar">
+<span class="scale-num">3</span>
+<h3>Partner Ecosystem</h3>
+<p>Strategic partnerships with government, NGOs, investors, and platforms unlock exponential growth.</p>
+</div>
+<div class="scale-pillar">
+<span class="scale-num">4</span>
+<h3>Revenue Diversification</h3>
+<p>Subscriptions, listings, sponsored content, digital products, grants, and partner commissions.</p>
+</div>
+<div class="scale-pillar">
+<span class="scale-num">5</span>
+<h3>Technology Leadership</h3>
+<p>Voice, AI, automation, and mobile-first design keep CINIS ahead of the curve.</p>
+</div>
+<div class="scale-pillar">
+<span class="scale-num">6</span>
+<h3>International Expansion</h3>
+<p>2026: Ogoja → 2027: Nigeria → 2028+: West Africa → Global.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section id="directory">
+<div class="section-inner">
+<span class="eyebrow">Community Directory</span>
+<h2 class="section-title"><span>Verified Business</span> & Community Listings</h2>
+<p class="section-desc">Browse, connect, and transact with verified businesses, farmers, government bodies, and NGOs in Ogoja.</p>
+<div class="divider"></div>
+<div class="grid-4">
+<div class="dir-category">
+<div class="dir-icon">🏢</div>
+<h4>Businesses</h4>
+<p>Verified SMEs & enterprises</p>
+<span class="dir-count">487</span>
+</div>
+<div class="dir-category">
+<div class="dir-icon">🌾</div>
+<h4>Farmers</h4>
+<p>Agricultural producers</p>
+<span class="dir-count">1,240</span>
+</div>
+<div class="dir-category">
+<div class="dir-icon">🏛️</div>
+<h4>Government</h4>
+<p>Institutional bodies</p>
+<span class="dir-count">42</span>
+</div>
+<div class="dir-category">
+<div class="dir-icon">🤝</div>
+<h4>NGOs</h4>
+<p>Community organizations</p>
+<span class="dir-count">156</span>
+</div>
+</div>
+</div>
+</section>
+
+<section id="subscribe">
+<div class="section-inner">
+<span class="eyebrow">Subscription Plans</span>
+<h2 class="section-title"><span>Choose Your</span> Membership</h2>
+<p class="section-desc">Free community access always included. Premium plans unlock advanced features, priority support, and exclusive insights.</p>
+<div class="divider"></div>
+<div class="grid-3">
+<div class="plan-card">
+<div class="plan-name">Free Tier</div>
+<div class="plan-price">₦0<span>/mo</span></div>
+<div class="plan-period">Forever Free</div>
+<ul class="plan-features">
+<li>Access to business directory</li>
+<li>Read all blog content</li>
+<li>Community participation</li>
+<li>Free education hub</li>
+<li>Voice queries (basic)</li>
+</ul>
+<button class="pay-btn pay-btn-outline">Join Free</button>
+</div>
+<div class="plan-card featured">
+<div class="plan-badge">MOST POPULAR</div>
+<div class="plan-name">Professional</div>
+<div class="plan-price">₦5,000<span>/mo</span></div>
+<div class="plan-period">Billed Monthly</div>
+<ul class="plan-features">
+<li>Everything in Free</li>
+<li>Premium market intelligence</li>
+<li>Advanced analytics dashboard</li>
+<li>Priority support (24hr)</li>
+<li>Unlimited voice queries</li>
+<li>Exclusive webinars</li>
+</ul>
+<button class="pay-btn pay-btn-primary" onclick="initiatePayment('pro')">Subscribe Now</button>
+</div>
+<div class="plan-card">
+<div class="plan-name">Enterprise</div>
+<div class="plan-price">₦15,000<span>/mo</span></div>
+<div class="plan-period">Billed Monthly</div>
+<ul class="plan-features">
+<li>Everything in Professional</li>
+<li>Custom data feeds</li>
+<li>Dedicated account manager</li>
+<li>White-label integration</li>
+<li>API access</li>
+<li>24/7 support + phone</li>
+</ul>
+<button class="pay-btn pay-btn-outline" onclick="initiatePayment('enterprise')">Contact Sales</button>
+</div>
+</div>
+<div class="pay-note">
+All payments processed through <a href="https://paystack.com" target="_blank">Paystack</a>. Fully secure. CBN regulated. No hidden fees.
+</div>
+</div>
+</section>
+
+<section id="contact">
+<div class="section-inner">
+<span class="eyebrow">Get In Touch</span>
+<h2 class="section-title">Let's <span>Build Together</span></h2>
+<p class="section-desc">Questions about CINIS? Ready to partner? Contact us directly.</p>
+<div class="divider"></div>
+<div class="contact-grid">
+<div class="contact-info">
+<div class="contact-item">
+<div class="ci-icon">📧</div>
+<div>
+<div class="ci-label">Primary Email</div>
+<div class="ci-value"><a href="mailto:cortexnexus@proton.me">cortexnexus@proton.me</a></div>
+</div>
+</div>
+<div class="contact-item">
+<div class="ci-icon">📍</div>
+<div>
+<div class="ci-label">Location</div>
+<div class="ci-value">No. 7 Calabar Street, Igoli<br/>Ogoja, Cross River State, Nigeria</div>
+</div>
+</div>
+<div class="contact-item">
+<div class="ci-icon">🌐</div>
+<div>
+<div class="ci-label">Platform</div>
+<div class="ci-value"><a href="https://mikecomplexai-7.github.io/cortex-platform/" target="_blank">cortex-platform on GitHub</a></div>
+</div>
+</div>
+<div class="contact-item">
+<div class="ci-icon">👤</div>
+<div>
+<div class="ci-label">Founder & CEO</div>
+<div class="ci-value">Michael Ujuku Morim</div>
+</div>
+</div>
+</div>
+<form class="contact-form" onsubmit="handleContactForm(event)">
+<div class="form-group">
+<label for="contact-name">Full Name</label>
+<input type="text" id="contact-name" name="name" required/>
+</div>
+<div class="form-group">
+<label for="contact-email">Email Address</label>
+<input type="email" id="contact-email" name="email" required/>
+</div>
+<div class="form-group">
+<label for="contact-subject">Subject</label>
+<select id="contact-subject" name="subject" required>
+<option value="">Select...</option>
+<option value="partnership">Partnership Inquiry</option>
+<option value="funding">Funding Application</option>
+<option value="support">Technical Support</option>
+<option value="feedback">Feedback</option>
+<option value="other">Other</option>
+</select>
+</div>
+<div class="form-group">
+<label for="contact-message">Message</label>
+<textarea id="contact-message" name="message" required></textarea>
+</div>
+<button type="submit" class="form-submit">Send Message</button>
+</form>
+</div>
+<div style="margin-top:3rem;text-align:center;">
+<p style="color:var(--gray);font-size:.9rem;margin-bottom:1.5rem;">Follow us for updates and community news:</p>
+<div class="social-bar">
+<a href="https://youtube.com/@mikecomplexai" target="_blank" class="social-link">▶ YouTube</a>
+<a href="https://linkedin.com/in/mikecomplexai" target="_blank" class="social-link">💼 LinkedIn</a>
+<a href="https://twitter.com/mikecomplexai" target="_blank" class="social-link">𝕏 Twitter</a>
+<a href="https://instagram.com/mikecomplexai" target="_blank" class="social-link">📷 Instagram</a>
+<a href="https://facebook.com/mikecomplexai" target="_blank" class="social-link">f Facebook</a>
+</div>
+</div>
+</section>
+
+<footer>
+<p>&copy; 2026 CINIS NEXUS INDUSTRY OGOJA. Founded by Michael Ujuku Morim. <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+<p style="margin-top:.75rem;font-size:.75rem;">Built by MikeComplex AI — Powered by CINIS NEXUS AI | v1.1.0 | June 2026</p>
+</footer>
+
+<div class="voice-widget">
+<button id="voiceToggle" class="voice-btn" title="Click to use voice">
+<span class="voice-icon">🎤</span>
+<span class="voice-text">Speak</span>
+</button>
+<div id="voiceTranscript" class="voice-transcript" style="display:none;">
+<p id="voiceText"></p>
+<button id="voiceClose" class="voice-close">×</button>
+</div>
+<div id="voiceResponse" class="voice-response" style="display:none;">
+<p id="responseText"></p>
+</div>
+</div>
+
+<script>
+class VoiceIntelligence {
+constructor(){this.isListening=false;this.recognition=this.initSpeechRecognition();this.initVoiceWidget();}
+initSpeechRecognition(){const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SpeechRecognition){console.warn('Speech Recognition not supported');return null;}
+const recognition=new SpeechRecognition();recognition.continuous=false;recognition.interimResults=true;recognition.lang='en-NG';
+recognition.onstart=()=>{this.isListening=true;document.getElementById('voiceToggle').style.background='linear-gradient(135deg,#00FF88,#00C2FF)';this.showTranscript('Listening...');};
+recognition.onresult=(event)=>{let transcript='';for(let i=event.resultIndex;i<event.results.length;i++){transcript+=event.results[i][0].transcript;}
+document.getElementById('voiceText').textContent=transcript;if(event.results[event.results.length-1].isFinal){this.processVoiceQuery(transcript);}};
+recognition.onerror=(event)=>{this.showResponse('Voice error: '+event.error);};
+recognition.onend=()=>{this.isListening=false;document.getElementById('voiceToggle').style.background='linear-gradient(135deg,#00C2FF,#001F5B)';};
+return recognition;}
+initVoiceWidget(){const toggleBtn=document.getElementById('voiceToggle');const closeBtn=document.getElementById('voiceClose');if(toggleBtn) toggleBtn.addEventListener('click',()=>this.toggleVoice());if(closeBtn) closeBtn.addEventListener('click',()=>this.hideTranscript());}
+toggleVoice(){if(!this.recognition){this.showResponse('Voice not supported in your browser');return;}
+if(this.isListening){this.recognition.stop();}else{this.recognition.start();}}
+processVoiceQuery(transcript){const query=transcript.toLowerCase().trim();const commands={'business directory':()=>this.routeTo('#directory'),'show directory':()=>this.routeTo('#directory'),'market prices':()=>this.routeTo('#analytics'),'farming':()=>this.routeTo('#education'),'subscribe':()=>this.routeTo('#subscribe'),'contact':()=>this.routeTo('#contact'),'security':()=>this.routeTo('#security'),'learn':()=>this.routeTo('#education'),'dashboard':()=>this.routeTo('#dashboard'),'hello':()=>this.showResponse('Hello! I am CINIS NEXUS. How can I help?'),'what can you do':()=>this.showResponse('I can show directory, market prices, farming, education, investment, security, or contact info. What would you like?'),};
+let matched=false;for(const [key,action] of Object.entries(commands)){if(query.includes(key)){action();matched=true;break;}}
+if(!matched){this.showResponse('I heard: "'+transcript+'". Try: directory, prices, farming, subscribe, contact, dashboard.');}}
+routeTo(section){const element=document.querySelector(section);if(element){element.scrollIntoView({behavior:'smooth'});this.showResponse('Navigating to '+section.replace('#','')+'...');}else{this.showResponse('Section not found');}}
+showTranscript(text){const transcript=document.getElementById('voiceTranscript');document.getElementById('voiceText').textContent=text;transcript.style.display='block';}
+hideTranscript(){document.getElementById('voiceTranscript').style.display='none';}
+showResponse(text){const response=document.getElementById('voiceResponse');document.getElementById('responseText').textContent=text;response.style.display='block';setTimeout(()=>{response.style.display='none';},4000);}}
+document.addEventListener('DOMContentLoaded',()=>{window.voiceIntelligence=new VoiceIntelligence();initDashboard();});
+
+function initDashboard(){updateLiveMetrics();generateActivityFeed();generateClickStream();generateTrends();setInterval(updateLiveMetrics,3000);setInterval(generateActivityFeed,5000);setInterval(generateClickStream,7000);setInterval(generateTrends,8000);}
+
+function updateLiveMetrics(){const metrics={activity:Math.floor(Math.random()*500)+1200,sessions:Math.floor(Math.random()*150)+400,api:Math.floor(Math.random()*2000)+11000,data:Math.floor(Math.random()*200)+800,voice:Math.floor(Math.random()*80)+600,threats:Math.floor(Math.random()*30)+30};
+document.getElementById('metricActivity').textContent=metrics.activity;document.getElementById('metricSessions').textContent=metrics.sessions;document.getElementById('metricAPI').textContent=metrics.api+'K';document.getElementById('metricData').textContent=Math.round(metrics.data/100)*100+'MB';document.getElementById('metricVoice').textContent=metrics.voice;document.getElementById('metricThreats').textContent=metrics.threats;}
+
+function generateActivityFeed(){const activities=['User subscribed to Professional plan','New business listing: TechStart Solutions','Market price update: Cassava +₦45/kg','Security: Blocked 3 unauthorized access attempts','Voice query: Agriculture market trends','New user joined community','API request spike detected +340/min','Payment verified: ₦15,000 Enterprise plan'];
+const feed=document.getElementById('activityFeed');feed.innerHTML='';activities.slice(0,8).forEach((activity,i)=>{const time=Math.floor(Math.random()*10)+1;const icons=['💰','📝','📊','🛡️','🎤','👤','⚡','✅'];const html=`<div class="activity-item"><div class="activity-icon">${icons[i]}</div><div class="activity-content"><div class="activity-title">${activity}</div><div class="activity-time">${time} seconds ago</div></div></div>`;feed.innerHTML+=html;});}
+
+function generateClickStream(){const searches=['business directory','market prices','agricultural data','subscription plans','voice tutorial','education hub','security tips','investment opportunities','farming guide','contact support'];
+const feed=document.getElementById('clickStreamFeed');feed.innerHTML='';searches.forEach((search,i)=>{const count=Math.floor(Math.random()*800)+100;const trend=Math.random()>0.5?'↑':'↓';const icons=['🔍','💼','📈','🌾','🎓','🛡️','💡','🚀','📊','📞'];const html=`<div class="activity-item"><div class="activity-icon">${icons[i]}</div><div class="activity-content"><div class="activity-title">"${search}"</div><div class="activity-desc">${count} searches ${trend}</div></div></div>`;feed.innerHTML+=html;});}
+
+function generateTrends(){const currentTrends=[{name:'🌾 Agricultural Markets Nigeria',value:Math.floor(Math.random()*15)+18,change:Math.floor(Math.random()*600)+400},{name:'💼 Business Directory Interest',value:Math.floor(Math.random()*10)+12,change:Math.floor(Math.random()*500)+300},{name:'📈 Market Intelligence Requests',value:Math.floor(Math.random()*20)+25,change:Math.floor(Math.random()*800)+600},{name:'🔐 Security Alerts Trending',value:Math.floor(Math.random()*8)+8,change:Math.floor(Math.random()*200)+100},{name:'💻 Tech Innovation Searches',value:Math.floor(Math.random()*18)+20,change:Math.floor(Math.random()*600)+500},{name:'🎓 Education Hub Access',value:Math.floor(Math.random()*25)+30,change:Math.floor(Math.random()*1000)+800}];
+const feed=document.getElementById('trendsFeed');feed.innerHTML='';currentTrends.forEach(trend=>{const html=`<div class="trend-item"><span class="trend-name">${trend.name}</span><span class="trend-value">↑ ${trend.value}%</span><span class="trend-change">+${trend.change} queries</span></div>`;feed.innerHTML+=html;});}
+
+let autopostEnabled=false;let postCounter=0;function toggleAutopost(){autopostEnabled=!autopostEnabled;const toggle=document.getElementById('autopostToggle');const status=document.getElementById('autopostStatus');toggle.classList.toggle('off');if(autopostEnabled){toggle.style.background='var(--green)';status.textContent='✓ Autoposting is ACTIVE. Posts every '+document.getElementById('postInterval').value+' seconds to 5 platforms.';status.style.background='rgba(0,255,136,.2)';status.style.borderColor='rgba(0,255,136,.4)';status.style.color='var(--green)';startAutoposting();}else{toggle.style.background='rgba(255,255,255,.1)';status.textContent='Autoposting is OFF. Click toggle to enable.';status.style.background='rgba(0,194,255,.08)';status.style.borderColor='rgba(0,194,255,.2)';status.style.color='var(--gray)';}}
+
+function startAutoposting(){const interval=parseInt(document.getElementById('postInterval').value)*1000;const platforms=['LinkedIn','Twitter','Facebook','Instagram','YouTube'];setInterval(()=>{if(!autopostEnabled) return;postCounter++;const platform=platforms[Math.floor(Math.random()*platforms.length)];const content=`[AUTO POST #${postCounter}] Real-time CINIS NEXUS Intelligence Update\n\n📊 Platform Activity: ${Math.floor(Math.random()*500)+1200} active sessions\n🌍 Trending: Agricultural markets +${Math.floor(Math.random()*20)+15}%\n💡 New insight available in the dashboard\n\n#CINIS #Intelligence #Nigeria #Business`;document.getElementById('postsSentToday').value=postCounter;console.log(`[${new Date().toLocaleTimeString()}] Posted to ${platform}:`);},interval);}
+
+function handleContactForm(e){e.preventDefault();const name=document.getElementById('contact-name').value;const email=document.getElementById('contact-email').value;alert('Thank you, '+name+'! We will respond to '+email+' within 24 hours.');document.querySelector('.contact-form').reset();}
+
+function initiatePayment(plan){const PAYSTACK_PUBLIC_KEY="pk_live_YOUR_PUBLIC_KEY_HERE";const amount=plan==='pro'?500000:1500000;alert('Redirecting to Paystack for '+(plan==='pro'?'Professional':'Enterprise')+' plan...\n\nNote: Add your Paystack public key to the initiatePayment function.');}
+
+document.getElementById('hamburger').addEventListener('click',()=>{document.getElementById('mobileMenu').classList.toggle('open');});
+</script>
+
+</body>
+</html>
