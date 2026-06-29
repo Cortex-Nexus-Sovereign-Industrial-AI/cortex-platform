@@ -1,0 +1,699 @@
+openapi: 3.1.0
+info:
+  title: Cortex Sovereign Industrial Orchestration API
+  version: 1.0.0
+  description: |
+    Agent orchestration, workflow control, integrations, and health endpoints
+    for the Cortex platform.
+servers:
+  - url: https://cortex-nexus-sovereign-industrial-ai.github.io
+    description: Public GitHub Pages surface
+  - url: https://api.cortex-nexus.local/v1
+    description: Backend API surface
+security:
+  - bearerAuth: []
+
+tags:
+  - name: Agents
+  - name: Workflows
+  - name: Integrations
+  - name: Auth
+  - name: System
+
+paths:
+  /v1/agents/runs:
+    post:
+      tags: [Agents]
+      summary: Start a new agent run
+      operationId: createAgentRun
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAgentRunRequest'
+            examples:
+              sample:
+                value:
+                  agent_id: agent-001
+                  task: search products
+                  inputs:
+                    query: IBM
+                  context:
+                    user_id: u123
+                    platform: cortex-platform
+                  priority: normal
+      responses:
+        '201':
+          description: Agent run created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentRunResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+
+  /v1/agents/runs/{run_id}:
+    get:
+      tags: [Agents]
+      summary: Inspect agent run status
+      operationId: getAgentRun
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/RunId'
+      responses:
+        '200':
+          description: Agent run status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentRunStatusResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /v1/agents/runs/{run_id}/cancel:
+    post:
+      tags: [Agents]
+      summary: Cancel an agent run
+      operationId: cancelAgentRun
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/RunId'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CancelRunRequest'
+      responses:
+        '200':
+          description: Run cancelled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunActionResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+
+  /v1/agents/runs/{run_id}/resume:
+    post:
+      tags: [Agents]
+      summary: Resume a paused agent run
+      operationId: resumeAgentRun
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/RunId'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResumeRunRequest'
+      responses:
+        '200':
+          description: Run resumed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunActionResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+
+  /v1/agents/events:
+    post:
+      tags: [Agents]
+      summary: Receive orchestration events
+      operationId: ingestAgentEvent
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentEvent'
+      responses:
+        '202':
+          description: Event accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Acknowledgement'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '409':
+          $ref: '#/components/responses/Conflict'
+
+  /v1/agents/tools:
+    get:
+      tags: [Agents]
+      summary: List tools
+      operationId: listTools
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Tool list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ToolListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      tags: [Agents]
+      summary: Register a tool
+      operationId: registerTool
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ToolDefinition'
+      responses:
+        '201':
+          description: Tool registered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ToolRegistrationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '409':
+          $ref: '#/components/responses/Conflict'
+
+  /v1/agents/workflows:
+    get:
+      tags: [Workflows]
+      summary: List workflows
+      operationId: listWorkflows
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Workflow list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      tags: [Workflows]
+      summary: Create workflow
+      operationId: createWorkflow
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkflowDefinition'
+      responses:
+        '201':
+          description: Workflow created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /v1/agents/workflows/{workflow_id}:
+    get:
+      tags: [Workflows]
+      summary: Get workflow
+      operationId: getWorkflow
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/WorkflowId'
+      responses:
+        '200':
+          description: Workflow details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /v1/integrations/deploys:
+    post:
+      tags: [Integrations]
+      summary: Publish deployment status
+      operationId: createDeployStatus
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeployStatusRequest'
+      responses:
+        '201':
+          description: Deploy status recorded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeployStatusResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '409':
+          $ref: '#/components/responses/Conflict'
+
+  /v1/auth/callback:
+    get:
+      tags: [Auth]
+      summary: OAuth or SSO callback
+      operationId: authCallback
+      security: []
+      parameters:
+        - name: code
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: state
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: error
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: error_description
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '302':
+          description: Redirect after login
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /v1/health:
+    get:
+      tags: [System]
+      summary: Health check
+      operationId: getHealth
+      security: []
+      responses:
+        '200':
+          description: Service healthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  parameters:
+    RunId:
+      name: run_id
+      in: path
+      required: true
+      schema:
+        type: string
+    WorkflowId:
+      name: workflow_id
+      in: path
+      required: true
+      schema:
+        type: string
+
+  responses:
+    BadRequest:
+      description: Invalid request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Conflict:
+      description: Conflict
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    TooManyRequests:
+      description: Too many requests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ServiceUnavailable:
+      description: Service unavailable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+
+  schemas:
+    ErrorResponse:
+      type: object
+      required: [success, error]
+      properties:
+        success:
+          type: boolean
+          const: false
+        error:
+          type: object
+          required: [code, message]
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            details:
+              type: object
+              additionalProperties: true
+
+    Acknowledgement:
+      type: object
+      required: [success]
+      properties:
+        success:
+          type: boolean
+          const: true
+        accepted:
+          type: boolean
+        id:
+          type: string
+
+    CreateAgentRunRequest:
+      type: object
+      required: [agent_id, task, inputs, context, priority]
+      properties:
+        agent_id:
+          type: string
+        task:
+          type: string
+        inputs:
+          type: object
+          additionalProperties: true
+        context:
+          type: object
+          additionalProperties: true
+        priority:
+          type: string
+          enum: [low, normal, high, critical]
+
+    AgentRunResponse:
+      type: object
+      required: [success, data]
+      properties:
+        success:
+          type: boolean
+          const: true
+        data:
+          type: object
+          required: [run_id, status, created_at]
+          properties:
+            run_id:
+              type: string
+            status:
+              type: string
+              enum: [queued, running, paused, succeeded, failed, cancelled]
+            created_at:
+              type: string
+              format: date-time
+
+    AgentRunStatusResponse:
+      type: object
+      required: [success, data]
+      properties:
+        success:
+          type: boolean
+          const: true
+        data:
+          type: object
+          required: [run_id, status]
+          properties:
+            run_id:
+              type: string
+            status:
+              type: string
+              enum: [queued, running, paused, succeeded, failed, cancelled]
+            step:
+              type: string
+            result:
+              type: object
+              additionalProperties: true
+            logs_ref:
+              type: string
+
+    CancelRunRequest:
+      type: object
+      properties:
+        reason:
+          type: string
+
+    ResumeRunRequest:
+      type: object
+      properties:
+        resume_from_step:
+          type: string
+
+    RunActionResponse:
+      type: object
+      required: [success, data]
+      properties:
+        success:
+          type: boolean
+          const: true
+        data:
+          type: object
+          required: [run_id, status]
+          properties:
+            run_id:
+              type: string
+            status:
+              type: string
+              enum: [queued, running, paused, succeeded, failed, cancelled]
+
+    AgentEvent:
+      type: object
+      required: [run_id, event_type, timestamp, payload]
+      properties:
+        run_id:
+          type: string
+        event_type:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+        payload:
+          type: object
+          additionalProperties: true
+
+    ToolDefinition:
+      type: object
+      required: [name, description, input_schema, output_schema, owner]
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        input_schema:
+          type: object
+          additionalProperties: true
+        output_schema:
+          type: object
+          additionalProperties: true
+        owner:
+          type: string
+
+    ToolListResponse:
+      type: object
+      required: [success, data]
+      properties:
+        success:
+          type: boolean
+          const: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ToolDefinition'
+
+    ToolRegistrationResponse:
+      type: object
+      required: [success, data]
+      properties:
+        success:
+          type: boolean
+          const: true
+        data:
+          type: object
+          required: [tool_id, status]
+          properties:
+            tool_id:
+              type: string
+            status:
+              type: string
+              const: registered
+
+    WorkflowDefinition:
+      type: object
+      required: [name, steps, triggers, policy]
+      properties:
+        name:
+          type: string
+        steps:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        triggers:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        policy:
+          type: object
+          additionalProperties: true
+
+    WorkflowResponse:
+      type: object
+      required: [success, data]
+      properties:
+        success:
+          type: boolean
+          const: true
+        data:
+          type: object
+          required: [workflow_id, name]
+          properties:
+            workflow_id:
+              type: string
+            name:
+              type: string
+            steps:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+            triggers:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+            policy:
+              type: object
+              additionalProperties: true
+
+    WorkflowListResponse:
+      type: object
+      required: [success, data]
+      properties:
+        success:
+          type: boolean
+          const: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkflowResponse'
+
+    DeployStatusRequest:
+      type: object
+      required: [status, message, deployer, metadata]
+      properties:
+        status:
+          type: string
+          enum: [queued, running, succeeded, failed, cancelled]
+        message:
+          type: string
+        deployer:
+          type: string
+        metadata:
+          type: object
+          additionalProperties: true
+
+    DeployStatusResponse:
+      type: object
+      required: [success, data]
+      properties:
+        success:
+          type: boolean
+          const: true
+        data:
+          type: object
+          required: [deployment_id, status]
+          properties:
+            deployment_id:
+              type: string
+            status:
+              type: string
+
+    HealthResponse:
+      type: object
+      required: [success, status]
+      properties:
+        success:
+          type: boolean
+          const: true
+        status:
+          type: string
+          const: ok
+        version:
+          type: string
+        uptime_seconds:
+          type: number
