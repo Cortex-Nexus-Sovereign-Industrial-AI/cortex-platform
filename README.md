@@ -112,7 +112,7 @@ python3 -m http.server 8000
 
 #### Deploy to GitHub Pages
 1. Push changes to `main` branch
-2. Platform auto-deploys to: `https://mikecomplexai-7.github.io/cortex-platform/`
+2. Platform auto-deploys to: `https://cortex-nexus-sovereign-industrial-ai.github.io/cortex-platform/`
 3. Changes live within 2 minutes
 
 ---
@@ -367,7 +367,7 @@ Voice Query Adoption:         68% ↗
 ## 📧 Contact & Support
 
 **Primary Email**: cortexnexus@proton.me  
-**Platform**: https://mikecomplexai-7.github.io/cortex-platform/  
+**Platform**: https://cortex-nexus-sovereign-industrial-ai.github.io/cortex-platform/**
 **Voice Contact**: Available via platform voice feature  
 **Founder & CEO**: Michael Ujuku Morim  
 **Location**: No. 7 Calabar Street, Igoli, Ogoja, Cross River State, Nigeria  
@@ -475,7 +475,7 @@ Want to improve CINIS NEXUS?
 
 ## 📞 Get Started
 
-1. **Visit the platform**: https://mikecomplexai-7.github.io/cortex-platform/
+1. **Visit the platform**: https://cortex-nexus-sovereign-industrial-ai.github.io/cortex-platform/**
 2. **Try voice features**: Click the voice icon and speak naturally
 3. **Join free**: No credit card required
 4. **Subscribe when ready**: ₦5,000/month unlocks everything
