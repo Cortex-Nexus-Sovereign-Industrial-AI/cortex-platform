@@ -1,189 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sovereign Industrial Product Search</title>
-    <style>
-        :root {
-            --wp--preset--spacing--30: 1.5rem;
-            --wp--preset--spacing--40: 2rem;
-            --wp--preset--spacing--50: 3rem;
-            --surface-card: #161b22;
-            --border-high-vis: #30363d;
-            --accent-glow: #58a6ff;
-            --hardware-core: #8b949e;
-        }
-        body { margin: 0; font-family: system-ui, sans-serif; background: #0d1117; color: #c9d1d9; }
-        .alignfull { width: 100%; }
-        .alignwide { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
-        
-        /* FIXED: Changed 1-fraction syntax error to valid 1fr grid sizing */
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.5rem; padding-top: var(--wp--preset--spacing--30); }
-        .product-card { background: var(--surface-card); border: 1px solid var(--border-high-vis); border-radius: 6px; padding: 1rem; position: relative; display: flex; flex-direction: column; }
-        .product-image { width: 100%; aspect-ratio: 1; background: #21262d; border-radius: 4px; object-fit: cover; }
-        .product-title { font-size: 1.2rem; margin: 1rem 0 0.5rem 0; color: #f0f6fc; }
-        .product-price { font-weight: bold; color: var(--accent-glow); margin-bottom: 0.5rem; }
-        .search-bar-container { margin: 1rem 0; }
-        .search-input { padding: 0.5rem; width: 70%; background: #010409; border: 1px solid var(--border-high-vis); color: white; border-radius: 4px; }
-        .search-btn { padding: 0.5rem 1rem; background: #238636; border: none; color: white; border-radius: 4px; cursor: pointer; }
-        
-        /* Added Segments System Matrix Styling */
-        .segment-wrapper { margin-top: var(--wp--preset--spacing--40); border-top: 1px solid var(--border-high-vis); padding-top: var(--wp--preset--spacing--30); }
-        .segment-banner { border-left: 3px solid var(--accent-glow); padding-left: 0.75rem; margin-bottom: 1rem; font-size: 1.1rem; font-weight: 600; color: #f0f6fc; }
-        .diagnostic-badge { font-family: monospace; font-size: 0.75rem; background: #21262d; padding: 0.2rem 0.5rem; border-radius: 4px; color: var(--hardware-core); align-self: flex-start; margin-bottom: 0.5rem; }
-        .origin-stamp { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: #238636; margin-top: auto; padding-top: 0.5rem; }
-        
-        /* Stealth Target Flag Protection Layer */
-        .stealth-hardware-vault { display: none !important; visibility: hidden; opacity: 0; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sovereign Industrial Product Search</title>
+  <style>
+    :root {
+      --wp--preset--spacing--30: 1.5rem;
+      --wp--preset--spacing--40: 2rem;
+      --wp--preset--spacing--50: 3rem;
+    }
+    body { margin: 0; font-family: system-ui, sans-serif; background: #0d1117; color: #c9d1d9; }
+    .alignfull { width: 100%; }
+    .alignwide { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+    .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.5rem; padding-top: var(--wp--preset--spacing--30); }
+    .product-card { background: #161b22; border: 1px solid #30363d; border-radius: 6px; padding: 1rem; position: relative; }
+    .product-image { width: 100%; aspect-ratio: 1; background: #21262d; border-radius: 4px; object-fit: cover; }
+    .product-title { font-size: 1.2rem; margin: 1rem 0 0.5rem 0; color: #f0f6fc; }
+    .product-price { font-weight: bold; color: #58a6ff; }
+    .search-bar-container { margin: 1rem 0; display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .search-input { padding: 0.5rem; width: min(70%, 420px); background: #010409; border: 1px solid #30363d; color: white; border-radius: 4px; }
+    .search-btn { padding: 0.5rem 1rem; background: #238636; border: none; color: white; border-radius: 4px; cursor: pointer; }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
 </head>
 <body>
 
-    <header class="alignfull" style="padding: 1rem; border-bottom: 1px solid #30363d;">
-        <div class="alignwide">
-            <a href="https://cortex-nexus-sovereign-industrial-ai.github.io/cortex-platform/" style="color: #58a6ff; text-decoration: none;">← Return to Home Platform</a>
-        </div>
-    </header>
+  <header class="alignfull" style="padding: 1rem; border-bottom: 1px solid #30363d;">
+    <div class="alignwide">
+      <a href="https://cortex-nexus-sovereign-industrial-ai.github.io/cortex-platform/" style="color: #58a6ff; text-decoration: none;">← Return to Home Platform</a>
+    </div>
+  </header>
 
-    <main class="wp-block-group alignfull" style="padding-top: var(--wp--preset--spacing--40); padding-bottom: var(--wp--preset--spacing--50);">
-        <div class="alignwide">
-            <div class="breadcrumbs" id="platform-breadcrumbs">Home / Industrial Products</div>
-            <h2 id="search-title">Search Results</h2>
-            
-            <div class="search-bar-container">
-                <input type="text" id="product-query" class="search-input" placeholder="Search industrial assets, models, tokens...">
-                <button id="search-trigger" class="search-btn">Search</button>
-            </div>
-        </div>
+  <main class="wp-block-group alignfull" style="padding-top: var(--wp--preset--spacing--40); padding-bottom: var(--wp--preset--spacing--50);">
+    <div class="alignwide">
+      <div class="breadcrumbs" id="platform-breadcrumbs">Home / Industrial Products</div>
+      <h2 id="search-title">Search Results</h2>
 
-        <div class="alignwide">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <span id="results-count">Showing 0 products across unified layers</span>
-                <select id="catalog-sorting" class="search-input" style="width: auto;">
-                    <option value="title-asc">Sort by Title (A-Z)</option>
-                    <option value="price-desc">Sort by Price (High to Low)</option>
-                </select>
-            </div>
+      <div class="search-bar-container" role="search" aria-label="Product search">
+        <label class="sr-only" for="product-query">Search products</label>
+        <input type="search" id="product-query" class="search-input" placeholder="Search industrial assets, models, tokens...">
+        <button id="search-trigger" class="search-btn">Search</button>
+      </div>
+    </div>
 
-            <!-- Dynamic Segment Container 1: Local Millions SDK Monolith Layer -->
-            <div class="segment-wrapper">
-                <div class="segment-banner">Segment Alpha: Millions SDK Core Matrix</div>
-                <div class="product-grid" id="sdk-monolith-columns"></div>
-            </div>
+    <div class="alignwide">
+      <div style="display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap;">
+        <span id="results-count">Showing 0 products</span>
+        <select id="catalog-sorting" class="search-input" style="width: auto;">
+          <option value="title-asc">Sort by Title (A-Z)</option>
+          <option value="price-desc">Sort by Price (High to Low)</option>
+        </select>
+      </div>
 
-            <!-- Dynamic Segment Container 2: IBM External Integration Platform Array -->
-            <div class="segment-wrapper">
-                <div class="segment-banner">Segment Beta: IBM Integrated Engine Array</div>
-                <div class="product-grid" id="ibm-platform-columns"></div>
-            </div>
-        </div>
-    </main>
+      <div class="product-grid" id="sovereign-product-collection"></div>
+    </div>
+  </main>
 
-    <!-- SECRET ARCHITECTURE VAULT INJECTION ZONE -->
-    <div id="stealth-vault" class="stealth-hardware-vault" data-core-target-i7="0x7F-I7-PROCCONTROL-NEXUS" data-core-target-a18-plus="0x3A-A18PLUS-SECUREENCLAVE-SOVEREIGN"></div>
+  <script>
+    const PlatformConfig = {
+      sdkEndpoint: "/v1",
+      ibmEndpoint: "https://us-south.functions.cloud.ibm.com/api/v1/web/"
+    };
 
-    <script>
-        // Configuration Matrix 
-        const PlatformConfig = {
-            sdkEndpoint: "http://127.0.0.1:8080/v1", // Local Millions SDK loopback endpoint
-            ibmEndpoint: "https://us-south.functions.cloud.ibm.com/api/v1/web/" // IBM Cloud Function/Platform layer action URL
-        };
+    document.getElementById('search-trigger').addEventListener('click', async () => {
+      const query = document.getElementById('product-query').value.trim();
+      document.getElementById('search-title').innerText = query ? `Search Results for: "${query}"` : "Search Results";
 
-        // Cache store to maintain data state for on-the-fly dynamic sorting changes
-        let memoryCollectionState = [];
+      try {
+        const localDataPromise = fetch(`${PlatformConfig.sdkEndpoint}/search?q=${encodeURIComponent(query)}`).then(r => r.json()).catch(() => []);
+        const ibmDataPromise = fetch(`${PlatformConfig.ibmEndpoint}?searchQuery=${encodeURIComponent(query)}`).then(r => r.json()).catch(() => []);
 
-        // Secret Hardware Vault Diagnostics Ingestor
-        const getStealthHardwareSignature = () => {
-            const vault = document.getElementById('stealth-vault');
-            return {
-                i7: vault.getAttribute('data-core-target-i7'),
-                a18: vault.getAttribute('data-core-target-a18-plus')
-            };
-        };
+        const [localAssets, ibmAssets] = await Promise.all([localDataPromise, ibmDataPromise]);
+        const combinedCollection = [...localAssets, ...ibmAssets];
 
-        // Execution Controller
-        document.getElementById('search-trigger').addEventListener('click', async () => {
-            const query = document.getElementById('product-query').value;
-            document.getElementById('search-title').innerText = `Search Results for: "${query}"`;
-            
-            try {
-                // Parallel Request execution to Local Engine and IBM platform data layers
-                const localDataPromise = fetch(`${PlatformConfig.sdkEndpoint}/search?q=${encodeURIComponent(query)}`).then(r => r.json()).catch(() => []);
-                const ibmDataPromise = fetch(`${PlatformConfig.ibmEndpoint}?searchQuery=${encodeURIComponent(query)}`).then(r => r.json()).catch(() => []);
+        renderProductCollection(combinedCollection);
+      } catch (err) {
+        console.error("Pipeline Sync Error:", err);
+        renderProductCollection([]);
+      }
+    });
 
-                // Await combined response streams
-                const [localAssets, ibmAssets] = await Promise.all([localDataPromise, ibmDataPromise]);
-                
-                // Track dynamic orchestration assignments by personalization metadata IDs
-                const mappedLocal = localAssets.map((item, idx) => ({ ...item, segment: 'sdk', pid: item.pid || `PID-SDK-${1000 + idx}` }));
-                const mappedIbm = ibmAssets.map((item, idx) => ({ ...item, segment: 'ibm', pid: item.pid || `PID-IBM-${5000 + idx}` }));
+    function renderProductCollection(items) {
+      const container = document.getElementById('sovereign-product-collection');
+      const countLabel = document.getElementById('results-count');
+      container.innerHTML = '';
+      countLabel.innerText = `Showing ${items.length} products found across unified layers`;
 
-                memoryCollectionState = [...mappedLocal, ...mappedIbm];
-                executeDynamicSortAndRender();
-            } catch (err) {
-                console.error("Pipeline Sync Error: ", err);
-            }
-        });
+      if (items.length === 0) {
+        container.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: #8b949e;">No industrial products matched your query.</p>`;
+        return;
+      }
 
-        // Trigger sorting reorganization natively when user selects dropdown filters
-        document.getElementById('catalog-sorting').addEventListener('change', () => {
-            executeDynamicSortAndRender();
-        });
-
-        function executeDynamicSortAndRender() {
-            const sortRule = document.getElementById('catalog-sorting').value;
-            
-            if (sortRule === 'title-asc') {
-                memoryCollectionState.sort((a, b) => a.title.localeCompare(b.title));
-            } else if (sortRule === 'price-desc') {
-                memoryCollectionState.sort((a, b) => parseFloat(b.price || 0) - parseFloat(a.price || 0));
-            }
-
-            renderProductCollection(memoryCollectionState);
-        }
-
-        function renderProductCollection(items) {
-            const sdkContainer = document.getElementById('sdk-monolith-columns');
-            const ibmContainer = document.getElementById('ibm-platform-columns');
-            const countLabel = document.getElementById('results-count');
-            
-            // Clear lists out cleanly
-            sdkContainer.innerHTML = '';
-            ibmContainer.innerHTML = '';
-            
-            countLabel.innerText = `Showing ${items.length} products found across unified layers`;
-
-            if(items.length === 0) {
-                const emptyStateHtml = `<p style="grid-column: 1/-1; text-align: center; color: #8b949e;">No industrial products matched your query.</p>`;
-                sdkContainer.innerHTML = emptyStateHtml;
-                ibmContainer.innerHTML = emptyStateHtml;
-                return;
-            }
-
-            items.forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'product-card';
-                card.innerHTML = `
-                    <span class="diagnostic-badge">${item.pid}</span>
-                    <img class="product-image" src="${item.image || 'placeholder.png'}" alt="${item.title}">
-                    <h3 class="product-title">${item.title}</h3>
-                    <div class="product-price">${item.price || 'Sovereign Node Exchange'}</div>
-                    <span class="origin-stamp">Invented by Unified Matrix Platform</span>
-                `;
-                
-                // Segments execution split handling row allocation logic securely
-                if (item.segment === 'sdk') {
-                    sdkContainer.appendChild(card);
-                } else {
-                    ibmContainer.appendChild(card);
-                }
-            });
-            
-            // Background check confirmation log of hidden baseline layers
-            const hw = getStealthHardwareSignature();
-            console.log(`[STEALTH SYSTEM SYNC] Handshake active targets -> i7: ${hw.i7} | A18+: ${hw.a18}`);
-        }
-    </script>
+      items.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = `
+          <img class="product-image" src="${item.image || 'placeholder.png'}" alt="${item.title || 'Product'}">
+          <h3 class="product-title">${item.title || 'Untitled Product'}</h3>
+          <div class="product-price">${item.price || 'Sovereign Node Exchange'}</div>
+        `;
+        container.appendChild(card);
+      });
+    }
+  </script>
 </body>
 </html>
