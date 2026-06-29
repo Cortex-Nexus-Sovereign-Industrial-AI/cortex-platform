@@ -71,7 +71,7 @@ The platform provides:
 ## 🚀 Quick Start
 
 ### For Users
-1. Visit: **https://mikecomplexai-7.github.io/cortex-platform-core/**
+1. Visit: **https://cortex-nexus-sovereign-industrial-ai.github.io/cortex-platform/**
 2. Browse the platform, read the blog, check the directory
 3. **Use Voice Features** — speak to query, get instant results
 4. **Join Free** — community access included
