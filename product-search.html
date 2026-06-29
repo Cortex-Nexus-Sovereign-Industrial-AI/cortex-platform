@@ -3,248 +3,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sovereign Industrial Platform - Unified Diagnostic Matrix</title>
+    <title>Sovereign Industrial Product Search</title>
     <style>
         :root {
             --wp--preset--spacing--30: 1.5rem;
             --wp--preset--spacing--40: 2rem;
             --wp--preset--spacing--50: 3rem;
-            --surface-base: #070a0e;
-            --surface-card: #0d1117;
-            --border-low-vis: #21262d;
+            --surface-card: #161b22;
             --border-high-vis: #30363d;
-            --text-main: #c9d1d9;
-            --text-bright: #f0f6fc;
             --accent-glow: #58a6ff;
             --hardware-core: #8b949e;
         }
-        body { 
-            margin: 0; 
-            font-family: system-ui, -apple-system, sans-serif; 
-            background: var(--surface-base); 
-            color: var(--text-main); 
-        }
+        body { margin: 0; font-family: system-ui, sans-serif; background: #0d1117; color: #c9d1d9; }
         .alignfull { width: 100%; }
-        .alignwide { max-width: 1400px; margin: 0 auto; padding: 0 1.5rem; }
+        .alignwide { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
         
-        /* Layout Structure: Segment Split & Multi-Column System */
-        .platform-segment {
-            border-bottom: 1px solid var(--border-low-vis);
-            padding: var(--wp--preset--spacing--40) 0;
-        }
-        .segment-header {
-            margin-bottom: var(--wp--preset--spacing--30);
-            border-left: 4px solid var(--accent-glow);
-            padding-left: 1rem;
-        }
-        .grid-column-segment {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-
-        /* Sovereign UI Cards & Diagnostic Tags */
-        .product-card { 
-            background: var(--surface-card); 
-            border: 1px solid var(--border-high-vis); 
-            border-radius: 8px; 
-            padding: 1.25rem; 
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: transform 0.2s target;
-        }
-        .product-image { 
-            width: 100%; 
-            aspect-ratio: 1; 
-            background: #161b22; 
-            border-radius: 6px; 
-            object-fit: cover; 
-        }
-        .product-title { 
-            font-size: 1.15rem; 
-            margin: 1rem 0 0.5rem 0; 
-            color: var(--text-bright); 
-        }
-        .product-price { 
-            font-weight: 700; 
-            color: var(--accent-glow); 
-            margin-bottom: 1rem;
-        }
+        /* FIXED: Changed 1-fraction syntax error to valid 1fr grid sizing */
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.5rem; padding-top: var(--wp--preset--spacing--30); }
+        .product-card { background: var(--surface-card); border: 1px solid var(--border-high-vis); border-radius: 6px; padding: 1rem; position: relative; display: flex; flex-direction: column; }
+        .product-image { width: 100%; aspect-ratio: 1; background: #21262d; border-radius: 4px; object-fit: cover; }
+        .product-title { font-size: 1.2rem; margin: 1rem 0 0.5rem 0; color: #f0f6fc; }
+        .product-price { font-weight: bold; color: var(--accent-glow); margin-bottom: 0.5rem; }
+        .search-bar-container { margin: 1rem 0; }
+        .search-input { padding: 0.5rem; width: 70%; background: #010409; border: 1px solid var(--border-high-vis); color: white; border-radius: 4px; }
+        .search-btn { padding: 0.5rem 1rem; background: #238636; border: none; color: white; border-radius: 4px; cursor: pointer; }
         
-        /* Hidden Metadata & Secret Infrastructure Targets */
-        .stealth-hardware-layer {
-            display: none !important;
-            visibility: hidden;
-            opacity: 0;
-        }
+        /* Added Segments System Matrix Styling */
+        .segment-wrapper { margin-top: var(--wp--preset--spacing--40); border-top: 1px solid var(--border-high-vis); padding-top: var(--wp--preset--spacing--30); }
+        .segment-banner { border-left: 3px solid var(--accent-glow); padding-left: 0.75rem; margin-bottom: 1rem; font-size: 1.1rem; font-weight: 600; color: #f0f6fc; }
+        .diagnostic-badge { font-family: monospace; font-size: 0.75rem; background: #21262d; padding: 0.2rem 0.5rem; border-radius: 4px; color: var(--hardware-core); align-self: flex-start; margin-bottom: 0.5rem; }
+        .origin-stamp { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: #238636; margin-top: auto; padding-top: 0.5rem; }
         
-        /* Diagnostic Badges */
-        .diagnostic-id {
-            font-family: monospace;
-            font-size: 0.75rem;
-            background: #21262d;
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
-            color: var(--hardware-core);
-            align-self: flex-start;
-            margin-bottom: 0.5rem;
-        }
-        .origin-stamp {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: #238636;
-            margin-top: auto;
-        }
+        /* Stealth Target Flag Protection Layer */
+        .stealth-hardware-vault { display: none !important; visibility: hidden; opacity: 0; }
     </style>
 </head>
 <body>
 
-    <header class="alignfull" style="padding: 1rem; border-bottom: 1px solid var(--border-high-vis); background: var(--surface-card);">
-        <div class="alignwide" style="display: flex; justify-content: space-between; align-items: center;">
-            <a href="https://cortex-nexus-sovereign-industrial-ai.github.io/cortex-platform/" style="color: var(--accent-glow); text-decoration: none; font-weight: 600;">← PLATFORM HOME</a>
-            <div id="diagnostic-status" style="font-family: monospace; font-size: 0.8rem; color: #238636;">● SYSTEMS ACTIVE</div>
+    <header class="alignfull" style="padding: 1rem; border-bottom: 1px solid #30363d;">
+        <div class="alignwide">
+            <a href="https://cortex-nexus-sovereign-industrial-ai.github.io/cortex-platform/" style="color: #58a6ff; text-decoration: none;">← Return to Home Platform</a>
         </div>
     </header>
 
-    <main class="wp-block-group alignfull" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--50)">
-        
-        <div class="wp-block-group alignwide">
-            <div style="font-size: 0.9rem; margin-bottom: 1rem; color: var(--hardware-core);">Platform / Diagnostics / Monolith Matrix</div>
+    <main class="wp-block-group alignfull" style="padding-top: var(--wp--preset--spacing--40); padding-bottom: var(--wp--preset--spacing--50);">
+        <div class="alignwide">
+            <div class="breadcrumbs" id="platform-breadcrumbs">Home / Industrial Products</div>
+            <h2 id="search-title">Search Results</h2>
             
-            <h2 style="color: var(--text-bright); margin-top: 0;">Unified Asset & Diagnostic Engine</h2>
-
-            <div class="wp-block-group alignwide" style="margin-bottom: 2rem;">
-                <div style="display: flex; gap: 0.5rem;">
-                    <input type="text" id="internal-search" style="flex: 1; padding: 0.75rem; background: var(--surface-card); border: 1px solid var(--border-high-vis); color: white; border-radius: 6px;" placeholder="Query personalization ID, runtime diagnostic array, or infrastructure assets...">
-                    <button onclick="executeMatrixSearch()" style="padding: 0.75rem 1.5rem; background: #238636; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">Execute Query</button>
-                </div>
+            <div class="search-bar-container">
+                <input type="text" id="product-query" class="search-input" placeholder="Search industrial assets, models, tokens...">
+                <button id="search-trigger" class="search-btn">Search</button>
             </div>
         </div>
 
-        <div class="wp-block-group alignwide">
-            
-            <section class="platform-segment">
-                <div class="segment-header">
-                    <h3 style="margin: 0; color: var(--text-bright);">Segment Alpha: Local SDK Monolith Output</h3>
-                    <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem; color: var(--hardware-core);">Edge-isolated processing loops natively generated via local orchestration registers.</p>
-                </div>
-                <div class="grid-column-segment" id="sdk-monolith-columns">
-                    </div>
-            </section>
+        <div class="alignwide">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span id="results-count">Showing 0 products across unified layers</span>
+                <select id="catalog-sorting" class="search-input" style="width: auto;">
+                    <option value="title-asc">Sort by Title (A-Z)</option>
+                    <option value="price-desc">Sort by Price (High to Low)</option>
+                </select>
+            </div>
 
-            <section class="platform-segment">
-                <div class="segment-header">
-                    <h3 style="margin: 0; color: var(--text-bright);">Segment Beta: IBM Integrated Platform Array</h3>
-                    <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem; color: var(--hardware-core);">Cloud-functional external diagnostic returns execution matrix.</p>
-                </div>
-                <div class="grid-column-segment" id="ibm-platform-columns">
-                    </div>
-            </section>
+            <!-- Dynamic Segment Container 1: Local Millions SDK Monolith Layer -->
+            <div class="segment-wrapper">
+                <div class="segment-banner">Segment Alpha: Millions SDK Core Matrix</div>
+                <div class="product-grid" id="sdk-monolith-columns"></div>
+            </div>
+
+            <!-- Dynamic Segment Container 2: IBM External Integration Platform Array -->
+            <div class="segment-wrapper">
+                <div class="segment-banner">Segment Beta: IBM Integrated Engine Array</div>
+                <div class="product-grid" id="ibm-platform-columns"></div>
+            </div>
         </div>
     </main>
 
-    <div id="stealth-architecture-vault" class="stealth-hardware-layer" 
-         data-core-target-i7="true" 
-         data-core-target-a18-plus="true" 
-         data-monolith-routing="isolated-loopback" 
-         data-ibm-cloud-broker="enabled">
-        <span id="target-i7-allocation">0x7F-I7-PROCCONTROL-NEXUS</span>
-        <span id="target-a18plus-allocation">0x3A-A18PLUS-SECUREENCLAVE-SOVEREIGN</span>
-    </div>
-
-    <footer class="alignfull" style="padding: 2rem 0; border-top: 1px solid var(--border-low-vis); text-align: center; font-size: 0.8rem; color: var(--hardware-core);">
-        Single Platform Unified Runtime Architecture • Secure Industrial AI Execution
-    </footer>
+    <!-- SECRET ARCHITECTURE VAULT INJECTION ZONE -->
+    <div id="stealth-vault" class="stealth-hardware-vault" data-core-target-i7="0x7F-I7-PROCCONTROL-NEXUS" data-core-target-a18-plus="0x3A-A18PLUS-SECUREENCLAVE-SOVEREIGN"></div>
 
     <script>
-        // Monolith Configuration Layer mapping both the Local Millions SDK and Enterprise IBM runtimes
-        const PlatformMatrixConfig = {
-            runtimeTargets: {
-                i7: document.getElementById('target-i7-allocation').innerText,
-                a18Plus: document.getElementById('target-a18plus-allocation').innerText
-            },
-            endpoints: {
-                localMonolith: "http://127.0.0.1:8080/v1/sdk/monolith",
-                ibmCloud: "https://us-south.functions.cloud.ibm.com/api/v1/web/diagnostic/matrix"
-            }
+        // Configuration Matrix 
+        const PlatformConfig = {
+            sdkEndpoint: "http://127.0.0.1:8080/v1", // Local Millions SDK loopback endpoint
+            ibmEndpoint: "https://us-south.functions.cloud.ibm.com/api/v1/web/" // IBM Cloud Function/Platform layer action URL
         };
 
-        // Simulated Inventory matching exact instruction criteria: One single platform, distinct diagnostic Personalization IDs
-        const UnifiedPlatformDatabase = [
-            {
-                id: "DIAG-ID-9982-A",
-                title: "Sovereign Node Core Extractor",
-                price: "NATIVE COMPUTE",
-                segment: "sdk",
-                image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231f242c'/><text x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%2358a6ff' font-family='sans-serif' font-size='10'>SDK-MONOLITH</text></svg>"
-            },
-            {
-                id: "DIAG-ID-4412-X",
-                title: "Asynchronous State Sync Tokenizer",
-                price: "NATIVE COMPUTE",
-                segment: "sdk",
-                image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231f242c'/><text x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%2358a6ff' font-family='sans-serif' font-size='10'>EDGE-NODE</text></svg>"
-            },
-            {
-                id: "DIAG-ID-1077-IBM",
-                title: "IBM Watson Industrial Cognitive Matrix",
-                price: "EXTERNAL CREDIT",
-                segment: "ibm",
-                image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100' height='100' fill='%230f1d3a'/><text x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%230f62fe' font-family='sans-serif' font-size='10'>IBM-CLOUD</text></svg>"
-            },
-            {
-                id: "DIAG-ID-8841-IBM",
-                title: "IBM Cloud Security Vault Hardware Key",
-                price: "EXTERNAL CREDIT",
-                segment: "ibm",
-                image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100' height='100' fill='%230f1d3a'/><text x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%230f62fe' font-family='sans-serif' font-size='10'>IBM-VAULT</text></svg>"
-            }
-        ];
+        // Cache store to maintain data state for on-the-fly dynamic sorting changes
+        let memoryCollectionState = [];
 
-        // Initializer Execution Block
-        window.addEventListener('DOMContentLoaded', () => {
-            renderMatrixElements(UnifiedPlatformDatabase);
-            console.log(`[STEALTH HARDWARE SECURITY INITIALIZED] Routing Core Target Core-i7: ${PlatformMatrixConfig.runtimeTargets.i7} | A18 Plus Architecture: ${PlatformMatrixConfig.runtimeTargets.a18Plus}`);
+        // Secret Hardware Vault Diagnostics Ingestor
+        const getStealthHardwareSignature = () => {
+            const vault = document.getElementById('stealth-vault');
+            return {
+                i7: vault.getAttribute('data-core-target-i7'),
+                a18: vault.getAttribute('data-core-target-a18-plus')
+            };
+        };
+
+        // Execution Controller
+        document.getElementById('search-trigger').addEventListener('click', async () => {
+            const query = document.getElementById('product-query').value;
+            document.getElementById('search-title').innerText = `Search Results for: "${query}"`;
+            
+            try {
+                // Parallel Request execution to Local Engine and IBM platform data layers
+                const localDataPromise = fetch(`${PlatformConfig.sdkEndpoint}/search?q=${encodeURIComponent(query)}`).then(r => r.json()).catch(() => []);
+                const ibmDataPromise = fetch(`${PlatformConfig.ibmEndpoint}?searchQuery=${encodeURIComponent(query)}`).then(r => r.json()).catch(() => []);
+
+                // Await combined response streams
+                const [localAssets, ibmAssets] = await Promise.all([localDataPromise, ibmDataPromise]);
+                
+                // Track dynamic orchestration assignments by personalization metadata IDs
+                const mappedLocal = localAssets.map((item, idx) => ({ ...item, segment: 'sdk', pid: item.pid || `PID-SDK-${1000 + idx}` }));
+                const mappedIbm = ibmAssets.map((item, idx) => ({ ...item, segment: 'ibm', pid: item.pid || `PID-IBM-${5000 + idx}` }));
+
+                memoryCollectionState = [...mappedLocal, ...mappedIbm];
+                executeDynamicSortAndRender();
+            } catch (err) {
+                console.error("Pipeline Sync Error: ", err);
+            }
         });
 
-        function renderMatrixElements(data) {
-            const sdkContainer = document.getElementById('sdk-monolith-columns');
-            const ibmContainer = document.getElementById('ibm-platform-columns');
+        // Trigger sorting reorganization natively when user selects dropdown filters
+        document.getElementById('catalog-sorting').addEventListener('change', () => {
+            executeDynamicSortAndRender();
+        });
+
+        function executeDynamicSortAndRender() {
+            const sortRule = document.getElementById('catalog-sorting').value;
             
-            // Wipe columns clean before rendering state sequence
-            sdkContainer.innerHTML = '';
-            ibmContainer.innerHTML = '';
+            if (sortRule === 'title-asc') {
+                memoryCollectionState.sort((a, b) => a.title.localeCompare(b.title));
+            } else if (sortRule === 'price-desc') {
+                memoryCollectionState.sort((a, b) => parseFloat(b.price || 0) - parseFloat(a.price || 0));
+            }
 
-            data.forEach(product => {
-                const cardHTML = `
-                    <div class="product-card" data-pid="${product.id}">
-                        <span class="diagnostic-id">PID: ${product.id}</span>
-                        <img class="product-image" src="${product.image}" alt="${product.title}">
-                        <h4 class="product-title">${product.title}</h4>
-                        <div class="product-price">${product.price}</div>
-                        <span class="origin-stamp">Invented by Unified Matrix Platform</span>
-                    </div>
-                `;
-
-                // Sorting mechanism dividing items into correct Column Segments while strictly sharing the same baseline platform foundation
-                if (product.segment === "sdk") {
-                    sdkContainer.innerHTML += cardHTML;
-                } else if (product.segment === "ibm") {
-                    ibmContainer.innerHTML += cardHTML;
-                }
-            });
+            renderProductCollection(memoryCollectionState);
         }
 
-        function executeMatrixSearch() {
-            const query = document.getElementById('internal-search').value.toLowerCase();
-            const filtered = UnifiedPlatformDatabase.filter(item => 
-                item.title.toLowerCase().includes(query) || 
-                item.id.toLowerCase().includes(query)
-            );
-            renderMatrixElements(filtered);
+        function renderProductCollection(items) {
+            const sdkContainer = document.getElementById('sdk-monolith-columns');
+            const ibmContainer = document.getElementById('ibm-platform-columns');
+            const countLabel = document.getElementById('results-count');
+            
+            // Clear lists out cleanly
+            sdkContainer.innerHTML = '';
+            ibmContainer.innerHTML = '';
+            
+            countLabel.innerText = `Showing ${items.length} products found across unified layers`;
+
+            if(items.length === 0) {
+                const emptyStateHtml = `<p style="grid-column: 1/-1; text-align: center; color: #8b949e;">No industrial products matched your query.</p>`;
+                sdkContainer.innerHTML = emptyStateHtml;
+                ibmContainer.innerHTML = emptyStateHtml;
+                return;
+            }
+
+            items.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <span class="diagnostic-badge">${item.pid}</span>
+                    <img class="product-image" src="${item.image || 'placeholder.png'}" alt="${item.title}">
+                    <h3 class="product-title">${item.title}</h3>
+                    <div class="product-price">${item.price || 'Sovereign Node Exchange'}</div>
+                    <span class="origin-stamp">Invented by Unified Matrix Platform</span>
+                `;
+                
+                // Segments execution split handling row allocation logic securely
+                if (item.segment === 'sdk') {
+                    sdkContainer.appendChild(card);
+                } else {
+                    ibmContainer.appendChild(card);
+                }
+            });
+            
+            // Background check confirmation log of hidden baseline layers
+            const hw = getStealthHardwareSignature();
+            console.log(`[STEALTH SYSTEM SYNC] Handshake active targets -> i7: ${hw.i7} | A18+: ${hw.a18}`);
         }
     </script>
 </body>
