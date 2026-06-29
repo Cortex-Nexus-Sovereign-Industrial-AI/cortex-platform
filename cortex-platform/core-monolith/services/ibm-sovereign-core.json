@@ -1,1 +1,28 @@
-
+{
+  "product_id": "cinis-ibm-sovereign-core",
+  "product_name": "IBM Sovereign Core Integration Boundary",
+  "department": "Orchestration & Autonomous Automation",
+  "version": "1.0.0",
+  "status": "active",
+  "architecture_mapping": {
+    "control_plane": "external-modules/ibm-sovereign-core/control-plane/",
+    "compliance_matrix": "external-modules/ibm-sovereign-core/compliance/",
+    "ai_gateway": "external-modules/ibm-sovereign-core/ai-gateway/"
+  },
+  "orchestration_hooks": {
+    "execution_engine": "Millions SDK Framework",
+    "data_perimeter": "CINIS Sovereign Core (A18+) Monolith",
+    "security_vault": "Shadow-Vault Data Protocols",
+    "isolation_mode": "In-Boundary Control Plane"
+  },
+  "compliance_frameworks": [
+    "GDPR",
+    "EU AI Act",
+    "Continuous Runtime Attestation"
+  ],
+  "governed_workloads": {
+    "local_inference": true,
+    "agent_operations": "isolated",
+    "external_telemetry_export": false
+  }
+}
