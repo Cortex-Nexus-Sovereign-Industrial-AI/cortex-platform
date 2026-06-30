@@ -1,75 +1,244 @@
-# CINIS NEXUS INDUSTRY OGOJA
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>CINIS NEXUS INDUSTRY OGOJA | AI-Assisted Publisher & Industrial-Digital Platform</title>
+<meta name="description" content="CINIS NEXUS INDUSTRY OGOJA is an AI-assisted publisher and industrial-digital platform for business intelligence, community information, monetized content, and operational automation in Ogoja, Cross River State, Nigeria."/>
+<meta name="keywords" content="CINIS NEXUS INDUSTRY OGOJA, Michael Ujuku Morim, Ogoja Nigeria, AI publisher, digital platform, business intelligence, community information, monetized content, automation"/>
+<meta property="og:title" content="CINIS NEXUS INDUSTRY OGOJA | AI-Assisted Publisher"/>
+<meta property="og:description" content="Business intelligence, community information, monetized content, and operational automation for Ogoja, Cross River State, Nigeria."/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://mikecomplexai-7.github.io/cortex-platform/"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="voice-app" content="CINIS NEXUS Voice Intelligence Layer v1.0"/>
+<link rel="canonical" href="https://mikecomplexai-7.github.io/cortex-platform/"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "CINIS NEXUS INDUSTRY OGOJA",
+  "alternateName": "CINIS-NIO",
+  "url": "https://mikecomplexai-7.github.io/cortex-platform/",
+  "email": "cortexnexus@proton.me",
+  "founder": {
+    "@type": "Person",
+    "name": "Michael Ujuku Morim"
+  },
+  "foundingDate": "2012",
+  "description": "AI-assisted publisher and industrial-digital platform for business intelligence, community information, monetized content, and operational automation in Ogoja, Cross River State, Nigeria.",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "No. 7 Calabar Street, Igoli",
+    "addressLocality": "Ogoja",
+    "addressRegion": "Cross River State",
+    "addressCountry": "NG"
+  }
+}
+</script>
+<style>
+:root{
+  --navy:#001F5B;--navy-deep:#000D2E;--teal:#00C2FF;--teal-dim:#0099CC;
+  --gold:#D4A017;--white:#FFFFFF;--off:#E8F4FF;--gray:#8899AA;
+  --dark:#060D1F;--card:#0A1628;--card2:#0D1E35;
+  --green:#00FF88;--purple:#7B2FBE;--red:#FF3355;
+  --font-head:'Segoe UI',system-ui,sans-serif;
+  --font-body:'Segoe UI',system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--dark);color:var(--white);font-family:var(--font-body);overflow-x:hidden;}
 
-**AI-Assisted Publisher and Industrial-Digital Platform**  
-Business intelligence, community information, monetized content, and operational automation for Ogoja, Cross River State, Nigeria.
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:var(--navy-deep);}
+::-webkit-scrollbar-thumb{background:var(--teal);border-radius:3px;}
 
-![Platform](https://img.shields.io/badge/Status-Live-00C2FF?style=flat-square)
-![Built](https://img.shields.io/badge/Built%20By-Michael%20Ujuku%20Morim-001F5B?style=flat-square)
-![Location](https://img.shields.io/badge/Location-Ogoja%2C%20Cross%20River%20State%2C%20Nigeria-00FF88?style=flat-square)
-![Platform](https://img.shields.io/badge/Platform-GitHub%20Pages-D4A017?style=flat-square)
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(6,13,31,0.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,194,255,0.15);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:64px;transition:all .3s;}
+.nav-logo{display:flex;align-items:center;gap:.75rem;text-decoration:none;}
+.nav-logo .mark{font-size:1.5rem;font-weight:900;color:var(--teal);letter-spacing:-.5px;}
+.nav-logo .sub{font-size:.65rem;color:var(--gold);letter-spacing:2px;text-transform:uppercase;display:block;margin-top:-2px;}
+.nav-links{display:flex;gap:1.5rem;list-style:none;}
+.nav-links a{color:var(--gray);text-decoration:none;font-size:.82rem;letter-spacing:.5px;text-transform:uppercase;transition:color .2s;}
+.nav-links a:hover{color:var(--teal);}
+.nav-cta{background:var(--teal);color:var(--navy-deep);padding:.5rem 1.25rem;border-radius:6px;font-weight:700;font-size:.82rem;text-decoration:none;letter-spacing:.5px;transition:all .2s;}
+.nav-cta:hover{background:var(--gold);color:#000;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;}
+.hamburger span{width:22px;height:2px;background:var(--teal);border-radius:2px;transition:all .3s;}
+.mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;background:rgba(6,13,31,.98);padding:2rem;z-index:999;border-bottom:1px solid rgba(0,194,255,.2);}
+.mobile-menu.open{display:block;}
+.mobile-menu a{display:block;color:var(--white);text-decoration:none;padding:.75rem 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:.95rem;}
 
----
+#hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6rem 2rem 4rem;position:relative;overflow:hidden;}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,194,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,194,255,.05) 1px,transparent 1px);background-size:60px 60px;animation:gridMove 20s linear infinite;}
+@keyframes gridMove{from{transform:translate(0,0)}to{transform:translate(60px,60px)}}
+.hero-glow{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(0,194,255,.12) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);animation:pulse 4s ease-in-out infinite;}
+@keyframes pulse{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.1)}}
+.hero-eyebrow{font-size:.72rem;letter-spacing:4px;color:var(--teal);text-transform:uppercase;margin-bottom:1.5rem;position:relative;}
+.hero-title{font-size:clamp(2.8rem,7vw,6rem);font-weight:900;line-height:1.05;position:relative;background:linear-gradient(135deg,var(--white) 30%,var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.75rem;}
+.hero-subtitle{font-size:clamp(1rem,2.5vw,1.4rem);color:var(--teal);font-weight:600;letter-spacing:2px;text-transform:uppercase;position:relative;margin-bottom:1.5rem;}
+.hero-desc{max-width:640px;color:var(--gray);font-size:1.05rem;line-height:1.75;position:relative;margin-bottom:2.5rem;}
+.hero-stats{display:flex;gap:3rem;justify-content:center;margin-bottom:3rem;position:relative;flex-wrap:wrap;}
+.stat{text-align:center;}
+.stat-n{font-size:2.2rem;font-weight:900;color:var(--teal);display:block;}
+.stat-l{font-size:.72rem;letter-spacing:2px;color:var(--gray);text-transform:uppercase;}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;position:relative;}
+.btn-primary{background:linear-gradient(135deg,var(--teal),#0077AA);color:#000;padding:.85rem 2rem;border-radius:8px;font-weight:800;font-size:.9rem;letter-spacing:.5px;text-decoration:none;transition:all .3s;border:none;cursor:pointer;}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,194,255,.35);}
+.btn-outline{border:1.5px solid var(--teal);color:var(--teal);padding:.85rem 2rem;border-radius:8px;font-weight:700;font-size:.9rem;letter-spacing:.5px;text-decoration:none;transition:all .3s;background:transparent;}
+.btn-outline:hover{background:rgba(0,194,255,.08);transform:translateY(-2px);}
+.scroll-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;color:var(--gray);font-size:.75rem;letter-spacing:2px;}
+.scroll-arrow{width:20px;height:20px;border-right:2px solid var(--teal);border-bottom:2px solid var(--teal);transform:rotate(45deg);animation:bounce .8s ease-in-out infinite alternate;}
+@keyframes bounce{from{transform:rotate(45deg) translateY(0)}to{transform:rotate(45deg) translateY(6px)}}
 
-## What This Platform Is
+section{padding:6rem 2rem;}
+.section-inner{max-width:1200px;margin:0 auto;}
+.eyebrow{font-size:.7rem;letter-spacing:4px;text-transform:uppercase;color:var(--teal);margin-bottom:1rem;display:block;}
+.section-title{font-size:clamp(1.8rem,4vw,3rem);font-weight:800;line-height:1.15;margin-bottom:1rem;}
+.section-title span{color:var(--teal);}
+.section-desc{color:var(--gray);font-size:1rem;line-height:1.75;max-width:600px;margin-bottom:3rem;}
+.divider{width:60px;height:3px;background:linear-gradient(90deg,var(--teal),transparent);margin:1.5rem 0 2.5rem;}
 
-CINIS NEXUS INDUSTRY OGOJA is an AI-assisted publisher and industrial-digital platform for business intelligence, community information, monetized content, and operational automation in Ogoja, Cross River State, Nigeria.
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:1.5rem;}
+.grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.25rem;}
+.card{background:var(--card);border:1px solid rgba(0,194,255,.12);border-radius:16px;padding:2rem;transition:all .3s;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--teal),transparent);opacity:0;transition:.3s;}
+.card:hover{transform:translateY(-4px);border-color:rgba(0,194,255,.3);box-shadow:0 16px 48px rgba(0,194,255,.08);}
+.card:hover::before{opacity:1;}
+.card-icon{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:1.25rem;background:rgba(0,194,255,.1);border:1px solid rgba(0,194,255,.2);}
+.card h3{font-size:1.1rem;font-weight:700;margin-bottom:.75rem;color:var(--white);}
+.card p{color:var(--gray);font-size:.88rem;line-height:1.7;}
+.card .tag{display:inline-block;font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;padding:.25rem .6rem;border-radius:4px;margin-bottom:1rem;}
+.tag-teal{background:rgba(0,194,255,.12);color:var(--teal);border:1px solid rgba(0,194,255,.25);}
+.tag-gold{background:rgba(212,160,23,.12);color:var(--gold);border:1px solid rgba(212,160,23,.25);}
+.tag-green{background:rgba(0,255,136,.1);color:var(--green);border:1px solid rgba(0,255,136,.2);}
+.tag-purple{background:rgba(123,47,190,.15);color:#BB7FFF;border:1px solid rgba(123,47,190,.3);}
 
-The platform is designed to support:
-- Business and entrepreneur visibility.
-- Community and regional information publishing.
-- AI-assisted content management.
-- Monetized digital publishing.
-- Operational workflows for company and public profiles.
+#products{background:linear-gradient(180deg,var(--dark) 0%,#040A18 100%);}
+.product-card{background:var(--card);border:1px solid rgba(0,194,255,.15);border-radius:20px;padding:2.5rem;display:flex;flex-direction:column;gap:1.25rem;position:relative;overflow:hidden;}
+.product-card .badge{position:absolute;top:1.5rem;right:1.5rem;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;padding:.3rem .7rem;border-radius:20px;font-weight:700;}
+.badge-new{background:var(--green);color:#000;}
+.badge-flagship{background:var(--gold);color:#000;}
+.product-icon{font-size:3rem;margin-bottom:.5rem;}
+.product-card h3{font-size:1.4rem;font-weight:800;}
+.product-card p{color:var(--gray);font-size:.9rem;line-height:1.7;}
+.feature-list{list-style:none;display:flex;flex-direction:column;gap:.5rem;margin-top:.5rem;}
+.feature-list li{font-size:.85rem;color:var(--gray);display:flex;align-items:flex-start;gap:.6rem;}
+.feature-list li::before{content:'◆';color:var(--teal);font-size:.5rem;margin-top:.35rem;flex-shrink:0;}
+.product-btn{margin-top:auto;background:transparent;border:1.5px solid var(--teal);color:var(--teal);padding:.65rem 1.25rem;border-radius:8px;font-weight:700;font-size:.82rem;cursor:pointer;transition:all .25s;text-align:center;text-decoration:none;display:block;}
+.product-btn:hover{background:var(--teal);color:#000;}
 
----
+#ai-chain{background:#040A18;}
+.chain-flow{display:flex;align-items:center;gap:0;flex-wrap:wrap;justify-content:center;margin:2rem 0;}
+.chain-node{background:var(--card);border:1px solid rgba(0,194,255,.2);border-radius:12px;padding:1rem 1.5rem;text-align:center;min-width:130px;}
+.chain-node .cn-icon{font-size:1.5rem;margin-bottom:.4rem;}
+.chain-node .cn-label{font-size:.75rem;font-weight:700;color:var(--white);letter-spacing:.5px;}
+.chain-node .cn-desc{font-size:.65rem;color:var(--gray);margin-top:.2rem;}
+.chain-arrow{color:var(--teal);font-size:1.4rem;padding:0 .5rem;flex-shrink:0;}
 
-## Core Purpose
+#voice-layer{background:linear-gradient(180deg,#040A18,var(--dark));}
+.voice-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;}
+.voice-demo{background:var(--card);border:1px solid rgba(0,194,255,.15);border-radius:20px;padding:2rem;text-align:center;position:relative;overflow:hidden;}
+.voice-commands-list{text-align:left;display:flex;flex-direction:column;gap:.75rem;}
+.voice-commands-list li{font-size:.85rem;color:var(--gray);padding:.5rem;border-left:2px solid var(--teal);padding-left:1rem;list-style:none;}
 
-This platform serves as:
-- A public company identity page.
-- A publisher and content distribution hub.
-- A business intelligence and community information center.
-- A monetization-ready digital platform.
-- An operational automation layer for CINIS NEXUS INDUSTRY OGOJA.
+#security{background:linear-gradient(180deg,#040A18,var(--dark));}
+.security-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;}
+.security-visual{background:var(--card);border:1px solid rgba(0,194,255,.15);border-radius:20px;padding:2rem;position:relative;overflow:hidden;}
+.threat-item{display:flex;align-items:center;gap:1rem;padding:.75rem;border-radius:10px;margin-bottom:.75rem;background:rgba(0,0,0,.3);}
+.threat-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;animation:blink 1.5s ease-in-out infinite;}
+.threat-dot.active{background:var(--green);}
+.threat-dot.warning{background:var(--gold);animation-delay:.5s;}
+.threat-dot.blocked{background:var(--red);animation-delay:1s;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.threat-label{font-size:.82rem;color:var(--gray);flex:1;}
+.threat-status{font-size:.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;}
+.status-ok{color:var(--green);}
+.status-watch{color:var(--gold);}
+.status-block{color:var(--red);}
 
----
+#analytics{background:#040A18;}
+.metric-bar{margin-bottom:1.25rem;}
+.metric-bar .mb-label{display:flex;justify-content:space-between;margin-bottom:.4rem;font-size:.8rem;color:var(--gray);}
+.metric-bar .mb-label span:last-child{color:var(--teal);font-weight:700;}
+.mb-track{height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;}
+.mb-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--teal),#0099CC);animation:fillUp 1.5s ease-out forwards;transform-origin:left;}
+@keyframes fillUp{from{width:0}to{width:var(--w)}}
 
-## Public-Facing Structure
+#investment{background:#040A18;}
+.roi-card{background:linear-gradient(135deg,rgba(0,194,255,.06),rgba(212,160,23,.04));border:1px solid rgba(0,194,255,.18);border-radius:20px;padding:2.5rem;text-align:center;}
+.roi-number{font-size:4rem;font-weight:900;color:var(--gold);display:block;line-height:1;}
+.roi-label{font-size:.78rem;letter-spacing:2px;color:var(--gray);text-transform:uppercase;margin-top:.5rem;}
 
-The site should be organized with these sections:
-- Home
-- About
-- Services
-- Publisher / Media
-- Products
-- Monetization
-- Directory
-- Contact
-- Policies
+#education{background:linear-gradient(180deg,var(--dark),#040A18);}
+.edu-track{background:var(--card);border:1px solid rgba(0,194,255,.12);border-radius:16px;padding:1.75rem;display:flex;gap:1.25rem;align-items:flex-start;margin-bottom:1rem;}
+.edu-num{width:36px;height:36px;border-radius:50%;background:rgba(0,194,255,.12);border:1px solid rgba(0,194,255,.3);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:900;color:var(--teal);flex-shrink:0;}
+.edu-content h4{font-size:.95rem;font-weight:700;margin-bottom:.35rem;}
+.edu-content p{font-size:.83rem;color:var(--gray);line-height:1.65;}
 
----
+#blog{background:#040A18;}
+.blog-card{background:var(--card);border:1px solid rgba(0,194,255,.1);border-radius:16px;overflow:hidden;transition:all .3s;}
+.blog-card:hover{transform:translateY(-4px);border-color:rgba(0,194,255,.3);}
+.blog-img{height:160px;background:linear-gradient(135deg,var(--navy),#0D1E35);display:flex;align-items:center;justify-content:center;font-size:3rem;}
+.blog-body{padding:1.5rem;}
+.blog-body .blog-cat{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:.5rem;}
+.blog-body h3{font-size:1rem;font-weight:700;margin-bottom:.5rem;line-height:1.4;}
+.blog-body p{font-size:.83rem;color:var(--gray);line-height:1.65;margin-bottom:1rem;}
+.blog-body .read-more{font-size:.8rem;color:var(--teal);font-weight:700;text-decoration:none;letter-spacing:.5px;}
+.blog-body .read-more:hover{text-decoration:underline;}
 
-## Platform Positioning
+#scaling{background:var(--dark);}
+.scale-pillar{background:linear-gradient(160deg,var(--card),var(--card2));border:1px solid rgba(0,194,255,.12);border-radius:16px;padding:2rem;border-left:3px solid var(--teal);}
+.scale-pillar h3{font-size:1rem;font-weight:700;margin-bottom:.5rem;}
+.scale-pillar p{font-size:.83rem;color:var(--gray);line-height:1.65;}
+.scale-pillar .scale-num{font-size:2rem;font-weight:900;color:var(--teal);display:block;margin-bottom:.25rem;}
 
-**CINIS NEXUS INDUSTRY OGOJA**  
-AI-assisted publisher, industrial-digital operator, and monetized public platform.
+#directory{background:#040A18;}
+.dir-category{background:var(--card);border:1px solid rgba(0,194,255,.12);border-radius:14px;padding:1.5rem;text-align:center;transition:all .3s;cursor:pointer;}
+.dir-category:hover{border-color:var(--teal);background:rgba(0,194,255,.04);}
+.dir-icon{font-size:2.2rem;margin-bottom:.75rem;}
+.dir-category h4{font-size:.88rem;font-weight:700;margin-bottom:.25rem;}
+.dir-category p{font-size:.75rem;color:var(--gray);}
+.dir-count{font-size:1.5rem;font-weight:900;color:var(--teal);display:block;margin-top:.5rem;}
 
-**Founder:** Michael Ujuku Morim  
-**Email:** cortexnexus@proton.me  
-**Location:** Ogoja, Cross River State, Nigeria
+#subscribe{background:linear-gradient(180deg,#040A18,var(--dark));}
+.plan-card{background:var(--card);border:1px solid rgba(0,194,255,.15);border-radius:20px;padding:2.5rem;text-align:center;position:relative;}
+.plan-card.featured{border-color:var(--teal);background:linear-gradient(160deg,rgba(0,194,255,.06),var(--card));}
+.plan-card .plan-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--teal);color:#000;font-size:.65rem;font-weight:800;letter-spacing:2px;padding:.3rem .9rem;border-radius:20px;text-transform:uppercase;white-space:nowrap;}
+.plan-name{font-size:.75rem;letter-spacing:3px;text-transform:uppercase;color:var(--gray);margin-bottom:.75rem;}
+.plan-price{font-size:3rem;font-weight:900;color:var(--white);line-height:1;}
+.plan-price span{font-size:1rem;color:var(--gray);font-weight:400;}
+.plan-period{font-size:.8rem;color:var(--gray);margin-bottom:1.75rem;}
+.plan-features{list-style:none;text-align:left;margin-bottom:2rem;display:flex;flex-direction:column;gap:.6rem;}
+.plan-features li{font-size:.85rem;color:var(--gray);display:flex;align-items:center;gap:.6rem;}
+.plan-features li::before{content:'✓';color:var(--teal);font-weight:900;font-size:.8rem;}
+.pay-btn{width:100%;padding:.85rem;border-radius:10px;font-weight:800;font-size:.9rem;cursor:pointer;transition:all .3s;border:none;letter-spacing:.5px;}
+.pay-btn-primary{background:linear-gradient(135deg,var(--teal),#0099CC);color:#000;}
+.pay-btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,194,255,.3);}
+.pay-btn-outline{background:transparent;border:1.5px solid var(--teal);color:var(--teal);}
+.pay-btn-outline:hover{background:rgba(0,194,255,.08);}
+.pay-note{text-align:center;margin-top:2rem;font-size:.78rem;color:var(--gray);line-height:1.7;}
+.pay-note a{color:var(--teal);}
 
----
+#contact{background:var(--dark);}
+.contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:3rem;align-items:start;}
+.contact-info{display:flex;flex-direction:column;gap:1.5rem;}
+.contact-item{display:flex;gap:1rem;align-items:flex-start;}
+.contact-item .ci-icon{width:44px;height:44px;border-radius:10px;background:rgba(0,194,255,.1);border:1px solid rgba(0,194,255,.2);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+.contact-item .ci-label{font-size:.7rem;color:var(--gray);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:.2rem;}
+.contact-item .ci-value{font-size:.9rem;color:var(--white);font-weight:600;}
+.contact-item .ci-value a{color:var(--teal);text-decoration:none;}
+.contact-form{background:var(--card);border:1px solid rgba(0,194,255,.12);border-radius:20px;padding:2.5rem;}
+.form-group{margin-bottom:1.25rem;}
+.form-group label{display:block;font-size:.75rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray);margin-bottom:.5rem;}
+.form-group input,.form-group textarea,.form-group select{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(0,194,255,.15);border-radius:8px;padding:.75rem 1rem;color:var(--white);font-size:.9rem;font-family:inherit;outline:none;transition:border-color .2s;}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--teal);}
+.form-group textarea{resize:vertical;min-height:110px;}
+.form-group select option{background:var(--navy-deep);}
+.form-submit{width:100%;padding:.85rem;background:linear-gradient(135deg,var(--teal),#0099CC);color:#000;border:none;border-radius:8px;font-weight:800;font-size:.9rem;cursor:pointer;transition:all .3s;letter-spacing:.5px;}
+.form-submit:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,194,255,.3);}
 
-## Notes
-
-- Keep public branding clear and consistent.
-- Use one canonical name across the site.
-- Separate public content from internal operational logic.
-- Keep monetization transparent and policy-compliant.
-
----
-
-## License
-
-© 2026 CINIS NEXUS INDUSTRY OGOJA  
-All rights reserved.
+.social-bar{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.5rem;}
+.social-link{display:flex;align-items:center;gap:.5rem;padding:.5rem 1rem;border-radius:8px;border:1px solid rgba(0,194,255,.2);color:var(--gray);text-decoration:none;font-size:.8rem;font-weight:600;}
+</style>
+</head>
