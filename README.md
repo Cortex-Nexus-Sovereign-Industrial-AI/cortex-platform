@@ -1,7 +1,4 @@
-# CINIS NEXUS INDUSTRY OGOJA
-
-**Cortex Intelligence Nexus Intel Solutions**  
-AI-powered industry intelligence platform for Ogoja, Cross River State, Nigeria.
+# CINIS NEXUS INDUSTRY OGOJA is an AI-assisted publisher and industrial-digital platform for business intelligence, community information, monetized content, and operational automation in Ogoja, Cross River State, Nigeria.
 
 ![Platform](https://img.shields.io/badge/Status-Live-00C2FF?style=flat-square)
 ![Built](https://img.shields.io/badge/Built%20By-MikeComplex%20AI-001F5B?style=flat-square)
