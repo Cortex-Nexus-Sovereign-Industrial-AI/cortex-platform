@@ -1,118 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sovereign Industrial Product Search</title>
-  <style>
-    :root {
-      --wp--preset--spacing--30: 1.5rem;
-      --wp--preset--spacing--40: 2rem;
-      --wp--preset--spacing--50: 3rem;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#060D1F" />
+  <title>CINIS NEXUS | Cortex Intelligence Platform — Ogoja, Nigeria</title>
+  <meta name="description" content="CINIS NEXUS INDUSTRY OGOJA — AI-powered industry intelligence platform connecting businesses, farmers, government, and communities across Cross River State, Nigeria." />
+  <meta name="keywords" content="CINIS, MikeComplex AI, Cortex Intelligence, Ogoja, Nigeria, AI platform, business intelligence, data analytics, cyber security" />
+  <link rel="canonical" href="https://mikecomplexai-7.github.io/cortex-platform/" />
+
+  <meta property="og:title" content="CINIS NEXUS | Cortex Intelligence Platform" />
+  <meta property="og:description" content="AI-powered industry intelligence for Ogoja and beyond." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://mikecomplexai-7.github.io/cortex-platform/" />
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "CINIS NEXUS INDUSTRY OGOJA",
+    "alternateName": "CINIS-NIO",
+    "url": "https://mikecomplexai-7.github.io/cortex-platform/",
+    "email": "cortexnexus@proton.me",
+    "founder": { "@type": "Person", "name": "Michael Ujuku Morim" },
+    "foundingDate": "2012",
+    "description": "AI-powered industry intelligence platform connecting businesses, farmers, government and communities in Ogoja, Cross River State, Nigeria.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "No. 7 Calabar Street, Igoli",
+      "addressLocality": "Ogoja",
+      "addressRegion": "Cross River State",
+      "addressCountry": "NG"
     }
-    body { margin: 0; font-family: system-ui, sans-serif; background: #0d1117; color: #c9d1d9; }
-    .alignfull { width: 100%; }
-    .alignwide { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
-    .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.5rem; padding-top: var(--wp--preset--spacing--30); }
-    .product-card { background: #161b22; border: 1px solid #30363d; border-radius: 6px; padding: 1rem; position: relative; }
-    .product-image { width: 100%; aspect-ratio: 1; background: #21262d; border-radius: 4px; object-fit: cover; }
-    .product-title { font-size: 1.2rem; margin: 1rem 0 0.5rem 0; color: #f0f6fc; }
-    .product-price { font-weight: bold; color: #58a6ff; }
-    .search-bar-container { margin: 1rem 0; display: flex; gap: 0.75rem; flex-wrap: wrap; }
-    .search-input { padding: 0.5rem; width: min(70%, 420px); background: #010409; border: 1px solid #30363d; color: white; border-radius: 4px; }
-    .search-btn { padding: 0.5rem 1rem; background: #238636; border: none; color: white; border-radius: 4px; cursor: pointer; }
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
-    }
-  </style>
+  }
+  </script>
 </head>
 <body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#hero" aria-label="CINIS Nexus home">
+        <span class="brand-mark">CINIS NEXUS</span>
+        <span class="brand-sub">Cortex Intelligence Platform</span>
+      </a>
 
-  <header class="alignfull" style="padding: 1rem; border-bottom: 1px solid #30363d;">
-    <div class="alignwide">
-      <a href="https://cortex-nexus-sovereign-industrial-ai.github.io/cortex-platform/" style="color: #58a6ff; text-decoration: none;">← Return to Home Platform</a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#platform">Platform</a>
+        <a href="#modules">Modules</a>
+        <a href="#security">Security</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <a class="button button-primary" href="#contact">Deploy</a>
     </div>
   </header>
 
-  <main class="wp-block-group alignfull" style="padding-top: var(--wp--preset--spacing--40); padding-bottom: var(--wp--preset--spacing--50);">
-    <div class="alignwide">
-      <div class="breadcrumbs" id="platform-breadcrumbs">Home / Industrial Products</div>
-      <h2 id="search-title">Search Results</h2>
+  <main>
+    <section id="hero" class="hero">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="container hero-inner">
+        <p class="eyebrow">Industrial AI • Ogoja • Cross River State</p>
+        <h1>CINIS NEXUS</h1>
+        <p class="hero-kicker">Cortex Intelligence Platform</p>
+        <p class="hero-copy">
+          A future-ready intelligence layer for businesses, farmers, government, and communities.
+          Built for clean execution, scalable communication, and professional deployment.
+        </p>
 
-      <div class="search-bar-container" role="search" aria-label="Product search">
-        <label class="sr-only" for="product-query">Search products</label>
-        <input type="search" id="product-query" class="search-input" placeholder="Search industrial assets, models, tokens...">
-        <button id="search-trigger" class="search-btn">Search</button>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#modules">Explore Platform</a>
+          <a class="button button-secondary" href="#contact">Connect</a>
+        </div>
+
+        <ul class="hero-stats" aria-label="Platform highlights">
+          <li><strong>AI</strong><span>Automation-ready</span></li>
+          <li><strong>Data</strong><span>Insight-focused</span></li>
+          <li><strong>Brand</strong><span>Professional-first</span></li>
+        </ul>
       </div>
-    </div>
+    </section>
 
-    <div class="alignwide">
-      <div style="display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap;">
-        <span id="results-count">Showing 0 products</span>
-        <select id="catalog-sorting" class="search-input" style="width: auto;">
-          <option value="title-asc">Sort by Title (A-Z)</option>
-          <option value="price-desc">Sort by Price (High to Low)</option>
-        </select>
+    <section id="platform" class="section">
+      <div class="container">
+        <p class="eyebrow">Platform direction</p>
+        <h2>Built as a real operating system for growth</h2>
+        <p class="section-copy">
+          This structure is designed to survive future expansion: new products, dashboards,
+          content layers, monetization paths, and service pages can be added without breaking the layout.
+        </p>
+
+        <div class="grid grid-3">
+          <article class="card">
+            <h3>Market Intelligence</h3>
+            <p>Organize business signals, local insights, and operational intelligence for better decisions.</p>
+          </article>
+          <article class="card">
+            <h3>Community Coordination</h3>
+            <p>Connect agriculture, commerce, and civic engagement in one branded information system.</p>
+          </article>
+          <article class="card">
+            <h3>Automation Ready</h3>
+            <p>Prepared for GitHub Pages, GitHub Actions, APIs, forms, and future integrations.</p>
+          </article>
+        </div>
       </div>
+    </section>
 
-      <div class="product-grid" id="sovereign-product-collection"></div>
-    </div>
+    <section id="modules" class="section section-alt">
+      <div class="container">
+        <p class="eyebrow">Core modules</p>
+        <h2>Platform modules that can scale</h2>
+        <p class="section-copy">
+          Each module is simple now, but structured to grow into a full product line.
+        </p>
+
+        <div class="grid grid-3">
+          <article class="card feature-card">
+            <div class="tag">AI</div>
+            <h3>Intelligence Hub</h3>
+            <p>Central point for reports, summaries, alerts, and knowledge flow.</p>
+          </article>
+          <article class="card feature-card">
+            <div class="tag">Directory</div>
+            <h3>Business Registry</h3>
+            <p>Feature local operators, vendors, institutions, and partners with organized listings.</p>
+          </article>
+          <article class="card feature-card">
+            <div class="tag">Growth</div>
+            <h3>Content Engine</h3>
+            <p>Support articles, announcements, commentary, and platform storytelling.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="security" class="section">
+      <div class="container two-col">
+        <div>
+          <p class="eyebrow">Trust layer</p>
+          <h2>Security, clarity, and professional presentation</h2>
+          <p class="section-copy">
+            The page is intentionally lightweight and semantic so it remains fast, readable, and easy to maintain.
+            That is how you keep a public platform stable as it grows.
+          </p>
+        </div>
+
+        <div class="card stack">
+          <div class="mini-row"><span>Readable UI</span><span>Stable</span></div>
+          <div class="mini-row"><span>Responsive layout</span><span>Ready</span></div>
+          <div class="mini-row"><span>SEO metadata</span><span>Included</span></div>
+          <div class="mini-row"><span>Deployment workflow</span><span>Automated</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section section-alt">
+      <div class="container">
+        <p class="eyebrow">Deployment</p>
+        <h2>Ready for GitHub Pages</h2>
+        <p class="section-copy">
+          Commit these files to your repository, enable GitHub Pages via Actions, and every push will deploy the latest version.
+        </p>
+
+        <div class="grid grid-2">
+          <article class="card">
+            <h3>Public Site</h3>
+            <p>Use this as the main landing page for CINIS NEXUS INDUSTRY OGOJA.</p>
+          </article>
+          <article class="card">
+            <h3>Future Expansion</h3>
+            <p>Add dashboards, services, forms, product pages, and data modules later without rewriting the base.</p>
+          </article>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <script>
-    const PlatformConfig = {
-      sdkEndpoint: "/v1",
-      ibmEndpoint: "https://us-south.functions.cloud.ibm.com/api/v1/web/"
-    };
-
-    document.getElementById('search-trigger').addEventListener('click', async () => {
-      const query = document.getElementById('product-query').value.trim();
-      document.getElementById('search-title').innerText = query ? `Search Results for: "${query}"` : "Search Results";
-
-      try {
-        const localDataPromise = fetch(`${PlatformConfig.sdkEndpoint}/search?q=${encodeURIComponent(query)}`).then(r => r.json()).catch(() => []);
-        const ibmDataPromise = fetch(`${PlatformConfig.ibmEndpoint}?searchQuery=${encodeURIComponent(query)}`).then(r => r.json()).catch(() => []);
-
-        const [localAssets, ibmAssets] = await Promise.all([localDataPromise, ibmDataPromise]);
-        const combinedCollection = [...localAssets, ...ibmAssets];
-
-        renderProductCollection(combinedCollection);
-      } catch (err) {
-        console.error("Pipeline Sync Error:", err);
-        renderProductCollection([]);
-      }
-    });
-
-    function renderProductCollection(items) {
-      const container = document.getElementById('sovereign-product-collection');
-      const countLabel = document.getElementById('results-count');
-      container.innerHTML = '';
-      countLabel.innerText = `Showing ${items.length} products found across unified layers`;
-
-      if (items.length === 0) {
-        container.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: #8b949e;">No industrial products matched your query.</p>`;
-        return;
-      }
-
-      items.forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'product-card';
-        card.innerHTML = `
-          <img class="product-image" src="${item.image || 'placeholder.png'}" alt="${item.title || 'Product'}">
-          <h3 class="product-title">${item.title || 'Untitled Product'}</h3>
-          <div class="product-price">${item.price || 'Sovereign Node Exchange'}</div>
-        `;
-        container.appendChild(card);
-      });
-    }
-  </script>
+  <footer class="site-footer">
+    <div class="container">
+      <p>CINIS NEXUS INDUSTRY OGOJA • Cortex Intelligence Platform</p>
+    </div>
+  </footer>
 </body>
 </html>
