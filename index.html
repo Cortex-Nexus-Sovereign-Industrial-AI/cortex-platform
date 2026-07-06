@@ -365,28 +365,31 @@
     <div class="section-header">
       <span class="section-tag">PLANS &amp; PRICING</span>
       <h2 class="section-title">Choose Your Access Level</h2>
-      <p class="section-subtitle">Join the CINIS platform at any level. All payments secured by Paystack &#8212; Nigeria's most trusted payment infrastructure.</p>
+      <p class="section-subtitle">Join the CINIS platform at any level. All payments secured natively via your integration infrastructure.</p>
     </div>
     <div class="pricing-grid">
       <div class="pricing-card">
         <div class="pricing-header"><h4>COMMUNITY</h4><div class="price"><span class="currency">&#8358;</span><span class="amount">0</span></div><span class="price-note">Free Forever</span></div>
         <ul class="pricing-features"><li>Directory listing access</li><li>Blog &amp; commentary reading</li><li>Basic market intelligence</li><li>Community updates</li></ul>
-        <a href="#" class="btn btn-outline btn-full">Get Free Access</a>
+        <!-- Targeted Shopify Target Element -->
+        <div id="shopify-product-community"></div>
       </div>
       <div class="pricing-card popular">
         <div class="popular-badge">MOST POPULAR</div>
-        <div class="pricing-header"><h4>PROFESSIONAL</h4><div class="price"><span class="currency">&#8358;</span><span class="amount">5,000</span><span class="period">/mo</span></div><span class="price-note">Billed monthly via Paystack</span></div>
+        <div class="pricing-header"><h4>PROFESSIONAL</h4><div class="price"><span class="currency">&#8358;</span><span class="amount">5,000</span><span class="period">/mo</span></div><span class="price-note">Billed monthly</span></div>
         <ul class="pricing-features"><li>Full platform intelligence access</li><li>AI analytics dashboard</li><li>Business directory premium listing</li><li>Market data &amp; agricultural reports</li><li>Education Hub full access</li><li>Commentary &amp; expert insights</li><li>Email support</li></ul>
-        <a href="#" class="btn btn-primary btn-full">Subscribe &#8212; &#8358;5,000/mo</a>
+        <!-- Targeted Shopify Target Element -->
+        <div id="shopify-product-professional"></div>
       </div>
       <div class="pricing-card">
-        <div class="pricing-header"><h4>ENTERPRISE</h4><div class="price"><span class="currency">&#8358;</span><span class="amount">15,000</span><span class="period">/mo</span></div><span class="price-note">Billed monthly via Paystack</span></div>
+        <div class="pricing-header"><h4>ENTERPRISE</h4><div class="price"><span class="currency">&#8358;</span><span class="amount">15,000</span><span class="period">/mo</span></div><span class="price-note">Billed monthly</span></div>
         <ul class="pricing-features"><li>Everything in Professional</li><li>Custom AI intelligence reports</li><li>Priority partner connections</li><li>Sponsored directory listing</li><li>Funding application assistance</li><li>MikeComplex AI consultation</li><li>Dedicated account manager</li></ul>
-        <a href="#" class="btn btn-primary btn-full">Subscribe &#8212; &#8358;15,000/mo</a>
+        <!-- Targeted Shopify Target Element -->
+        <div id="shopify-product-enterprise"></div>
       </div>
     </div>
     <div class="pricing-note">
-      <p>&#128274; All payments are securely processed by Paystack &#8212; SSL encrypted, CBN regulated.</p>
+      <p>&#128274; All payments are securely processed and SSL encrypted.</p>
       <p>Subscriptions auto-renew monthly. Cancel anytime. Questions? Email <a href="mailto:cortexnexus@proton.me">cortexnexus@proton.me</a></p>
     </div>
   </div>
@@ -499,6 +502,102 @@ const form=document.getElementById('contactForm');
 form.addEventListener('submit',e=>{const btn=form.querySelector('button[type="submit"]'),ot=btn.textContent;btn.textContent='Sending...';btn.disabled=true;setTimeout(()=>{btn.textContent='Message Sent \u2713';setTimeout(()=>{btn.textContent=ot;btn.disabled=false;form.reset();},2000);},1500);});
 const sections=document.querySelectorAll('section[id]'),navLinks=document.querySelectorAll('.nav-menu a[href^="#"]');
 window.addEventListener('scroll',()=>{let c='';sections.forEach(s=>{if(scrollY>=s.offsetTop-100)c=s.getAttribute('id');});navLinks.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+c));});
+</script>
+
+<!-- NATIVE ASYNC SHOPIFY BUY BUTTON INTEL INITIALIZATION LAYER -->
+<script type="text/javascript">
+(function () {
+  var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.js';
+  if (window.ShopifyBuy) {
+    if (window.ShopifyBuy.UI) {
+      ShopifyInit();
+    } else {
+      loadScript();
+    }
+  } else {
+    loadScript();
+  }
+
+  function loadScript() {
+    var script = document.createElement('script');
+    script.async = true;
+    script.src = scriptURL;
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
+    script.onload = ShopifyInit;
+  }
+
+  function ShopifyInit() {
+    var client = ShopifyBuy.buildClient({
+      domain: 'YOUR_SHOP_SUBDOMAIN.myshopify.com', // Replace with your explicit Shopify domain
+      storefrontAccessToken: 'YOUR_STOREFRONT_TOKEN', // Replace with your public token
+    });
+
+    // Configuration template matching core branding design system (Gold accents & Dark typography)
+    var componentOptions = {
+      product: {
+        styles: {
+          button: {
+            'font-family': 'Space Grotesk, sans-serif',
+            'font-weight': '600',
+            'background-color': '#d4af37',
+            'color': '#0a0a0f',
+            'border-radius': '4px',
+            'padding': '12px 24px',
+            'width': '100%'
+          },
+          buttonHover: {
+            'background-color': '#ffffff',
+            'color': '#0a0a0f'
+          }
+        }
+      },
+      cart: {
+        styles: {
+          button: {
+            'background-color': '#d4af37',
+            'color': '#0a0a0f',
+            'font-family': 'Space Grotesk, sans-serif'
+          }
+        }
+      }
+    };
+
+    ShopifyBuy.UI.onReady(client).then(function (ui) {
+      // 1. Initializing Community Component (Free/Lead Generation)
+      ui.createComponent('product', {
+        id: 'YOUR_COMMUNITY_PRODUCT_ID', // Replace with exact item ID from your dashboard
+        node: document.getElementById('shopify-product-community'),
+        options: Object.assign({}, componentOptions, {
+          product: Object.assign({}, componentOptions.product, {
+            text: { button: 'Get Free Access' }
+          })
+        })
+      });
+
+      // 2. Initializing Professional Tier Component (NGN 5,000 Premium Engine)
+      ui.createComponent('product', {
+        id: 'YOUR_PROFESSIONAL_PRODUCT_ID', // Replace with exact item ID from your dashboard
+        node: document.getElementById('shopify-product-professional'),
+        options: Object.assign({}, componentOptions, {
+          product: Object.assign({}, componentOptions.product, {
+            text: { button: 'Subscribe Now' }
+          })
+        })
+      });
+
+      // 3. Initializing Enterprise Tier Component (NGN 15,000 High-Velocity Tier)
+      ui.createComponent('product', {
+        id: 'YOUR_ENTERPRISE_PRODUCT_ID', // Replace with exact item ID from your dashboard
+        node: document.getElementById('shopify-product-enterprise'),
+        options: Object.assign({}, componentOptions, {
+          product: Object.assign({}, componentOptions.product, {
+            text: { button: 'Request Enterprise Access' }
+          })
+        })
+      });
+    });
+  }
+})();
 </script>
 
 </body>
