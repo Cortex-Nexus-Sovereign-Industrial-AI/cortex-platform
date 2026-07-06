@@ -1,6 +1,4 @@
-
-# Now write the COMPLETE matching CSS
-styles_css = r'''/* ============================================
+/* ============================================
    CINIS NEXUS — Cortex Intelligence Platform
    Stylesheet | Built by MikeComplex AI
    ============================================ */
@@ -398,9 +396,3 @@ img { max-width: 100%; display: block; }
   .directory-grid { grid-template-columns: 1fr 1fr; }
   .pricing-grid { grid-template-columns: 1fr; }
 }
-'''
-
-with open('/mnt/agents/output/styles.css', 'w', encoding='utf-8') as f:
-    f.write(styles_css)
-
-print(f"styles.css: {len(styles_css)} chars written")
