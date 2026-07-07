@@ -6,7 +6,8 @@ The primary production engine and orchestration node for **CINIS NEXUS INDUSTRY 
 
 ## 🌐 Unified Ecosystem Directory
 
-* **Sovereign Infrastructure:** [cortex-platform](https://github.com/cortex-nexus-sovereign-industrial/cortex-platform)
+* **Live Platform Link:** [cortex-platform Live](https://cortex-nexus-sovereign-industrial-ai.github.io/cortex-platform/)
+* **Sovereign Infrastructure (Source Code):** [cortex-platform Repository](https://github.com/cortex-nexus-sovereign-industrial/cortex-platform)
 * **Identity Framework:** [about.me/mikecomplexai](https://about.me/mikecomplexai)
 * **Secure Communications:** `cortexnexus@proton.me`
 
