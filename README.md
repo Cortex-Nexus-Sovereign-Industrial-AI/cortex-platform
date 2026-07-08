@@ -33,7 +33,7 @@ This repository houses the core operational layers for our decentralized, offlin
 ```text
 ├── index.html          # Main interactive presentation and platform gateway
 ├── styles.css          # High-efficiency structural styling
-├── webhook_trigger_engine.py  # Webhook listener (Stripe / Paystack) — use .env for secrets
+├── webhook_trigger_engine.py  # Webhook listener (Paystack-first) — use .env for secrets
 ├── core/               # Localized orchestration and edge system protocols
 └── README.md           # This primary architectural index
 ```
@@ -47,7 +47,7 @@ This repository houses the core operational layers for our decentralized, offlin
 2. Create a Python virtual environment and install requirements (if running the webhook):
    python -m venv venv
    source venv/bin/activate
-   pip install -r requirements.txt  # (Flask, stripe) — requirements.txt may be added separately
+   pip install -r requirements.txt  # (Flask) — requirements.txt may be added separately
 3. Create a .env file from .env.example and set your secrets locally (do not commit .env).
 4. Run the webhook listener locally (for payments/testing):
    export FLASK_APP=webhook_trigger_engine.py
