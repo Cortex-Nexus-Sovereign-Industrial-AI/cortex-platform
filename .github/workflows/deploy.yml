@@ -1,37 +1,50 @@
-name: Deploy to GitHub Pages
+name: Deploy platform
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
   workflow_dispatch:
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Set up Node (optional)
+        uses: actions/setup-node@v4
         with:
-          path: .
+          node-version: '20'
+
+      - name: Install dependencies (if package.json exists)
+        run: |
+          if [ -f package.json ]; then
+            npm ci
+          else
+            echo "No package.json — skipping npm install"
+          fi
+
+      - name: Build (if build script exists)
+        run: |
+          if [ -f package.json ] && npm run | grep -q "build"; then
+            npm run build
+          else
+            echo "No build step defined — skipping"
+          fi
 
       - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./   # repo root contains index.html
+
+      - name: Optional: Deploy / Sync to Shopify (requires secrets)
+        if: ${{ secrets.SHOPIFY_APP_TOKEN && secrets.SHOPIFY_STORE_DOMAIN }}
+        env:
+          SHOPIFY_APP_TOKEN: ${{ secrets.SHOPIFY_APP_TOKEN }}
+          SHOPIFY_STORE_DOMAIN: ${{ secrets.SHOPIFY_STORE_DOMAIN }}
+          THEME_ID: ${{ secrets.THEME_ID }}
+        run: |
+          chmod +x ./scripts/deploy-shopify.sh || true
+          ./scripts/deploy-shopify.sh
