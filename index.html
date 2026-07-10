@@ -37,7 +37,7 @@
 
 <nav class="navbar" id="navbar">
   <div class="nav-container">
-    <a href="#" class="nav-logo">
+    <a href="#hero" class="nav-logo">
       <span class="logo-mark">&#10022;</span>
       <span class="logo-text">CINIS NEXUS</span>
     </a>
@@ -319,11 +319,11 @@
       <p class="section-subtitle">The CINIS Commentary Channel &#8212; where ideas, strategy, industry news and platform updates live. Subscribe, read, share and level up.</p>
     </div>
     <div class="blog-grid">
-      <article class="blog-card"><div class="blog-tag">&#129504; AI INTELLIGENCE</div><h4>How AI Is Changing Business in Ogoja &#8212; And What You Must Do Now</h4><p>The window for early adoption is closing. Here's exactly how local businesses can use AI to outcompete within 90 days.</p><a href="#" class="blog-link">Read Commentary &#8594;</a></article>
-      <article class="blog-card"><div class="blog-tag">&#128200; TRADING &amp; INVESTMENT</div><h4>Maximizing AI in Trading: A Practical Guide for Nigerian Investors</h4><p>No hype, no shortcuts. A real breakdown of how AI tools are used in market analysis and what works in the Nigerian context.</p><a href="#" class="blog-link">Read Commentary &#8594;</a></article>
-      <article class="blog-card"><div class="blog-tag">&#127793; AGRICULTURE</div><h4>Data-Driven Farming: Cross River State Leads the Way</h4><p>How Ogoja farmers are using platform intelligence to improve yield, reduce waste and connect directly to markets.</p><a href="#" class="blog-link">Read Commentary &#8594;</a></article>
+      <article class="blog-card"><div class="blog-tag">&#129504; AI INTELLIGENCE</div><h4>How AI Is Changing Business in Ogoja &#8212; And What You Must Do Now</h4><p>The window for early adoption is closing. Here's exactly how local businesses can use AI to outcompete within 90 days.</p><a href="https://medium.com/@mikecomplexai" class="blog-link" target="_blank" rel="noopener">Read Commentary &#8594;</a></article>
+      <article class="blog-card"><div class="blog-tag">&#128200; TRADING &amp; INVESTMENT</div><h4>Maximizing AI in Trading: A Practical Guide for Nigerian Investors</h4><p>No hype, no shortcuts. A real breakdown of how AI tools are used in market analysis and what works in the Nigerian context.</p><a href="https://medium.com/@mikecomplexai" class="blog-link" target="_blank" rel="noopener">Read Commentary &#8594;</a></article>
+      <article class="blog-card"><div class="blog-tag">&#127793; AGRICULTURE</div><h4>Data-Driven Farming: Cross River State Leads the Way</h4><p>How Ogoja farmers are using platform intelligence to improve yield, reduce waste and connect directly to markets.</p><a href="https://medium.com/@mikecomplexai" class="blog-link" target="_blank" rel="noopener">Read Commentary &#8594;</a></article>
     </div>
-    <div class="blog-cta"><a href="#" class="btn btn-outline">View All Articles &amp; Commentary</a></div>
+    <div class="blog-cta"><a href="https://medium.com/@mikecomplexai" class="btn btn-outline" target="_blank" rel="noopener">View All Articles &amp; Commentary</a></div>
   </div>
 </section>
 
@@ -352,13 +352,30 @@
       <p class="section-subtitle">Every business, farmer, organization and community leader in Ogoja and Cross River State &#8212; connected, visible and searchable on one platform.</p>
     </div>
     <div class="directory-grid">
-      <div class="directory-card"><div class="dir-icon">&#127978;</div><h4>Businesses</h4><p>Shops, services &amp; enterprises</p><a href="#" class="dir-link">Join</a></div>
-      <div class="directory-card"><div class="dir-icon">&#127793;</div><h4>Farmers</h4><p>Producers &amp; cooperatives</p><a href="#" class="dir-link">Join</a></div>
-      <div class="directory-card"><div class="dir-icon">&#127963;&#65039;</div><h4>Government</h4><p>Agencies &amp; officials</p><a href="#" class="dir-link">Join</a></div>
-      <div class="directory-card"><div class="dir-icon">&#129309;</div><h4>NGOs &amp; Partners</h4><p>Development organizations</p><a href="#" class="dir-link">Join</a></div>
+      <div class="directory-card"><div class="dir-icon">&#127978;</div><h4>Businesses</h4><p>Shops, services &amp; enterprises</p><a href="#" class="dir-link" onclick="openDirectoryModal('Business');return false;">Join</a></div>
+      <div class="directory-card"><div class="dir-icon">&#127793;</div><h4>Farmers</h4><p>Producers &amp; cooperatives</p><a href="#" class="dir-link" onclick="openDirectoryModal('Farmer');return false;">Join</a></div>
+      <div class="directory-card"><div class="dir-icon">&#127963;&#65039;</div><h4>Government</h4><p>Agencies &amp; officials</p><a href="#" class="dir-link" onclick="openDirectoryModal('Government');return false;">Join</a></div>
+      <div class="directory-card"><div class="dir-icon">&#129309;</div><h4>NGOs &amp; Partners</h4><p>Development organizations</p><a href="#" class="dir-link" onclick="openDirectoryModal('NGO');return false;">Join</a></div>
     </div>
   </div>
 </section>
+
+<div id="directoryModal" class="directory-modal">
+  <div class="directory-modal-content">
+    <button class="modal-close" onclick="closeDirectoryModal()" aria-label="Close">&times;</button>
+    <h3>Join the Ogoja Intelligence Directory</h3>
+    <form id="directoryForm" action="https://formspree.io/f/YOUR_DIRECTORY_FORM_ID" method="POST">
+      <input type="hidden" name="category" id="directoryCategory" value="">
+      <div class="form-group"><input type="text" name="entity_name" placeholder="BUSINESS / ORGANIZATION NAME" required></div>
+      <div class="form-group"><input type="text" name="contact_name" placeholder="CONTACT PERSON" required></div>
+      <div class="form-group"><input type="tel" name="phone" placeholder="PHONE NUMBER" required></div>
+      <div class="form-group"><input type="email" name="email" placeholder="EMAIL ADDRESS"></div>
+      <div class="form-group"><input type="text" name="location" placeholder="LOCATION (e.g. Igoli, Ogoja)" required></div>
+      <div class="form-group"><textarea name="description" rows="4" placeholder="WHAT DO YOU DO?" required></textarea></div>
+      <button type="submit" class="btn btn-primary btn-full">Submit Listing &#8594;</button>
+    </form>
+  </div>
+</div>
 
 <section class="section pricing" id="pricing">
   <div class="container">
@@ -408,11 +425,11 @@
         <div class="contact-item"><span class="contact-icon">&#127760;</span><div><span class="contact-label">PLATFORM</span><a href="https://cortex-nexus-sovereign-industrial-ai.github.io/cortex-platform/">cortex-platform</a></div></div>
         <div class="contact-item"><span class="contact-icon">&#128100;</span><div><span class="contact-label">FOUNDER &amp; CEO</span><p>Michael Ujuku Morim</p></div></div>
         <div class="social-links">
-          <a href="#" class="social-link" aria-label="YouTube">&#9654; YouTube</a>
-          <a href="#" class="social-link" aria-label="Facebook">f Facebook</a>
-          <a href="#" class="social-link" aria-label="LinkedIn">in LinkedIn</a>
-          <a href="#" class="social-link" aria-label="Instagram">&#128247; Instagram</a>
-          <a href="#" class="social-link" aria-label="Twitter/X">&#10005; Twitter/X</a>
+          <a href="https://youtube.com/@cortexnexus" class="social-link" target="_blank" rel="noopener" aria-label="YouTube">&#9654; YouTube</a>
+          <a href="https://facebook.com/cortexnexus" class="social-link" target="_blank" rel="noopener" aria-label="Facebook">f Facebook</a>
+          <a href="https://linkedin.com/company/cortexnexus" class="social-link" target="_blank" rel="noopener" aria-label="LinkedIn">in LinkedIn</a>
+          <a href="https://instagram.com/cortexnexus" class="social-link" target="_blank" rel="noopener" aria-label="Instagram">&#128247; Instagram</a>
+          <a href="https://x.com/cortexnexus" class="social-link" target="_blank" rel="noopener" aria-label="Twitter/X">&#10005; Twitter/X</a>
         </div>
       </div>
       <div class="contact-form">
@@ -498,8 +515,27 @@ counters.forEach(c=>co.observe(c));
 const re=document.querySelectorAll('.product-card,.chain-node,.security-card,.metric-card,.intel-card,.trading-card,.edu-track,.edu-cat,.blog-card,.scaling-card,.directory-card,.pricing-card,.contact-item');
 const ro=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('revealed');ro.unobserve(e.target);}});},{threshold:0.1,rootMargin:'0px 0px -50px 0px'});
 re.forEach(el=>{el.classList.add('reveal-hidden');ro.observe(el);});
+function handleFormspreeSubmit(form){
+  form.addEventListener('submit',e=>{
+    e.preventDefault();
+    const btn=form.querySelector('button[type="submit"]'),ot=btn.textContent;
+    btn.textContent='Sending...';btn.disabled=true;
+    fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}})
+      .then(r=>{
+        if(r.ok){btn.textContent='Message Sent \u2713';form.reset();}
+        else{btn.textContent='Error \u2014 try again';}
+      })
+      .catch(()=>{btn.textContent='Error \u2014 try again';})
+      .finally(()=>{setTimeout(()=>{btn.textContent=ot;btn.disabled=false;},2500);});
+  });
+}
 const form=document.getElementById('contactForm');
-form.addEventListener('submit',e=>{const btn=form.querySelector('button[type="submit"]'),ot=btn.textContent;btn.textContent='Sending...';btn.disabled=true;setTimeout(()=>{btn.textContent='Message Sent \u2713';setTimeout(()=>{btn.textContent=ot;btn.disabled=false;form.reset();},2000);},1500);});
+handleFormspreeSubmit(form);
+const directoryForm=document.getElementById('directoryForm');
+handleFormspreeSubmit(directoryForm);
+function openDirectoryModal(category){document.getElementById('directoryCategory').value=category;document.getElementById('directoryModal').classList.add('active');document.body.style.overflow='hidden';}
+function closeDirectoryModal(){document.getElementById('directoryModal').classList.remove('active');document.body.style.overflow='';}
+document.getElementById('directoryModal').addEventListener('click',e=>{if(e.target.id==='directoryModal')closeDirectoryModal();});
 const sections=document.querySelectorAll('section[id]'),navLinks=document.querySelectorAll('.nav-menu a[href^="#"]');
 window.addEventListener('scroll',()=>{let c='';sections.forEach(s=>{if(scrollY>=s.offsetTop-100)c=s.getAttribute('id');});navLinks.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+c));});
 </script>
