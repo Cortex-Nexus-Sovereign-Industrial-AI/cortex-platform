@@ -57,7 +57,7 @@ This repository houses the core operational layers for our decentralized, offlin
 ├── webhook_trigger_engine.py   # Flask webhook listener
 ├── netlify.toml                # Netlify deployment config
 ├── requirements.txt            # Python dependencies
-├── .env.example                # Secrets template (copy to .env)
+├── .env.example                # Secrets template
 ├── .gitignore                  # Git ignore rules
 └── README.md                   # This file
 ```
@@ -72,7 +72,7 @@ This repository houses the core operational layers for our decentralized, offlin
 3. Set build command to: `echo "Static site"`
 4. Set publish directory to: `.`
 5. Configure environment variables in Netlify dashboard
-6. Deploy — your platform is live at `https://cortex-platforms.netlify.app`
+6. Deploy — your platform is live
 
 ### Option B: Local Development
 ```bash
@@ -80,85 +80,35 @@ This repository houses the core operational layers for our decentralized, offlin
 git clone https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform.git
 cd cortex-platform
 
-# 2. Create virtual environment (for webhook engine)
+# 2. Create virtual environment
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 
 # 3. Configure secrets
 cp .env.example .env
-# Edit .env with your real API keys (NEVER commit .env)
+# Edit .env with your real API keys
 
 # 4. Run webhook listener
 export FLASK_APP=webhook_trigger_engine.py
 flask run --port=8080
 
-# 5. Open index.html in browser or serve with:
+# 5. Serve the platform
 python -m http.server 3000
 ```
 
 ---
 
-## 🔌 API Endpoints
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/` | Health check |
-| GET | `/api/health` | Detailed system health |
-| POST | `/api/webhooks/paystack` | Paystack webhook receiver |
-| POST | `/api/webhooks/flutterwave` | Flutterwave webhook receiver |
-| POST | `/api/webhooks/shopify` | Shopify webhook receiver |
-| GET | `/api/transactions/<provider>` | Transaction logs |
-| GET | `/api/transactions/summary` | Cross-provider summary |
-
----
-
 ## 💳 Payment Integration
 
-### Paystack Setup
+### Paystack
 1. Go to **Settings → Payment Config**
-2. Enter your Paystack Secret Key and Webhook Secret
-3. Set webhook URL in Paystack dashboard to:
-   `https://cortex-platforms.netlify.app/api/webhooks/paystack`
+2. Enter your Paystack Secret Key
+3. Set webhook URL in Paystack dashboard
 
-### Flutterwave Setup
-1. Enter your Flutterwave Secret Key and Webhook Secret
-2. Set webhook URL in Flutterwave dashboard to:
-   `https://cortex-platforms.netlify.app/api/webhooks/flutterwave`
-
----
-
-## 🛡 Security & Privacy
-
-- **Never commit secrets** (API keys, webhook secrets) to the repository
-- Use environment variables or a secrets manager (`.env` file)
-- Configure webhook endpoints with **HTTPS only**
-- Validate all webhook signatures before processing
-- Add a **Privacy Policy** and **Terms of Service** page if collecting emails or processing payments
-- Enable CSP headers (configured in `netlify.toml`)
-
----
-
-## 🤖 AI Agents
-
-| Agent | Role | Voice |
-|-------|------|-------|
-| **Cortex Nexus** | Sovereign command node | Authoritative, precise, industrial |
-| **MikeComplex AI** | Strategic advisor | Visionary, business-focused |
-| **Builder Bot** | Code & infrastructure | Technical, hands-on |
-| **Scout AI** | Research & intelligence | Curious, data-driven |
-
-Switch personas in the AI Workspace to get different perspectives on the same task.
-
----
-
-## 📦 Shopify Integration
-
-1. Go to **Settings → Payments → Shopify Store**
-2. Click **Connect Shopify Store**
-3. Enter your store URL (e.g., `cortex-intelligence-nexus.myshopify.com`)
-4. Authorize Cortex Platform in Shopify admin
-5. Inventory, orders, and products sync automatically
+### Flutterwave
+1. Enter your Flutterwave Secret Key
+2. Set webhook URL in Flutterwave dashboard
 
 ---
 

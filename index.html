@@ -48,106 +48,248 @@
   </script>
 </head>
 <body>
-  <!-- MAIN APP WITH ALL SECTIONS -->
-  <div id="app">
-    <!-- SOCIAL NEXUS SECTION -->
-    <section id="tab-social">
-      <div class="page-header">
-        <h1>🌐 Social Nexus</h1>
-        <p>All Connected Media Channels</p>
-      </div>
-      <div class="social-grid">
-        <a href="https://x.com/MikeComplexAie" target="_blank" class="social-card x-card">
-          <div class="social-icon">𝕏</div>
-          <h3>X (Twitter)</h3>
-          <p class="social-handle">@MikeComplexAie</p>
-          <p class="social-desc">Real-time technical updates and industry insights</p>
-          <span class="social-link">Open Profile →</span>
-        </a>
-        <a href="https://www.youtube.com/@MikecomplexAI-i2e" target="_blank" class="social-card yt-card">
-          <div class="social-icon">▶️</div>
-          <h3>YouTube</h3>
-          <p class="social-handle">@MikecomplexAI-i2e</p>
-          <p class="social-desc">Deep-dive video documentation and architecture reviews</p>
-          <span class="social-link">Open Channel →</span>
-        </a>
-        <a href="https://www.tiktok.com/@cinisnio.ai" target="_blank" class="social-card tt-card">
-          <div class="social-icon">🎵</div>
-          <h3>TikTok</h3>
-          <p class="social-handle">@cinisnio.ai</p>
-          <p class="social-desc">Dynamic platform demonstrations and workflow breakdowns</p>
-          <span class="social-link">Open Profile →</span>
-        </a>
-        <a href="https://medium.com/@mikecomplexai" target="_blank" class="social-card fb-card">
-          <div class="social-icon">📰</div>\n          <h3>Medium</h3>
-          <p class="social-handle">@mikecomplexai</p>
-          <p class="social-desc">Technical articles and in-depth analysis</p>
-          <span class="social-link">Open Page →</span>
-        </a>
-        <a href="https://www.linkedin.com/in/michaelujukumorim" target="_blank" class="social-card ig-card">
-          <div class="social-icon">💼</div>
-          <h3>LinkedIn</h3>
-          <p class="social-handle">michaelujukumorim</p>
-          <p class="social-desc">Professional networking and B2B opportunities</p>
-          <span class="social-link">Open Profile →</span>
-        </a>
-        <a href="https://www.snapchat.com/add/mikecomplexai" target="_blank" class="social-card li-card">
-          <div class="social-icon">👻</div>
-          <h3>Snapchat</h3>
-          <p class="social-handle">@mikecomplexai</p>
-          <p class="social-desc">Behind-the-scenes moments and daily updates</p>
-          <span class="social-link">Open Profile →</span>
-        </a>
-      </div>
-    </section>
+  <!-- AUTH OVERLAY -->
+  <div id="auth-overlay" class="auth-overlay">
+    <div class="auth-card">
+      <div class="auth-logo">⚡</div>
+      <h2 id="auth-title">Welcome to Cortex</h2>
+      <p class="auth-subtitle">Sovereign Industrial AI Core — CINIS NEXUS INDUSTRY HQ</p>
+      <form id="auth-form" onsubmit="handleAuth(event)">
+        <div id="name-field" class="form-group" style="display:none;">
+          <label>Full Name</label>
+          <input type="text" id="auth-name" placeholder="Michael Ujuku Morim">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="auth-email" placeholder="cortexnexus@proton.me" required>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="auth-password" placeholder="••••••••" required minlength="8">
+        </div>
+        <div id="confirm-field" class="form-group" style="display:none;">
+          <label>Confirm Password</label>
+          <input type="password" id="auth-confirm" placeholder="••••••••">
+        </div>
+        <button type="submit" class="btn-primary btn-full" id="auth-btn">Sign In</button>
+      </form>
+      <p class="auth-toggle">
+        <span id="auth-toggle-text">No account?</span>
+        <button onclick="toggleAuthMode()" class="link-btn" id="auth-toggle-btn">Create one</button>
+      </p>
+      <div class="auth-divider"><span>or</span></div>
+      <button class="btn-secondary btn-full" onclick="guestAccess()">Continue as Guest</button>
+    </div>
+  </div>
 
-    <!-- BUSINESS HUB SECTION -->
-    <section id="tab-business">
-      <div class="page-header">
-        <h1>🏢 Business Hub</h1>
-        <p>Executive Networks, Communication Endpoints & Infrastructure Nodes</p>
+  <!-- MAIN APP -->
+  <div id="app" style="display:none;">
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <div class="logo-sm">⚡</div>
+        <span class="brand-text">CORTEX</span>
       </div>
-      <div class="biz-grid">
-        <div class="biz-card">
-          <div class="biz-icon">🌐</div>
-          <h3>Executive Networks</h3>
-          <div class="biz-links">
-            <a href="https://about.me/mikecomplexai" target="_blank">🆔 about.me/mikecomplexai</a>
-            <a href="https://www.linkedin.com/in/michaelujukumorim" target="_blank">💼 LinkedIn Profile</a>
-            <a href="https://medium.com/@mikecomplexai" target="_blank">📰 Medium Articles</a>
-            <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform" target="_blank">💻 GitHub Repository</a>
-          </div>
-        </div>
-        <div class="biz-card">
-          <div class="biz-icon">📡</div>
-          <h3>Direct Communication</h3>
-          <div class="biz-links">
-            <a href="mailto:cortexnexus@proton.me">📧 cortexnexus@proton.me</a>
-            <a href="https://wa.me/2349010251577" target="_blank">📱 WhatsApp: +234 901 025 1577</a>
-            <a href="https://t.me/mikecomplexai" target="_blank">✈️ Telegram: @mikecomplexai</a>
-            <a href="https://www.snapchat.com/add/mikecomplexai" target="_blank">👻 Snapchat: @mikecomplexai</a>
-          </div>
-        </div>
-        <div class="biz-card">
-          <div class="biz-icon">🎬</div>
-          <h3>Content & Media</h3>
-          <div class="biz-links">
-            <a href="https://www.youtube.com/@MikecomplexAI-i2e" target="_blank">▶️ YouTube Channel</a>
-            <a href="https://www.tiktok.com/@cinisnio.ai" target="_blank">🎵 TikTok: @cinisnio.ai</a>
-            <a href="https://x.com/MikeComplexAie" target="_blank">𝕏 X (Twitter): @MikeComplexAie</a>
-          </div>
-        </div>
-        <div class="biz-card">
-          <div class="biz-icon">🏗️</div>
-          <h3>Infrastructure Nodes</h3>
-          <div class="biz-links">
-            <a href="https://cinisnio.ai" target="_blank">🎯 cinisnio.ai</a>
-            <a href="https://corte.io" target="_blank">🔗 corte.io</a>
-            <a href="https://cortex-platforms.netlify.app" target="_blank">⚡ cortex-platforms.netlify.app</a>
-          </div>
+      <div class="top-bar-center">
+        <div class="search-box">
+          <span>🔍</span>
+          <input type="text" placeholder="Search platform, commands, AI tasks..." id="global-search">
         </div>
       </div>
-    </section>
+      <div class="top-bar-right">
+        <button class="icon-btn" title="Notifications">🔔<span class="badge">3</span></button>
+        <button class="icon-btn" title="Messages">💬</button>
+        <div class="user-pill" onclick="toggleUserMenu()">
+          <div class="avatar" id="user-avatar">M</div>
+          <span id="user-name">Michael</span>
+          <span>▼</span>
+        </div>
+        <div id="user-menu" class="dropdown-menu">
+          <a href="#" onclick="switchTab('settings'); toggleUserMenu(); return false;">⚙️ Settings</a>
+          <a href="#" onclick="switchTab('business'); toggleUserMenu(); return false;">🏢 Business Profile</a>
+          <div class="dropdown-divider"></div>
+          <a href="#" onclick="signOut(); return false;" class="text-danger">🚪 Sign Out</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="layout">
+      <aside class="sidebar" id="sidebar">
+        <nav class="nav-section">
+          <div class="nav-label">Platform</div>
+          <button class="nav-item active" data-tab="dashboard" onclick="switchTab('dashboard')">
+            <span class="nav-icon">📊</span><span class="nav-text">Dashboard</span>
+          </button>
+          <button class="nav-item" data-tab="ai-workspace" onclick="switchTab('ai-workspace')">
+            <span class="nav-icon">🤖</span><span class="nav-text">AI Workspace</span><span class="nav-badge">LIVE</span>
+          </button>
+          <button class="nav-item" data-tab="business" onclick="switchTab('business')">
+            <span class="nav-icon">🏢</span><span class="nav-text">Business Hub</span>
+          </button>
+        </nav>
+        <nav class="nav-section">
+          <div class="nav-label">Commerce</div>
+          <button class="nav-item" data-tab="shopify" onclick="switchTab('shopify')">
+            <span class="nav-icon">🛒</span><span class="nav-text">Shopify Store</span>
+          </button>
+          <button class="nav-item" data-tab="payments" onclick="switchTab('payments')">
+            <span class="nav-icon">💳</span><span class="nav-text">Payments</span>
+          </button>
+          <button class="nav-item" data-tab="orders" onclick="switchTab('orders')">
+            <span class="nav-icon">📦</span><span class="nav-text">Orders</span>
+          </button>
+          <button class="nav-item" data-tab="checkout" onclick="switchTab('checkout')">
+            <span class="nav-icon">🛍️</span><span class="nav-text">Checkout</span><span class="nav-badge">NEW</span>
+          </button>
+        </nav>
+        <nav class="nav-section">
+          <div class="nav-label">Presence</div>
+          <button class="nav-item" data-tab="social" onclick="switchTab('social')">
+            <span class="nav-icon">🌐</span><span class="nav-text">Social Nexus</span>
+          </button>
+          <button class="nav-item" data-tab="content" onclick="switchTab('content')">
+            <span class="nav-icon">📝</span><span class="nav-text">Content Studio</span>
+          </button>
+        </nav>
+        <nav class="nav-section">
+          <div class="nav-label">System</div>
+          <button class="nav-item" data-tab="settings" onclick="switchTab('settings')">
+            <span class="nav-icon">⚙️</span><span class="nav-text">Settings</span>
+          </button>
+          <button class="nav-item" data-tab="help" onclick="switchTab('help')">
+            <span class="nav-icon">❓</span><span class="nav-text">Help & Docs</span>
+          </button>
+        </nav>
+        <div class="sidebar-footer">
+          <div class="sovereign-badge">
+            <span>🛡️</span>
+            <div>
+              <div class="sovereign-title">Sovereign Mode</div>
+              <div class="sovereign-status">Edge-resilient active</div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main-content" id="main-content">
+        <!-- BUSINESS HUB -->
+        <section id="tab-business" class="tab-panel">
+          <div class="page-header">
+            <h1>🏢 Business Hub</h1>
+            <p>Executive Networks, Communication Endpoints, Media Channels & Infrastructure Nodes</p>
+          </div>
+          <div class="biz-grid">
+            <div class="biz-card">
+              <div class="biz-icon">🌐</div>
+              <h3>Executive Networks</h3>
+              <div class="biz-links">
+                <a href="https://about.me/mikecomplexai" target="_blank">🆔 about.me/mikecomplexai</a>
+                <a href="https://www.linkedin.com/in/michaelujukumorim" target="_blank">💼 LinkedIn Profile</a>
+                <a href="https://medium.com/@mikecomplexai" target="_blank">📰 Medium Articles</a>
+                <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform" target="_blank">💻 GitHub Repository</a>
+              </div>
+            </div>
+            <div class="biz-card">
+              <div class="biz-icon">📡</div>
+              <h3>Direct Communication</h3>
+              <div class="biz-links">
+                <a href="mailto:cortexnexus@proton.me">📧 cortexnexus@proton.me</a>
+                <a href="https://wa.me/2349010251577" target="_blank">📱 WhatsApp: +234 901 025 1577</a>
+                <a href="https://t.me/mikecomplexai" target="_blank">✈️ Telegram: @mikecomplexai</a>
+                <a href="https://www.snapchat.com/add/mikecomplexai" target="_blank">👻 Snapchat: @mikecomplexai</a>
+              </div>
+            </div>
+            <div class="biz-card">
+              <div class="biz-icon">🎬</div>
+              <h3>Content & Media</h3>
+              <div class="biz-links">
+                <a href="https://www.youtube.com/@MikecomplexAI-i2e" target="_blank">▶️ YouTube Channel</a>
+                <a href="https://www.tiktok.com/@cinisnio.ai" target="_blank">🎵 TikTok: @cinisnio.ai</a>
+                <a href="https://x.com/MikeComplexAie" target="_blank">𝕏 X (Twitter): @MikeComplexAie</a>
+              </div>
+            </div>
+            <div class="biz-card">
+              <div class="biz-icon">🏗️</div>
+              <h3>Infrastructure Nodes</h3>
+              <div class="biz-links">
+                <a href="https://cinisnio.ai" target="_blank">🎯 cinisnio.ai</a>
+                <a href="https://corte.io" target="_blank">🔗 corte.io</a>
+                <a href="https://cortex-platforms.netlify.app" target="_blank">⚡ cortex-platforms.netlify.app</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SOCIAL NEXUS -->
+        <section id="tab-social" class="tab-panel">
+          <div class="page-header">
+            <h1>🌐 Social Nexus</h1>
+            <p>All Connected Media Channels</p>
+          </div>
+          <div class="social-grid">
+            <a href="https://x.com/MikeComplexAie" target="_blank" class="social-card x-card">
+              <div class="social-icon">𝕏</div>
+              <h3>X (Twitter)</h3>
+              <p class="social-handle">@MikeComplexAie</p>
+              <p class="social-desc">Real-time technical updates</p>
+              <span class="social-link">Open Profile →</span>
+            </a>
+            <a href="https://www.youtube.com/@MikecomplexAI-i2e" target="_blank" class="social-card yt-card">
+              <div class="social-icon">▶️</div>
+              <h3>YouTube</h3>
+              <p class="social-handle">@MikecomplexAI-i2e</p>
+              <p class="social-desc">Deep-dive video documentation</p>
+              <span class="social-link">Open Channel →</span>
+            </a>
+            <a href="https://www.tiktok.com/@cinisnio.ai" target="_blank" class="social-card tt-card">
+              <div class="social-icon">🎵</div>
+              <h3>TikTok</h3>
+              <p class="social-handle">@cinisnio.ai</p>
+              <p class="social-desc">Dynamic demonstrations</p>
+              <span class="social-link">Open Profile →</span>
+            </a>
+            <a href="https://medium.com/@mikecomplexai" target="_blank" class="social-card fb-card">
+              <div class="social-icon">📰</div>
+              <h3>Medium</h3>
+              <p class="social-handle">@mikecomplexai</p>
+              <p class="social-desc">Technical articles</p>
+              <span class="social-link">Open Page →</span>
+            </a>
+            <a href="https://www.linkedin.com/in/michaelujukumorim" target="_blank" class="social-card ig-card">
+              <div class="social-icon">💼</div>
+              <h3>LinkedIn</h3>
+              <p class="social-handle">michaelujukumorim</p>
+              <p class="social-desc">Professional networking</p>
+              <span class="social-link">Open Profile →</span>
+            </a>
+            <a href="https://www.snapchat.com/add/mikecomplexai" target="_blank" class="social-card li-card">
+              <div class="social-icon">👻</div>
+              <h3>Snapchat</h3>
+              <p class="social-handle">@mikecomplexai</p>
+              <p class="social-desc">Behind-the-scenes</p>
+              <span class="social-link">Open Profile →</span>
+            </a>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="app-footer">
+      <div class="footer-left">
+        <span>© 2026 CINIS NEXUS INDUSTRY OGOJA</span>
+        <span class="footer-dot">•</span>
+        <span>Sovereign Industrial AI Core</span>
+      </div>
+      <div class="footer-right">
+        <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform" target="_blank">GitHub</a>
+        <a href="https://about.me/mikecomplexai" target="_blank">About</a>
+        <a href="mailto:cortexnexus@proton.me">Contact</a>
+        <a href="https://wa.me/2349010251577" target="_blank">WhatsApp</a>
+        <a href="https://cinisnio.ai" target="_blank">cinisnio.ai</a>
+        <a href="https://corte.io" target="_blank">corte.io</a>
+        <span class="footer-version">v2.3.0-sovereign</span>
+      </div>
+    </footer>
   </div>
 
   <script src="app.js"></script>
