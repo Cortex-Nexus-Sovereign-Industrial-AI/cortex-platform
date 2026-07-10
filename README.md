@@ -16,12 +16,21 @@ Founded by **Michael Ujuku Morim** in Ogoja, Cross River State, Nigeria.
 | **Secure Email** | `cortexnexus@proton.me` |
 
 ### 📢 Connected Media Channels
-- **X (Twitter):** [@cortexainexus](https://x.com/@cortexainexus) — Real-time technical updates
-- **YouTube:** [@MikecomplexAi](https://youtube.com/@MikecomplexAi) — Deep-dive video documentation
-- **TikTok Hub:** Connected Profile — Dynamic platform demonstrations
-- **Facebook:** Business Page — Community engagement
-- **Instagram:** Business Profile — Visual storytelling
-- **LinkedIn:** Company Page — B2B networking
+- **X (Twitter):** [@MikeComplexAie](https://x.com/MikeComplexAie) — Real-time technical updates
+- **YouTube:** [@MikecomplexAI-i2e](https://www.youtube.com/@MikecomplexAI-i2e) — Deep-dive video documentation
+- **TikTok:** [@cinisnio.ai](https://www.tiktok.com/@cinisnio.ai) — Dynamic platform demonstrations
+- **Medium:** [@mikecomplexai](https://medium.com/@mikecomplexai) — Technical articles and analysis
+- **LinkedIn:** [michaelujukumorim](https://www.linkedin.com/in/michaelujukumorim) — Professional networking
+- **Snapchat:** [@mikecomplexai](https://www.snapchat.com/add/mikecomplexai) — Behind-the-scenes updates
+
+### 📡 Direct Communication Endpoints
+- **WhatsApp:** [+234 901 025 1577](https://wa.me/2349010251577)
+- **Telegram:** [@mikecomplexai](https://t.me/mikecomplexai)
+- **Email:** cortexnexus@proton.me
+
+### 🏗️ Infrastructure Custom Domains
+- **Cinematic Analysis Hub:** [cinisnio.ai](https://cinisnio.ai)
+- **Matrix Routing Layer:** [corte.io](https://corte.io)
 
 ---
 
@@ -35,7 +44,7 @@ This repository houses the core operational layers for our decentralized, offlin
 - **AI Command Center:** 4 specialized AI agents — Cortex Nexus, MikeComplex AI, Builder Bot, Scout AI
 - **Payment Rails:** Paystack (primary) + Flutterwave (secondary) with secure webhook validation
 - **Commerce:** Shopify store integration with inventory sync and AI recommendations
-- **Social Command:** Cross-platform content generation and scheduling for X, TikTok, YouTube, Facebook, Instagram, LinkedIn
+- **Social Command:** Cross-platform content generation and scheduling
 
 ---
 
@@ -83,8 +92,6 @@ cp .env.example .env
 # 4. Run webhook listener
 export FLASK_APP=webhook_trigger_engine.py
 flask run --port=8080
-# OR
-python webhook_trigger_engine.py
 
 # 5. Open index.html in browser or serve with:
 python -m http.server 3000
@@ -103,6 +110,21 @@ python -m http.server 3000
 | POST | `/api/webhooks/shopify` | Shopify webhook receiver |
 | GET | `/api/transactions/<provider>` | Transaction logs |
 | GET | `/api/transactions/summary` | Cross-provider summary |
+
+---
+
+## 💳 Payment Integration
+
+### Paystack Setup
+1. Go to **Settings → Payment Config**
+2. Enter your Paystack Secret Key and Webhook Secret
+3. Set webhook URL in Paystack dashboard to:
+   `https://cortex-platforms.netlify.app/api/webhooks/paystack`
+
+### Flutterwave Setup
+1. Enter your Flutterwave Secret Key and Webhook Secret
+2. Set webhook URL in Flutterwave dashboard to:
+   `https://cortex-platforms.netlify.app/api/webhooks/flutterwave`
 
 ---
 
@@ -134,24 +156,9 @@ Switch personas in the AI Workspace to get different perspectives on the same ta
 
 1. Go to **Settings → Payments → Shopify Store**
 2. Click **Connect Shopify Store**
-3. Enter your store URL (e.g., `yourstore.myshopify.com`)
+3. Enter your store URL (e.g., `cortex-intelligence-nexus.myshopify.com`)
 4. Authorize Cortex Platform in Shopify admin
 5. Inventory, orders, and products sync automatically
-
----
-
-## 💳 Payment Configuration
-
-### Paystack
-1. Go to **Settings → Payment Config**
-2. Enter your Paystack Secret Key and Webhook Secret
-3. Set webhook URL in Paystack dashboard to:
-   `https://cortex-platforms.netlify.app/api/webhooks/paystack`
-
-### Flutterwave
-1. Enter your Flutterwave Secret Key and Webhook Secret
-2. Set webhook URL in Flutterwave dashboard to:
-   `https://cortex-platforms.netlify.app/api/webhooks/flutterwave`
 
 ---
 
