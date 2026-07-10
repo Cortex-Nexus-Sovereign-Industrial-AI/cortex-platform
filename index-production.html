@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cortex Platform v2.1 - Sovereign Industrial AI | CINIS NEXUS</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://js.paystack.co/v1/inline.js"></script>
+</head>
+<body>
+
+<!-- ============================================
+     AUTH OVERLAY
+     ============================================ -->
+<div id="auth-overlay" class="auth-overlay">
+  <div class="auth-card">
+    <div class="auth-logo">⚡</div>
+    <h2 id="auth-title">Welcome to Cortex</h2>
+    <p class="auth-subtitle">Sovereign Industrial AI Platform</p>
+
+    <form id="auth-form" onsubmit="handleAuth(event)">
+      <div id="name-field" class="form-group" style="display: none;">
+        <label>Full Name</label>
+        <input type="text" id="auth-name" placeholder="Michael Ujuku Morim">
+      </div>
+
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" id="auth-email" placeholder="you@example.com" required>
+      </div>
+
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="auth-password" placeholder="••••••••" required>
+      </div>
+
+      <div id="confirm-field" class="form-group" style="display: none;">
+        <label>Confirm Password</label>
+        <input type="password" id="auth-confirm" placeholder="••••••••">
+      </div>
+
+      <button type="submit" class="btn-primary btn-full btn-lg">Sign In</button>
+    </form>
+
+    <div class="auth-divider">
+      <span>or continue with</span>
+    </div>
+
+    <button class="btn-secondary btn-full" onclick="guestAccess()" style="margin-bottom: 12px;">
+      📱 Guest Access (Limited)
+    </button>
+
+    <div class="auth-toggle">
+      <span id="auth-toggle-text">No account?</span>
+      <button type="button" class="link-btn" onclick="toggleAuthMode()" id="auth-toggle-btn">Create one</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================
+     MAIN APP
+     ============================================ -->
+<div id="app" style="display: none;">
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="top-bar-left">
+      <div class="logo-sm">⚡</div>
+      <div class="brand-text">CORTEX</div>
+    </div>
+
+    <div class="top-bar-center">
+      <div class="search-box">
+        <span>🔍</span>
+        <input type="text" id="global-search" placeholder="Search platform... (Ctrl+K)">
+      </div>
+    </div>
+
+    <div class="top-bar-right">
+      <button class="icon-btn" onclick="showNotifications()" title="Notifications">
+        🔔
+        <span class="badge" id="notif-badge">0</span>
+      </button>
+      <button class="icon-btn" onclick="showMessages()" title="Messages">💬</button>
+      <div class="user-pill" onclick="toggleUserMenu()">
+        <div class="avatar" id="user-avatar">M</div>
+        <span id="user-name">Michael</span>
+      </div>
+      <div id="user-menu" class="dropdown-menu">
+        <a onclick="switchTab('settings')">⚙️ Settings</a>
+        <div class="dropdown-divider"></div>
+        <a class="text-danger" onclick="signOut()">🚪 Sign Out</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- LAYOUT: SIDEBAR + MAIN -->
+  <div class="layout">
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <div class="nav-section">
+        <div class="nav-label">CORE</div>
+        <button class="nav-item active" data-tab="dashboard" onclick="switchTab('dashboard')">
+          <span class="nav-icon">📊</span>
+          Dashboard
+        </button>
+        <button class="nav-item" data-tab="ai-workspace" onclick="switchTab('ai-workspace')">
+          <span class="nav-icon">🤖</span>
+          AI Workspace
+        </button>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-label">COMMERCE</div>
+        <button class="nav-item" data-tab="shopify" onclick="switchTab('shopify')">
+          <span class="nav-icon">🛒</span>
+          Shopify
+        </button>
+        <button class="nav-item" data-tab="checkout" onclick="switchTab('checkout')">
+          <span class="nav-icon">💳</span>
+          Checkout
+          <span class="nav-badge">LIVE</span>
+        </button>
+        <button class="nav-item" data-tab="orders" onclick="switchTab('orders')">
+          <span class="nav-icon">📦</span>
+          Orders
+        </button>
+        <button class="nav-item" data-tab="payments" onclick="switchTab('payments')">
+          <span class="nav-icon">💰</span>
+          Payments
+        </button>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-label">CONTENT</div>
+        <button class="nav-item" data-tab="content" onclick="switchTab('content')">
+          <span class="nav-icon">✍️</span>
+          Content Studio
+        </button>
+        <button class="nav-item" data-tab="social" onclick="switchTab('social')">
+          <span class="nav-icon">🌐</span>
+          Social Nexus
+        </button>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-label">BUSINESS</div>
+        <button class="nav-item" data-tab="business" onclick="switchTab('business')">
+          <span class="nav-icon">🏢</span>
+          Business Hub
+        </button>
+        <button class="nav-item" data-tab="help" onclick="switchTab('help')">
+          <span class="nav-icon">❓</span>
+          Help & Docs
+        </button>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="sovereign-badge">
+          <span>⚡</span>
+          <div>
+            <div class="sovereign-title">CINIS NEXUS</div>
+            <div class="sovereign-status">Sovereign AI Online</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+
+      <!-- DASHBOARD TAB -->
+      <div id="tab-dashboard" class="tab-panel active">
+        <div class="page-header">
+          <h1>⚡ Dashboard</h1>
+          <p>Real-time overview of your sovereign AI operations</p>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card stat-live">
+            <div class="stat-icon">💳</div>
+            <div>
+              <div class="stat-label">Total Revenue</div>
+              <div class="stat-value" id="stat-revenue">₦0.00</div>
+              <div class="stat-sub">Paystack LIVE</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon">📦</div>
+            <div>
+              <div class="stat-label">Orders Processed</div>
+              <div class="stat-value" id="stat-orders">0</div>
+              <div class="stat-sub">Complete transactions</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon">🤖</div>
+            <div>
+              <div class="stat-label">AI Agents Active</div>
+              <div class="stat-value">4</div>
+              <div class="stat-sub">Cortex, MikeComplex, Builder, Scout</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon">📊</div>
+            <div>
+              <div class="stat-label">Platform Status</div>
+              <div class="stat-value" style="color: #34d399;">LIVE</div>
+              <div class="stat-sub">v2.1 Production</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-row">
+          <div class="panel">
+            <div class="panel-header">
+              <h3>📋 Activity Log</h3>
+              <button class="btn-sm" onclick="clearLog()">Clear</button>
+            </div>
+            <div class="log-container" id="activity-log"></div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <h3>⚡ Quick Actions</h3>
+            </div>
+            <div class="quick-actions">
+              <button class="action-btn" onclick="quickAction('Test Payment')">
+                <span>💳</span>
+                <div>
+                  <div class="action-title">Process Payment</div>
+                  <div class="action-desc">Go to checkout</div>
+                </div>
+              </button>
+              <button class="action-btn" onclick="quickAction('Generate content for my business')">
+                <span>✨</span>
+                <div>
+                  <div class="action-title">Generate Content</div>
+                  <div class="action-desc">AI writing</div>
+                </div>
+              </button>
+              <button class="action-btn" onclick="quickAction('Analyze market trends')">
+                <span>📈</span>
+                <div>
+                  <div class="action-title">Market Analysis</div>
+                  <div class="action-desc">Intelligence report</div>
+                </div>
+              </button>
+              <button class="action-btn" onclick="quickAction('Help me with code')">
+                <span>💻</span>
+                <div>
+                  <div class="action-title">Build Features</div>
+                  <div class="action-desc">Developer tools</div>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI WORKSPACE TAB -->
+      <div id="tab-ai-workspace" class="tab-panel">
+        <div class="page-header">
+          <h1>🤖 AI Workspace</h1>
+          <p>Chat with specialized AI agents</p>
+        </div>
+
+        <div class="ai-layout">
+          <div class="ai-chat-panel">
+            <div class="ai-chat-header">
+              <div class="ai-persona-display">
+                <div class="ai-avatar" id="ai-avatar">⚡</div>
+                <div>
+                  <div class="ai-name" id="ai-name">Cortex Nexus</div>
+                  <div class="ai-status">
+                    <span class="status-dot"></span> Online
+                  </div>
+                </div>
+              </div>
+              <button class="btn-sm" onclick="clearAiChat()">🔄 Clear</button>
+            </div>
+            <div class="ai-chat-messages" id="ai-chat-messages">
+              <div class="message ai-message">
+                <div class="message-avatar">⚡</div>
+                <div class="message-bubble">
+                  <div class="message-sender">Cortex Nexus</div>
+                  <div class="message-text">Sovereign industrial AI core online. I am your deterministic command node for CINIS NEXUS INDUSTRY HQ. How may I assist your operations today?</div>
+                  <div class="message-time">Just now</div>
+                </div>
+              </div>
+            </div>
+            <div class="ai-chat-input">
+              <div class="input-toolbar">
+                <button type="button" title="Attach file">📎</button>
+                <button type="button" title="Code snippet">{'{'}</button>
+              </div>
+              <div class="input-row">
+                <textarea id="ai-input" placeholder="Ask Cortex anything... (Shift+Enter for new line)"></textarea>
+                <button class="send-btn" onclick="sendAiMessage()">→</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="ai-sidebar">
+            <div class="panel">
+              <div class="panel-header">
+                <h3>🎭 AI Personas</h3>
+              </div>
+              <div class="voice-list">
+                <div class="voice-card active" data-voice="cortex" onclick="switchVoice('cortex')">
+                  <div class="voice-avatar">⚡</div>
+                  <div>
+                    <div class="voice-name">Cortex Nexus</div>
+                    <div class="voice-desc">Deterministic AI</div>
+                  </div>
+                </div>
+                <div class="voice-card" data-voice="mikecomplex" onclick="switchVoice('mikecomplex')">
+                  <div class="voice-avatar">🧠</div>
+                  <div>
+                    <div class="voice-name">MikeComplex</div>
+                    <div class="voice-desc">Strategic advisor</div>
+                  </div>
+                </div>
+                <div class="voice-card" data-voice="builder" onclick="switchVoice('builder')">
+                  <div class="voice-avatar">🔨</div>
+                  <div>
+                    <div class="voice-name">Builder Bot</div>
+                    <div class="voice-desc">Tech builder</div>
+                  </div>
+                </div>
+                <div class="voice-card" data-voice="scout" onclick="switchVoice('scout')">
+                  <div class="voice-avatar">🔍</div>
+                  <div>
+                    <div class="voice-name">Scout AI</div>
+                    <div class="voice-desc">Market researcher</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-header">
+                <h3>📋 Recent Tasks</h3>
+              </div>
+              <div class="task-list" id="ai-task-list">
+                <div class="task-item empty">No tasks yet. Start chatting above.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CHECKOUT TAB -->
+      <div id="tab-checkout" class="tab-panel">
+        <div class="page-header">
+          <h1>💳 Checkout - Paystack LIVE</h1>
+          <p>Process real payments with Paystack integration</p>
+        </div>
+
+        <div class="checkout-layout">
+          <!-- LEFT: Order Summary -->
+          <div class="panel">
+            <div class="panel-header">
+              <h3>📦 Order Summary</h3>
+            </div>
+            <div class="checkout-items">
+              <div class="checkout-item">
+                <div class="item-image">⚡</div>
+                <div class="item-details">
+                  <div class="item-name">Cortex Platform License</div>
+                  <div class="item-desc">Annual subscription - Sovereign AI Core</div>
+                </div>
+                <div class="item-price" id="item-price-1">₦0.00</div>
+              </div>
+            </div>
+            <div class="checkout-totals">
+              <div class="total-row">
+                <span>Subtotal</span>
+                <span id="subtotal">₦0.00</span>
+              </div>
+              <div class="total-row">
+                <span>Tax (0%)</span>
+                <span>₦0.00</span>
+              </div>
+              <div class="total-row total-final">
+                <span>Total</span>
+                <span id="total-amount">₦0.00</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT: Payment Form -->
+          <div class="panel">
+            <div class="panel-header">
+              <h3>💸 Payment Details</h3>
+            </div>
+            <div style="padding: 20px;">
+              <form id="paystack-form" style="display: flex; flex-direction: column; gap: 16px;">
+                <div class="form-group">
+                  <label>Full Name *</label>
+                  <input type="text" id="paystack-name" placeholder="Michael Ujuku Morim" required>
+                </div>
+
+                <div class="form-group">
+                  <label>Email Address *</label>
+                  <input type="email" id="paystack-email" placeholder="you@example.com" required>
+                </div>
+
+                <div class="form-group">
+                  <label>Phone Number</label>
+                  <input type="tel" id="paystack-phone" placeholder="+234 701 234 5678">
+                </div>
+
+                <div class="form-group">
+                  <label>Product/Service *</label>
+                  <select id="paystack-product" required>
+                    <option value="">Select a product...</option>
+                    <option value="cortex-license">Cortex Platform License</option>
+                    <option value="ai-consulting">AI Consulting Services</option>
+                    <option value="custom-dev">Custom Development</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label>Amount (₦) *</label>
+                  <input type="number" id="paystack-amount" placeholder="100" min="100" required onchange="updateTotal()">
+                  <small>Minimum: ₦100</small>
+                </div>
+              </form>
+
+              <div class="paystack-notice">
+                <span>🔐</span>
+                <div>
+                  <strong>Secure Payment</strong>
+                  <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px;">Your payment is processed securely by Paystack. We never store your card details.</div>
+                </div>
+              </div>
+
+              <button class="btn-paystack" onclick="payWithPaystack()">
+                <span>🔐</span>
+                Pay ₦<span id="btn-amount">100</span> with Paystack
+              </button>
+
+              <div class="paystack-powered">
+                Powered by <strong>Paystack</strong> • LIVE Mode
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Payment Status Panel -->
+        <div id="payment-status-panel" style="display: none; margin-top: 24px;">
+          <div class="panel">
+            <div id="payment-status-content"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ORDERS TAB -->
+      <div id="tab-orders" class="tab-panel">
+        <div class="page-header">
+          <h1>📦 Orders</h1>
+          <p>View and manage all your transactions</p>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <h3>Transaction History</h3>
+            <button class="btn-sm" onclick="exportOrders()">📥 Export CSV</button>
+          </div>
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer</th>
+                  <th>Email</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                  <th>Reference</th>
+                  <th>Date</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="orders-table">
+                <tr class="empty-row">
+                  <td colspan="8">No orders yet. Complete a payment in the Checkout tab to see it here.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- PAYMENTS TAB -->
+      <div id="tab-payments" class="tab-panel">
+        <div class="page-header">
+          <h1>💰 Payments</h1>
+          <p>Payment gateway configuration and statistics</p>
+        </div>
+
+        <div class="payments-grid">
+          <!-- Paystack Card -->
+          <div class="payment-card">
+            <div class="payment-header" style="background: linear-gradient(135deg, #059669, #10b981);">
+              <div class="payment-logo">💚</div>
+              <h3>Paystack</h3>
+              <span class="payment-badge">LIVE MODE</span>
+            </div>
+            <div class="payment-body">
+              <div class="endpoint-box">
+                <label>Public Key</label>
+                <code>pk_live_d7f59d46d24...ba4e919fc</code>
+              </div>
+              <div class="payment-stats">
+                <div>
+                  <span class="stat-num" id="paystack-success">0</span>
+                  <div style="font-size: 0.8rem; color: var(--text-muted);">Transactions</div>
+                </div>
+                <div>
+                  <span class="stat-num" id="paystack-total">₦0</span>
+                  <div style="font-size: 0.8rem; color: var(--text-muted);">Revenue</div>
+                </div>
+              </div>
+              <div class="payment-actions">
+                <button class="btn-sm" onclick="viewPaystackLogs()">📋 View Logs</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Flutterwave Card -->
+          <div class="payment-card">
+            <div class="payment-header" style="background: linear-gradient(135deg, #7c2d12, #ea580c);">
+              <div class="payment-logo">🌊</div>
+              <h3>Flutterwave</h3>
+              <span class="payment-badge">COMING SOON</span>
+            </div>
+            <div class="payment-body">
+              <div class="endpoint-box">
+                <label>Public Key</label>
+                <code>FLWPUBK_TEST_xxxxx...xxxxx</code>
+              </div>
+              <div class="payment-stats">
+                <div>
+                  <span class="stat-num">0</span>
+                  <div style="font-size: 0.8rem; color: var(--text-muted);">Transactions</div>
+                </div>
+                <div>
+                  <span class="stat-num">₦0</span>
+                  <div style="font-size: 0.8rem; color: var(--text-muted);">Revenue</div>
+                </div>
+              </div>
+              <div class="payment-actions">
+                <button class="btn-sm" onclick="testFlutterwave()">🧪 Test</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Summary Card -->
+          <div class="panel payment-summary">
+            <div class="panel-header">
+              <h3>💹 Summary</h3>
+            </div>
+            <div class="summary-stats">
+              <div class="summary-row">
+                <span>Total Processed</span>
+                <span class="summary-value success" id="total-processed">₦0.00</span>
+              </div>
+              <div class="summary-row">
+                <span>Total Orders</span>
+                <span class="summary-value" id="total-success">0</span>
+              </div>
+              <div class="summary-row">
+                <span>Payment Mode</span>
+                <span class="summary-value warn">
+                  <select id="payment-mode" onchange="togglePaymentMode()" style="background: transparent; border: none; color: var(--warn); font-weight: 700;">
+                    <option value="live" selected>LIVE 🔴</option>
+                    <option value="test">TEST 🟡</option>
+                  </select>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SHOPIFY TAB -->
+      <div id="tab-shopify" class="tab-panel">
+        <div class="page-header">
+          <h1>🛒 Shopify Integration</h1>
+          <p>Connect and manage your e-commerce store</p>
+        </div>
+
+        <div class="shopify-hero">
+          <div class="shopify-icon">🛍️</div>
+          <h2>Connected: cortex-intelligence-nexus.myshopify.com</h2>
+          <p>Your Shopify store is synchronized with Cortex Platform. All products, orders, and inventory are automatically synced.</p>
+          <div class="shopify-actions">
+            <button class="btn-primary" onclick="connectShopify()">✅ Connection Verified</button>
+            <button class="btn-secondary" onclick="viewIntegrationDocs()">📚 View Docs</button>
+          </div>
+        </div>
+
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-icon">📦</div>
+            <h4>Real-time Sync</h4>
+            <p>All products and inventory automatically synced with Shopify</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">💳</div>
+            <h4>Payment Processing</h4>
+            <p>Paystack payments integrated directly in your store</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <h4>Analytics</h4>
+            <p>Real-time sales data and customer insights</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🤖</div>
+            <h4>AI Descriptions</h4>
+            <p>Auto-generate product descriptions with AI</p>
+          </div>
+        </div>
+
+        <div class="panel" style="margin-top: 24px;">
+          <div class="panel-header">
+            <h3>Status</h3>
+          </div>
+          <div class="connection-status">
+            <div class="status-row">
+              <span>Store Connection</span>
+              <span class="status-connected">✅ Connected</span>
+            </div>
+            <div class="status-row">
+              <span>Product Sync</span>
+              <span class="status-connected">✅ Active</span>
+            </div>
+            <div class="status-row">
+              <span>Order Sync</span>
+              <span class="status-connected">✅ Real-time</span>
+            </div>
+            <div class="status-row">
+              <span>Payment Gateway</span>
+              <span class="status-connected">✅ Paystack LIVE</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SOCIAL NEXUS TAB -->
+      <div id="tab-social" class="tab-panel">
+        <div class="page-header">
+          <h1>🌐 Social Nexus</h1>
+          <p>Connect with your audience across all platforms</p>
+        </div>
+
+        <div id="footer-social-links" class="social-grid" style="margin-bottom: 24px;">
+          <!-- Social links will be rendered here -->
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <h3>📱 Social Media Tools</h3>
+          </div>
+          <div class="social-tools">
+            <button class="social-tool-btn" onclick="logAction('Post to X/Twitter scheduled')">
+              <span>𝕏</span>
+              <div>
+                <div class="tool-title">Tweet Designer</div>
+                <div class="tool-desc">Create and schedule</div>
+              </div>
+            </button>
+            <button class="social-tool-btn" onclick="logAction('YouTube video optimizer loaded')">
+              <span>▶️</span>
+              <div>
+                <div class="tool-title">Video Optimizer</div>
+                <div class="tool-desc">Metadata & thumbnails</div>
+              </div>
+            </button>
+            <button class="social-tool-btn" onclick="logAction('TikTok content generator active')">
+              <span>♪</span>
+              <div>
+                <div class="tool-title">TikTok Creator</div>
+                <div class="tool-desc">Trending audio sync</div>
+              </div>
+            </button>
+            <button class="social-tool-btn" onclick="logAction('Instagram carousel builder opened')">
+              <span>📷</span>
+              <div>
+                <div class="tool-title">Carousel Builder</div>
+                <div class="tool-desc">Multi-image posts</div>
+              </div>
+            </button>
+            <button class="social-tool-btn" onclick="logAction('LinkedIn article scheduled')">
+              <span>💼</span>
+              <div>
+                <div class="tool-title">Article Writer</div>
+                <div class="tool-desc">B2B content</div>
+              </div>
+            </button>
+            <button class="social-tool-btn" onclick="logAction('Pinterest board management opened')">
+              <span>📌</span>
+              <div>
+                <div class="tool-title">Pinterest Manager</div>
+                <div class="tool-desc">Visual bookmarking</div>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTENT STUDIO TAB -->
+      <div id="tab-content" class="tab-panel">
+        <div class="page-header">
+          <h1>✍️ Content Studio</h1>
+          <p>AI-powered content generation for all channels</p>
+        </div>
+
+        <div class="content-studio">
+          <div class="content-sidebar">
+            <div class="content-categories">
+              <button class="content-cat active" onclick="setContentType('email')">📧 Email</button>
+              <button class="content-cat" onclick="setContentType('social')">📱 Social</button>
+              <button class="content-cat" onclick="setContentType('product')">📦 Product</button>
+              <button class="content-cat" onclick="setContentType('blog')">📝 Blog</button>
+              <button class="content-cat" onclick="setContentType('ad')">📢 Ads</button>
+              <button class="content-cat" onclick="setContentType('seo')">🔍 SEO</button>
+            </div>
+          </div>
+
+          <div class="content-editor">
+            <div class="editor-header">
+              <h2 id="content-type-title">Email Campaign Generator</h2>
+              <div class="editor-actions">
+                <button class="btn-sm" onclick="generateContent()">✨ Generate</button>
+              </div>
+            </div>
+
+            <div class="editor-fields">
+              <div class="form-group">
+                <label>Subject / Headline</label>
+                <input type="text" id="content-subject" class="form-control" placeholder="Enter email subject line...">
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                <div class="form-group">
+                  <label>Tone</label>
+                  <select id="content-tone" class="form-control">
+                    <option>Professional</option>
+                    <option>Casual</option>
+                    <option>Humorous</option>
+                    <option>Urgent</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label>Target Audience</label>
+                  <select id="content-audience" class="form-control">
+                    <option>Nigerian SMEs and industrial partners</option>
+                    <option>Tech entrepreneurs</option>
+                    <option>Enterprise clients</option>
+                    <option>Developers</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Brief / Details</label>
+                <textarea id="content-brief" class="form-control" placeholder="Describe what you want..." style="min-height: 120px;"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label>Generated Content</label>
+                <textarea id="content-output" class="form-control" placeholder="Generated content will appear here..." style="min-height: 200px;" readonly></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BUSINESS HUB TAB -->
+      <div id="tab-business" class="tab-panel">
+        <div class="page-header">
+          <h1>🏢 Business Hub</h1>
+          <p>Enterprise tools and resources for CINIS NEXUS</p>
+        </div>
+
+        <div class="biz-grid">
+          <div class="biz-card">
+            <div class="biz-icon">📊</div>
+            <h3>Analytics Dashboard</h3>
+            <p>Real-time insights into your platform performance, user engagement, and revenue trends.</p>
+            <div class="biz-links">
+              <a href="#">📈 View Reports</a>
+              <a href="#">📥 Export Data</a>
+            </div>
+          </div>
+
+          <div class="biz-card">
+            <div class="biz-icon">👥</div>
+            <h3>Team Management</h3>
+            <p>Invite team members, assign roles, and collaborate on projects securely.</p>
+            <div class="biz-links">
+              <a href="#">👤 Add Members</a>
+              <a href="#">🔐 Manage Roles</a>
+            </div>
+          </div>
+
+          <div class="biz-card">
+            <div class="biz-icon">📚</div>
+            <h3>Documentation</h3>
+            <p>Complete guides, API documentation, and deployment instructions.</p>
+            <div class="biz-links">
+              <a href="#">📖 Read Docs</a>
+              <a href="#">🔗 API Reference</a>
+            </div>
+          </div>
+
+          <div class="biz-card">
+            <div class="biz-icon">🤝</div>
+            <h3>Partner Program</h3>
+            <p>Join our partner ecosystem and grow your business with CINIS NEXUS.</p>
+            <div class="biz-links">
+              <a href="#">💼 Learn More</a>
+              <a href="#">✍️ Apply Now</a>
+            </div>
+          </div>
+
+          <div class="biz-card">
+            <div class="biz-icon">🎓</div>
+            <h3>Training & Certification</h3>
+            <p>Master the Cortex Platform with our comprehensive training programs.</p>
+            <div class="biz-links">
+              <a href="#">🎥 View Courses</a>
+              <a href="#">🏆 Get Certified</a>
+            </div>
+          </div>
+
+          <div class="biz-card">
+            <div class="biz-icon">🚀</div>
+            <h3>Enterprise Solutions</h3>
+            <p>Custom implementations, white-label options, and dedicated support.</p>
+            <div class="biz-links">
+              <a href="#">📞 Contact Sales</a>
+              <a href="#">💡 Request Demo</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HELP & DOCS TAB -->
+      <div id="tab-help" class="tab-panel">
+        <div class="page-header">
+          <h1>❓ Help & Documentation</h1>
+          <p>Find answers, tutorials, and support resources</p>
+        </div>
+
+        <div class="help-grid">
+          <div class="help-card">
+            <h3>🎯 Getting Started</h3>
+            <p>Learn how to set up your Cortex Platform account and make your first payment.</p>
+            <a href="#">Read Guide →</a>
+          </div>
+
+          <div class="help-card">
+            <h3>💳 Payment Integration</h3>
+            <p>Complete guide to Paystack integration, webhook setup, and payment verification.</p>
+            <a href="#">Read Guide →</a>
+          </div>
+
+          <div class="help-card">
+            <h3>🤖 AI Agents</h3>
+            <p>Understand how to work with our 4 specialized AI personas for maximum productivity.</p>
+            <a href="#">Read Guide →</a>
+          </div>
+
+          <div class="help-card">
+            <h3>📊 Analytics</h3>
+            <p>Learn how to track, measure, and optimize your platform metrics.</p>
+            <a href="#">Read Guide →</a>
+          </div>
+
+          <div class="help-card">
+            <h3>🔐 Security</h3>
+            <p>Best practices for securing your account and protecting your data.</p>
+            <a href="#">Read Guide →</a>
+          </div>
+
+          <div class="help-card">
+            <h3>📞 Support</h3>
+            <p>Contact our support team for technical issues, billing questions, and feedback.</p>
+            <a href="#">Contact Support →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- SETTINGS TAB -->
+      <div id="tab-settings" class="tab-panel">
+        <div class="page-header">
+          <h1>⚙️ Settings</h1>
+          <p>Account, security, and platform preferences</p>
+        </div>
+
+        <div class="settings-layout">
+          <div class="settings-nav">
+            <button class="settings-nav-item active" onclick="setSettingsTab('account')">👤 Account</button>
+            <button class="settings-nav-item" onclick="setSettingsTab('security')">🔐 Security</button>
+            <button class="settings-nav-item" onclick="setSettingsTab('payments')">💳 Payments</button>
+            <button class="settings-nav-item" onclick="setSettingsTab('notifications')">🔔 Notifications</button>
+            <button class="settings-nav-item" onclick="setSettingsTab('appearance')">🎨 Appearance</button>
+            <button class="settings-nav-item" onclick="setSettingsTab('integrations')">🔗 Integrations</button>
+          </div>
+
+          <div class="settings-content">
+            <!-- Account Panel -->
+            <div id="settings-account" class="settings-panel active">
+              <h3>Account Information</h3>
+              <div style="display: flex; flex-direction: column; gap: 16px;">
+                <div class="form-group">
+                  <label>Full Name</label>
+                  <input type="text" id="settings-name" placeholder="Michael Ujuku Morim" value="Michael Ujuku Morim">
+                </div>
+                <div class="form-group">
+                  <label>Email Address</label>
+                  <input type="email" id="settings-email" placeholder="you@example.com">
+                </div>
+                <div class="form-group">
+                  <label>Company</label>
+                  <input type="text" id="settings-company" placeholder="CINIS NEXUS">
+                </div>
+                <div class="form-group">
+                  <label>Location</label>
+                  <input type="text" id="settings-location" placeholder="Ogoja, Cross River, Nigeria">
+                </div>
+                <button class="btn-primary" onclick="saveSettings()" style="width: fit-content;">💾 Save Changes</button>
+              </div>
+            </div>
+
+            <!-- Security Panel -->
+            <div id="settings-security" class="settings-panel">
+              <h3>Security Settings</h3>
+              <div class="security-section">
+                <h4>Password</h4>
+                <p>Change your password regularly to keep your account secure.</p>
+                <button class="btn-secondary" onclick="changePassword()" style="width: fit-content;">🔑 Change Password</button>
+              </div>
+              <div class="security-section">
+                <h4>Two-Factor Authentication</h4>
+                <p>Add an extra layer of security to your account.</p>
+                <label class="toggle-item">
+                  <span>Enable 2FA</span>
+                  <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider"></span>
+                  </label>
+                </label>
+              </div>
+            </div>
+
+            <!-- Payments Panel -->
+            <div id="settings-payments" class="settings-panel">
+              <h3>Payment Configuration</h3>
+              <div class="api-list">
+                <div class="api-item">
+                  <div>
+                    <div class="api-name">Paystack Integration</div>
+                    <div class="api-desc">Process real payments with Paystack</div>
+                  </div>
+                  <span class="api-status connected">✅ Active</span>
+                </div>
+                <div class="api-item">
+                  <div>
+                    <div class="api-name">Flutterwave Integration</div>
+                    <div class="api-desc">Alternative payment gateway</div>
+                  </div>
+                  <span class="api-status pending">⏳ Pending</span>
+                </div>
+              </div>
+              <button class="btn-secondary" onclick="savePaymentConfig()" style="margin-top: 16px; width: fit-content;">💾 Save Settings</button>
+            </div>
+
+            <!-- Appearance Panel -->
+            <div id="settings-appearance" class="settings-panel">
+              <h3>Appearance</h3>
+              <div class="accent-colors">
+                <h4>Accent Color</h4>
+                <div class="color-options">
+                  <button class="color-opt active" style="background: #6366f1;" onclick="setAccent('#6366f1')"></button>
+                  <button class="color-opt" style="background: #0ea5e9;" onclick="setAccent('#0ea5e9')"></button>
+                  <button class="color-opt" style="background: #ec4899;" onclick="setAccent('#ec4899')"></button>
+                  <button class="color-opt" style="background: #f59e0b;" onclick="setAccent('#f59e0b')"></button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Integrations Panel -->
+            <div id="settings-integrations" class="settings-panel">
+              <h3>Connected Services</h3>
+              <div class="api-list">
+                <div class="api-item">
+                  <div>
+                    <div class="api-name">Shopify Store</div>
+                    <div class="api-desc">cortex-intelligence-nexus.myshopify.com</div>
+                  </div>
+                  <span class="api-status connected">✅ Connected</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="app-footer">
+    <div class="footer-left">
+      <span>Cortex Platform</span>
+      <span class="footer-dot">•</span>
+      <span class="footer-version">v2.1 LIVE</span>
+      <span class="footer-dot">•</span>
+      <span>CINIS NEXUS INDUSTRY OGOJA</span>
+    </div>
+    <div class="footer-right">
+      <a href="#">Status</a>
+      <span class="footer-dot">•</span>
+      <a href="#">Privacy</a>
+      <span class="footer-dot">•</span>
+      <a href="#">Terms</a>
+      <span class="footer-dot">•</span>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+
+end>
+
+<script src="app.js"></script>
+</body>
+</html>
