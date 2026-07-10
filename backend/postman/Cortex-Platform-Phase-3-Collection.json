@@ -1,0 +1,663 @@
+{
+  "info": {
+    "name": "CORTEX PLATFORM — Phase 3: Payment Integration",
+    "description": "Postman collection for testing Paystack payment API endpoints, webhook flows, and order management. Phase 3 deliverable for live payment testing.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "2.1.0",
+    "created": "2026-07-10T23:31:31Z",
+    "updated": "2026-07-10T23:31:31Z"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{JWT_TOKEN}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "BASE_URL",
+      "value": "http://localhost:8080",
+      "type": "string",
+      "description": "API Base URL (local development)"
+    },
+    {
+      "key": "PROD_URL",
+      "value": "https://cortex-api.render.com",
+      "type": "string",
+      "description": "Production API URL (replace with actual)"
+    },
+    {
+      "key": "JWT_TOKEN",
+      "value": "",
+      "type": "string",
+      "description": "Authentication token (set after login)"
+    },
+    {
+      "key": "USER_EMAIL",
+      "value": "test@cortex-platform.com",
+      "type": "string"
+    },
+    {
+      "key": "USER_PASSWORD",
+      "value": "TestPassword123!",
+      "type": "string"
+    },
+    {
+      "key": "ORDER_ID",
+      "value": "",
+      "type": "string",
+      "description": "Created order ID (set by test)"
+    },
+    {
+      "key": "PAYSTACK_REFERENCE",
+      "value": "",
+      "type": "string",
+      "description": "Paystack transaction reference"
+    }
+  ],
+  "item": [
+    {
+      "name": "🔐 Authentication",
+      "item": [
+        {
+          "name": "Sign Up",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{USER_EMAIL}}\",\n  \"password\": \"{{USER_PASSWORD}}\",\n  \"full_name\": \"Test User\",\n  \"phone\": \"+2349010251577\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/auth/signup",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "signup"
+              ]
+            },
+            "description": "Create a new user account"
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{USER_EMAIL}}\",\n  \"password\": \"{{USER_PASSWORD}}\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/auth/login",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            },
+            "description": "Login and receive JWT token\n\n⚠️ Copy the token from response and set JWT_TOKEN variable"
+          }
+        },
+        {
+          "name": "Verify Token",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/auth/verify",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "verify"
+              ]
+            },
+            "description": "Verify current JWT token is valid"
+          }
+        }
+      ]
+    },
+    {
+      "name": "📋 Orders",
+      "item": [
+        {
+          "name": "Create Order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"Professional Plan Subscription - 1 Month\",\n  \"amount_naira\": 5000,\n  \"currency\": \"NGN\",\n  \"metadata\": {\n    \"subscription_tier\": \"professional\",\n    \"billing_cycle\": \"monthly\",\n    \"features\": [\n      \"Advanced Analytics\",\n      \"Unlimited Reports\",\n      \"Priority Support\"\n    ]\n  }\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/orders/create",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "create"
+              ]
+            },
+            "description": "Create a new payment order\n\n✅ Save the returned order_id and paystack_reference"
+          }
+        },
+        {
+          "name": "Get Order Details",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/orders/{{ORDER_ID}}",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "{{ORDER_ID}}"
+              ]
+            },
+            "description": "Retrieve details of a specific order"
+          }
+        },
+        {
+          "name": "List User Orders",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/orders?status=pending&limit=10&offset=0",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "orders"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "pending",
+                  "description": "Filter by status: pending, completed, failed, refunded"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "offset",
+                  "value": "0"
+                }
+              ]
+            },
+            "description": "List all orders for authenticated user with optional filters"
+          }
+        },
+        {
+          "name": "Cancel Order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"User requested cancellation\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/orders/{{ORDER_ID}}/cancel",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "{{ORDER_ID}}",
+                "cancel"
+              ]
+            },
+            "description": "Cancel an unpaid order"
+          }
+        }
+      ]
+    },
+    {
+      "name": "💳 Payments (Paystack)",
+      "item": [
+        {
+          "name": "Initialize Payment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"order_id\": \"{{ORDER_ID}}\",\n  \"email\": \"{{USER_EMAIL}}\",\n  \"amount_naira\": 5000,\n  \"metadata\": {\n    \"order_id\": \"{{ORDER_ID}}\",\n    \"user_email\": \"{{USER_EMAIL}}\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/payments/initialize",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "payments",
+                "initialize"
+              ]
+            },
+            "description": "Initialize a Paystack payment transaction\n\n✅ Response includes authorization_url → visit to complete payment"
+          }
+        },
+        {
+          "name": "Verify Payment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reference\": \"{{PAYSTACK_REFERENCE}}\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/payments/verify",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "payments",
+                "verify"
+              ]
+            },
+            "description": "Verify a payment using Paystack reference\n\n✅ Call after completing payment on Paystack checkout page"
+          }
+        },
+        {
+          "name": "Get Payment Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/payments/{{ORDER_ID}}/status",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "payments",
+                "{{ORDER_ID}}",
+                "status"
+              ]
+            },
+            "description": "Check payment status for an order"
+          }
+        },
+        {
+          "name": "List Payments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/payments?status=completed&limit=20",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "payments"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "completed",
+                  "description": "Filter: pending, completed, failed"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                }
+              ]
+            },
+            "description": "List all payments for authenticated user"
+          }
+        },
+        {
+          "name": "Request Refund",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"Accidental duplicate payment\",\n  \"amount_naira\": 5000\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/payments/{{ORDER_ID}}/refund",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "payments",
+                "{{ORDER_ID}}",
+                "refund"
+              ]
+            },
+            "description": "Request a refund for a completed payment"
+          }
+        }
+      ]
+    },
+    {
+      "name": "🔔 Webhooks",
+      "item": [
+        {
+          "name": "Simulate Charge Success",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-paystack-signature",
+                "value": "{{WEBHOOK_SIGNATURE}}",
+                "description": "HMAC-SHA512 signature (auto-generated by Paystack)"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event\": \"charge.success\",\n  \"data\": {\n    \"id\": 123456789,\n    \"reference\": \"{{PAYSTACK_REFERENCE}}\",\n    \"amount\": 500000,\n    \"status\": \"success\",\n    \"customer\": {\n      \"email\": \"{{USER_EMAIL}}\",\n      \"first_name\": \"Test\",\n      \"last_name\": \"User\"\n    },\n    \"authorization\": {\n      \"authorization_code\": \"AUTH_ABC123\",\n      \"card_type\": \"visa\",\n      \"last4\": \"0845\"\n    },\n    \"paid_at\": \"2026-07-10T23:31:31.000Z\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/webhooks/paystack",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "webhooks",
+                "paystack"
+              ]
+            },
+            "description": "Simulate a successful payment webhook from Paystack\n\n⚠️ Use test-webhooks.js script to auto-generate valid signatures"
+          }
+        },
+        {
+          "name": "Simulate Charge Failed",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-paystack-signature",
+                "value": "{{WEBHOOK_SIGNATURE}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event\": \"charge.failed\",\n  \"data\": {\n    \"id\": 123456789,\n    \"reference\": \"{{PAYSTACK_REFERENCE}}\",\n    \"amount\": 500000,\n    \"status\": \"failed\",\n    \"gateway_response\": \"Insufficient Funds\",\n    \"customer\": {\n      \"email\": \"{{USER_EMAIL}}\"\n    }\n  }\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/webhooks/paystack",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "webhooks",
+                "paystack"
+              ]
+            },
+            "description": "Simulate a failed payment webhook"
+          }
+        },
+        {
+          "name": "Get Webhook Logs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/webhooks/logs?limit=50&provider=paystack",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "webhooks",
+                "logs"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "50"
+                },
+                {
+                  "key": "provider",
+                  "value": "paystack",
+                  "description": "Filter by provider: paystack, flutterwave"
+                },
+                {
+                  "key": "status",
+                  "value": "processed",
+                  "disabled": true,
+                  "description": "Optional: pending, processed, failed"
+                }
+              ]
+            },
+            "description": "Retrieve webhook logs and processing history"
+          }
+        }
+      ]
+    },
+    {
+      "name": "📧 Email Receipts",
+      "item": [
+        {
+          "name": "Send Payment Receipt",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"order_id\": \"{{ORDER_ID}}\",\n  \"template\": \"payment_receipt\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/emails/receipt",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "emails",
+                "receipt"
+              ]
+            },
+            "description": "Manually send payment receipt email (usually sent automatically)"
+          }
+        },
+        {
+          "name": "Send Order Confirmation",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"order_id\": \"{{ORDER_ID}}\",\n  \"template\": \"order_confirmation\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/emails/confirmation",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "emails",
+                "confirmation"
+              ]
+            },
+            "description": "Send order confirmation email"
+          }
+        },
+        {
+          "name": "Email Logs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/emails/logs?limit=20&status=sent",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "emails",
+                "logs"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "key": "status",
+                  "value": "sent",
+                  "description": "Filter: sent, pending, failed"
+                }
+              ]
+            },
+            "description": "View email sending history and status"
+          }
+        }
+      ]
+    },
+    {
+      "name": "🧪 Health & Diagnostics",
+      "item": [
+        {
+          "name": "API Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/health",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "health"
+              ]
+            },
+            "description": "Check API server health and service status"
+          }
+        },
+        {
+          "name": "Database Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/admin/db-status",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "admin",
+                "db-status"
+              ]
+            },
+            "description": "Check database connectivity and table counts (admin only)"
+          }
+        },
+        {
+          "name": "Paystack Configuration",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/admin/config?show_keys=false",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "admin",
+                "config"
+              ],
+              "query": [
+                {
+                  "key": "show_keys",
+                  "value": "false",
+                  "description": "Never set to true in production!"
+                }
+              ]
+            },
+            "description": "Verify payment gateway configuration (admin only)"
+          }
+        }
+      ]
+    }
+  ],
+  "description": "Complete API testing suite for CORTEX PLATFORM Phase 3 payment integration.\n\n**Quick Start:**\n1. Set BASE_URL to your API endpoint\n2. Run 'Sign Up' → 'Login' (save JWT token)\n3. Run 'Create Order' → save order_id\n4. Run 'Initialize Payment' → visit authorization_url\n5. Complete payment on Paystack test card page\n6. Run 'Verify Payment' to confirm\n7. Use webhook tests to verify backend processing\n\n**Test Card (Paystack):**\n- Number: 4084 0843 0843 0845\n- Expiry: 12/26\n- CVC: 000\n\n**Support:** cortexnexus@proton.me"
+}
