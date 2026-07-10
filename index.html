@@ -53,6 +53,7 @@
       <li><a href="#pricing">Pricing</a></li>
       <li><a href="#contact" class="nav-cta">Contact</a></li>
     </ul>
+    <button id="voiceNavBtn" class="voice-nav-btn" aria-label="Talk to CINIS Voice AI" title="Talk to CINIS Voice AI">&#127908;</button>
   </div>
 </nav>
 
@@ -360,6 +361,20 @@
   </div>
 </section>
 
+<div id="voicePanel" class="voice-panel">
+  <div class="voice-panel-content">
+    <button class="modal-close" onclick="closeVoicePanel()" aria-label="Close">&times;</button>
+    <div class="voice-orb" id="voiceOrb">&#127908;</div>
+    <h3>CINIS Voice AI</h3>
+    <p id="voiceStatus" class="voice-status">Tap the mic and speak naturally &#8212; ask a question or say "open directory" / "show pricing"</p>
+    <p id="voiceTranscript" class="voice-transcript"></p>
+    <button id="voiceMicBtn" class="btn btn-primary btn-full">&#127908; Start Speaking</button>
+    <div class="voice-commands-hint">
+      <span>Quick jumps:</span> "products" &#183; "directory" &#183; "pricing" &#183; "contact" &#8212; or just ask anything else
+    </div>
+  </div>
+</div>
+
 <div id="directoryModal" class="directory-modal">
   <div class="directory-modal-content">
     <button class="modal-close" onclick="closeDirectoryModal()" aria-label="Close">&times;</button>
@@ -534,6 +549,135 @@ handleFormspreeSubmit(directoryForm);
 function openDirectoryModal(category){document.getElementById('directoryCategory').value=category;document.getElementById('directoryModal').classList.add('active');document.body.style.overflow='hidden';}
 function closeDirectoryModal(){document.getElementById('directoryModal').classList.remove('active');document.body.style.overflow='';}
 document.getElementById('directoryModal').addEventListener('click',e=>{if(e.target.id==='directoryModal')closeDirectoryModal();});
+
+/* ===== CINIS Voice AI ===== */
+const voiceNavBtn=document.getElementById('voiceNavBtn');
+const voicePanel=document.getElementById('voicePanel');
+const voiceMicBtn=document.getElementById('voiceMicBtn');
+const voiceStatus=document.getElementById('voiceStatus');
+const voiceTranscript=document.getElementById('voiceTranscript');
+const voiceOrb=document.getElementById('voiceOrb');
+
+function openVoicePanel(){voicePanel.classList.add('active');document.body.style.overflow='hidden';}
+function closeVoicePanel(){voicePanel.classList.remove('active');document.body.style.overflow='';stopListening();}
+voiceNavBtn.addEventListener('click',openVoicePanel);
+voicePanel.addEventListener('click',e=>{if(e.target.id==='voicePanel')closeVoicePanel();});
+
+const VOICE_COMMANDS=[
+  {keys:['product','products','flagship'],target:'#products',say:'Opening platform products.'},
+  {keys:['architecture','how it works','ai chain'],target:'#architecture',say:'Opening the intelligence architecture.'},
+  {keys:['security','cyber security','threat'],target:'#security',say:'Opening cyber security dashboard.'},
+  {keys:['analytics','data','intelligence'],target:'#analytics',say:'Opening data intelligence.'},
+  {keys:['trading','investment'],target:'#trading',say:'Opening trading and investment.'},
+  {keys:['education','learn','learning'],target:'#education',say:'Opening the education hub.'},
+  {keys:['blog','commentary','article'],target:'#blog',say:'Opening blog and commentary.'},
+  {keys:['directory','business directory','join directory'],target:'#directory',say:'Opening the community directory.'},
+  {keys:['pricing','plans','subscribe','price'],target:'#pricing',say:'Opening plans and pricing.'},
+  {keys:['contact','talk to someone','support'],target:'#contact',say:'Opening contact.'},
+  {keys:['join the platform','join platform','get started'],target:'#pricing',say:'Let\'s get you started. Opening plans.'},
+  {keys:['home','top','start over'],target:'#hero',say:'Back to the top.'}
+];
+
+const CINIS_AI_ENDPOINT='https://YOUR-WORKER-NAME.YOUR-SUBDOMAIN.workers.dev';
+
+function speak(text){
+  if(!('speechSynthesis' in window))return;
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang='en-NG';u.rate=1;u.pitch=1;
+  const voices=speechSynthesis.getVoices();
+  const ng=voices.find(v=>v.lang==='en-NG')||voices.find(v=>v.lang&&v.lang.startsWith('en'));
+  if(ng)u.voice=ng;
+  speechSynthesis.speak(u);
+}
+
+async function askCinisAI(message){
+  voiceStatus.textContent='Thinking...';
+  try{
+    const res=await fetch(CINIS_AI_ENDPOINT,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({message})
+    });
+    const data=await res.json();
+    const reply=data.reply||"Sorry, I'm not sure. Try emailing cortexnexus@proton.me.";
+    voiceStatus.textContent=reply;
+    speak(reply);
+  }catch(err){
+    voiceStatus.textContent="I couldn't reach the AI right now. Try again shortly.";
+    speak("I couldn't reach the AI right now. Try again shortly.");
+  }
+}
+
+function routeCommand(transcript){
+  const t=transcript.toLowerCase();
+  for(const cmd of VOICE_COMMANDS){
+    if(cmd.keys.some(k=>t.includes(k))){
+      voiceStatus.textContent=cmd.say;
+      speak(cmd.say);
+      setTimeout(()=>{
+        const el=document.querySelector(cmd.target);
+        if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
+        closeVoicePanel();
+      },900);
+      return true;
+    }
+  }
+  askCinisAI(transcript);
+  return false;
+}
+
+const SpeechRecognitionAPI=window.SpeechRecognition||window.webkitSpeechRecognition;
+let recognition=null,listening=false;
+
+if(SpeechRecognitionAPI){
+  recognition=new SpeechRecognitionAPI();
+  recognition.lang='en-NG';
+  recognition.continuous=false;
+  recognition.interimResults=true;
+  recognition.maxAlternatives=1;
+
+  recognition.onstart=()=>{
+    listening=true;
+    voiceOrb.classList.add('listening');
+    voiceMicBtn.textContent='\u23F9 Stop';
+    voiceStatus.textContent='Listening...';
+    voiceTranscript.textContent='';
+  };
+  recognition.onresult=e=>{
+    let interim='';
+    for(let i=e.resultIndex;i<e.results.length;i++){
+      const res=e.results[i];
+      interim+=res[0].transcript;
+      if(res.isFinal){
+        voiceTranscript.textContent='"'+res[0].transcript+'"';
+        routeCommand(res[0].transcript);
+      }
+    }
+    if(interim)voiceTranscript.textContent='"'+interim+'"';
+  };
+  recognition.onerror=e=>{
+    voiceStatus.textContent=e.error==='not-allowed'?'Microphone access denied. Enable it in browser settings.':'Voice error: '+e.error;
+    stopListening();
+  };
+  recognition.onend=()=>{stopListening();};
+}else{
+  voiceStatus.textContent='Voice recognition is not supported in this browser. Try Chrome or Edge on desktop, or Chrome on Android.';
+  voiceMicBtn.disabled=true;
+  voiceMicBtn.textContent='Voice Not Supported Here';
+}
+
+function stopListening(){
+  listening=false;
+  voiceOrb.classList.remove('listening');
+  voiceMicBtn.textContent='\u{1F3A4} Start Speaking';
+  if(recognition){try{recognition.stop();}catch(e){}}
+}
+
+voiceMicBtn.addEventListener('click',()=>{
+  if(!recognition)return;
+  if(listening){stopListening();}
+  else{try{recognition.start();}catch(e){}}
+});
 const sections=document.querySelectorAll('section[id]'),navLinks=document.querySelectorAll('.nav-menu a[href^="#"]');
 window.addEventListener('scroll',()=>{let c='';sections.forEach(s=>{if(scrollY>=s.offsetTop-100)c=s.getAttribute('id');});navLinks.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+c));});
 </script>
