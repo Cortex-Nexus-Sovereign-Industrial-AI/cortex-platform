@@ -64,7 +64,7 @@ const MOCK_EVENTS = {
       id: Math.floor(Math.random() * 1000000),
       status: 'success',
       reference: `REF_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-      amount: 500000, // ₦5,000 in kobo
+      amount: 500000,
       paid_at: new Date().toISOString(),
       paidAt: new Date().toISOString(),
       customer: {
@@ -140,23 +140,6 @@ const MOCK_EVENTS = {
       message: 'Charge refunded',
       refund_amount: 500000
     }
-  },
-
-  'customer.identification.success': {
-    event: 'customer.identification.success',
-    data: {
-      id: 12345,
-      customer_code: 'CUS_1234567890',
-      email: 'test@cortex-platform.com',
-      first_name: 'Test',
-      last_name: 'User',
-      phone: '+2349010251577',
-      identified: true,
-      identification: {
-        type: 'bvn',
-        value: '12345678901'
-      }
-    }
   }
 };
 
@@ -165,10 +148,6 @@ const MOCK_EVENTS = {
 // ============================================
 
 function generateWebhookSignature(payload) {
-  /**
-   * Paystack uses HMAC-SHA512 for webhook signatures
-   * Signature = hex(HMAC-SHA512(SECRET_KEY, payload))
-   */
   return crypto
     .createHmac('sha512', WEBHOOK_SECRET)
     .update(payload)
