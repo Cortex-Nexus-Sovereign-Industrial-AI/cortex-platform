@@ -10,6 +10,8 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Paystack Inline JS -->
+  <script src="https://js.paystack.co/v1/inline.js"></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -29,1015 +31,123 @@
       "addressCountry": "Nigeria"
     },
     "sameAs": [
-      "https://x.com/@cortexainexus",
-      "https://youtube.com/@MikecomplexAi",
+      "https://x.com/MikeComplexAie",
+      "https://www.youtube.com/@MikecomplexAI-i2e",
+      "https://www.linkedin.com/in/michaelujukumorim",
+      "https://medium.com/@mikecomplexai",
+      "https://www.tiktok.com/@cinisnio.ai",
       "https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform"
-    ]
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+2349010251577",
+      "contactType": "customer support",
+      "availableLanguage": "English"
+    }
   }
   </script>
 </head>
 <body>
-  <!-- AUTH OVERLAY (Sign In / Sign Up) -->
-  <div id="auth-overlay" class="auth-overlay">
-    <div class="auth-card">
-      <div class="auth-logo">⚡</div>
-      <h2 id="auth-title">Welcome to Cortex</h2>
-      <p class="auth-subtitle">Sovereign Industrial AI Core</p>
-      <form id="auth-form" onsubmit="handleAuth(event)">
-        <div id="name-field" class="form-group" style="display:none;">
-          <label>Full Name</label>
-          <input type="text" id="auth-name" placeholder="Michael Ujuku Morim" required>
-        </div>
-        <div class="form-group">
-          <label>Email</label>
-          <input type="email" id="auth-email" placeholder="cortexnexus@proton.me" required>
-        </div>
-        <div class="form-group">
-          <label>Password</label>
-          <input type="password" id="auth-password" placeholder="••••••••" required minlength="8">
-        </div>
-        <div id="confirm-field" class="form-group" style="display:none;">
-          <label>Confirm Password</label>
-          <input type="password" id="auth-confirm" placeholder="••••••••">
-        </div>
-        <button type="submit" class="btn-primary btn-full" id="auth-btn">Sign In</button>
-      </form>
-      <p class="auth-toggle">
-        <span id="auth-toggle-text">No account?</span>
-        <button onclick="toggleAuthMode()" class="link-btn" id="auth-toggle-btn">Create one</button>
-      </p>
-      <div class="auth-divider"><span>or</span></div>
-      <button class="btn-secondary btn-full" onclick="guestAccess()">Continue as Guest</button>
-    </div>
-  </div>
-
-  <!-- MAIN APP (hidden until auth) -->
-  <div id="app" style="display:none;">
-
-    <!-- TOP BAR -->
-    <div class="top-bar">
-      <div class="top-bar-left">
-        <div class="logo-sm">⚡</div>
-        <span class="brand-text">CORTEX</span>
+  <!-- MAIN APP WITH ALL SECTIONS -->
+  <div id="app">
+    <!-- SOCIAL NEXUS SECTION -->
+    <section id="tab-social">
+      <div class="page-header">
+        <h1>🌐 Social Nexus</h1>
+        <p>All Connected Media Channels</p>
       </div>
-      <div class="top-bar-center">
-        <div class="search-box">
-          <span>🔍</span>
-          <input type="text" placeholder="Search platform, commands, AI tasks..." id="global-search">
-        </div>
+      <div class="social-grid">
+        <a href="https://x.com/MikeComplexAie" target="_blank" class="social-card x-card">
+          <div class="social-icon">𝕏</div>
+          <h3>X (Twitter)</h3>
+          <p class="social-handle">@MikeComplexAie</p>
+          <p class="social-desc">Real-time technical updates and industry insights</p>
+          <span class="social-link">Open Profile →</span>
+        </a>
+        <a href="https://www.youtube.com/@MikecomplexAI-i2e" target="_blank" class="social-card yt-card">
+          <div class="social-icon">▶️</div>
+          <h3>YouTube</h3>
+          <p class="social-handle">@MikecomplexAI-i2e</p>
+          <p class="social-desc">Deep-dive video documentation and architecture reviews</p>
+          <span class="social-link">Open Channel →</span>
+        </a>
+        <a href="https://www.tiktok.com/@cinisnio.ai" target="_blank" class="social-card tt-card">
+          <div class="social-icon">🎵</div>
+          <h3>TikTok</h3>
+          <p class="social-handle">@cinisnio.ai</p>
+          <p class="social-desc">Dynamic platform demonstrations and workflow breakdowns</p>
+          <span class="social-link">Open Profile →</span>
+        </a>
+        <a href="https://medium.com/@mikecomplexai" target="_blank" class="social-card fb-card">
+          <div class="social-icon">📰</div>\n          <h3>Medium</h3>
+          <p class="social-handle">@mikecomplexai</p>
+          <p class="social-desc">Technical articles and in-depth analysis</p>
+          <span class="social-link">Open Page →</span>
+        </a>
+        <a href="https://www.linkedin.com/in/michaelujukumorim" target="_blank" class="social-card ig-card">
+          <div class="social-icon">💼</div>
+          <h3>LinkedIn</h3>
+          <p class="social-handle">michaelujukumorim</p>
+          <p class="social-desc">Professional networking and B2B opportunities</p>
+          <span class="social-link">Open Profile →</span>
+        </a>
+        <a href="https://www.snapchat.com/add/mikecomplexai" target="_blank" class="social-card li-card">
+          <div class="social-icon">👻</div>
+          <h3>Snapchat</h3>
+          <p class="social-handle">@mikecomplexai</p>
+          <p class="social-desc">Behind-the-scenes moments and daily updates</p>
+          <span class="social-link">Open Profile →</span>
+        </a>
       </div>
-      <div class="top-bar-right">
-        <button class="icon-btn" title="Notifications">🔔<span class="badge">3</span></button>
-        <button class="icon-btn" title="Messages">💬</button>
-        <div class="user-pill" onclick="toggleUserMenu()">
-          <div class="avatar" id="user-avatar">M</div>
-          <span id="user-name">Michael</span>
-          <span>▼</span>
-        </div>
-        <div id="user-menu" class="dropdown-menu">
-          <a href="#" onclick="switchTab('settings'); toggleUserMenu(); return false;">⚙️ Settings</a>
-          <a href="#" onclick="switchTab('business'); toggleUserMenu(); return false;">🏢 Business Profile</a>
-          <div class="dropdown-divider"></div>
-          <a href="#" onclick="signOut(); return false;" class="text-danger">🚪 Sign Out</a>
-        </div>
+    </section>
+
+    <!-- BUSINESS HUB SECTION -->
+    <section id="tab-business">
+      <div class="page-header">
+        <h1>🏢 Business Hub</h1>
+        <p>Executive Networks, Communication Endpoints & Infrastructure Nodes</p>
       </div>
-    </div>
-
-    <!-- SIDEBAR + CONTENT -->
-    <div class="layout">
-      <!-- SIDEBAR NAVIGATION -->
-      <aside class="sidebar" id="sidebar">
-        <nav class="nav-section">
-          <div class="nav-label">Platform</div>
-          <button class="nav-item active" data-tab="dashboard" onclick="switchTab('dashboard')">
-            <span class="nav-icon">📊</span>
-            <span class="nav-text">Dashboard</span>
-          </button>
-          <button class="nav-item" data-tab="ai-workspace" onclick="switchTab('ai-workspace')">
-            <span class="nav-icon">🤖</span>
-            <span class="nav-text">AI Workspace</span>
-            <span class="nav-badge">LIVE</span>
-          </button>
-          <button class="nav-item" data-tab="business" onclick="switchTab('business')">
-            <span class="nav-icon">🏢</span>
-            <span class="nav-text">Business Hub</span>
-          </button>
-        </nav>
-
-        <nav class="nav-section">
-          <div class="nav-label">Commerce</div>
-          <button class="nav-item" data-tab="shopify" onclick="switchTab('shopify')">
-            <span class="nav-icon">🛒</span>
-            <span class="nav-text">Shopify Store</span>
-          </button>
-          <button class="nav-item" data-tab="payments" onclick="switchTab('payments')">
-            <span class="nav-icon">💳</span>
-            <span class="nav-text">Payments</span>
-          </button>
-          <button class="nav-item" data-tab="orders" onclick="switchTab('orders')">
-            <span class="nav-icon">📦</span>
-            <span class="nav-text">Orders</span>
-          </button>
-        </nav>
-
-        <nav class="nav-section">
-          <div class="nav-label">Presence</div>
-          <button class="nav-item" data-tab="social" onclick="switchTab('social')">
-            <span class="nav-icon">🌐</span>
-            <span class="nav-text">Social Nexus</span>
-          </button>
-          <button class="nav-item" data-tab="content" onclick="switchTab('content')">
-            <span class="nav-icon">📝</span>
-            <span class="nav-text">Content Studio</span>
-          </button>
-        </nav>
-
-        <nav class="nav-section">
-          <div class="nav-label">System</div>
-          <button class="nav-item" data-tab="settings" onclick="switchTab('settings')">
-            <span class="nav-icon">⚙️</span>
-            <span class="nav-text">Settings</span>
-          </button>
-          <button class="nav-item" data-tab="help" onclick="switchTab('help')">
-            <span class="nav-icon">❓</span>
-            <span class="nav-text">Help & Docs</span>
-          </button>
-        </nav>
-
-        <div class="sidebar-footer">
-          <div class="sovereign-badge">
-            <span>🛡️</span>
-            <div>
-              <div class="sovereign-title">Sovereign Mode</div>
-              <div class="sovereign-status">Edge-resilient active</div>
-            </div>
+      <div class="biz-grid">
+        <div class="biz-card">
+          <div class="biz-icon">🌐</div>
+          <h3>Executive Networks</h3>
+          <div class="biz-links">
+            <a href="https://about.me/mikecomplexai" target="_blank">🆔 about.me/mikecomplexai</a>
+            <a href="https://www.linkedin.com/in/michaelujukumorim" target="_blank">💼 LinkedIn Profile</a>
+            <a href="https://medium.com/@mikecomplexai" target="_blank">📰 Medium Articles</a>
+            <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform" target="_blank">💻 GitHub Repository</a>
           </div>
         </div>
-      </aside>
-
-      <!-- MAIN CONTENT -->
-      <main class="main-content" id="main-content">
-
-        <!-- DASHBOARD -->
-        <section id="tab-dashboard" class="tab-panel active">
-          <div class="page-header">
-            <h1>Dashboard</h1>
-            <p>Real-time overview of your sovereign industrial operations</p>
+        <div class="biz-card">
+          <div class="biz-icon">📡</div>
+          <h3>Direct Communication</h3>
+          <div class="biz-links">
+            <a href="mailto:cortexnexus@proton.me">📧 cortexnexus@proton.me</a>
+            <a href="https://wa.me/2349010251577" target="_blank">📱 WhatsApp: +234 901 025 1577</a>
+            <a href="https://t.me/mikecomplexai" target="_blank">✈️ Telegram: @mikecomplexai</a>
+            <a href="https://www.snapchat.com/add/mikecomplexai" target="_blank">👻 Snapchat: @mikecomplexai</a>
           </div>
-
-          <div class="stats-grid">
-            <div class="stat-card stat-live">
-              <div class="stat-icon">🟢</div>
-              <div class="stat-info">
-                <div class="stat-label">Platform Status</div>
-                <div class="stat-value">LIVE</div>
-                <div class="stat-sub">cortex-platforms.netlify.app</div>
-              </div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-icon">🤖</div>
-              <div class="stat-info">
-                <div class="stat-label">AI Agents Active</div>
-                <div class="stat-value" id="stat-agents">4</div>
-                <div class="stat-sub">Cortex · MikeComplex · Builder · Scout</div>
-              </div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-icon">💰</div>
-              <div class="stat-info">
-                <div class="stat-label">Revenue Today</div>
-                <div class="stat-value" id="stat-revenue">₦0.00</div>
-                <div class="stat-sub">Paystack + Flutterwave ready</div>
-              </div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-icon">🛡️</div>
-              <div class="stat-info">
-                <div class="stat-label">Data Sovereignty</div>
-                <div class="stat-value">100%</div>
-                <div class="stat-sub">Edge-resilient · Offline-first</div>
-              </div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-icon">📦</div>
-              <div class="stat-info">
-                <div class="stat-label">Orders Today</div>
-                <div class="stat-value" id="stat-orders">0</div>
-                <div class="stat-sub">Across all channels</div>
-              </div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-icon">👥</div>
-              <div class="stat-info">
-                <div class="stat-label">Active Users</div>
-                <div class="stat-value" id="stat-users">1</div>
-                <div class="stat-sub">Currently online</div>
-              </div>
-            </div>
+        </div>
+        <div class="biz-card">
+          <div class="biz-icon">🎬</div>
+          <h3>Content & Media</h3>
+          <div class="biz-links">
+            <a href="https://www.youtube.com/@MikecomplexAI-i2e" target="_blank">▶️ YouTube Channel</a>
+            <a href="https://www.tiktok.com/@cinisnio.ai" target="_blank">🎵 TikTok: @cinisnio.ai</a>
+            <a href="https://x.com/MikeComplexAie" target="_blank">𝕏 X (Twitter): @MikeComplexAie</a>
           </div>
-
-          <div class="dashboard-row">
-            <div class="panel">
-              <div class="panel-header">
-                <h3>📡 System Activity Log</h3>
-                <button class="btn-sm" onclick="clearLog()">Clear</button>
-              </div>
-              <div class="log-container" id="activity-log">
-                <div class="log-entry"><span class="log-time">[11:00:01]</span> <span class="log-success">Platform initialized — Cortex Nexus online</span></div>
-                <div class="log-entry"><span class="log-time">[11:00:02]</span> <span class="log-success">AI agents loaded — 4 modules active</span></div>
-                <div class="log-entry"><span class="log-time">[11:00:03]</span> <span class="log-warn">Webhook engine standby — Paystack/Flutterwave</span></div>
-                <div class="log-entry"><span class="log-time">[11:00:04]</span> <span class="log-info">Shopify bridge: awaiting connection</span></div>
-                <div class="log-entry"><span class="log-time">[11:00:05]</span> <span class="log-accent">Social nexus: X, TikTok, YouTube, Facebook ready</span></div>
-              </div>
-            </div>
-            <div class="panel">
-              <div class="panel-header">
-                <h3>⚡ Quick Actions</h3>
-              </div>
-              <div class="quick-actions">
-                <button class="action-btn" onclick="quickAction('Generate business email')">
-                  <span>📧</span>
-                  <div>
-                    <div class="action-title">Generate Email</div>
-                    <div class="action-desc">AI-powered business correspondence</div>
-                  </div>
-                </button>
-                <button class="action-btn" onclick="quickAction('Write Python automation script')">
-                  <span>🐍</span>
-                  <div>
-                    <div class="action-title">Write Code</div>
-                    <div class="action-desc">Python/JS automation scripts</div>
-                  </div>
-                </button>
-                <button class="action-btn" onclick="quickAction('Create marketing campaign')">
-                  <span>🎯</span>
-                  <div>
-                    <div class="action-title">Marketing</div>
-                    <div class="action-desc">Campaign copy & strategy</div>
-                  </div>
-                </button>
-                <button class="action-btn" onclick="quickAction('Analyze market trends')">
-                  <span>📈</span>
-                  <div>
-                    <div class="action-title">Analyze</div>
-                    <div class="action-desc">Market intelligence reports</div>
-                  </div>
-                </button>
-                <button class="action-btn" onclick="quickAction('Draft social media post')">
-                  <span>🌐</span>
-                  <div>
-                    <div class="action-title">Social Post</div>
-                    <div class="action-desc">Cross-platform content</div>
-                  </div>
-                </button>
-                <button class="action-btn" onclick="quickAction('Create product listing')">
-                  <span>🛒</span>
-                  <div>
-                    <div class="action-title">Product Listing</div>
-                    <div class="action-desc">Shopify-ready descriptions</div>
-                  </div>
-                </button>
-              </div>
-            </div>
+        </div>
+        <div class="biz-card">
+          <div class="biz-icon">🏗️</div>
+          <h3>Infrastructure Nodes</h3>
+          <div class="biz-links">
+            <a href="https://cinisnio.ai" target="_blank">🎯 cinisnio.ai</a>
+            <a href="https://corte.io" target="_blank">🔗 corte.io</a>
+            <a href="https://cortex-platforms.netlify.app" target="_blank">⚡ cortex-platforms.netlify.app</a>
           </div>
-        </section>
-
-        <!-- AI WORKSPACE -->
-        <section id="tab-ai-workspace" class="tab-panel">
-          <div class="page-header">
-            <h1>🤖 AI Workspace</h1>
-            <p>Your sovereign AI command center — build, code, write, analyze</p>
-          </div>
-
-          <div class="ai-layout">
-            <!-- AI CHAT -->
-            <div class="ai-chat-panel">
-              <div class="ai-chat-header">
-                <div class="ai-persona-display">
-                  <div class="ai-avatar" id="ai-avatar">⚡</div>
-                  <div>
-                    <div class="ai-name" id="ai-name">Cortex Nexus</div>
-                    <div class="ai-status"><span class="status-dot"></span> Online — Sovereign Industrial Core</div>
-                  </div>
-                </div>
-                <button class="btn-sm" onclick="clearAiChat()">Clear Chat</button>
-              </div>
-              <div class="ai-chat-messages" id="ai-chat-messages">
-                <div class="message ai-message">
-                  <div class="message-avatar">⚡</div>
-                  <div class="message-bubble">
-                    <div class="message-sender">Cortex Nexus</div>
-                    <div class="message-text">Sovereign industrial AI core online. I am your deterministic command node for CINIS NEXUS INDUSTRY HQ. How may I assist your operations today?</div>
-                    <div class="message-time">Just now</div>
-                  </div>
-                </div>
-              </div>
-              <div class="ai-chat-input">
-                <div class="input-toolbar">
-                  <button title="Attach file">📎</button>
-                  <button title="Voice input">🎤</button>
-                  <button title="Code mode">💻</button>
-                </div>
-                <div class="input-row">
-                  <textarea id="ai-input" placeholder="Ask Cortex to build, code, write, analyze, or orchestrate..." rows="1"></textarea>
-                  <button class="send-btn" onclick="sendAiMessage()">➤</button>
-                </div>
-              </div>
-            </div>
-
-            <!-- AI SIDEBAR -->
-            <div class="ai-sidebar">
-              <div class="panel">
-                <div class="panel-header"><h3>🎙️ Voice & Persona</h3></div>
-                <div class="voice-list">
-                  <div class="voice-card active" onclick="switchVoice('cortex')" data-voice="cortex">
-                    <div class="voice-avatar" style="background:linear-gradient(135deg,#4f46e5,#7c3aed)">⚡</div>
-                    <div class="voice-info">
-                      <div class="voice-name">Cortex Nexus</div>
-                      <div class="voice-desc">Sovereign command — authoritative, precise</div>
-                    </div>
-                  </div>
-                  <div class="voice-card" onclick="switchVoice('mikecomplex')" data-voice="mikecomplex">
-                    <div class="voice-avatar" style="background:linear-gradient(135deg,#0f766e,#14b8a6)">🧠</div>
-                    <div class="voice-info">
-                      <div class="voice-name">MikeComplex AI</div>
-                      <div class="voice-desc">Strategic advisor — visionary, business-focused</div>
-                    </div>
-                  </div>
-                  <div class="voice-card" onclick="switchVoice('builder')" data-voice="builder">
-                    <div class="voice-avatar" style="background:linear-gradient(135deg,#b45309,#f59e0b)">🔨</div>
-                    <div class="voice-info">
-                      <div class="voice-name">Builder Bot</div>
-                      <div class="voice-desc">Code & infrastructure — technical, hands-on</div>
-                    </div>
-                  </div>
-                  <div class="voice-card" onclick="switchVoice('scout')" data-voice="scout">
-                    <div class="voice-avatar" style="background:linear-gradient(135deg,#be185d,#ec4899)">🔍</div>
-                    <div class="voice-info">
-                      <div class="voice-name">Scout AI</div>
-                      <div class="voice-desc">Research & intelligence — curious, data-driven</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="panel">
-                <div class="panel-header"><h3>🛠️ Quick Tools</h3></div>
-                <div class="tool-grid">
-                  <button class="tool-btn" onclick="quickTask('Generate business email')">📧 Email</button>
-                  <button class="tool-btn" onclick="quickTask('Write Python script')">🐍 Python</button>
-                  <button class="tool-btn" onclick="quickTask('Write JavaScript function')">📜 JS</button>
-                  <button class="tool-btn" onclick="quickTask('Create HTML component')">🌐 HTML</button>
-                  <button class="tool-btn" onclick="quickTask('Write product description')">✍️ Copy</button>
-                  <button class="tool-btn" onclick="quickTask('Generate SEO keywords')">🔍 SEO</button>
-                  <button class="tool-btn" onclick="quickTask('Create social media post')">📱 Social</button>
-                  <button class="tool-btn" onclick="quickTask('Analyze sales data')">📊 Data</button>
-                </div>
-              </div>
-
-              <div class="panel">
-                <div class="panel-header"><h3>📋 Recent Tasks</h3></div>
-                <div class="task-list" id="ai-task-list">
-                  <div class="task-item empty">No tasks yet. Start by asking Cortex above.</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- BUSINESS HUB -->
-        <section id="tab-business" class="tab-panel">
-          <div class="page-header">
-            <h1>🏢 Business Hub</h1>
-            <p>Industrial operations, CRM, and strategic business layers</p>
-          </div>
-
-          <div class="biz-grid">
-            <div class="biz-card">
-              <div class="biz-icon">🏭</div>
-              <h3>Industrial Operations</h3>
-              <div class="biz-links">
-                <a href="#" onclick="logAction('Production Orchestration opened')">⚙️ Production Orchestration</a>
-                <a href="#" onclick="logAction('Supply Chain Monitor opened')">📦 Supply Chain Monitor</a>
-                <a href="#" onclick="logAction('Equipment Maintenance opened')">🔧 Equipment Maintenance</a>
-                <a href="#" onclick="logAction('Quality Control opened')">📊 Quality Control Dashboard</a>
-                <a href="#" onclick="logAction('Workforce Scheduler opened')">👷 Workforce Scheduler</a>
-              </div>
-            </div>
-            <div class="biz-card">
-              <div class="biz-icon">📋</div>
-              <h3>Business Layers</h3>
-              <div class="biz-links">
-                <a href="#" onclick="logAction('Email Campaign Generator opened')">📧 Email Campaign Generator</a>
-                <a href="#" onclick="logAction('Content Studio opened')">📝 Content Studio</a>
-                <a href="#" onclick="logAction('Marketing Automation opened')">🎯 Marketing Automation</a>
-                <a href="#" onclick="logAction('CRM opened')">👥 CRM & Lead Management</a>
-                <a href="#" onclick="logAction('Invoice Generator opened')">🧾 Invoice Generator</a>
-              </div>
-            </div>
-            <div class="biz-card">
-              <div class="biz-icon">🌐</div>
-              <h3>Identity & Presence</h3>
-              <div class="biz-links">
-                <a href="https://about.me/mikecomplexai" target="_blank">🆔 about.me/mikecomplexai</a>
-                <a href="mailto:cortexnexus@proton.me">🔒 cortexnexus@proton.me</a>
-                <a href="#">📍 Ogoja, Cross River State, Nigeria</a>
-                <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform" target="_blank">💻 GitHub Repository</a>
-              </div>
-            </div>
-            <div class="biz-card">
-              <div class="biz-icon">📊</div>
-              <h3>Analytics & Reports</h3>
-              <div class="biz-links">
-                <a href="#" onclick="logAction('Revenue Report opened')">💰 Revenue Report</a>
-                <a href="#" onclick="logAction('Customer Analytics opened')">👥 Customer Analytics</a>
-                <a href="#" onclick="logAction('Inventory Report opened')">📦 Inventory Report</a>
-                <a href="#" onclick="logAction('Social Media Metrics opened')">🌐 Social Media Metrics</a>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- SHOPIFY STORE -->
-        <section id="tab-shopify" class="tab-panel">
-          <div class="page-header">
-            <h1>🛒 Shopify Store</h1>
-            <p>Unified e-commerce integration with AI-powered commerce</p>
-          </div>
-
-          <div class="shopify-hero">
-            <div class="shopify-icon">🛒</div>
-            <h2>Connect Your Shopify Store</h2>
-            <p>Link your Shopify store to Cortex Platform for unified inventory, order management, AI-powered product recommendations, and cross-channel analytics.</p>
-            <div class="shopify-actions">
-              <button class="btn-primary btn-lg" onclick="connectShopify()">🔗 Connect Shopify Store</button>
-              <button class="btn-secondary btn-lg" onclick="viewIntegrationDocs()">📋 View Integration Docs</button>
-            </div>
-          </div>
-
-          <div class="feature-grid">
-            <div class="feature-card">
-              <div class="feature-icon">📦</div>
-              <h4>Inventory Sync</h4>
-              <p>Real-time stock levels synchronized across all sales channels. Never oversell again.</p>
-            </div>
-            <div class="feature-card">
-              <div class="feature-icon">🤖</div>
-              <h4>AI Recommendations</h4>
-              <p>Smart product suggestions powered by Cortex AI to increase average order value.</p>
-            </div>
-            <div class="feature-card">
-              <div class="feature-icon">📊</div>
-              <h4>Sales Analytics</h4>
-              <p>Unified revenue dashboard combining Shopify, direct sales, and social commerce data.</p>
-            </div>
-            <div class="feature-card">
-              <div class="feature-icon">🔔</div>
-              <h4>Order Alerts</h4>
-              <p>Instant push notifications and webhook alerts for every new order across platforms.</p>
-            </div>
-            <div class="feature-card">
-              <div class="feature-icon">✍️</div>
-              <h4>AI Product Descriptions</h4>
-              <p>Generate SEO-optimized product copy, titles, and tags with one click.</p>
-            </div>
-            <div class="feature-card">
-              <div class="feature-icon">🎯</div>
-              <h4>Abandoned Cart Recovery</h4>
-              <p>Automated email and SMS sequences to recover lost sales.</p>
-            </div>
-          </div>
-
-          <div class="panel" style="margin-top:24px;">
-            <div class="panel-header"><h3>🔗 Store Connection Status</h3></div>
-            <div class="connection-status">
-              <div class="status-row">
-                <span>Shopify Store URL</span>
-                <span class="status-pending" id="shopify-url">Not connected</span>
-              </div>
-              <div class="status-row">
-                <span>API Connection</span>
-                <span class="status-pending" id="shopify-api">Pending</span>
-              </div>
-              <div class="status-row">
-                <span>Webhook Sync</span>
-                <span class="status-pending" id="shopify-webhook">Pending</span>
-              </div>
-              <div class="status-row">
-                <span>Inventory Bridge</span>
-                <span class="status-pending" id="shopify-inventory">Pending</span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- PAYMENTS -->
-        <section id="tab-payments" class="tab-panel">
-          <div class="page-header">
-            <h1>💳 Payments</h1>
-            <p>Paystack & Flutterwave integration hub for Nigerian & global commerce</p>
-          </div>
-
-          <div class="payments-grid">
-            <div class="payment-card">
-              <div class="payment-header" style="background:linear-gradient(135deg,#059669,#10b981)">
-                <div class="payment-logo">💚</div>
-                <h3>Paystack</h3>
-                <span class="payment-badge">Primary</span>
-              </div>
-              <div class="payment-body">
-                <div class="endpoint-box">
-                  <label>Webhook Endpoint</label>
-                  <code>https://cortex-platforms.netlify.app/api/webhooks/paystack</code>
-                </div>
-                <div class="payment-stats">
-                  <div><span class="stat-num" id="paystack-total">₦0.00</span><span class="stat-label">Total Processed</span></div>
-                  <div><span class="stat-num" id="paystack-success">0</span><span class="stat-label">Successful</span></div>
-                  <div><span class="stat-num" id="paystack-pending">0</span><span class="stat-label">Pending</span></div>
-                </div>
-                <div class="payment-actions">
-                  <button class="btn-primary" onclick="testPaystack()">🧪 Test Payment</button>
-                  <button class="btn-secondary" onclick="viewPaystackLogs()">📋 View Logs</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="payment-card">
-              <div class="payment-header" style="background:linear-gradient(135deg,#d97706,#f59e0b)">
-                <div class="payment-logo">🧡</div>
-                <h3>Flutterwave</h3>
-                <span class="payment-badge">Secondary</span>
-              </div>
-              <div class="payment-body">
-                <div class="endpoint-box">
-                  <label>Webhook Endpoint</label>
-                  <code>https://cortex-platforms.netlify.app/api/webhooks/flutterwave</code>
-                </div>
-                <div class="payment-stats">
-                  <div><span class="stat-num" id="flutterwave-total">₦0.00</span><span class="stat-label">Total Processed</span></div>
-                  <div><span class="stat-num" id="flutterwave-success">0</span><span class="stat-label">Successful</span></div>
-                  <div><span class="stat-num" id="flutterwave-pending">0</span><span class="stat-label">Pending</span></div>
-                </div>
-                <div class="payment-actions">
-                  <button class="btn-primary" style="background:linear-gradient(135deg,#d97706,#f59e0b)" onclick="testFlutterwave()">🧪 Test Payment</button>
-                  <button class="btn-secondary" onclick="viewFlutterwaveLogs()">📋 View Logs</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="payment-summary">
-              <div class="panel">
-                <div class="panel-header"><h3>📈 Transaction Overview</h3></div>
-                <div class="summary-stats">
-                  <div class="summary-row">
-                    <span>Total Processed</span>
-                    <span class="summary-value" id="total-processed">₦0.00</span>
-                  </div>
-                  <div class="summary-row">
-                    <span>Successful</span>
-                    <span class="summary-value success" id="total-success">0</span>
-                  </div>
-                  <div class="summary-row">
-                    <span>Pending</span>
-                    <span class="summary-value warn" id="total-pending">0</span>
-                  </div>
-                  <div class="summary-row">
-                    <span>Failed</span>
-                    <span class="summary-value danger" id="total-failed">0</span>
-                  </div>
-                  <div class="summary-row">
-                    <span>Refunded</span>
-                    <span class="summary-value" id="total-refunded">₦0.00</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- ORDERS -->
-        <section id="tab-orders" class="tab-panel">
-          <div class="page-header">
-            <h1>📦 Orders</h1>
-            <p>Unified order management across all channels</p>
-          </div>
-          <div class="panel">
-            <div class="panel-header">
-              <h3>Recent Orders</h3>
-              <div class="panel-actions">
-                <button class="btn-sm">Filter</button>
-                <button class="btn-sm">Export</button>
-              </div>
-            </div>
-            <div class="table-container">
-              <table class="data-table">
-                <thead>
-                  <tr><th>Order ID</th><th>Customer</th><th>Channel</th><th>Amount</th><th>Status</th><th>Date</th><th>Actions</th></tr>
-                </thead>
-                <tbody id="orders-table">
-                  <tr class="empty-row"><td colspan="7">No orders yet. Connect your Shopify store or receive your first payment.</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </section>
-
-        <!-- SOCIAL NEXUS -->
-        <section id="tab-social" class="tab-panel">
-          <div class="page-header">
-            <h1>🌐 Social Nexus</h1>
-            <p>Connected media channels and social command center</p>
-          </div>
-
-          <div class="social-grid">
-            <a href="https://x.com/@cortexainexus" target="_blank" class="social-card x-card">
-              <div class="social-icon">𝕏</div>
-              <h3>X (Twitter)</h3>
-              <p class="social-handle">@cortexainexus</p>
-              <p class="social-desc">Real-time technical updates and industry insights</p>
-              <span class="social-link">Open Profile →</span>
-            </a>
-            <a href="https://youtube.com/@MikecomplexAi" target="_blank" class="social-card yt-card">
-              <div class="social-icon">▶️</div>
-              <h3>YouTube</h3>
-              <p class="social-handle">@MikecomplexAi</p>
-              <p class="social-desc">Deep-dive video documentation and architecture reviews</p>
-              <span class="social-link">Open Channel →</span>
-            </a>
-            <div class="social-card tt-card">
-              <div class="social-icon">🎵</div>
-              <h3>TikTok Hub</h3>
-              <p class="social-handle">Connected Profile</p>
-              <p class="social-desc">Dynamic platform demonstrations and workflow breakdowns</p>
-              <span class="social-link">Open Profile →</span>
-            </div>
-            <div class="social-card fb-card">
-              <div class="social-icon">📘</div>
-              <h3>Facebook</h3>
-              <p class="social-handle">Business Page</p>
-              <p class="social-desc">Community engagement, updates, and business networking</p>
-              <span class="social-link">Open Page →</span>
-            </div>
-            <div class="social-card ig-card">
-              <div class="social-icon">📷</div>
-              <h3>Instagram</h3>
-              <p class="social-handle">Business Profile</p>
-              <p class="social-desc">Visual storytelling and product showcases</p>
-              <span class="social-link">Open Profile →</span>
-            </div>
-            <div class="social-card li-card">
-              <div class="social-icon">💼</div>
-              <h3>LinkedIn</h3>
-              <p class="social-handle">Company Page</p>
-              <p class="social-desc">B2B networking and industry thought leadership</p>
-              <span class="social-link">Open Page →</span>
-            </div>
-          </div>
-
-          <div class="panel" style="margin-top:24px;">
-            <div class="panel-header"><h3>📢 Social Media Command Center</h3></div>
-            <div class="social-tools">
-              <button class="social-tool-btn" onclick="logAction('Compose cross-platform post')">
-                <span>📝</span>
-                <div>
-                  <div class="tool-title">Compose Post</div>
-                  <div class="tool-desc">Write once, publish everywhere</div>
-                </div>
-              </button>
-              <button class="social-tool-btn" onclick="logAction('Content calendar opened')">
-                <span>📅</span>
-                <div>
-                  <div class="tool-title">Content Calendar</div>
-                  <div class="tool-desc">Schedule across all platforms</div>
-                </div>
-              </button>
-              <button class="social-tool-btn" onclick="logAction('Engagement analytics opened')">
-                <span>📊</span>
-                <div>
-                  <div class="tool-title">Engagement Analytics</div>
-                  <div class="tool-desc">Track performance metrics</div>
-                </div>
-              </button>
-              <button class="social-tool-btn" onclick="logAction('AI content generator opened')">
-                <span>🤖</span>
-                <div>
-                  <div class="tool-title">AI Generator</div>
-                  <div class="tool-desc">Auto-generate platform-specific content</div>
-                </div>
-              </button>
-            </div>
-          </div>
-        </section>
-
-        <!-- CONTENT STUDIO -->
-        <section id="tab-content" class="tab-panel">
-          <div class="page-header">
-            <h1>📝 Content Studio</h1>
-            <p>AI-powered content creation for all your business needs</p>
-          </div>
-          <div class="content-studio">
-            <div class="content-sidebar">
-              <div class="content-categories">
-                <button class="content-cat active" onclick="setContentType('email')">📧 Emails</button>
-                <button class="content-cat" onclick="setContentType('social')">🌐 Social</button>
-                <button class="content-cat" onclick="setContentType('product')">🛒 Product</button>
-                <button class="content-cat" onclick="setContentType('blog')">📝 Blog</button>
-                <button class="content-cat" onclick="setContentType('ad')">🎯 Ads</button>
-                <button class="content-cat" onclick="setContentType('seo')">🔍 SEO</button>
-              </div>
-            </div>
-            <div class="content-editor">
-              <div class="editor-header">
-                <h3 id="content-type-title">Email Campaign Generator</h3>
-                <div class="editor-actions">
-                  <button class="btn-sm" onclick="generateContent()">✨ Generate with AI</button>
-                  <button class="btn-sm btn-secondary">💾 Save Draft</button>
-                </div>
-              </div>
-              <div class="editor-fields">
-                <div class="field-group">
-                  <label>Subject / Headline</label>
-                  <input type="text" id="content-subject" placeholder="Enter subject or headline...">
-                </div>
-                <div class="field-group">
-                  <label>Tone</label>
-                  <select id="content-tone">
-                    <option>Professional</option>
-                    <option>Friendly</option>
-                    <option>Persuasive</option>
-                    <option>Technical</option>
-                    <option>Casual</option>
-                  </select>
-                </div>
-                <div class="field-group">
-                  <label>Target Audience</label>
-                  <input type="text" id="content-audience" placeholder="e.g., Nigerian SMEs, industrial buyers...">
-                </div>
-                <div class="field-group">
-                  <label>Key Points / Brief</label>
-                  <textarea id="content-brief" rows="4" placeholder="Describe what you want to communicate..."></textarea>
-                </div>
-                <div class="field-group">
-                  <label>Generated Content</label>
-                  <textarea id="content-output" rows="8" placeholder="AI-generated content will appear here..." readonly></textarea>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- SETTINGS -->
-        <section id="tab-settings" class="tab-panel">
-          <div class="page-header">
-            <h1>⚙️ Settings</h1>
-            <p>Platform configuration, API keys, and account management</p>
-          </div>
-
-          <div class="settings-layout">
-            <div class="settings-nav">
-              <button class="settings-nav-item active" onclick="setSettingsTab('account')">👤 Account</button>
-              <button class="settings-nav-item" onclick="setSettingsTab('api')">🔌 API Connections</button>
-              <button class="settings-nav-item" onclick="setSettingsTab('payments')">💳 Payment Config</button>
-              <button class="settings-nav-item" onclick="setSettingsTab('notifications')">🔔 Notifications</button>
-              <button class="settings-nav-item" onclick="setSettingsTab('security')">🔐 Security</button>
-              <button class="settings-nav-item" onclick="setSettingsTab('appearance')">🎨 Appearance</button>
-            </div>
-
-            <div class="settings-content">
-              <!-- Account Settings -->
-              <div id="settings-account" class="settings-panel active">
-                <h3>Account Information</h3>
-                <div class="form-group">
-                  <label>Full Name</label>
-                  <input type="text" value="Michael Ujuku Morim" id="settings-name">
-                </div>
-                <div class="form-group">
-                  <label>Email</label>
-                  <input type="email" value="cortexnexus@proton.me" id="settings-email">
-                </div>
-                <div class="form-group">
-                  <label>Company</label>
-                  <input type="text" value="CINIS NEXUS INDUSTRY OGOJA" id="settings-company">
-                </div>
-                <div class="form-group">
-                  <label>Location</label>
-                  <input type="text" value="Ogoja, Cross River State, Nigeria" id="settings-location">
-                </div>
-                <button class="btn-primary" onclick="saveSettings()">💾 Save Changes</button>
-              </div>
-
-              <!-- API Settings -->
-              <div id="settings-api" class="settings-panel">
-                <h3>API Connections</h3>
-                <div class="api-list">
-                  <div class="api-item">
-                    <div class="api-info">
-                      <div class="api-name">Paystack API</div>
-                      <div class="api-desc">Payment processing for Nigerian markets</div>
-                    </div>
-                    <div class="api-status connected">● Connected</div>
-                  </div>
-                  <div class="api-item">
-                    <div class="api-info">
-                      <div class="api-name">Flutterwave API</div>
-                      <div class="api-desc">Cross-border payment processing</div>
-                    </div>
-                    <div class="api-status connected">● Connected</div>
-                  </div>
-                  <div class="api-item">
-                    <div class="api-info">
-                      <div class="api-name">Shopify API</div>
-                      <div class="api-desc">E-commerce store integration</div>
-                    </div>
-                    <div class="api-status pending">○ Pending</div>
-                  </div>
-                  <div class="api-item">
-                    <div class="api-info">
-                      <div class="api-name">GitHub Pages</div>
-                      <div class="api-desc">Static site deployment</div>
-                    </div>
-                    <div class="api-status connected">● Connected</div>
-                  </div>
-                  <div class="api-item">
-                    <div class="api-info">
-                      <div class="api-name">Google Cloud</div>
-                      <div class="api-desc">Cloud infrastructure & services</div>
-                    </div>
-                    <div class="api-status pending">○ Pending</div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Payment Config -->
-              <div id="settings-payments" class="settings-panel">
-                <h3>Payment Configuration</h3>
-                <div class="form-group">
-                  <label>Paystack Secret Key</label>
-                  <input type="password" placeholder="sk_test_xxxxxxxxxxxxxxxx" id="paystack-key">
-                  <small>Use environment variables in production. Never commit secrets.</small>
-                </div>
-                <div class="form-group">
-                  <label>Flutterwave Secret Key</label>
-                  <input type="password" placeholder="FLWSECK_TEST-xxxxxxxx" id="flutterwave-key">
-                </div>
-                <div class="form-group">
-                  <label>Webhook Secret (Paystack)</label>
-                  <input type="password" placeholder="whsec_xxxxxxxxxxxxxxxx" id="paystack-wh-secret">
-                </div>
-                <div class="form-group">
-                  <label>Webhook Secret (Flutterwave)</label>
-                  <input type="password" placeholder="Enter webhook secret..." id="flutterwave-wh-secret">
-                </div>
-                <button class="btn-primary" onclick="savePaymentConfig()">💾 Save Configuration</button>
-              </div>
-
-              <!-- Notifications -->
-              <div id="settings-notifications" class="settings-panel">
-                <h3>Notification Preferences</h3>
-                <div class="toggle-list">
-                  <div class="toggle-item">
-                    <span>Webhook Notifications</span>
-                    <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
-                  </div>
-                  <div class="toggle-item">
-                    <span>New Order Alerts</span>
-                    <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
-                  </div>
-                  <div class="toggle-item">
-                    <span>Payment Confirmations</span>
-                    <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
-                  </div>
-                  <div class="toggle-item">
-                    <span>AI Task Completions</span>
-                    <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
-                  </div>
-                  <div class="toggle-item">
-                    <span>Social Media Mentions</span>
-                    <label class="switch"><input type="checkbox"><span class="slider"></span></label>
-                  </div>
-                  <div class="toggle-item">
-                    <span>Email Digest (Daily)</span>
-                    <label class="switch"><input type="checkbox"><span class="slider"></span></label>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Security -->
-              <div id="settings-security" class="settings-panel">
-                <h3>Security Settings</h3>
-                <div class="form-group">
-                  <label>Current Password</label>
-                  <input type="password" placeholder="••••••••">
-                </div>
-                <div class="form-group">
-                  <label>New Password</label>
-                  <input type="password" placeholder="••••••••">
-                </div>
-                <div class="form-group">
-                  <label>Confirm New Password</label>
-                  <input type="password" placeholder="••••••••">
-                </div>
-                <button class="btn-primary" onclick="changePassword()">🔐 Update Password</button>
-                <div class="security-section">
-                  <h4>Two-Factor Authentication</h4>
-                  <p>Add an extra layer of security to your account.</p>
-                  <button class="btn-secondary">Enable 2FA</button>
-                </div>
-              </div>
-
-              <!-- Appearance -->
-              <div id="settings-appearance" class="settings-panel">
-                <h3>Appearance</h3>
-                <div class="toggle-list">
-                  <div class="toggle-item">
-                    <span>Dark Mode (Always On)</span>
-                    <label class="switch"><input type="checkbox" checked disabled><span class="slider"></span></label>
-                  </div>
-                  <div class="toggle-item">
-                    <span>Compact Sidebar</span>
-                    <label class="switch"><input type="checkbox" id="compact-sidebar"><span class="slider"></span></label>
-                  </div>
-                  <div class="toggle-item">
-                    <span>AI Auto-Assist</span>
-                    <label class="switch"><input type="checkbox" checked id="auto-assist"><span class="slider"></span></label>
-                  </div>
-                  <div class="toggle-item">
-                    <span>Sound Effects</span>
-                    <label class="switch"><input type="checkbox" id="sound-effects"><span class="slider"></span></label>
-                  </div>
-                </div>
-                <div class="accent-colors">
-                  <h4>Accent Color</h4>
-                  <div class="color-options">
-                    <button class="color-opt active" style="background:#6366f1" onclick="setAccent('#6366f1')"></button>
-                    <button class="color-opt" style="background:#10b981" onclick="setAccent('#10b981')"></button>
-                    <button class="color-opt" style="background:#f59e0b" onclick="setAccent('#f59e0b')"></button>
-                    <button class="color-opt" style="background:#ec4899" onclick="setAccent('#ec4899')"></button>
-                    <button class="color-opt" style="background:#06b6d4" onclick="setAccent('#06b6d4')"></button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- HELP & DOCS -->
-        <section id="tab-help" class="tab-panel">
-          <div class="page-header">
-            <h1>❓ Help & Documentation</h1>
-            <p>Guides, API docs, and support resources</p>
-          </div>
-          <div class="help-grid">
-            <div class="help-card">
-              <h3>🚀 Quick Start</h3>
-              <p>Get your platform up and running in 5 minutes.</p>
-              <a href="#">Read Guide →</a>
-            </div>
-            <div class="help-card">
-              <h3>🔌 API Documentation</h3>
-              <p>Webhook endpoints, authentication, and integration specs.</p>
-              <a href="#">View Docs →</a>
-            </div>
-            <div class="help-card">
-              <h3>🤖 AI Workspace Guide</h3>
-              <p>How to use Cortex, MikeComplex, Builder, and Scout AI agents.</p>
-              <a href="#">Learn More →</a>
-            </div>
-            <div class="help-card">
-              <h3>💳 Payment Setup</h3>
-              <p>Configure Paystack and Flutterwave webhooks securely.</p>
-              <a href="#">Setup Guide →</a>
-            </div>
-            <div class="help-card">
-              <h3>🛒 Shopify Integration</h3>
-              <p>Connect your store and sync inventory with Cortex.</p>
-              <a href="#">Integration Steps →</a>
-            </div>
-            <div class="help-card">
-              <h3>🔐 Security Best Practices</h3>
-              <p>Protecting secrets, webhooks, and user data.</p>
-              <a href="#">Security Guide →</a>
-            </div>
-          </div>
-        </section>
-
-      </main>
-    </div>
-
-    <!-- FOOTER -->
-    <footer class="app-footer">
-      <div class="footer-left">
-        <span>© 2026 CINIS NEXUS INDUSTRY OGOJA</span>
-        <span class="footer-dot">•</span>
-        <span>Sovereign Industrial AI Core</span>
+        </div>
       </div>
-      <div class="footer-right">
-        <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform" target="_blank">GitHub</a>
-        <a href="https://about.me/mikecomplexai" target="_blank">About</a>
-        <a href="mailto:cortexnexus@proton.me">Contact</a>
-        <span class="footer-version">v2.0.0-sovereign</span>
-      </div>
-    </footer>
+    </section>
   </div>
 
   <script src="app.js"></script>
