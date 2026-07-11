@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cortex Platform — Test Payment</title>
+<script src="https://js.paystack.co/v1/inline.js"></script>
+<style>
+  body {
+    font-family: -apple-system, Segoe UI, Roboto, sans-serif;
+    background: #0d1117;
+    color: #e6edf3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+  }
+  .card {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 12px;
+    padding: 32px;
+    width: 320px;
+    text-align: center;
+  }
+  h2 { margin-top: 0; }
+  input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 6px;
+    border: 1px solid #30363d;
+    background: #0d1117;
+    color: #e6edf3;
+    box-sizing: border-box;
+  }
+  button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 12px;
+    border: none;
+    border-radius: 6px;
+    background: #2ea043;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  button:hover { background: #3fb950; }
+  #status { margin-top: 16px; font-size: 14px; }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <h2>Test Payment — ₦100</h2>
+  <input type="email" id="email" placeholder="your-email@example.com" required>
+  <button onclick="payWithPaystack()">Pay ₦100 Now</button>
+  <div id="status"></div>
+</div>
+
+<script>
+  // ⚠️ TEST KEY — safe to use publicly, only works in Paystack test mode
+  const PAYSTACK_PUBLIC_KEY = "pk_test_cfeb04b79e16c6c813c17f654766bfd09c7ece0f";
+
+  function payWithPaystack() {
+    const email = document.getElementById('email').value;
+    const statusDiv = document.getElementById('status');
+
+    if (!email || !email.includes('@')) {
+      statusDiv.innerHTML = "⚠️ Enter a valid email first.";
+      statusDiv.style.color = "orange";
+      return;
+    }
+
+    statusDiv.innerHTML = "Opening Paystack...";
+    statusDiv.style.color = "#e6edf3";
+
+    const handler = PaystackPop.setup({
+      key: PAYSTACK_PUBLIC_KEY,
+      email: email,
+      amount: 10000, // ₦100 in kobo (Paystack uses smallest currency unit)
+      currency: "NGN",
+      ref: 'CORTEX_TEST_' + Math.floor((Math.random() * 1000000000) + 1),
+      callback: function(response) {
+        statusDiv.innerHTML = "✅ Payment successful! Reference: " + response.reference +
+          "<br><small>Verify this reference in your Paystack dashboard.</small>";
+        statusDiv.style.color = "#3fb950";
+      },
+      onClose: function() {
+        statusDiv.innerHTML = "Payment window closed.";
+        statusDiv.style.color = "orange";
+      }
+    });
+    handler.openIframe();
+  }
+</script>
+
+</body>
+</html>
