@@ -29,8 +29,8 @@ Founded by **Michael Ujuku Morim** in Ogoja, Cross River State, Nigeria.
 - **Email:** cortexnexus@proton.me
 
 ### 🏗️ Infrastructure Custom Domains
-- **Cinematic Analysis Hub:** [cinisnio.ai](https://cinisnio.ai)
-- **Matrix Routing Layer:** [corte.io](https://corte.io)
+- **Cinematic Analysis Hub:** [cortexintelligencenexusintelsolution.com](https://cortexintelligencenexusintelsolution.com)
+- **Matrix Routing Layer:** [getcortexintel.com](https://getcortexintel.com)
 
 ---
 
