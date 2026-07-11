@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CINIS NEXUS — Join Professional</title>
+<script src="https://js.paystack.co/v1/inline.js"></script>
+<style>
+  body {
+    font-family: -apple-system, Segoe UI, Roboto, sans-serif;
+    background: #0a0a0f;
+    color: #e6edf3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  .card {
+    background: #14141c;
+    border: 1px solid #2a2a38;
+    border-radius: 14px;
+    padding: 32px;
+    width: 340px;
+    text-align: center;
+  }
+  .badge {
+    display: inline-block;
+    background: #2ea04322;
+    color: #3fb950;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+  }
+  h2 { margin: 8px 0 4px; }
+  .price { font-size: 28px; font-weight: bold; margin: 8px 0 4px; }
+  .price span { font-size: 14px; color: #9198a1; font-weight: normal; }
+  ul {
+    text-align: left;
+    font-size: 14px;
+    color: #c9d1d9;
+    padding-left: 20px;
+    margin: 16px 0;
+  }
+  li { margin: 6px 0; }
+  input {
+    width: 100%;
+    padding: 11px;
+    margin: 8px 0;
+    border-radius: 6px;
+    border: 1px solid #2a2a38;
+    background: #0a0a0f;
+    color: #e6edf3;
+    box-sizing: border-box;
+    font-size: 14px;
+  }
+  button {
+    width: 100%;
+    padding: 13px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 6px;
+    background: #2ea043;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+  }
+  button:hover { background: #3fb950; }
+  button:disabled { background: #555; cursor: not-allowed; }
+  #status { margin-top: 14px; font-size: 13px; min-height: 18px; }
+  .lock { font-size: 12px; color: #6e7681; margin-top: 14px; }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="badge">MOST POPULAR</div>
+  <h2>Professional</h2>
+  <div class="price">₦5,000 <span>/ month</span></div>
+  <ul>
+    <li>Full platform intelligence access</li>
+    <li>AI analytics dashboard</li>
+    <li>Business directory premium listing</li>
+    <li>Education Hub full access</li>
+    <li>Email support</li>
+  </ul>
+  <input type="text" id="fullname" placeholder="Full name" required>
+  <input type="email" id="email" placeholder="Email address" required>
+  <button id="payBtn" onclick="payWithPaystack()">Join Professional — ₦5,000</button>
+  <div id="status"></div>
+  <div class="lock">🔒 Secured by Paystack · SSL Encrypted</div>
+</div>
+
+<script>
+  // LIVE public key — safe to expose in front-end code
+  const PAYSTACK_PUBLIC_KEY = "pk_live_d7f59d46d24abebfb35ae3ae5b397f8ba4e919fc";
+
+  function payWithPaystack() {
+    const email = document.getElementById('email').value.trim();
+    const fullname = document.getElementById('fullname').value.trim();
+    const statusDiv = document.getElementById('status');
+    const btn = document.getElementById('payBtn');
+
+    if (!fullname) {
+      statusDiv.innerHTML = "⚠️ Enter your full name.";
+      statusDiv.style.color = "orange";
+      return;
+    }
+    if (!email || !email.includes('@')) {
+      statusDiv.innerHTML = "⚠️ Enter a valid email.";
+      statusDiv.style.color = "orange";
+      return;
+    }
+
+    btn.disabled = true;
+    statusDiv.innerHTML = "Opening secure payment...";
+    statusDiv.style.color = "#e6edf3";
+
+    const handler = PaystackPop.setup({
+      key: PAYSTACK_PUBLIC_KEY,
+      email: email,
+      amount: 500000, // ₦5,000 in kobo
+      currency: "NGN",
+      ref: 'CINIS_PRO_' + Date.now(),
+      metadata: {
+        custom_fields: [
+          { display_name: "Full Name", variable_name: "full_name", value: fullname },
+          { display_name: "Plan", variable_name: "plan", value: "Professional Monthly" }
+        ]
+      },
+      callback: function(response) {
+        statusDiv.innerHTML = "✅ Payment successful! Welcome, " + fullname + ".<br><small>Ref: " + response.reference + "</small>";
+        statusDiv.style.color = "#3fb950";
+        btn.innerHTML = "Payment Complete ✓";
+        // NEXT STEP: this reference should be sent to a backend to verify
+        // and unlock access. See note below.
+      },
+      onClose: function() {
+        statusDiv.innerHTML = "Payment window closed.";
+        statusDiv.style.color = "orange";
+        btn.disabled = false;
+      }
+    });
+    handler.openIframe();
+  }
+</script>
+
+</body>
+</html>
