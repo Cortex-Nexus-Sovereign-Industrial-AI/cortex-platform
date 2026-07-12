@@ -1,7 +1,1 @@
-cortex-platform/
-├── .github/
-│   └── workflows/
-│       └── shopify-deploy.yml   <-- deploy automation (already done ✅)
-└── server/
-    ├── shopify-client.js         <-- connector (already done ✅)
-    └── test-push.js              <-- this new file (your product pusher)
+
