@@ -1,0 +1,37 @@
+name: Push Product to Shopify
+
+on:
+  workflow_dispatch:
+    inputs:
+      product_title:
+        description: 'Product title'
+        required: false
+        default: 'Cortex Sovereign Node - X1 Industrial AI Edge Unit'
+
+jobs:
+  push-product:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: npm install @shopify/admin-api-client || true
+      - name: Push Flagship Product to Shopify
+        env:
+          SHOPIFY_STORE_DOMAIN: ${{ secrets.SHOPIFY_STORE_DOMAIN }}
+          SHOPIFY_ADMIN_TOKEN: ${{ secrets.SHOPIFY_ADMIN_TOKEN }}
+          SHOPIFY_API_KEY: ${{ secrets.SHOPIFY_API_KEY }}
+          SHOPIFY_API_SECRET: ${{ secrets.SHOPIFY_API_SECRET }}
+        run: |
+          node server/test-push.js || node server/shopify-client.js || echo "Running inline product creation..."
+          node -e "
+          const STORE = process.env.SHOPIFY_STORE_DOMAIN;
+          const TOKEN = process.env.SHOPIFY_ADMIN_TOKEN;
+          const url = 'https://'+STORE+'/admin/api/2024-10/graphql.json';
+          const query = \`mutation { productCreate(input: { title: \\\"${{ inputs.product_title }}\\\", descriptionHtml: \\\"<h2>The Brain of Autonomous Industry</h2><p>Cortex Sovereign Node X1 - 240 TOPS Sovereign AI, MIL-SPEC hardened, on-premise.</p>\\\", vendor: \\\"Cortex Nexus\\\", productType: \\\"Industrial AI\\\", tags: [\\\"sovereign\\\",\\\"industrial-ai\\\",\\\"edge\\\"] }) { product { id title handle status } userErrors { message } } }\`;
+          fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Shopify-Access-Token': TOKEN }, body: JSON.stringify({ query }) })
+          .then(r=>r.json()).then(j=>{ console.log(JSON.stringify(j,null,2)); if(j.errors||j.data?.productCreate?.userErrors?.length) process.exit(1); console.log('✅ Product created successfully!'); })
+          .catch(e=>{ console.error(e); process.exit(1); });
+          "
