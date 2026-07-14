@@ -369,5 +369,53 @@
   </div>
 
   <script src="app.js"></script>
+
+<!-- CINIS Sovereign Core: dev console (see dev-console/README.md) -->
+<!--
+  Secret dev console panel.
+  IMPORTANT: visibility of this panel is cosmetic only. Every action button
+  below calls a backend endpoint that independently re-checks a real session
+  token server-side. Do not add any code path where a click here performs a
+  privileged action directly in the browser — see dev-console.js.
+-->
+<section id="secret-dev-console" class="dev-console hidden" aria-hidden="true">
+  <div class="dev-console-inner">
+    <header class="dev-console-header">
+      <h3>CINIS Sovereign Core — Dev Console</h3>
+      <button id="devConsoleClose" aria-label="Close dev console">&times;</button>
+    </header>
+
+    <div class="dev-console-unlock">
+      <label for="devConsoleKey">Owner verification key</label>
+      <input type="password" id="devConsoleKey" placeholder="Paste key to unlock">
+      <button id="devConsoleUnlock">Unlock</button>
+      <p class="dev-console-note">
+        This only toggles the panel's visibility. The buttons below still
+        require your backend to accept a valid session before they do anything.
+      </p>
+    </div>
+
+    <div class="dev-console-panels" id="devConsolePanels" hidden>
+      <div class="dev-console-panel">
+        <h4>Repo status</h4>
+        <pre id="repoStatus">Not checked yet.</pre>
+        <button id="checkRepoStatus">Check repo status</button>
+      </div>
+
+      <div class="dev-console-panel">
+        <h4>Hugging Face sync</h4>
+        <pre id="hfStatus">Not checked yet.</pre>
+        <button id="checkHfStatus">Check HF status</button>
+      </div>
+
+      <div class="dev-console-panel">
+        <h4>Sync log</h4>
+        <pre id="syncLog"></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="dev-console/dev-console.js"></script>
 </body>
 </html>
