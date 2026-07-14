@@ -1229,3 +1229,119 @@ body {
   from { transform: translateX(100%); opacity: 0; }
   to { transform: translateX(0); opacity: 1; }
 }
+/* === Dev Console (secret-dev-console) === */
+.dev-console {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(10, 10, 15, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+}
+.dev-console.hidden {
+  display: none;
+}
+.dev-console-inner {
+  width: min(560px, 92vw);
+  max-height: 85vh;
+  overflow-y: auto;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: 24px;
+}
+.dev-console-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 12px;
+}
+.dev-console-header h3 {
+  color: var(--text-primary);
+  font-size: 1.05rem;
+  margin: 0;
+}
+.dev-console-header button {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.4rem;
+  cursor: pointer;
+  line-height: 1;
+}
+.dev-console-unlock label {
+  display: block;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+}
+.dev-console-unlock input {
+  width: 100%;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  padding: 10px 12px;
+  font-family: var(--font-mono);
+  margin-bottom: 10px;
+}
+.dev-console-unlock button {
+  background: var(--accent-gradient);
+  color: var(--text-primary);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 10px 16px;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-weight: 600;
+}
+.dev-console-note {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  margin-top: 10px;
+  line-height: 1.4;
+}
+.dev-console-panels {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.dev-console-panel {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+}
+.dev-console-panel h4 {
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  margin: 0 0 8px 0;
+  font-family: var(--font-sans);
+}
+.dev-console-panel pre {
+  color: var(--info);
+  font-size: 0.78rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin: 0 0 10px 0;
+}
+.dev-console-panel button {
+  background: transparent;
+  border: 1px solid var(--accent-light);
+  color: var(--accent-light);
+  border-radius: var(--radius-sm);
+  padding: 6px 12px;
+  font-size: 0.78rem;
+  cursor: pointer;
+  font-family: var(--font-sans);
+}
+.dev-console-panel button:hover {
+  background: var(--accent);
+  color: var(--text-primary);
+}
