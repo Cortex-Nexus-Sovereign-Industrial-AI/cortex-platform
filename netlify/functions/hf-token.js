@@ -1,13 +1,13 @@
 // netlify/functions/hf-token.js
 // Server-side OAuth code-for-token exchange for Hugging Face.
-// The HF client secret lives ONLY in Netlify environment variables
-// (HF_CLIENT_ID, HF_CLIENT_SECRET) — never in any file shipped to the browser.
+// The HF client secret lives ONLY in Netlify env (HF_CLIENT_ID, HF_CLIENT_SECRET).
 //
-// Recommended pattern: don't hand the raw HF access_token back to the browser.
-// Store it server-side keyed by an opaque session id, and return only that
-// session id. Every later privileged call goes browser -> this backend -> HF.
-// This build returns the token directly to unblock initial wiring; swap in
-// the session-store version before going live with real users.
+// On success, the raw HF access token is NOT returned to the browser.
+// Instead it's encrypted (see lib/session.js) into an opaque session blob
+// that the browser stores and sends back on later calls, but cannot read
+// or forge. This is what repo-status.js / hf-status.js verify.
+
+const { encryptSession } = require('./lib/session');
 
 exports.handler = async (event) => {
   if (event.httpMethod !== "POST") {
@@ -27,6 +27,9 @@ exports.handler = async (event) => {
 
   if (!process.env.HF_CLIENT_ID || !process.env.HF_CLIENT_SECRET) {
     return { statusCode: 500, body: JSON.stringify({ error: "Server not configured: missing HF_CLIENT_ID/HF_CLIENT_SECRET" }) };
+  }
+  if (!process.env.SESSION_SECRET) {
+    return { statusCode: 500, body: JSON.stringify({ error: "Server not configured: missing SESSION_SECRET" }) };
   }
 
   try {
@@ -48,9 +51,17 @@ exports.handler = async (event) => {
     }
 
     const data = await resp.json();
+    const expiresInMs = (data.expires_in || 3600) * 1000;
+
+    const session = encryptSession({
+      hf_access_token: data.access_token,
+      exp: Date.now() + expiresInMs
+    });
+
+    // Browser gets an opaque, encrypted blob — never the raw HF token.
     return {
       statusCode: 200,
-      body: JSON.stringify({ access_token: data.access_token, expires_in: data.expires_in })
+      body: JSON.stringify({ session, expires_in: data.expires_in })
     };
   } catch (err) {
     return { statusCode: 500, body: JSON.stringify({ error: "Unexpected error", detail: String(err) }) };

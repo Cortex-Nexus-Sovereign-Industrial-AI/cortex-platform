@@ -1,25 +1,37 @@
 // netlify/functions/hf-status.js
-// Stub. Same pattern as repo-status.js: fails closed until real session
-// verification and a real Hugging Face API call are wired in.
+// Requires a valid encrypted session. Uses the HF token embedded in that
+// session (decrypted server-side only) to call the HF API on the user's
+// behalf — the browser never sees this token.
+
+const { decryptSession } = require('./lib/session');
 
 exports.handler = async (event) => {
   const sessionToken = event.headers['x-cinis-session'];
+  const session = decryptSession(sessionToken);
 
-  if (!sessionToken || !isValidSession(sessionToken)) {
-    return { statusCode: 401, body: JSON.stringify({ error: "Unauthorized" }) };
+  if (!session || !session.hf_access_token) {
+    return { statusCode: 401, body: JSON.stringify({ error: "Unauthorized or expired session" }) };
   }
 
-  // TODO: replace with a real call to https://huggingface.co/api/... using
-  // the session-scoped HF token looked up server-side for this session.
-  return {
-    statusCode: 200,
-    body: JSON.stringify({
-      space_status: "stub - not yet wired to live Hugging Face data",
-      checked_at: new Date().toISOString()
-    })
-  };
-};
+  try {
+    const resp = await fetch("https://huggingface.co/api/whoami-v2", {
+      headers: { Authorization: `Bearer ${session.hf_access_token}` }
+    });
 
-function isValidSession(token) {
-  return false;
-}
+    if (!resp.ok) {
+      return { statusCode: 502, body: JSON.stringify({ error: "HF API call failed", status: resp.status }) };
+    }
+
+    const data = await resp.json();
+    return {
+      statusCode: 200,
+      body: JSON.stringify({
+        hf_user: data.name,
+        hf_type: data.type,
+        checked_at: new Date().toISOString()
+      })
+    };
+  } catch (err) {
+    return { statusCode: 502, body: JSON.stringify({ error: "Unexpected error", detail: String(err) }) };
+  }
+};

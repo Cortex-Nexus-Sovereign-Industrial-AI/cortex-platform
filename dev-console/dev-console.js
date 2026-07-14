@@ -1,8 +1,14 @@
 // dev-console.js
-// The "unlock" step below only shows/hides the panel. It is NOT auth.
-// Every button here calls a backend endpoint; the backend is what actually
-// decides whether the action is allowed. If you add new buttons, follow the
-// same pattern: browser -> your backend (which checks a real credential) -> action.
+// The "unlock" input below only shows/hides the panel — it is NOT auth.
+// Real auth is the encrypted session set by your HF OAuth callback handler
+// after it POSTs the redirect `code` to /api/hf-token and receives back a
+// `session` blob. That handler lives elsewhere in your app (per the original
+// spec) — this file assumes it stores the result like this:
+//
+//   sessionStorage.setItem('cinisSession', data.session);
+//
+// If that handler doesn't do this yet, that's the next piece to build —
+// this file can't confirm it exists from here.
 
 document.addEventListener('DOMContentLoaded', () => {
   const panel = document.getElementById('secret-dev-console');
@@ -17,46 +23,58 @@ document.addEventListener('DOMContentLoaded', () => {
     log.textContent += `[${ts}] ${msg}\n`;
   }
 
+  function getSession() {
+    return sessionStorage.getItem('cinisSession');
+  }
+
   unlockBtn.addEventListener('click', () => {
     // Cosmetic only — reveals the panel. Does not grant any real access.
-    // sessionStorage, not localStorage, and cleared on close.
     if (keyInput.value.trim().length > 0) {
-      sessionStorage.setItem('devConsoleSessionHint', 'shown');
       panels.hidden = false;
-      appendLog('Panel unlocked (display only — backend still gates every action).');
+      appendLog('Panel unlocked (display only).');
+      if (!getSession()) {
+        appendLog('No active session found — complete Hugging Face sign-in first for the buttons below to work.');
+      }
     }
   });
 
   closeBtn.addEventListener('click', () => {
     panel.classList.add('hidden');
     panels.hidden = true;
-    sessionStorage.removeItem('devConsoleSessionHint');
     keyInput.value = '';
   });
 
-  document.getElementById('checkRepoStatus').addEventListener('click', async () => {
-    appendLog('Checking repo status...');
-    try {
-      // Backend endpoint you control — re-checks the real session server-side
-      // before returning anything. Replace with your actual endpoint.
-      const resp = await fetch('/api/repo-status');
-      const data = await resp.json();
-      document.getElementById('repoStatus').textContent = JSON.stringify(data, null, 2);
-      appendLog('Repo status updated.');
-    } catch (err) {
-      appendLog(`Repo status check failed: ${err}`);
+  async function callProtected(endpoint, outEl) {
+    const session = getSession();
+    if (!session) {
+      outEl.textContent = 'No active session. Sign in with Hugging Face first.';
+      return;
     }
+    try {
+      const resp = await fetch(endpoint, {
+        headers: { 'x-cinis-session': session }
+      });
+      const data = await resp.json();
+      if (!resp.ok) {
+        outEl.textContent = `Error (${resp.status}): ${data.error || 'unknown'}`;
+        appendLog(`${endpoint} returned ${resp.status}`);
+        return;
+      }
+      outEl.textContent = JSON.stringify(data, null, 2);
+      appendLog(`${endpoint} updated.`);
+    } catch (err) {
+      outEl.textContent = `Request failed: ${err}`;
+      appendLog(`${endpoint} request failed: ${err}`);
+    }
+  }
+
+  document.getElementById('checkRepoStatus').addEventListener('click', () => {
+    appendLog('Checking repo status...');
+    callProtected('/api/repo-status', document.getElementById('repoStatus'));
   });
 
-  document.getElementById('checkHfStatus').addEventListener('click', async () => {
+  document.getElementById('checkHfStatus').addEventListener('click', () => {
     appendLog('Checking Hugging Face sync status...');
-    try {
-      const resp = await fetch('/api/hf-status');
-      const data = await resp.json();
-      document.getElementById('hfStatus').textContent = JSON.stringify(data, null, 2);
-      appendLog('HF status updated.');
-    } catch (err) {
-      appendLog(`HF status check failed: ${err}`);
-    }
+    callProtected('/api/hf-status', document.getElementById('hfStatus'));
   });
 });
