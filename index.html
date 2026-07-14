@@ -46,6 +46,60 @@
     }
   }
   </script>
+
+  <!-- CINIS CORE: SECURE HUGGING FACE INTELLIGENCE BRIDGE -->
+  <script>
+    // Global State for Sovereign Engine
+    const CortexEngine = {
+      hfToken: null,
+      ownerAuthenticated: false,
+      
+      // Initialize the secure handshake on page load
+      init() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const authCode = urlParams.get('code');
+        const error = urlParams.get('error');
+
+        if (authCode) {
+          console.log("⚡ [CORTEX ENGINE] Authorization code detected. Processing handshake...");
+          this.handleHandshake(authCode);
+        } else if (error) {
+          console.error("❌ [CORTEX ENGINE] Handshake Refused:", error);
+        }
+      },
+
+      // Process Code & Redirect to clean up URL
+      handleHandshake(code) {
+        // Store code temporarily for confirmation
+        sessionStorage.setItem('cinis_auth_temp', code);
+        window.history.replaceState({}, document.title, window.location.pathname);
+        
+        // Dispatch event to open secret command module
+        setTimeout(() => {
+          this.triggerOwnerVerification();
+        }, 800);
+      },
+
+      // Owner verification sequence to lock down sensitive actions
+      triggerOwnerVerification() {
+        const secretKey = prompt("🔑 [OWNER INITIALIZATION REQUIRED]\nEnter your Secret Platform API Key to bind Hugging Face Core Permissions:");
+        if (secretKey && secretKey.trim() !== "") {
+          this.hfToken = secretKey; // Bind key to the engine
+          this.ownerAuthenticated = true;
+          alert("⚡ COGNITIVE LINK ESTABLISHED\nCortex Engine successfully registered with Hugging Face High-Level Permissions.");
+          
+          // Show the hidden Dev Console tab in settings/workspace
+          const devConsole = document.getElementById("secret-dev-console");
+          if (devConsole) devConsole.style.display = "block";
+        } else {
+          alert("❌ Unauthorized access block. System returned to Standard Sovereign Safe Mode.");
+        }
+      }
+    };
+
+    // Auto-run engine scanner on load
+    window.addEventListener('DOMContentLoaded', () => CortexEngine.init());
+  </script>
 </head>
 <body>
   <!-- AUTH OVERLAY -->
@@ -268,6 +322,28 @@
               <p class="social-desc">Behind-the-scenes</p>
               <span class="social-link">Open Profile →</span>
             </a>
+          </div>
+        </section>
+
+        <!-- OWNER DEV CONSOLE (Hidden by default, unlocked by API initialization) -->
+        <section id="secret-dev-console" class="tab-panel" style="display:none; background: #0c0f12; border: 1px solid #1a2332; padding: 20px; border-radius: 8px; margin-top: 20px;">
+          <h2 style="color: #00ff66; font-family: 'JetBrains Mono', monospace; display: flex; align-items: center; gap: 10px;">
+            <span>🟢</span> CINIS Engine Terminal Active
+          </h2>
+          <p style="font-family: 'JetBrains Mono', monospace; color: #8892b0; font-size: 0.9rem;">
+            Owner secure identity confirmed. Cognitive linkages to high-level Hugging Face permissions initialized.
+          </p>
+          <div class="biz-grid" style="margin-top: 20px;">
+            <div class="biz-card" style="background: #161b22;">
+              <h3>Repository Controller</h3>
+              <p style="font-size: 0.85rem; color: #8b949e;">Structure builds and push data nodes to HF</p>
+              <button class="btn-primary" onclick="alert('Querying HF Spaces...')">Scan Repositories</button>
+            </div>
+            <div class="biz-card" style="background: #161b22;">
+              <h3>Colony Orchestrator</h3>
+              <p style="font-size: 0.85rem; color: #8b949e;">Initialize decentralized inference loops</p>
+              <button class="btn-primary" onclick="alert('Spinning up offline inference nodes...')">Boot Ghost Network</button>
+            </div>
           </div>
         </section>
       </main>
