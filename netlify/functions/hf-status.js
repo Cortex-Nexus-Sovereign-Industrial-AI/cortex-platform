@@ -1,7 +1,12 @@
 // netlify/functions/hf-status.js
-// Requires a valid encrypted session. Uses the HF token embedded in that
-// session (decrypted server-side only) to call the HF API on the user's
-// behalf — the browser never sees this token.
+// Simplified: uses a server-side fine-grained HF token (HF_API_TOKEN) set
+// directly in Netlify env, rather than a token embedded in the user's OAuth
+// session. This is a single-owner admin console, not a multi-user login
+// flow, so a static server-side token is the right level of complexity —
+// no OAuth app, no client secret, no redirect URI to register.
+//
+// Still requires a valid encrypted session (proof someone went through the
+// owner-verification flow) before it will do anything — see lib/session.js.
 
 const { decryptSession } = require('./lib/session');
 
@@ -9,13 +14,23 @@ exports.handler = async (event) => {
   const sessionToken = event.headers['x-cinis-session'];
   const session = decryptSession(sessionToken);
 
-  if (!session || !session.hf_access_token) {
+  if (!session) {
     return { statusCode: 401, body: JSON.stringify({ error: "Unauthorized or expired session" }) };
+  }
+
+  if (!process.env.HF_API_TOKEN) {
+    return {
+      statusCode: 200,
+      body: JSON.stringify({
+        status: "not_configured",
+        note: "Session valid, but HF_API_TOKEN is not set in Netlify env yet."
+      })
+    };
   }
 
   try {
     const resp = await fetch("https://huggingface.co/api/whoami-v2", {
-      headers: { Authorization: `Bearer ${session.hf_access_token}` }
+      headers: { Authorization: `Bearer ${process.env.HF_API_TOKEN}` }
     });
 
     if (!resp.ok) {
