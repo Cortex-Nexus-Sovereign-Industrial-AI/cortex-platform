@@ -4,8 +4,8 @@ Thanks for helping improve the Cortex Platform! This guide explains how to set u
 
 ---
 
-## 🔧 Basic Workflow
-1. Fork the repository.
-2. Create a feature branch:
+## ⚡ Quick Start Checklist
+1. Clone the repository:
    ```bash
-   git checkout -b feat/your-change
+   git clone https://github.com/<your-org>/cortex-platform.git
+   cd cortex-platform
