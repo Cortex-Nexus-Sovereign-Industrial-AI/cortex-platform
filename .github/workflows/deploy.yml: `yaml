@@ -1,0 +1,3 @@
+env:
+  API_ID: ${{ secrets.API_ID }}
+  API_SECRET_KEY: ${{ secrets.API_SECRET_KEY }}
