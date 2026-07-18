@@ -1,0 +1,14 @@
+name: cortex-platform
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - pytest>=7.0
+  - flake8>=4.0
+  - pytest-cov
+  - numpy
+  - pandas
+  - pip:
+    - -r requirements.txt
