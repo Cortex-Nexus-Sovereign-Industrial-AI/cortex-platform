@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Cortex Intelligence Nexus</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .admin-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: 100vh;
+            background: #0a1628;
+        }
+        .admin-sidebar {
+            background: linear-gradient(135deg, #001a36 0%, #003366 100%);
+            padding: 24px;
+            border-right: 2px solid #00d4ff;
+        }
+        .admin-sidebar h3 {
+            color: #00d4ff;
+            margin-bottom: 20px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .admin-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .admin-menu li {
+            margin-bottom: 12px;
+        }
+        .admin-menu a {
+            color: #a0aec0;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 8px 12px;
+            display: block;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        .admin-menu a:hover,
+        .admin-menu a.active {
+            background: #00d4ff;
+            color: #0a1628;
+        }
+        .admin-main {
+            padding: 40px;
+        }
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #1e3a5f;
+            padding-bottom: 20px;
+        }
+        .admin-header h1 {
+            color: #00d4ff;
+            margin: 0;
+            font-size: 28px;
+        }
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+        .stat-card {
+            background: linear-gradient(135deg, #1a3a52 0%, #0f2940 100%);
+            border: 1px solid #00d4ff;
+            border-radius: 8px;
+            padding: 24px;
+            color: #e2e8f0;
+        }
+        .stat-card h3 {
+            color: #a0aec0;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0 0 12px 0;
+        }
+        .stat-card .value {
+            color: #00d4ff;
+            font-size: 32px;
+            font-weight: bold;
+            margin: 0;
+        }
+        .stat-card .change {
+            color: #48bb78;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+        .admin-section {
+            background: linear-gradient(135deg, #1a3a52 0%, #0f2940 100%);
+            border: 1px solid #1e3a5f;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        .admin-section h2 {
+            color: #00d4ff;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        .table-wrapper {
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            color: #cbd5e0;
+            font-size: 14px;
+        }
+        th {
+            background: #0f2940;
+            color: #00d4ff;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid #00d4ff;
+        }
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #1e3a5f;
+        }
+        tr:hover {
+            background: rgba(0, 212, 255, 0.05);
+        }
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .badge-active {
+            background: rgba(72, 187, 120, 0.2);
+            color: #48bb78;
+            border: 1px solid #48bb78;
+        }
+        .badge-inactive {
+            background: rgba(245, 101, 101, 0.2);
+            color: #f56565;
+            border: 1px solid #f56565;
+        }
+        .badge-pending {
+            background: rgba(237, 137, 54, 0.2);
+            color: #ed8936;
+            border: 1px solid #ed8936;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+        }
+        .btn-small {
+            padding: 4px 8px;
+            font-size: 11px;
+            border: 1px solid #00d4ff;
+            background: transparent;
+            color: #00d4ff;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-small:hover {
+            background: #00d4ff;
+            color: #0a1628;
+        }
+        .footer-text {
+            font-size: 12px;
+            color: #718096;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #1e3a5f;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <aside class="admin-sidebar">
+            <h3>Admin Menu</h3>
+            <ul class="admin-menu">
+                <li><a href="#dashboard" class="active">Dashboard</a></li>
+                <li><a href="#users">User Management</a></li>
+                <li><a href="#compliance">Compliance</a></li>
+                <li><a href="#operations">Operations</a></li>
+                <li><a href="#analytics">Analytics</a></li>
+                <li><a href="#settings">Settings</a></li>
+                <li><a href="#audit">Audit Logs</a></li>
+            </ul>
+        </aside>
+        <main class="admin-main">
+            <div class="admin-header">
+                <h1>Admin Dashboard</h1>
+                <div style="color: #a0aec0; font-size: 14px;"><span id="current-time"></span></div>
+            </div>
+            <div class="admin-stats">
+                <div class="stat-card">
+                    <h3>Active Users</h3>
+                    <p class="value">1,247</p>
+                    <p class="change">↑ 12% this month</p>
+                </div>
+                <div class="stat-card">
+                    <h3>API Calls (24h)</h3>
+                    <p class="value">48.3K</p>
+                    <p class="change">↑ 5% vs yesterday</p>
+                </div>
+                <div class="stat-card">
+                    <h3>System Health</h3>
+                    <p class="value" style="color: #48bb78;">99.98%</p>
+                    <p class="change">All systems nominal</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Revenue (MTD)</h3>
+                    <p class="value">₦2.4M</p>
+                    <p class="change">↑ 18% vs last month</p>
+                </div>
+            </div>
+            <div class="admin-section" id="users">
+                <h2>User Management</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>User ID</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                                <th>Role</th>
+                                <th>Last Active</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#USR001</td>
+                                <td>john@company.com</td>
+                                <td><span class="badge badge-active">Active</span></td>
+                                <td>Admin</td>
+                                <td>2 mins ago</td>
+                                <td><div class="action-buttons"><button class="btn-small">Edit</button><button class="btn-small">Revoke</button></div></td>
+                            </tr>
+                            <tr>
+                                <td>#USR002</td>
+                                <td>sarah@client.com</td>
+                                <td><span class="badge badge-active">Active</span></td>
+                                <td>Customer</td>
+                                <td>1 hour ago</td>
+                                <td><div class="action-buttons"><button class="btn-small">Edit</button><button class="btn-small">Suspend</button></div></td>
+                            </tr>
+                            <tr>
+                                <td>#USR003</td>
+                                <td>inactive@company.com</td>
+                                <td><span class="badge badge-inactive">Inactive</span></td>
+                                <td>Analyst</td>
+                                <td>7 days ago</td>
+                                <td><div class="action-buttons"><button class="btn-small">Edit</button><button class="btn-small">Reactivate</button></div></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="admin-section" id="compliance">
+                <h2>Compliance Status</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Requirement</th>
+                                <th>Status</th>
+                                <th>Last Checked</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Data Encryption</td>
+                                <td><span class="badge badge-active">Compliant</span></td>
+                                <td>Today, 08:30 AM</td>
+                                <td>All data encrypted with AES-256</td>
+                            </tr>
+                            <tr>
+                                <td>Access Logs</td>
+                                <td><span class="badge badge-active">Compliant</span></td>
+                                <td>Today, 08:15 AM</td>
+                                <td>90-day retention active</td>
+                            </tr>
+                            <tr>
+                                <td>API Rate Limits</td>
+                                <td><span class="badge badge-pending">Pending Review</span></td>
+                                <td>Yesterday, 04:00 PM</td>
+                                <td>Q3 audit scheduled</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="footer-text">Cortex Intelligence Nexus Admin Dashboard • Enterprise Governance Framework • Last updated: <span id="update-time">now</span></div>
+        </main>
+    </div>
+    <script>
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', { hour12: true });
+            const dateString = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+            document.getElementById('current-time').textContent = `${dateString}, ${timeString}`;
+            document.getElementById('update-time').textContent = `${timeString}`;
+        }
+        updateTime();
+        setInterval(updateTime, 1000);
+        document.querySelectorAll('.admin-menu a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelectorAll('.admin-menu a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
