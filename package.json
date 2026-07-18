@@ -1,0 +1,37 @@
+{
+  "name": "cortex-platform",
+  "version": "1.0.0",
+  "description": "Official hub for CINIS. Houses the enterprise governance framework and the Millions SDK for autonomous AI operations.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "jest",
+    "build": "webpack --mode production",
+    "lint": "eslint src/**/*.js",
+    "dev": "webpack --mode development --watch",
+    "deploy": "npm run build && gh-pages -d dist"
+  },
+  "keywords": [
+    "cortex",
+    "ai",
+    "sovereign",
+    "industrial",
+    "governance"
+  ],
+  "author": "Cortex-Nexus-Sovereign-Industrial-AI",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.23.0",
+    "@babel/preset-env": "^7.23.0",
+    "babel-loader": "^9.1.0",
+    "eslint": "^8.50.0",
+    "jest": "^29.7.0",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.0",
+    "gh-pages": "^6.0.0"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "axios": "^1.5.0"
+  }
+}
