@@ -1,0 +1,36 @@
+name: Deploy Cortex Platform
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    env:
+      API_ID: ${{ secrets.API_ID }}
+      API_SECRET_KEY: ${{ secrets.API_SECRET_KEY }}
+      OAUTH_REDIRECT_URI: urn:ietf:wg:oauth:2.0:oob
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run build
+        run: npm run build
+
+      - name: Deploy
+        run: npm run deploy
+        env:
+          API_ID: ${{ secrets.API_ID }}
+          API_SECRET_KEY: ${{ secrets.API_SECRET_KEY }}
+          OAUTH_REDIRECT_URI: urn:ietf:wg:oauth:2.0:oob
