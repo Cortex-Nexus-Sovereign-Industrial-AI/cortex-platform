@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  # Sovereign Reverse Proxy & Web Server
+  cinisnio_ingress:
+    image: caddy:alpine
+    container_name: cinisnio_web
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - ./site_build:/usr/share/caddy/cinisnio
+    extra_hosts:
+      - "cinisnio.ai:127.0.0.1"
+
+  # Offline AI Model Engine (Local c.ai / LLM runtime)
+  local_ai_engine:
+    image: ollama/ollama:latest
+    container_name: local_ai_engine
+    restart: always
+    volumes:
+      - ./ai_storage:/root/.ollama
+    ports:
+      - "11434:11434"
+    environment:
+      - OLLAMA_KEEP_ALIVE=-1 # Keep model active permanently in RAM
+
+  # Multi-Module Ingress Gateway (Handles webhooks & alerts)
+  local_api_gateway:
+    build: .
+    container_name: local_api_gateway
+    restart: always
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env.local
