@@ -1,0 +1,19 @@
+# Local Sovereign Ingress for cinisnio.ai
+cinisnio.ai {
+    # 1. Automatic Local TLS / SSL Certificate (No subscription needed)
+    tls internal
+
+    # 2. Root Web Application Directory (Your local build files)
+    root * /usr/share/caddy/cinisnio
+    file_server
+
+    # 3. Route Embedded AI Engine (Self-hosted offline model endpoint)
+    handle /api/v1/chat* {
+        reverse_proxy local_ai_engine:11434
+    }
+
+    # 4. Route Ingress Webhook Pipeline (WhatsApp & Analytics Stream)
+    handle /api/webhook* {
+        reverse_proxy local_api_gateway:3000
+    }
+}
