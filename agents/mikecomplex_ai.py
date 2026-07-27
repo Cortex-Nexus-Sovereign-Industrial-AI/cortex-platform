@@ -10,10 +10,11 @@ class MikeComplexAI(Agent):
         config = AgentConfig(
             name="mikecomplex-ai-core",
             type="reasoning",
-            description="Adaptive offline intelligence with real Termux sensors",
+            description="Adaptive offline intelligence with real motion + sensor polling",
             parameters={
                 "offline_mode": True,
-                "sensor_polling_interval": 30,
+                "sensor_polling_interval": 10,   # Faster for motion
+                "motion_threshold": 0.3,
                 "self_healing": True
             }
         )
@@ -22,77 +23,80 @@ class MikeComplexAI(Agent):
         os.makedirs("logs", exist_ok=True)
 
     def run_termux_command(self, cmd):
-        """Safely run Termux commands"""
         try:
             result = subprocess.check_output(cmd, shell=True, text=True, timeout=5)
-            return result.strip()
-        except Exception:
+            return json.loads(result) if result.strip().startswith('{') else result.strip()
+        except:
             return None
 
-    def read_real_sensors(self):
-        """Real Termux sensor integration"""
+    def poll_motion_sensor(self):
+        """Real accelerometer / motion polling"""
+        try:
+            # Poll accelerometer for motion
+            motion_data = self.run_termux_command('termux-sensor -s "accelerometer" -n 3 -d 300')
+            if isinstance(motion_data, dict) and "accelerometer" in motion_data:
+                values = motion_data["accelerometer"].get("values", [0,0,0])
+                # Simple motion detection: check if acceleration changes significantly
+                magnitude = (values[0]**2 + values[1]**2 + values[2]**2) ** 0.5
+                return {
+                    "magnitude": round(magnitude, 3),
+                    "moving": magnitude > self.config.parameters.get("motion_threshold", 0.3)
+                }
+            return {"magnitude": 0, "moving": False}
+        except:
+            return {"magnitude": 0, "moving": False, "fallback": True}
+
+    def read_full_sensors(self):
+        """Combine battery + motion + other sensors"""
         sensors = {
             "timestamp": datetime.now().isoformat(),
-            "screen": "unknown",
-            "battery_level": None,
-            "charging": False,
-            "movement": "unknown",
-            "light_level": None,
-            "temperature": None
+            "motion": self.poll_motion_sensor(),
+            "battery": None,
+            "screen": "unknown"
         }
 
+        # Battery
         try:
-            # Battery & Charging
-            battery_info = self.run_termux_command("termux-battery-status")
-            if battery_info:
-                data = json.loads(battery_info)
-                sensors["battery_level"] = data.get("percentage")
-                sensors["charging"] = data.get("plugged", False) != "UNPLUGGED"
+            bat = self.run_termux_command("termux-battery-status")
+            if bat:
+                sensors["battery"] = json.loads(bat)
+        except:
+            pass
 
-            # Screen state (using dumpsys - lightweight check)
-            screen = self.run_termux_command("dumpsys power | grep 'mScreenOn='")
-            if screen:
-                sensors["screen"] = "on" if "true" in screen.lower() else "off"
+        # Screen state
+        try:
+            screen = self.run_termux_command("dumpsys power | grep mScreenOn=")
+            sensors["screen"] = "on" if screen and "true" in screen.lower() else "off"
+        except:
+            pass
 
-            # Light & Motion (Termux sensor if available)
-            light = self.run_termux_command("termux-sensor -s light -n 1")
-            if light:
-                try:
-                    sensors["light_level"] = int(light.split()[-1])
-                except:
-                    pass
-
-            # Simple movement simulation via uptime or custom
-            sensors["movement"] = "moving" if time.time() % 120 < 60 else "stable"
-
-        except Exception as e:
-            print(f"Sensor read error (self-healing active): {e}")
-
-        # Log locally
+        # Log
         with open(self.sensor_log, "a") as f:
             f.write(json.dumps(sensors) + "\n")
 
         return sensors
 
     def render_metrics(self):
-        data = self.read_real_sensors()
+        data = self.read_full_sensors()
+        motion = data["motion"]
+        
         print(f"📱 MikeComplex AI Live | {data['timestamp']}")
-        print(f"   Screen: {data['screen']} | Battery: {data['battery_level']}% | Charging: {data['charging']}")
-        print(f"   Light: {data['light_level']} | Movement: {data['movement']}")
+        print(f"   Motion: {'MOVING' if motion.get('moving') else 'Stable'} | Magnitude: {motion.get('magnitude')}")
+        print(f"   Screen: {data['screen']} | Battery: {data.get('battery', {}).get('percentage', 'N/A')}%")
 
     def generate_local_revenue_ideas(self):
         return [
-            "Sell custom offline AI monitoring apps via Termux",
-            "Offer local AI consulting for small businesses",
-            "Create and distribute sovereign sensor dashboards"
+            "Build motion-activated offline AI monitors for homes/factories",
+            "Sell Termux-based motion tracking kits",
+            "Offer sovereign AI consulting packages"
         ]
 
     def run_relentless(self):
-        print("🚀 MikeComplex AI started with REAL Termux sensor integration")
+        print("🚀 MikeComplex AI running with REAL Motion Sensor Polling")
         while True:
             self.render_metrics()
-            print("💡 Revenue Idea:", self.generate_local_revenue_ideas()[0])
-            time.sleep(self.config.parameters.get("sensor_polling_interval", 30))
+            print("💡 Local Idea:", self.generate_local_revenue_ideas()[0])
+            time.sleep(self.config.parameters.get("sensor_polling_interval", 10))
 
 if __name__ == "__main__":
     ai = MikeComplexAI()
