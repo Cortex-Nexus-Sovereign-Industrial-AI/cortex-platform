@@ -1,4 +1,5 @@
 from cinis.millions import Agent, AgentConfig
+from utils.backoff import ExponentialBackoff
 import subprocess
 import json
 import time
@@ -6,6 +7,7 @@ from datetime import datetime
 import os
 
 class MikeComplexAI(Agent):
+    self.backoff = ExponentialBackoff(base_delay=1.0, max_delay=30.0)
     def __init__(self):
         config = AgentConfig(
             name="mikecomplex-ai-core",
