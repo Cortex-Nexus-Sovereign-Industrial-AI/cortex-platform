@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MikeComplex AI • Live Sensor Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #0f0f0f; color: #0f0; margin: 0; padding: 20px; }
+        h1 { color: #0f0; text-align: center; }
+        .card { background: #1a1a1a; border: 1px solid #0f0; border-radius: 8px; padding: 15px; margin: 15px 0; }
+        .metric { font-size: 1.4em; margin: 10px 0; }
+        .moving { color: #ff0; }
+        .stable { color: #0f0; }
+        #log { height: 300px; overflow-y: auto; background: #111; padding: 10px; font-family: monospace; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <h1>🚀 MikeComplex AI • Live Sensors</h1>
+    
+    <div class="card">
+        <h2>Motion Status</h2>
+        <div class="metric" id="motion">Detecting...</div>
+    </div>
+
+    <div class="card">
+        <h2>Battery & Charging</h2>
+        <div class="metric" id="battery">Loading...</div>
+    </div>
+
+    <div class="card">
+        <h2>Screen & Activity</h2>
+        <div class="metric" id="screen">Loading...</div>
+    </div>
+
+    <div class="card">
+        <h2>Recent Sensor Log</h2>
+        <pre id="log"></pre>
+    </div>
+
+    <script>
+        async function updateDashboard() {
+            try {
+                const response = await fetch('logs/sensor_data.jsonl');
+                const text = await response.text();
+                const lines = text.trim().split('\n').slice(-10); // last 10 entries
+                
+                let latest = {};
+                if (lines.length > 0) {
+                    latest = JSON.parse(lines[lines.length - 1]);
+                }
+
+                // Motion
+                const motion = latest.motion || {};
+                document.getElementById('motion').innerHTML = 
+                    `Motion: <span class="${motion.moving ? 'moving' : 'stable'}">${motion.moving ? 'MOVING' : 'STABLE'}</span> | Magnitude: ${motion.magnitude || 'N/A'}`;
+
+                // Battery
+                const bat = latest.battery || {};
+                document.getElementById('battery').textContent = 
+                    `Battery: ${bat.percentage || 'N/A'}% | Charging: ${bat.charging ? 'YES' : 'NO'}`;
+
+                // Screen
+                document.getElementById('screen').textContent = 
+                    `Screen: ${latest.screen || 'unknown'} | Activity: ${latest.activity_level || 'unknown'}`;
+
+                // Log
+                document.getElementById('log').textContent = lines.join('\n');
+
+            } catch (e) {
+                console.log("Dashboard update:", e.message);
+            }
+        }
+
+        // Update every 5 seconds
+        setInterval(updateDashboard, 5000);
+        updateDashboard(); // Initial load
+    </script>
+</body>
+</html>
