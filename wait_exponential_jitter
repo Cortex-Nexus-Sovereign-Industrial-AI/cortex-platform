@@ -1,0 +1,1 @@
+wait_time = min(initial * (exp_base ** n) + random.uniform(0, jitter), maximum)
