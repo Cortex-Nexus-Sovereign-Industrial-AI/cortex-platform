@@ -1,51 +1,58 @@
+import random
 import time
-from enum import Enum
 
-class CircuitState(Enum):
-    CLOSED = "CLOSED"
-    OPEN = "OPEN"
-    HALF_OPEN = "HALF_OPEN"
+class ExponentialBackoff:
+    """
+    Exponential Backoff with Decorrelated Jitter (Recommended for production)
+    """
+    def __init__(self, base_delay=1.0, max_delay=30.0, max_attempts=15):
+        self.base_delay = base_delay
+        self.max_delay = max_delay
+        self.max_attempts = max_attempts
+        self.attempt = 0
+        self.previous_delay = base_delay
 
-class CircuitBreaker:
-    def __init__(self, failure_threshold=5, recovery_timeout=30, reset_timeout=60):
-        self.failure_threshold = failure_threshold
-        self.recovery_timeout = recovery_timeout
-        self.reset_timeout = reset_timeout
-        self.state = CircuitState.CLOSED
-        self.failure_count = 0
-        self.last_failure_time = None
-        self.last_success_time = None
+    def get_delay(self):
+        """Decorrelated Jitter: High randomness based on previous delay"""
+        if self.attempt >= self.max_attempts:
+            return None
 
-    def call(self, func, *args, **kwargs):
-        """Execute function with circuit breaker protection"""
-        if self.state == CircuitState.OPEN:
-            if time.time() - self.last_failure_time > self.recovery_timeout:
-                self.state = CircuitState.HALF_OPEN
-            else:
-                raise Exception(f"Circuit breaker OPEN. Service unavailable. Retry in {self.recovery_timeout - (time.time() - self.last_failure_time):.0f}s")
+        # Exponential component
+        exponential = min(self.base_delay * (2 ** self.attempt), self.max_delay)
 
-        try:
-            result = func(*args, **kwargs)
-            self.on_success()
-            return result
-        except Exception as e:
-            self.on_failure()
-            raise e
-
-    def on_success(self):
-        self.failure_count = 0
-        self.last_success_time = time.time()
-        if self.state == CircuitState.HALF_OPEN:
-            print("✅ Circuit breaker CLOSED (service recovered)")
-        self.state = CircuitState.CLOSED
-
-    def on_failure(self):
-        self.failure_count += 1
-        self.last_failure_time = time.time()
+        # Decorrelated Jitter: Random between base and 3x exponential
+        delay = random.uniform(self.base_delay, exponential * 3.0)
         
-        if self.failure_count >= self.failure_threshold:
-            self.state = CircuitState.OPEN
-            print(f"⚠️ Circuit breaker OPEN after {self.failure_count} failures")
+        # Cap and smooth
+        delay = min(delay, self.max_delay)
+        
+        self.previous_delay = delay
+        self.attempt += 1
+        
+        return delay
 
-    def is_open(self):
-        return self.state == CircuitState.OPEN
+    def wait(self):
+        """Sleep for calculated delay"""
+        delay = self.get_delay()
+        if delay is None:
+            print("Max retry attempts reached.")
+            return False
+        
+        print(f"⏳ Decorrelated Jitter: Waiting {delay:.2f}s (Attempt {self.attempt})")
+        time.sleep(delay)
+        return True
+
+    def reset(self):
+        """Reset after successful connection"""
+        self.attempt = 0
+        self.previous_delay = self.base_delay
+
+
+# Quick Test
+if __name__ == "__main__":
+    backoff = ExponentialBackoff(base_delay=1.0, max_delay=30.0)
+    
+    for i in range(8):
+        if not backoff.wait():
+            break
+        print(f"Retry {i+1} attempted.\n")
