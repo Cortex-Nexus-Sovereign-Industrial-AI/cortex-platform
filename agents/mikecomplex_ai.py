@@ -1,90 +1,97 @@
 from cinis.millions import Agent, AgentConfig
-import time
-import os
+import subprocess
 import json
+import time
 from datetime import datetime
+import os
 
 class MikeComplexAI(Agent):
     def __init__(self):
         config = AgentConfig(
             name="mikecomplex-ai-core",
             type="reasoning",
-            description="Adaptive offline intelligence core with sensor integration",
+            description="Adaptive offline intelligence with real Termux sensors",
             parameters={
                 "offline_mode": True,
-                "phone_state_detection": True,
-                "metric_rendering": True,
-                "self_healing": True,
-                "sensor_polling_interval": 30
+                "sensor_polling_interval": 30,
+                "self_healing": True
             }
         )
         super().__init__(config)
         self.sensor_log = "logs/sensor_data.jsonl"
         os.makedirs("logs", exist_ok=True)
 
-    def read_phone_sensors(self):
-        """Simulated + real sensor reading (extendable)"""
+    def run_termux_command(self, cmd):
+        """Safely run Termux commands"""
         try:
-            # Simulated real sensor data
-            state = {
-                "timestamp": datetime.now().isoformat(),
-                "screen": self._detect_screen_state(),
-                "charging": self._detect_charging(),
-                "battery_level": self._get_battery_level(),
-                "movement": self._detect_movement(),
-                "light_level": self._get_light_level(),  # ambient light
-                "activity_level": "high" if time.time() % 120 < 60 else "low"
-            }
-            
-            # Log to local file (offline)
-            with open(self.sensor_log, "a") as f:
-                f.write(json.dumps(state) + "\n")
-            
-            return state
+            result = subprocess.check_output(cmd, shell=True, text=True, timeout=5)
+            return result.strip()
+        except Exception:
+            return None
+
+    def read_real_sensors(self):
+        """Real Termux sensor integration"""
+        sensors = {
+            "timestamp": datetime.now().isoformat(),
+            "screen": "unknown",
+            "battery_level": None,
+            "charging": False,
+            "movement": "unknown",
+            "light_level": None,
+            "temperature": None
+        }
+
+        try:
+            # Battery & Charging
+            battery_info = self.run_termux_command("termux-battery-status")
+            if battery_info:
+                data = json.loads(battery_info)
+                sensors["battery_level"] = data.get("percentage")
+                sensors["charging"] = data.get("plugged", False) != "UNPLUGGED"
+
+            # Screen state (using dumpsys - lightweight check)
+            screen = self.run_termux_command("dumpsys power | grep 'mScreenOn='")
+            if screen:
+                sensors["screen"] = "on" if "true" in screen.lower() else "off"
+
+            # Light & Motion (Termux sensor if available)
+            light = self.run_termux_command("termux-sensor -s light -n 1")
+            if light:
+                try:
+                    sensors["light_level"] = int(light.split()[-1])
+                except:
+                    pass
+
+            # Simple movement simulation via uptime or custom
+            sensors["movement"] = "moving" if time.time() % 120 < 60 else "stable"
+
         except Exception as e:
-            print(f"Sensor error (self-healing): {e}")
-            return {"status": "fallback", "error": str(e)}
+            print(f"Sensor read error (self-healing active): {e}")
 
-    def _detect_screen_state(self):
-        # In real Termux/Android: use termux-sensor or dumpsys
-        return "on" if time.time() % 60 < 40 else "off"
+        # Log locally
+        with open(self.sensor_log, "a") as f:
+            f.write(json.dumps(sensors) + "\n")
 
-    def _detect_charging(self):
-        # Real implementation can read battery status
-        return True
-
-    def _get_battery_level(self):
-        return 85  # Simulate or read from system
-
-    def _detect_movement(self):
-        # Accelerometer simulation
-        return "stable" if time.time() % 180 < 90 else "moving"
-
-    def _get_light_level(self):
-        # Ambient light (lux)
-        return 450
+        return sensors
 
     def render_metrics(self):
-        sensors = self.read_phone_sensors()
-        print(f"📊 MikeComplex AI Live Metrics | {sensors['timestamp']}")
-        print(f"   Screen: {sensors['screen']} | Charging: {sensors['charging']}")
-        print(f"   Battery: {sensors['battery_level']}% | Movement: {sensors['movement']}")
-        print(f"   Activity: {sensors['activity_level']}")
+        data = self.read_real_sensors()
+        print(f"📱 MikeComplex AI Live | {data['timestamp']}")
+        print(f"   Screen: {data['screen']} | Battery: {data['battery_level']}% | Charging: {data['charging']}")
+        print(f"   Light: {data['light_level']} | Movement: {data['movement']}")
 
     def generate_local_revenue_ideas(self):
         return [
-            "Package offline AI agents as Termux apps for local sale",
-            "Offer sovereign AI consulting for small factories",
-            "Create and sell sensor dashboards as standalone tools"
+            "Sell custom offline AI monitoring apps via Termux",
+            "Offer local AI consulting for small businesses",
+            "Create and distribute sovereign sensor dashboards"
         ]
 
     def run_relentless(self):
-        print("🚀 MikeComplex AI running in relentless offline mode with live sensors")
-        print("   Phone state detection + metric rendering active")
+        print("🚀 MikeComplex AI started with REAL Termux sensor integration")
         while True:
             self.render_metrics()
-            ideas = self.generate_local_revenue_ideas()
-            print(f"💡 Local Opportunity: {ideas[0]}")
+            print("💡 Revenue Idea:", self.generate_local_revenue_ideas()[0])
             time.sleep(self.config.parameters.get("sensor_polling_interval", 30))
 
 if __name__ == "__main__":
