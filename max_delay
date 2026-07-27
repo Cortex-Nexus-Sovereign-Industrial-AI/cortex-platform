@@ -1,0 +1,23 @@
+import time
+import random
+
+def retry_with_decorrelated_jitter(
+    func,
+    max_retries=5,
+    base_delay=0.5,
+    max_delay=60.0
+):
+    delay = base_delay
+    
+    for attempt in range(max_retries + 1):
+        try:
+            return func()
+        except Exception as e:
+            if attempt == max_retries:
+                raise
+            
+            # Decorrelated jitter core logic
+            delay = min(max_delay, random.uniform(base_delay, delay * 3))
+            
+            print(f"Attempt {attempt+1} failed. Retrying in {delay:.2f}s")
+            time.sleep(delay)
