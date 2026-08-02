@@ -1,0 +1,32 @@
+steps:
+  # Step 1: Build the container image using Docker
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/cortex-nexus-industrial-ai:$SHORT_SHA'
+      - '.'
+
+  # Step 2: Push the image to Google Container Registry / Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'gcr.io/$PROJECT_ID/cortex-nexus-industrial-ai:$SHORT_SHA'
+
+  # Step 3: Deploy to Google Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'cortex-nexus-industrial-ai'
+      - '--image=gcr.io/$PROJECT_ID/cortex-nexus-industrial-ai:$SHORT_SHA'
+      - '--region=us-central1'
+      - '--platform=managed'
+      - '--allow-unauthenticated'
+      - '--set-env-vars'
+      - 'NETLIFY_HOST=https://cortex-platforms.netlify.app,SHOPIFY_STORE=cortex-intelligence-nexus.myshopify.com'
+
+images:
+  - 'gcr.io/$PROJECT_ID/cortex-nexus-industrial-ai:$SHORT_SHA'
+  
