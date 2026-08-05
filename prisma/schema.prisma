@@ -1,0 +1,38 @@
+// Minimal schema.prisma with payment models for Paystack / Flutterwave webhook idempotency.
+// Add these models to your existing schema.prisma, or use this file as-is for a service focused
+// on payments. Adjust names/fields to match your domain model if required.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model PaymentEvent {
+  id                    Int      @id @default(autoincrement())
+  gateway               String
+  transaction_reference String
+  payload               Json
+  headers               Json?
+  processed             Boolean  @default(false)
+  received_at           DateTime @default(now())
+  processed_at          DateTime?
+
+  @@unique([gateway, transaction_reference])
+  @@map("payment_events")
+}
+
+model RevenueLedger {
+  id             Int      @id @default(autoincrement())
+  transaction_id String   @unique
+  gateway        String
+  // Use Decimal for precise currency amounts. Prisma returns Decimal objects.
+  amount_numeric Decimal  @db.Decimal(18, 2)
+  metadata       Json?
+  created_at     DateTime @default(now())
+
+  @@map("revenue_ledger")
+}
