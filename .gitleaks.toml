@@ -1,0 +1,86 @@
+# .gitleaks.toml
+# CINIS NEXUS INDUSTRY — Customized Secret Detection Rules
+# Shadow-Vault Protocol | Maintained by MikeComplex AI
+
+# Extend the official default rules (highly recommended)
+[extend]
+useDefault = true
+
+# ============================================================
+# Custom Rules for CINIS / Cortex Platform
+# ============================================================
+
+[[rules]]
+id = "cinis-internal-api-key"
+description = "CINIS Internal or Platform API Key"
+regex = '''(?i)(?:cinis|cortex|vexenos|mikecomplex)[_-]?(?:api[_-]?key|secret|token|auth)[\s:=]+['"]?([a-zA-Z0-9_\-]{20,})['"]?'''
+secretGroup = 1
+tags = ["cinis", "internal", "api"]
+
+[[rules]]
+id = "paystack-secret-key"
+description = "Paystack Secret Key"
+regex = '''(?i)(?:paystack[_-]?(?:secret|sk)|sk_live_|sk_test_)[\s:=]*['"]?(sk_(?:live|test)_[a-zA-Z0-9]{20,})['"]?'''
+secretGroup = 1
+tags = ["paystack", "payment"]
+
+[[rules]]
+id = "flutterwave-secret-key"
+description = "Flutterwave Secret Key"
+regex = '''(?i)(?:flutterwave|flw)[_-]?(?:secret|sk)[\s:=]*['"]?(FLWSECK[_-](?:TEST|TEST)[_-][a-zA-Z0-9\-]{10,})['"]?'''
+secretGroup = 1
+tags = ["flutterwave", "payment"]
+
+[[rules]]
+id = "shopify-access-token"
+description = "Shopify Access Token / Private App Password"
+regex = '''(?i)(?:shopify[_-]?(?:access[_-]?token|private[_-]?app|admin[_-]?api))[\s:=]*['"]?(shpat_[a-zA-Z0-9]{20,}|[a-f0-9]{32})['"]?'''
+secretGroup = 1
+tags = ["shopify", "ecommerce"]
+
+[[rules]]
+id = "huggingface-token"
+description = "Hugging Face Access Token"
+regex = '''(?i)(?:hf[_-]?token|huggingface[_-]?(?:token|api[_-]?key))[\s:=]*['"]?(hf_[a-zA-Z0-9]{20,})['"]?'''
+secretGroup = 1
+tags = ["huggingface", "ai"]
+
+[[rules]]
+id = "netlify-access-token"
+description = "Netlify Access Token / Build Hook related secrets"
+regex = '''(?i)(?:netlify[_-]?(?:token|access[_-]?token|auth))[\s:=]*['"]?([a-zA-Z0-9_-]{20,})['"]?'''
+secretGroup = 1
+tags = ["netlify", "deploy"]
+
+[[rules]]
+id = "generic-long-secret"
+description = "Generic high-entropy secret assignment"
+regex = '''(?i)(?:secret|token|api[_-]?key|password|passwd|auth[_-]?key)[\s:=]+['"]([a-zA-Z0-9/+_\-=]{32,})['"]'''
+secretGroup = 1
+tags = ["generic", "high-entropy"]
+
+# ============================================================
+# Global Allowlist (reduce false positives)
+# ============================================================
+
+[[allowlists]]
+description = "Ignore common test, example, and documentation files"
+paths = [
+  '''\.env\.example$''',
+  '''env\.example$''',
+  '''.*\.md$''',
+  '''.*\.txt$''',
+  '''docs/.*''',
+  '''.*test.*''',
+  '''.*example.*''',
+  '''.*fixture.*''',
+  '''.*mock.*''',
+]
+
+[[allowlists]]
+description = "Ignore known placeholder / dummy values"
+regexes = [
+  '''(?i)(your[_-]?api[_-]?key|changeme|placeholder|example|dummy|test[_-]?key|xxx+|\*{6,})''',
+  '''sk_test_placeholder''',
+  '''hf_xxxxxxxx''',
+]

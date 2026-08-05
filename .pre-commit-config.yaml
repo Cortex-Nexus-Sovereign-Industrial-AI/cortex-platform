@@ -1,0 +1,12 @@
+# .pre-commit-config.yaml
+# Shadow-Vault local secret prevention
+# Install: pip install pre-commit && pre-commit install
+# Skip once: SKIP=gitleaks git commit -m "message"
+
+repos:
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.24.2
+    hooks:
+      - id: gitleaks
+        name: "Gitleaks — Detect hardcoded secrets (CINIS custom rules)"
+        args: ["--config", ".gitleaks.toml"]
