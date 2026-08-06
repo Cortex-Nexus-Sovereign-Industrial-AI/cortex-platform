@@ -5,19 +5,17 @@
 ## Overall Health: ACTIVE / BUILDING
 
 ### Completed
-- [x] Command Center, STATUS, docs, inventory, activity log
-- [x] Security: secrets out of Git; env examples sanitized
-- [x] Backend v2.2 + member-dashboard + index CTAs
-- [x] Shopify seed script
-- [x] **DEPLOY_CHECKLIST.md**
-- [x] package.json scripts: `start`, `server`, `seed:shopify`
-- [x] netlify.toml CSP + functions path hardened
+- [x] Command surface, docs, security, frontend, member UI, Shopify seed
+- [x] Backend v2.2 API + access grants
+- [x] Deploy checklist + Netlify config
+- [x] **backend/package.json v2.2** (clean deps, Node ≥18)
+- [x] **render.yaml** — Node API service (`cortex-platform-api`, rootDir backend)
 
-### Awaiting credentials / host
-- [ ] Env secrets locally + Netlify
-- [ ] `npm start` (or Node host for Express API)
-- [ ] `npm run seed:shopify`
-- [ ] Paystack webhook URL registered
+### Awaiting owner
+- [ ] Secrets in Netlify + Render
+- [ ] Deploy API on Render (or local `npm start`)
+- [ ] Shopify seed with Admin token
+- [ ] Paystack webhook URL registration
 
 ## Signal
-Deploy path is documented end-to-end. Code and ops surface are ready; activation is credential + host configuration.
+API hosting path (Render) is defined. Static site path (Netlify) is defined. Activation = credentials + one deploy click.

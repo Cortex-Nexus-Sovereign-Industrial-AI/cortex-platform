@@ -1,11 +1,9 @@
 # Activity Log — CINIS NEXUS
 
-## 2026-08-06 — Deploy path closed
-- Full command orchestration (docs, security, backend, frontend, member UI, Shopify seed)
-- DEPLOY_CHECKLIST.md added
-- package.json: start / server / seed:shopify
-- netlify.toml: functions dir, CSP for Paystack/Shopify
-- NETLIFY_READINESS updated
+## 2026-08-06 — Host path complete
+- Full orchestration: command, security, backend, frontend, commerce seed, deploy docs
+- backend package v2.2; render.yaml Node API service
+- DEPLOY_CHECKLIST includes Render + Netlify + local
 
 ## Outcome
-Repository is an operable command center with a clear deploy checklist. Live commerce and auth require owner secrets and a running API process.
+Repository is ready for owner-driven activation. No further structural blocks without credentials.

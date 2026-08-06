@@ -1,17 +1,30 @@
+# CINIS NEXUS — Render Blueprint
+# Deploys Express API from /backend
+# Docs: https://render.com/docs/blueprint-spec
+
 services:
   - type: web
+    name: cortex-platform-api
+    runtime: node
     plan: free
-    name: django-app
-    runtime: python
-    repo: https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform
-    buildCommand: './build.sh'
-    startCommand: 'python -m gunicorn mysite.asgi:application -k uvicorn.workers.UvicornWorker'
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
     envVars:
-      - key: DATABASE_URL
-        fromDatabase:
-          name: django-app-db
-          property: connectionString
-
-databases:
-  - name: django-app-db
-    plan: free
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true
+      - key: FRONTEND_URL
+        sync: false
+      - key: PAYSTACK_SECRET_KEY
+        sync: false
+      - key: PAYSTACK_PUBLIC_KEY
+        sync: false
+      - key: PAYSTACK_MODE
+        value: live
+      - key: SHOPIFY_ADMIN_TOKEN
+        sync: false
+      - key: SHOPIFY_STORE_DOMAIN
+        value: cortex-intelligence-nexus.myshopify.com
