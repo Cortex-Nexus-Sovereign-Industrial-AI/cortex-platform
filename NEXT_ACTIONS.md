@@ -1,24 +1,15 @@
 # NEXT ACTIONS
 **Updated:** 2026-08-06
 
-## Code orchestration — complete without secrets
-- [x] Command / docs / security / inventory
-- [x] Shopify seed + backend auth + access grants
-- [x] Frontend CTAs + member-dashboard.html
+## Code / docs orchestration — complete
+- [x] Command surface, security, backend, frontend, member UI, Shopify seed, deploy checklist
 
-## Owner credentials (required for live commerce)
-```bash
-export SHOPIFY_ADMIN_TOKEN=shpat_...
-export JWT_SECRET=long-random-string
-export PAYSTACK_SECRET_KEY=sk_test_or_live_...
-export PAYSTACK_PUBLIC_KEY=pk_test_or_live_...
+## Owner activation
+1. Follow [DEPLOY_CHECKLIST.md](./DEPLOY_CHECKLIST.md)
+2. Set secrets locally + Netlify
+3. `npm start` and optionally `npm run seed:shopify`
+4. Register Paystack webhook URL
 
-node scripts/seed-shopify-products.js
-# Start API: node backend/server.js
-# Open: member-dashboard.html
-```
-
-Set the same variables in Netlify for production.
-
-## Optional
-- [ ] Founder approval to archive duplicate HTML / large PDFs
+## Optional later
+- [ ] Host Express API on Railway/Render/VPS
+- [ ] Archive duplicate root HTML/PDFs (Founder approval)

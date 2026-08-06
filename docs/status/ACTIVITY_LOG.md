@@ -1,10 +1,11 @@
 # Activity Log — CINIS NEXUS
 
-## 2026-08-06 — Orchestration closed
-- Full command surface, docs, security, commerce seed, backend v2.2, frontend CTAs, member-dashboard
-- README polished to complete-state with owner credential steps
-- PUBLIC_SURFACES includes member dashboard
-- Continuous commits visible on cortex-platform
+## 2026-08-06 — Deploy path closed
+- Full command orchestration (docs, security, backend, frontend, member UI, Shopify seed)
+- DEPLOY_CHECKLIST.md added
+- package.json: start / server / seed:shopify
+- netlify.toml: functions dir, CSP for Paystack/Shopify
+- NETLIFY_READINESS updated
 
 ## Outcome
-All non-secret structural work is complete. Platform shows active professional development and a clear path to live commerce.
+Repository is an operable command center with a clear deploy checklist. Live commerce and auth require owner secrets and a running API process.
