@@ -6,28 +6,25 @@
 
 ### Completed
 - [x] Organization + repository established
-- [x] Multiple HTML platform variants (index, complete, production, funnel)
-- [x] Admin dashboard + Customer success portal
-- [x] Backend skeleton (Node server, routes, auth stubs, payments)
-- [x] Netlify configuration + functions (Paystack webhook, HF, status)
+- [x] Multiple HTML platform variants + portals
+- [x] Backend skeleton (Node + Python agents)
+- [x] Netlify configuration + functions
 - [x] Shopify client + deploy workflow
-- [x] Python agents & orchestrators present
-- [x] Extensive documentation set present
-- [x] about.me identity hub live
-- [x] Substack publication started
+- [x] about.me + Substack surfaces
 - [x] Paystack integration documented
 - [x] **Command Center established**
 - [x] **STATUS board live**
-- [x] **Documentation structure defined**
-- [x] **Shopify + Netlify readiness docs added**
+- [x] **Documentation structure + index**
+- [x] **Shopify + Netlify readiness docs**
 - [x] **Stack Map created**
-- [x] **Key documents consolidated into /docs** (Architecture, Roadmap, Governance)
+- [x] **Core docs consolidated into /docs**
 - [x] **.gitignore strengthened**
-- [x] **docs/README.md index created**
-- [x] **Activity Log active** — continuous professional commits visible
+- [x] **Security: tracked .env files removed from repo**
+- [x] **Archive policy created**
+- [x] **Activity Log active**
 
 ### In Progress
-- [ ] Further root cleanup (loose PDFs, duplicate HTML variants, tracked .env files)
+- [ ] Further root cleanup (large PDFs, duplicate HTML variants)
 - [ ] Functional user authentication + protected member area
 - [ ] Live Shopify storefront with products
 - [ ] Production Paystack end-to-end flow
@@ -40,7 +37,7 @@
 - [ ] Automated content pipeline
 
 ## Activity Signal
-Repository is under active command-center orchestration.  
-Clear commits are being made so external viewers see continuous professional progress.
+Repository under active command-center orchestration.  
+Security hygiene improved. Documentation consolidated. Continuous commits visible.
 
-**Latest focus:** Documentation consolidation complete for core files. Next: root cleanup + commerce surface.
+**Latest focus:** Security cleanup complete → next commerce or backend hardening.

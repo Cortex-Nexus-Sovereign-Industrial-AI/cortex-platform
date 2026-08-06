@@ -3,33 +3,30 @@
 **Updated:** 2026-08-06
 
 ## Priority 1 — Visibility & Tracking
-- [x] Create Command Center
-- [x] Create STATUS board
-- [x] Start Activity Log
-- [x] Continue commits so the repo shows life
-- [x] docs/README.md index
+- [x] Command Center + STATUS + Activity Log
+- [x] Continuous commits for visible activity
 
-## Priority 2 — Documentation Consolidation
-- [x] Move ARCHITECTURE, ROADMAP, GOVERNANCE into /docs
+## Priority 2 — Documentation & Security Consolidation
+- [x] Move core docs into /docs
 - [x] Strengthen .gitignore
-- [ ] Archive large root PDFs into /docs/archive or /assets
-- [ ] Remove or untrack sensitive .env files from history if needed
+- [x] Remove tracked .env / .env.local / backend/.env.production
+- [x] Archive policy created
+- [ ] Optional: move large root PDFs into docs/archive or assets (binary move)
 
 ## Priority 3 — Commerce Surface
 - [ ] Confirm active Shopify store URL
-- [ ] Push first product set using existing client/workflow
-- [ ] Link store clearly from main index and about.me
+- [ ] Push first product set
+- [ ] Link store from main index and about.me
 
 ## Priority 4 — Backend Hardening
 - [ ] Complete auth routes (login / callback / session)
 - [ ] Protect member dashboard routes
-- [ ] Wire Paystack webhook to actual access granting logic
+- [ ] Wire Paystack webhook to access granting logic
 
 ## Priority 5 — Frontend Polish
-- [ ] Choose one primary index.html as canonical landing
-- [ ] Ensure all CTAs point to live surfaces
-- [ ] Add visible “Last Updated” / activity badge
+- [ ] Canonical primary landing confirmed
+- [ ] CTAs point to live surfaces
+- [ ] Visible Last Updated / activity signal
 
 ---
-
-**Rule:** Every completed item is checked off here and reflected in STATUS.md + ACTIVITY_LOG.md.
+**Rule:** Completed items checked here and reflected in STATUS.md + ACTIVITY_LOG.md.
