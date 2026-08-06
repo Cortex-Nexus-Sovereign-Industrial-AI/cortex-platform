@@ -22,7 +22,8 @@
 - [x] **Shopify + Netlify readiness docs added**
 - [x] **Stack Map created**
 - [x] **Key documents consolidated into /docs** (Architecture, Roadmap, Governance)
-- [x] **.gitignore strengthened** (secrets protection)
+- [x] **.gitignore strengthened**
+- [x] **docs/README.md index created**
 - [x] **Activity Log active** — continuous professional commits visible
 
 ### In Progress
@@ -42,4 +43,4 @@
 Repository is under active command-center orchestration.  
 Clear commits are being made so external viewers see continuous professional progress.
 
-**Latest focus:** Documentation consolidation + operational hardening.
+**Latest focus:** Documentation consolidation complete for core files. Next: root cleanup + commerce surface.

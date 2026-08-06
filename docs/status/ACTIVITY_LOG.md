@@ -9,7 +9,8 @@
 - Added full Stack Map
 - Consolidated ARCHITECTURE, ROADMAP, GOVERNANCE into /docs hierarchy
 - Strengthened .gitignore to protect secrets and reduce noise
-- Platform now shows continuous professional commit activity
+- Added docs/README.md index for easy navigation
+- Continuous professional commits now visible on the repository
 
 ## Previous (pre-command-center)
 - Multiple HTML landings, portals, backend stubs, Netlify functions, Shopify client, Python agents, and large document set already present in repository.

@@ -7,11 +7,12 @@
 - [x] Create STATUS board
 - [x] Start Activity Log
 - [x] Continue commits so the repo shows life
+- [x] docs/README.md index
 
 ## Priority 2 — Documentation Consolidation
 - [x] Move ARCHITECTURE, ROADMAP, GOVERNANCE into /docs
 - [x] Strengthen .gitignore
-- [ ] Archive large root PDFs into /docs/archive or /assets (next)
+- [ ] Archive large root PDFs into /docs/archive or /assets
 - [ ] Remove or untrack sensitive .env files from history if needed
 
 ## Priority 3 — Commerce Surface
