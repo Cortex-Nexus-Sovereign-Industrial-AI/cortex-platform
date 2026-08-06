@@ -1,7 +1,11 @@
-# Secrets
+# Secrets — never commit
 .env
-.env.local
-.env.production
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+credentials/
 
 # Python
 __pycache__/
@@ -29,10 +33,15 @@ webhook_logs.log
 .DS_Store
 Thumbs.db
 
-# Node (if using Netlify functions)
+# Node / Netlify
 node_modules/
 .netlify/
 
 # Build artifacts
 dist/
 build/
+
+# Local history / temp
+.bash_history
+*.tmp
+*.bak

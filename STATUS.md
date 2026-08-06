@@ -12,24 +12,25 @@
 - [x] Netlify configuration + functions (Paystack webhook, HF, status)
 - [x] Shopify client + deploy workflow
 - [x] Python agents & orchestrators present
-- [x] Extensive documentation set (ARCHITECTURE, ROADMAP, FEATURES, GOVERNANCE, etc.)
+- [x] Extensive documentation set present
 - [x] about.me identity hub live
 - [x] Substack publication started
 - [x] Paystack integration documented
-- [x] **Command Center established** (COMMAND_CENTER.md)
+- [x] **Command Center established**
 - [x] **STATUS board live**
 - [x] **Documentation structure defined**
 - [x] **Shopify + Netlify readiness docs added**
 - [x] **Stack Map created**
-- [x] **Activity Log started** — platform now shows tracked professional activity
+- [x] **Key documents consolidated into /docs** (Architecture, Roadmap, Governance)
+- [x] **.gitignore strengthened** (secrets protection)
+- [x] **Activity Log active** — continuous professional commits visible
 
 ### In Progress
-- [ ] Clean root directory (many loose PDFs, duplicate files, env files)
-- [ ] Move key existing markdown into /docs hierarchy
+- [ ] Further root cleanup (loose PDFs, duplicate HTML variants, tracked .env files)
 - [ ] Functional user authentication + protected member area
 - [ ] Live Shopify storefront with products
 - [ ] Production Paystack end-to-end flow
-- [ ] Consistent public activity / content cadence
+- [ ] Consistent public content cadence
 
 ### Not Started / Blocked
 - [ ] Real revenue tracking dashboard
@@ -38,7 +39,7 @@
 - [ ] Automated content pipeline
 
 ## Activity Signal
-This repository is under active command-center orchestration.  
-Commits are being made with clear messages so external viewers see continuous professional progress.
+Repository is under active command-center orchestration.  
+Clear commits are being made so external viewers see continuous professional progress.
 
-**Latest focus:** Documentation consolidation + operational readiness for Shopify & Netlify.
+**Latest focus:** Documentation consolidation + operational hardening.

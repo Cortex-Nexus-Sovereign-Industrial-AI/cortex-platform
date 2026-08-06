@@ -2,16 +2,17 @@
 **Owner:** MikeComplex AI / Michael Ujuku Morim  
 **Updated:** 2026-08-06
 
-## Priority 1 — Visibility & Tracking (Done / Ongoing)
+## Priority 1 — Visibility & Tracking
 - [x] Create Command Center
 - [x] Create STATUS board
 - [x] Start Activity Log
-- [ ] Continue daily/weekly commits so the repo shows life
+- [x] Continue commits so the repo shows life
 
 ## Priority 2 — Documentation Consolidation
-- [ ] Move existing ARCHITECTURE.md, ROADMAP.md, FEATURES.md, GOVERNANCE.md, etc. into /docs subfolders
-- [ ] Archive or move large root PDFs into /docs/archive or /assets
-- [ ] Remove or gitignore sensitive .env files from root
+- [x] Move ARCHITECTURE, ROADMAP, GOVERNANCE into /docs
+- [x] Strengthen .gitignore
+- [ ] Archive large root PDFs into /docs/archive or /assets (next)
+- [ ] Remove or untrack sensitive .env files from history if needed
 
 ## Priority 3 — Commerce Surface
 - [ ] Confirm active Shopify store URL
@@ -25,9 +26,9 @@
 
 ## Priority 5 — Frontend Polish
 - [ ] Choose one primary index.html as canonical landing
-- [ ] Ensure all CTAs point to live surfaces (Netlify, Shopify, Substack, Command Center)
+- [ ] Ensure all CTAs point to live surfaces
 - [ ] Add visible “Last Updated” / activity badge
 
 ---
 
-**Rule:** Every completed item must be checked off here and reflected in STATUS.md + ACTIVITY_LOG.md so the platform always has a clear, honest surface of progress.
+**Rule:** Every completed item is checked off here and reflected in STATUS.md + ACTIVITY_LOG.md.
