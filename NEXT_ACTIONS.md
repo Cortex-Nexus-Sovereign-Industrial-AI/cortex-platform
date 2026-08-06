@@ -1,15 +1,12 @@
 # NEXT ACTIONS
 **Updated:** 2026-08-06
 
-## Code / docs orchestration — complete
-- [x] Command surface, security, backend, frontend, member UI, Shopify seed, deploy checklist
+## Orchestration — complete
+See [HANDOFF.md](./HANDOFF.md).
 
-## Owner activation
-1. Follow [DEPLOY_CHECKLIST.md](./DEPLOY_CHECKLIST.md)
-2. Set secrets locally + Netlify
-3. `npm start` and optionally `npm run seed:shopify`
-4. Register Paystack webhook URL
+## Owner only
+1. [DEPLOY_CHECKLIST.md](./DEPLOY_CHECKLIST.md)
+2. Secrets + API host + optional Shopify seed + Paystack webhook
 
-## Optional later
-- [ ] Host Express API on Railway/Render/VPS
-- [ ] Archive duplicate root HTML/PDFs (Founder approval)
+## Optional
+- Archive duplicate HTML / root PDFs (Founder approval)
