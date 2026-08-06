@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CINIS NEXUS — Member Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body { background: #0d1117; color: #c9d1d9; font-family: Inter, system-ui, sans-serif; margin: 0; }
+    .wrap { max-width: 720px; margin: 0 auto; padding: 2rem 1rem; }
+    h1 { color: #58a6ff; font-size: 1.5rem; }
+    .card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 1.25rem; margin-bottom: 1rem; }
+    label { display: block; font-size: 0.8rem; opacity: 0.8; margin-bottom: 0.25rem; }
+    input { width: 100%; padding: 0.6rem; border-radius: 6px; border: 1px solid #30363d; background: #0d1117; color: #c9d1d9; box-sizing: border-box; margin-bottom: 0.75rem; }
+    button { background: #238636; color: #fff; border: none; padding: 0.65rem 1.2rem; border-radius: 6px; cursor: pointer; font-weight: 600; }
+    button.secondary { background: #21262d; }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
+    .error { color: #f85149; font-size: 0.9rem; }
+    .ok { color: #3fb950; font-size: 0.9rem; }
+    .grant { border-left: 3px solid #3fb950; padding-left: 0.75rem; margin: 0.5rem 0; }
+    .muted { opacity: 0.65; font-size: 0.85rem; }
+    a { color: #58a6ff; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>⚡ Member Dashboard</h1>
+    <p class="muted">Bound to <code>GET /api/auth/me</code> · Cortex Platform v2.2</p>
+
+    <div id="login-card" class="card">
+      <h2 style="margin-top:0;font-size:1.1rem;">Sign in</h2>
+      <label for="email">Email</label>
+      <input id="email" type="email" placeholder="you@example.com" autocomplete="username">
+      <label for="password">Password</label>
+      <input id="password" type="password" placeholder="••••••••" autocomplete="current-password">
+      <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+        <button id="btn-login" type="button">Login</button>
+        <button id="btn-register" type="button" class="secondary">Register</button>
+      </div>
+      <p id="auth-msg" class="error" style="display:none;"></p>
+      <p class="muted" style="margin-top:1rem;">API base: <span id="api-base-label"></span></p>
+    </div>
+
+    <div id="profile-card" class="card" style="display:none;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <h2 style="margin:0;font-size:1.1rem;">Profile</h2>
+        <button id="btn-logout" type="button" class="secondary">Logout</button>
+      </div>
+      <div id="profile-body" style="margin-top:1rem;"></div>
+      <h3 style="font-size:1rem;">Access grants</h3>
+      <div id="grants-body"></div>
+      <p class="muted"><a href="index.html">← Back to platform</a> · <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/STATUS.md" target="_blank">Live status</a></p>
+    </div>
+  </div>
+
+  <script>
+    // Default: same origin when served behind Netlify proxy, else local backend
+    const API_BASE = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+      ? 'http://localhost:5000'
+      : '';
+
+    document.getElementById('api-base-label').textContent = API_BASE || '(same origin /api)';
+
+    const tokenKey = 'cortex_jwt';
+
+    function showMsg(text, isError) {
+      const el = document.getElementById('auth-msg');
+      el.style.display = 'block';
+      el.className = isError ? 'error' : 'ok';
+      el.textContent = text;
+    }
+
+    async function api(path, options = {}) {
+      const headers = { 'Content-Type': 'application/json', ...(options.headers || {}) };
+      const token = localStorage.getItem(tokenKey);
+      if (token) headers['Authorization'] = 'Bearer ' + token;
+      const res = await fetch(API_BASE + path, { ...options, headers });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || res.statusText || 'Request failed');
+      return data;
+    }
+
+    async function loadMe() {
+      const data = await api('/api/auth/me');
+      const u = data.user;
+      document.getElementById('login-card').style.display = 'none';
+      document.getElementById('profile-card').style.display = 'block';
+      document.getElementById('profile-body').innerHTML =
+        '<p><strong>' + escapeHtml(u.name) + '</strong><br>' +
+        escapeHtml(u.email) +
+        (u.company ? '<br>' + escapeHtml(u.company) : '') +
+        (u.location ? '<br>' + escapeHtml(u.location) : '') +
+        '</p><p class="muted">Member since ' + escapeHtml(u.created_at || '—') + '</p>';
+
+      const grants = data.grants || [];
+      const gEl = document.getElementById('grants-body');
+      if (!grants.length) {
+        gEl.innerHTML = '<p class="muted">No active access grants yet. Complete a payment to unlock products.</p>';
+      } else {
+        gEl.innerHTML = grants.map(g =>
+          '<div class="grant"><strong>' + escapeHtml(g.product) + '</strong><br>' +
+          '<span class="muted">' + escapeHtml(g.order_ref || '') + ' · ' + escapeHtml(g.granted_at || '') + '</span></div>'
+        ).join('');
+      }
+    }
+
+    function escapeHtml(s) {
+      return String(s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+
+    document.getElementById('btn-login').onclick = async () => {
+      try {
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
+        const data = await api('/api/auth/login', {
+          method: 'POST',
+          body: JSON.stringify({ email, password })
+        });
+        localStorage.setItem(tokenKey, data.token);
+        showMsg('Login successful', false);
+        await loadMe();
+      } catch (e) {
+        showMsg(e.message, true);
+      }
+    };
+
+    document.getElementById('btn-register').onclick = async () => {
+      try {
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
+        const name = email.split('@')[0] || 'Member';
+        const data = await api('/api/auth/register', {
+          method: 'POST',
+          body: JSON.stringify({ name, email, password })
+        });
+        localStorage.setItem(tokenKey, data.token);
+        showMsg('Registered successfully', false);
+        await loadMe();
+      } catch (e) {
+        showMsg(e.message, true);
+      }
+    };
+
+    document.getElementById('btn-logout').onclick = () => {
+      localStorage.removeItem(tokenKey);
+      document.getElementById('profile-card').style.display = 'none';
+      document.getElementById('login-card').style.display = 'block';
+      showMsg('Logged out', false);
+    };
+
+    // Auto-load if token present
+    if (localStorage.getItem(tokenKey)) {
+      loadMe().catch(() => localStorage.removeItem(tokenKey));
+    }
+  </script>
+</body>
+</html>

@@ -1,54 +1,28 @@
 # Root Inventory — Canonical vs Experimental
-**Updated:** 2026-08-06  
-**Purpose:** Stop confusion about which files are the live surface vs historical experiments.
+**Updated:** 2026-08-06
 
 ## Canonical (use these)
 
 | Path | Role |
 |------|------|
-| `index.html` | Primary app shell (Netlify publish + CTAs) |
-| `styles.css` | Primary stylesheet |
-| `app.js` | Primary frontend logic |
-| `backend/server.js` | Primary API (v2.2) |
-| `shopify-client.js` | Shopify Admin connector |
+| `index.html` | Primary app shell |
+| `member-dashboard.html` | Member UI bound to `/api/auth/me` |
+| `styles.css` / `app.js` | Primary frontend assets |
+| `backend/server.js` | Primary API v2.2 |
+| `shopify-client.js` | Shopify connector |
 | `scripts/seed-shopify-products.js` | Product seed |
-| `netlify.toml` + `netlify/functions/` | Deploy + serverless |
-| `COMMAND_CENTER.md` | Ops entry |
-| `STATUS.md` | Live health |
-| `PUBLIC_SURFACES.md` | Public URL map |
-| `docs/` | Tracked documentation hierarchy |
+| `netlify.toml` + `netlify/functions/` | Deploy |
+| `COMMAND_CENTER.md` / `STATUS.md` / `PUBLIC_SURFACES.md` | Ops |
+| `docs/` | Tracked documentation |
 
-## Supporting portals (keep)
+## Supporting portals
+- `admin-dashboard.html`, `customer-success-portal.html`, `test-payment.html`
+- `join.html`, `projects.html`, `documents.html`
 
-| Path | Role |
-|------|------|
-| `admin-dashboard.html` | Admin UI experiment |
-| `customer-success-portal.html` | Support portal |
-| `test-payment.html` | Paystack test page |
-| `join.html` / `Join–professional.html` | Join flows |
-| `projects.html` | Projects listing |
-| `documents.html` | Documents surface |
-
-## Experimental / duplicate HTML (do not link externally)
-
-Treat as archive candidates — do not delete without Founder approval:
-
-- `index_complete.html`
-- `index-production.html`
-- `index-9.html`, `index-10.html`
-- `funnel-lane.html`, `funnel-lane (1..5).html`
-- `cortex-connector-hub_agentic_artifact_1_ef996e8c5cda (1).html`
-- `documentation.html`, `media.html`, `research.html`, `support.html`, `product-search.html`
-
-## Binary / historical documents (root)
-
-Large PDFs and DOCX remain in root for history. Policy: see `docs/archive/README.md`.
-Examples:
-- ` THE SUPREME CONSTITUTION...pdf`
-- `Global_Correction_Protocol...pdf`
-- `CINIS_*.pdf` blueprints
-- `infographics_*.pdf`
-- Various images (png/jpeg/webp)
+## Experimental / duplicate (do not link externally)
+- `index_complete.html`, `index-production.html`, `index-9.html`, `index-10.html`
+- `funnel-lane.html` and `funnel-lane (1..5).html`
+- Other one-off HTML experiments in root
 
 ## Rule
-External links and about.me must only point to **canonical** surfaces listed in `PUBLIC_SURFACES.md` and the Canonical table above.
+External links only to canonical surfaces in `PUBLIC_SURFACES.md`.

@@ -4,26 +4,21 @@
 
 ## Overall Health: ACTIVE / BUILDING
 
-### Completed this orchestration session
-- [x] Command Center + STATUS + Activity Log + NEXT_ACTIONS
-- [x] Docs hierarchy under `/docs`
-- [x] Security: removed tracked `.env*` and `.bash_history`
-- [x] Shopify store confirmed + product seed script (4 products)
-- [x] Auth: JWT register/login/me + OAuth route module + requireAuth
-- [x] Member protection on GET /api/orders and GET /api/stats
-- [x] access_grants on Paystack charge.success
-- [x] PUBLIC_SURFACES + ACTIVITY_BADGE
-- [x] index.html CTAs (Business Hub, footer, help, social)
-- [x] **ROOT_INVENTORY.md** — canonical vs experimental classification
+### Completed
+- [x] Command Center, STATUS, docs hierarchy, security cleanup
+- [x] Shopify seed script + store domain
+- [x] Backend v2.2: JWT, protected routes, access_grants
+- [x] Frontend CTAs + PUBLIC_SURFACES + ROOT_INVENTORY
+- [x] **member-dashboard.html** — login/register + profile + grants via `/api/auth/me`
+- [x] Env examples sanitized (no live-looking keys)
 
-### Awaiting credentials (your action)
-- [ ] `SHOPIFY_ADMIN_TOKEN` → run `node scripts/seed-shopify-products.js`
-- [ ] Netlify env: `JWT_SECRET`, `PAYSTACK_SECRET_KEY`, `PAYSTACK_PUBLIC_KEY`, `SHOPIFY_ADMIN_TOKEN`
+### Awaiting your credentials
+- [ ] SHOPIFY_ADMIN_TOKEN → seed products
+- [ ] Netlify: JWT_SECRET, PAYSTACK_*, SHOPIFY_ADMIN_TOKEN
+- [ ] Run backend so member-dashboard can authenticate
 
-### Optional later
-- [ ] Physically move root PDFs into `docs/archive/` (binary move)
-- [ ] Delete or relocate duplicate HTML after Founder review
-- [ ] Member dashboard UI bound to `/api/auth/me`
+### Optional
+- [ ] Archive root PDFs / duplicate HTML (Founder approval)
 
 ## Activity Signal
-Platform has a professional, tracked command surface. Code is ready for commerce and payments once secrets are set. Continuous commits visible on the repo.
+Member dashboard is live in-repo. Full command surface tracked. Commerce and production payments wait only on secrets.
