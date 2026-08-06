@@ -4,34 +4,26 @@
 
 ## Overall Health: ACTIVE / BUILDING
 
-### Completed
-- [x] Organization + repository established
-- [x] Frontend landings + public surface CTAs
-- [x] Backend API v2.2 (JWT auth, orders, Paystack, stats)
-- [x] Netlify configuration + functions
-- [x] Shopify client + product seed script
-- [x] Command Center + STATUS + Activity Log + docs hierarchy
-- [x] Security: tracked secrets removed
-- [x] Auth routes + requireAuth middleware
+### Completed this orchestration session
+- [x] Command Center + STATUS + Activity Log + NEXT_ACTIONS
+- [x] Docs hierarchy under `/docs`
+- [x] Security: removed tracked `.env*` and `.bash_history`
+- [x] Shopify store confirmed + product seed script (4 products)
+- [x] Auth: JWT register/login/me + OAuth route module + requireAuth
+- [x] Member protection on GET /api/orders and GET /api/stats
+- [x] access_grants on Paystack charge.success
 - [x] PUBLIC_SURFACES + ACTIVITY_BADGE
-- [x] index.html CTAs mirrored
-- [x] **Member routes protected** — GET /api/orders, GET /api/stats require JWT
-- [x] **GET /api/auth/me** — profile + access grants
-- [x] **access_grants table** — created on Paystack charge.success
-- [x] dbRun lastID fix for reliable inserts
+- [x] index.html CTAs (Business Hub, footer, help, social)
+- [x] **ROOT_INVENTORY.md** — canonical vs experimental classification
 
-### In Progress / Awaiting credentials
-- [ ] SHOPIFY_ADMIN_TOKEN → run product seed
-- [ ] Production secrets in Netlify (JWT_SECRET, PAYSTACK_*, SHOPIFY_*)
-- [ ] Root PDF / duplicate HTML cleanup (optional)
+### Awaiting credentials (your action)
+- [ ] `SHOPIFY_ADMIN_TOKEN` → run `node scripts/seed-shopify-products.js`
+- [ ] Netlify env: `JWT_SECRET`, `PAYSTACK_SECRET_KEY`, `PAYSTACK_PUBLIC_KEY`, `SHOPIFY_ADMIN_TOKEN`
 
-### Not Started
-- [ ] Revenue dashboard UI
-- [ ] Mobile apps
-- [ ] Multi-language voice layer
-- [ ] Automated content pipeline
+### Optional later
+- [ ] Physically move root PDFs into `docs/archive/` (binary move)
+- [ ] Delete or relocate duplicate HTML after Founder review
+- [ ] Member dashboard UI bound to `/api/auth/me`
 
 ## Activity Signal
-Backend now enforces member protection and grants access after successful payment. Frontend exposes all public surfaces. Continuous commits visible.
-
-**Latest focus:** Backend hardening complete for core member paths. Commerce activation awaits Shopify token.
+Platform has a professional, tracked command surface. Code is ready for commerce and payments once secrets are set. Continuous commits visible on the repo.
