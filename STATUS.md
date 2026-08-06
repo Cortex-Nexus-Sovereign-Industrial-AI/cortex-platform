@@ -6,38 +6,36 @@
 
 ### Completed
 - [x] Organization + repository established
-- [x] Multiple HTML platform variants + portals
+- [x] Frontend landings + portals
 - [x] Backend skeleton (Node + Python agents)
 - [x] Netlify configuration + functions
-- [x] Shopify client + deploy workflow
+- [x] Shopify client present
 - [x] about.me + Substack surfaces
-- [x] Paystack integration documented
-- [x] **Command Center established**
-- [x] **STATUS board live**
-- [x] **Documentation structure + index**
-- [x] **Shopify + Netlify readiness docs**
-- [x] **Stack Map created**
-- [x] **Core docs consolidated into /docs**
-- [x] **.gitignore strengthened**
-- [x] **Security: tracked .env files removed from repo**
-- [x] **Archive policy created**
-- [x] **Activity Log active**
+- [x] Paystack webhook implemented
+- [x] Command Center + STATUS + Activity Log
+- [x] Documentation structure + core docs consolidated
+- [x] Security: tracked secrets removed
+- [x] Archive policy
+- [x] **Shopify product seed script ready** (4 products)
+- [x] **Auth routes fully wired** (login / callback / status / logout)
+- [x] **requireAuth middleware added**
+- [x] Auth + Shopify ops docs updated
 
 ### In Progress
-- [ ] Further root cleanup (large PDFs, duplicate HTML variants)
-- [ ] Functional user authentication + protected member area
-- [ ] Live Shopify storefront with products
-- [ ] Production Paystack end-to-end flow
-- [ ] Consistent public content cadence
+- [ ] Set SHOPIFY_ADMIN_TOKEN and run seed script
+- [ ] Link live storefront from index + about.me
+- [ ] Configure OAuth provider env vars for production auth
+- [ ] Protect member dashboard routes with requireAuth
+- [ ] Wire Paystack success → access grant
+- [ ] Root PDF / duplicate HTML cleanup
 
 ### Not Started / Blocked
-- [ ] Real revenue tracking dashboard
+- [ ] Real revenue tracking dashboard UI
 - [ ] Mobile apps
-- [ ] Full multi-language voice production layer
+- [ ] Full multi-language voice layer
 - [ ] Automated content pipeline
 
 ## Activity Signal
-Repository under active command-center orchestration.  
-Security hygiene improved. Documentation consolidated. Continuous commits visible.
+Command-center orchestration active. Security hygiene improved. Commerce seed + auth routes now in place. Continuous commits visible.
 
-**Latest focus:** Security cleanup complete → next commerce or backend hardening.
+**Latest focus:** Commerce seed ready — awaiting Admin token to push products. Auth routes ready — awaiting OAuth provider credentials.

@@ -2,15 +2,14 @@
 
 ## 2026-08-06 (continued)
 - Established COMMAND_CENTER.md as single entry point
-- Created STATUS.md for live health tracking
-- Created documentation master structure
-- Added Shopify Integration guide + Netlify Readiness + Stack Map
-- Consolidated ARCHITECTURE, ROADMAP, GOVERNANCE into /docs hierarchy
-- Strengthened .gitignore
-- Created docs/README.md index
-- **Security cleanup:** removed tracked `.env`, `.env.local`, `backend/.env.production` from repository
-- Added archive policy under docs/archive/
-- Continuous professional commits now visible on the repository
+- Created STATUS.md + NEXT_ACTIONS + Activity Log
+- Consolidated core docs into /docs hierarchy
+- Strengthened .gitignore; removed tracked .env / .env.local / backend/.env.production / .bash_history
+- Added archive policy
+- **Commerce:** confirmed Shopify store domain; created product seed script (4 products)
+- **Backend:** wired full auth routes (login / callback / status / logout) + requireAuth middleware
+- Added AUTH_SETUP and updated SHOPIFY_INTEGRATION docs
+- Continuous professional commits visible on repository
 
 ## Previous (pre-command-center)
-- Multiple HTML landings, portals, backend stubs, Netlify functions, Shopify client, Python agents, and large document set already present in repository.
+- Multiple HTML landings, portals, backend stubs, Netlify functions, Shopify client, Python agents, and large document set already present.

@@ -4,28 +4,29 @@
 
 ## Priority 1 — Visibility & Tracking
 - [x] Command Center + STATUS + Activity Log
-- [x] Continuous commits for visible activity
+- [x] Continuous commits
 
-## Priority 2 — Documentation & Security Consolidation
-- [x] Move core docs into /docs
-- [x] Strengthen .gitignore
-- [x] Remove tracked .env / .env.local / backend/.env.production
-- [x] Archive policy created
-- [ ] Optional: move large root PDFs into docs/archive or assets (binary move)
+## Priority 2 — Documentation & Security
+- [x] Core docs into /docs
+- [x] .gitignore + remove tracked secrets
+- [x] Archive policy
 
 ## Priority 3 — Commerce Surface
-- [ ] Confirm active Shopify store URL
-- [ ] Push first product set
+- [x] Confirm Shopify store URL (cortex-intelligence-nexus.myshopify.com)
+- [x] Product seed script created
+- [ ] Set SHOPIFY_ADMIN_TOKEN and run `node scripts/seed-shopify-products.js`
 - [ ] Link store from main index and about.me
 
 ## Priority 4 — Backend Hardening
-- [ ] Complete auth routes (login / callback / session)
-- [ ] Protect member dashboard routes
-- [ ] Wire Paystack webhook to access granting logic
+- [x] Auth routes wired (login / callback / status / logout)
+- [x] requireAuth middleware added
+- [ ] Configure OAuth env vars in production
+- [ ] Apply requireAuth to member dashboard routes
+- [ ] Wire Paystack webhook → access granting logic
 
 ## Priority 5 — Frontend Polish
 - [ ] Canonical primary landing confirmed
-- [ ] CTAs point to live surfaces
+- [ ] CTAs point to live Shopify + docs surfaces
 - [ ] Visible Last Updated / activity signal
 
 ---
