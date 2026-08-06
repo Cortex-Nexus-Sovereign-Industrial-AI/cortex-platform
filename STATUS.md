@@ -4,21 +4,23 @@
 
 ## Overall Health: ACTIVE / BUILDING
 
-### Completed
-- [x] Command Center, STATUS, docs hierarchy, security cleanup
-- [x] Shopify seed script + store domain
+### Completed (this orchestration)
+- [x] Command Center, STATUS, Activity Log, NEXT_ACTIONS
+- [x] Docs hierarchy + ROOT_INVENTORY
+- [x] Secrets removed from Git; env examples sanitized
+- [x] Shopify seed script (4 products)
 - [x] Backend v2.2: JWT, protected routes, access_grants
-- [x] Frontend CTAs + PUBLIC_SURFACES + ROOT_INVENTORY
-- [x] **member-dashboard.html** — login/register + profile + grants via `/api/auth/me`
-- [x] Env examples sanitized (no live-looking keys)
+- [x] index.html public CTAs
+- [x] member-dashboard.html
+- [x] README updated to complete-state quickstart
 
-### Awaiting your credentials
-- [ ] SHOPIFY_ADMIN_TOKEN → seed products
-- [ ] Netlify: JWT_SECRET, PAYSTACK_*, SHOPIFY_ADMIN_TOKEN
-- [ ] Run backend so member-dashboard can authenticate
+### Awaiting credentials
+- [ ] SHOPIFY_ADMIN_TOKEN + product seed run
+- [ ] Netlify JWT_SECRET + PAYSTACK_* + SHOPIFY_ADMIN_TOKEN
+- [ ] Backend process running for member-dashboard live auth
 
 ### Optional
-- [ ] Archive root PDFs / duplicate HTML (Founder approval)
+- [ ] Archive duplicate HTML / large PDFs (Founder approval)
 
-## Activity Signal
-Member dashboard is live in-repo. Full command surface tracked. Commerce and production payments wait only on secrets.
+## Signal
+Professional tracked activity surface is live. Commerce and payments activate when secrets are set.
