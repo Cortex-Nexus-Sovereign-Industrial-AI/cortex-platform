@@ -5,13 +5,14 @@
 ## Overall Health: ACTIVE — STRUCTURAL WORK COMPLETE
 
 ### Done
-- [x] Command / HANDOFF / deploy docs
-- [x] Backend v2.2 + member-dashboard
+- [x] Command / HANDOFF / deploy / local-dev docs
+- [x] Backend v2.2 + member-dashboard + app.js JWT wiring
 - [x] Shopify seed + Netlify + Render
-- [x] **app.js** — auth overlay uses JWT API (`/api/auth/login`, `/register`, `/me`); offline local fallback
+- [x] **Netlify `health` function** → `/api/health` on static deploy
 
 ### Owner activation
-- [ ] Secrets + API host
+- [ ] Secrets + Express API host
 - [ ] Shopify seed + Paystack webhook
 
-See [HANDOFF.md](./HANDOFF.md).
+**Handoff:** [HANDOFF.md](./HANDOFF.md)  
+**Local:** [docs/operations/LOCAL_DEV.md](./docs/operations/LOCAL_DEV.md)
