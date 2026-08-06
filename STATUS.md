@@ -14,17 +14,14 @@
 - [x] Command Center + STATUS + Activity Log
 - [x] Documentation structure + core docs consolidated
 - [x] Security: tracked secrets removed
-- [x] Auth routes wired (OAuth PKCE + JWT server)
-- [x] requireAuth middleware
-- [x] **PUBLIC_SURFACES.md** — canonical public link map
-- [x] **ACTIVITY_BADGE.md** — visible activity signal
-- [x] Frontend notes for canonical landing
+- [x] Auth routes wired + requireAuth middleware
+- [x] PUBLIC_SURFACES.md + ACTIVITY_BADGE.md
+- [x] **index.html CTAs mirrored** — Business Hub, footer, help tab, social (Substack), activity badge
 
 ### In Progress
 - [ ] Set SHOPIFY_ADMIN_TOKEN and run product seed
-- [ ] Link live Shopify storefront in index CTAs (after products exist)
-- [ ] Configure production OAuth / JWT secrets in Netlify
-- [ ] Apply requireAuth to selected member-only API routes
+- [ ] Configure production secrets in Netlify (JWT, Paystack, Shopify)
+- [ ] Protect selected member API routes
 - [ ] Root PDF / duplicate HTML cleanup
 
 ### Not Started / Blocked
@@ -34,8 +31,6 @@
 - [ ] Automated content pipeline
 
 ## Activity Signal
-Platform under active command-center orchestration.  
-Public surfaces mapped. Commerce seed ready. Auth backend ready.  
-Continuous commits visible for professional momentum.
+Command-center orchestration active. Frontend now exposes Command Center, Status, Shopify, Substack, Netlify, and GitHub Pages from the primary shell.
 
-**Latest focus:** Public surfaces + activity signal live. Next: activate Shopify products when token available, then tighten frontend CTAs.
+**Latest focus:** Frontend public surfaces live in index.html. Next: activate Shopify products when token available.
