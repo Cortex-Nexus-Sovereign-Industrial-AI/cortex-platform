@@ -36,7 +36,8 @@
       "https://www.linkedin.com/in/michaelujukumorim",
       "https://medium.com/@mikecomplexai",
       "https://www.tiktok.com/@cinisnio.ai",
-      "https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform"
+      "https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform",
+      "https://mikecomplexai.substack.com"
     ],
     "contactPoint": {
       "@type": "ContactPoint",
@@ -49,17 +50,13 @@
 
   <!-- CINIS CORE: SECURE HUGGING FACE INTELLIGENCE BRIDGE -->
   <script>
-    // Global State for Sovereign Engine
     const CortexEngine = {
       hfToken: null,
       ownerAuthenticated: false,
-      
-      // Initialize the secure handshake on page load
       init() {
         const urlParams = new URLSearchParams(window.location.search);
         const authCode = urlParams.get('code');
         const error = urlParams.get('error');
-
         if (authCode) {
           console.log("⚡ [CORTEX ENGINE] Authorization code detected. Processing handshake...");
           this.handleHandshake(authCode);
@@ -67,28 +64,17 @@
           console.error("❌ [CORTEX ENGINE] Handshake Refused:", error);
         }
       },
-
-      // Process Code & Redirect to clean up URL
       handleHandshake(code) {
-        // Store code temporarily for confirmation
         sessionStorage.setItem('cinis_auth_temp', code);
         window.history.replaceState({}, document.title, window.location.pathname);
-        
-        // Dispatch event to open secret command module
-        setTimeout(() => {
-          this.triggerOwnerVerification();
-        }, 800);
+        setTimeout(() => { this.triggerOwnerVerification(); }, 800);
       },
-
-      // Owner verification sequence to lock down sensitive actions
       triggerOwnerVerification() {
         const secretKey = prompt("🔑 [OWNER INITIALIZATION REQUIRED]\nEnter your Secret Platform API Key to bind Hugging Face Core Permissions:");
         if (secretKey && secretKey.trim() !== "") {
-          this.hfToken = secretKey; // Bind key to the engine
+          this.hfToken = secretKey;
           this.ownerAuthenticated = true;
           alert("⚡ COGNITIVE LINK ESTABLISHED\nCortex Engine successfully registered with Hugging Face High-Level Permissions.");
-          
-          // Show the hidden Dev Console tab in settings/workspace
           const devConsole = document.getElementById("secret-dev-console");
           if (devConsole) devConsole.style.display = "block";
         } else {
@@ -96,8 +82,6 @@
         }
       }
     };
-
-    // Auto-run engine scanner on load
     window.addEventListener('DOMContentLoaded', () => CortexEngine.init());
   </script>
 </head>
@@ -108,6 +92,7 @@
       <div class="auth-logo">⚡</div>
       <h2 id="auth-title">Welcome to Cortex</h2>
       <p class="auth-subtitle">Sovereign Industrial AI Core — CINIS NEXUS INDUSTRY HQ</p>
+      <p style="font-size:0.75rem;opacity:0.7;margin-bottom:0.75rem;">Active build · <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/STATUS.md" target="_blank" style="color:inherit;">View live status</a></p>
       <form id="auth-form" onsubmit="handleAuth(event)">
         <div id="name-field" class="form-group" style="display:none;">
           <label>Full Name</label>
@@ -142,6 +127,7 @@
       <div class="top-bar-left">
         <div class="logo-sm">⚡</div>
         <span class="brand-text">CORTEX</span>
+        <span style="font-size:0.65rem;margin-left:8px;opacity:0.6;font-family:JetBrains Mono,monospace;">ACTIVE BUILD</span>
       </div>
       <div class="top-bar-center">
         <div class="search-box">
@@ -160,6 +146,7 @@
         <div id="user-menu" class="dropdown-menu">
           <a href="#" onclick="switchTab('settings'); toggleUserMenu(); return false;">⚙️ Settings</a>
           <a href="#" onclick="switchTab('business'); toggleUserMenu(); return false;">🏢 Business Profile</a>
+          <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/STATUS.md" target="_blank">📋 Live Status</a>
           <div class="dropdown-divider"></div>
           <a href="#" onclick="signOut(); return false;" class="text-danger">🚪 Sign Out</a>
         </div>
@@ -239,7 +226,8 @@
                 <a href="https://about.me/mikecomplexai" target="_blank">🆔 about.me/mikecomplexai</a>
                 <a href="https://www.linkedin.com/in/michaelujukumorim" target="_blank">💼 LinkedIn Profile</a>
                 <a href="https://medium.com/@mikecomplexai" target="_blank">📰 Medium Articles</a>
-                <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform" target="_blank">💻 GitHub Repository</a>
+                <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform" target="_blank">💻 GitHub Command Repo</a>
+                <a href="https://mikecomplexai.substack.com" target="_blank">📬 Substack Publication</a>
               </div>
             </div>
             <div class="biz-card">
@@ -265,9 +253,39 @@
               <div class="biz-icon">🏗️</div>
               <h3>Infrastructure Nodes</h3>
               <div class="biz-links">
+                <a href="https://cortex-platforms.netlify.app" target="_blank">⚡ Netlify App</a>
+                <a href="https://cortex-nexus-sovereign-industrial-ai.github.io/cortex-platform/" target="_blank">📄 GitHub Pages</a>
+                <a href="https://cortex-intelligence-nexus.myshopify.com" target="_blank">🛒 Shopify Store</a>
+                <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/COMMAND_CENTER.md" target="_blank">🧭 Command Center</a>
+                <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/STATUS.md" target="_blank">📋 Live Status Board</a>
                 <a href="https://cinisnio.ai" target="_blank">🎯 cinisnio.ai</a>
-                <a href="https://corte.io" target="_blank">🔗 corte.io</a>
-                <a href="https://cortex-platforms.netlify.app" target="_blank">⚡ cortex-platforms.netlify.app</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- HELP & DOCS -->
+        <section id="tab-help" class="tab-panel">
+          <div class="page-header">
+            <h1>❓ Help & Docs</h1>
+            <p>Tracked documentation and command surfaces</p>
+          </div>
+          <div class="biz-grid">
+            <div class="biz-card">
+              <h3>Command Surfaces</h3>
+              <div class="biz-links">
+                <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/COMMAND_CENTER.md" target="_blank">Command Center</a>
+                <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/STATUS.md" target="_blank">Live Status</a>
+                <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/PUBLIC_SURFACES.md" target="_blank">Public Surfaces Map</a>
+                <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/ACTIVITY_BADGE.md" target="_blank">Activity Signal</a>
+              </div>
+            </div>
+            <div class="biz-card">
+              <h3>Operations</h3>
+              <div class="biz-links">
+                <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/docs/operations/SHOPIFY_INTEGRATION.md" target="_blank">Shopify Integration</a>
+                <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/docs/operations/AUTH_SETUP.md" target="_blank">Auth Setup</a>
+                <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/docs/operations/NETLIFY_READINESS.md" target="_blank">Netlify Readiness</a>
               </div>
             </div>
           </div>
@@ -315,17 +333,17 @@
               <p class="social-desc">Professional networking</p>
               <span class="social-link">Open Profile →</span>
             </a>
-            <a href="https://www.snapchat.com/add/mikecomplexai" target="_blank" class="social-card li-card">
-              <div class="social-icon">👻</div>
-              <h3>Snapchat</h3>
-              <p class="social-handle">@mikecomplexai</p>
-              <p class="social-desc">Behind-the-scenes</p>
-              <span class="social-link">Open Profile →</span>
+            <a href="https://mikecomplexai.substack.com" target="_blank" class="social-card li-card">
+              <div class="social-icon">📬</div>
+              <h3>Substack</h3>
+              <p class="social-handle">mikecomplexai</p>
+              <p class="social-desc">Publication & updates</p>
+              <span class="social-link">Open Publication →</span>
             </a>
           </div>
         </section>
 
-        <!-- OWNER DEV CONSOLE (Hidden by default, unlocked by API initialization) -->
+        <!-- OWNER DEV CONSOLE -->
         <section id="secret-dev-console" class="tab-panel" style="display:none; background: #0c0f12; border: 1px solid #1a2332; padding: 20px; border-radius: 8px; margin-top: 20px;">
           <h2 style="color: #00ff66; font-family: 'JetBrains Mono', monospace; display: flex; align-items: center; gap: 10px;">
             <span>🟢</span> CINIS Engine Terminal Active
@@ -355,36 +373,30 @@
         <span>© 2026 CINIS NEXUS INDUSTRY OGOJA</span>
         <span class="footer-dot">•</span>
         <span>Sovereign Industrial AI Core</span>
+        <span class="footer-dot">•</span>
+        <span style="opacity:0.7;">Active Build · Aug 2026</span>
       </div>
       <div class="footer-right">
         <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform" target="_blank">GitHub</a>
+        <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/STATUS.md" target="_blank">Status</a>
         <a href="https://about.me/mikecomplexai" target="_blank">About</a>
+        <a href="https://mikecomplexai.substack.com" target="_blank">Substack</a>
+        <a href="https://cortex-intelligence-nexus.myshopify.com" target="_blank">Shopify</a>
         <a href="mailto:cortexnexus@proton.me">Contact</a>
         <a href="https://wa.me/2349010251577" target="_blank">WhatsApp</a>
-        <a href="https://cinisnio.ai" target="_blank">cinisnio.ai</a>
-        <a href="https://corte.io" target="_blank">corte.io</a>
-        <span class="footer-version">v2.3.0-sovereign</span>
+        <span class="footer-version">v2.4.0-command</span>
       </div>
     </footer>
   </div>
 
   <script src="app.js"></script>
 
-<!-- CINIS Sovereign Core: dev console (see dev-console/README.md) -->
-<!--
-  Secret dev console panel.
-  IMPORTANT: visibility of this panel is cosmetic only. Every action button
-  below calls a backend endpoint that independently re-checks a real session
-  token server-side. Do not add any code path where a click here performs a
-  privileged action directly in the browser — see dev-console.js.
--->
-<section id="secret-dev-console" class="dev-console hidden" aria-hidden="true">
+<section id="secret-dev-console-panel" class="dev-console hidden" aria-hidden="true">
   <div class="dev-console-inner">
     <header class="dev-console-header">
       <h3>CINIS Sovereign Core — Dev Console</h3>
       <button id="devConsoleClose" aria-label="Close dev console">&times;</button>
     </header>
-
     <div class="dev-console-unlock">
       <label for="devConsoleKey">Owner verification key</label>
       <input type="password" id="devConsoleKey" placeholder="Paste key to unlock">
@@ -394,20 +406,17 @@
         require your backend to accept a valid session before they do anything.
       </p>
     </div>
-
     <div class="dev-console-panels" id="devConsolePanels" hidden>
       <div class="dev-console-panel">
         <h4>Repo status</h4>
         <pre id="repoStatus">Not checked yet.</pre>
         <button id="checkRepoStatus">Check repo status</button>
       </div>
-
       <div class="dev-console-panel">
         <h4>Hugging Face sync</h4>
         <pre id="hfStatus">Not checked yet.</pre>
         <button id="checkHfStatus">Check HF status</button>
       </div>
-
       <div class="dev-console-panel">
         <h4>Sync log</h4>
         <pre id="syncLog"></pre>
