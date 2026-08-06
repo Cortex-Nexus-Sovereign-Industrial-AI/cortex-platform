@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <!-- Paystack Inline JS -->
   <script src="https://js.paystack.co/v1/inline.js"></script>
   <script type="application/ld+json">
   {
@@ -18,18 +17,8 @@
     "@type": "Organization",
     "name": "CINIS NEXUS INDUSTRY OGOJA",
     "url": "https://cortex-platforms.netlify.app",
-    "logo": "https://cortex-platforms.netlify.app/assets/logo.png",
-    "founder": {
-      "@type": "Person",
-      "name": "Michael Ujuku Morim",
-      "url": "https://about.me/mikecomplexai"
-    },
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Ogoja",
-      "addressRegion": "Cross River State",
-      "addressCountry": "Nigeria"
-    },
+    "founder": { "@type": "Person", "name": "Michael Ujuku Morim", "url": "https://about.me/mikecomplexai" },
+    "address": { "@type": "PostalAddress", "addressLocality": "Ogoja", "addressRegion": "Cross River State", "addressCountry": "Nigeria" },
     "sameAs": [
       "https://x.com/MikeComplexAie",
       "https://www.youtube.com/@MikecomplexAI-i2e",
@@ -39,46 +28,30 @@
       "https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform",
       "https://mikecomplexai.substack.com"
     ],
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "telephone": "+2349010251577",
-      "contactType": "customer support",
-      "availableLanguage": "English"
-    }
+    "contactPoint": { "@type": "ContactPoint", "telephone": "+2349010251577", "contactType": "customer support", "availableLanguage": "English" }
   }
   </script>
-
-  <!-- CINIS CORE: SECURE HUGGING FACE INTELLIGENCE BRIDGE -->
   <script>
     const CortexEngine = {
-      hfToken: null,
-      ownerAuthenticated: false,
+      hfToken: null, ownerAuthenticated: false,
       init() {
         const urlParams = new URLSearchParams(window.location.search);
         const authCode = urlParams.get('code');
         const error = urlParams.get('error');
-        if (authCode) {
-          console.log("⚡ [CORTEX ENGINE] Authorization code detected. Processing handshake...");
-          this.handleHandshake(authCode);
-        } else if (error) {
-          console.error("❌ [CORTEX ENGINE] Handshake Refused:", error);
-        }
+        if (authCode) this.handleHandshake(authCode);
+        else if (error) console.error('[CORTEX ENGINE] Handshake Refused:', error);
       },
       handleHandshake(code) {
         sessionStorage.setItem('cinis_auth_temp', code);
         window.history.replaceState({}, document.title, window.location.pathname);
-        setTimeout(() => { this.triggerOwnerVerification(); }, 800);
+        setTimeout(() => this.triggerOwnerVerification(), 800);
       },
       triggerOwnerVerification() {
-        const secretKey = prompt("🔑 [OWNER INITIALIZATION REQUIRED]\nEnter your Secret Platform API Key to bind Hugging Face Core Permissions:");
-        if (secretKey && secretKey.trim() !== "") {
-          this.hfToken = secretKey;
-          this.ownerAuthenticated = true;
-          alert("⚡ COGNITIVE LINK ESTABLISHED\nCortex Engine successfully registered with Hugging Face High-Level Permissions.");
-          const devConsole = document.getElementById("secret-dev-console");
-          if (devConsole) devConsole.style.display = "block";
-        } else {
-          alert("❌ Unauthorized access block. System returned to Standard Sovereign Safe Mode.");
+        const secretKey = prompt('[OWNER INITIALIZATION]\nEnter Secret Platform API Key:');
+        if (secretKey && secretKey.trim()) {
+          this.hfToken = secretKey; this.ownerAuthenticated = true;
+          const devConsole = document.getElementById('secret-dev-console');
+          if (devConsole) devConsole.style.display = 'block';
         }
       }
     };
@@ -86,13 +59,12 @@
   </script>
 </head>
 <body>
-  <!-- AUTH OVERLAY -->
   <div id="auth-overlay" class="auth-overlay">
     <div class="auth-card">
       <div class="auth-logo">⚡</div>
       <h2 id="auth-title">Welcome to Cortex</h2>
       <p class="auth-subtitle">Sovereign Industrial AI Core — CINIS NEXUS INDUSTRY HQ</p>
-      <p style="font-size:0.75rem;opacity:0.7;margin-bottom:0.75rem;">Active build · <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/STATUS.md" target="_blank" style="color:inherit;">View live status</a></p>
+      <p style="font-size:0.75rem;opacity:0.7;margin-bottom:0.75rem;">Active build · <a href="member-dashboard.html" style="color:inherit;">Member login</a> · <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/STATUS.md" target="_blank" style="color:inherit;">Status</a></p>
       <form id="auth-form" onsubmit="handleAuth(event)">
         <div id="name-field" class="form-group" style="display:none;">
           <label>Full Name</label>
@@ -112,16 +84,13 @@
         </div>
         <button type="submit" class="btn-primary btn-full" id="auth-btn">Sign In</button>
       </form>
-      <p class="auth-toggle">
-        <span id="auth-toggle-text">No account?</span>
-        <button onclick="toggleAuthMode()" class="link-btn" id="auth-toggle-btn">Create one</button>
-      </p>
+      <p class="auth-toggle"><span id="auth-toggle-text">No account?</span> <button onclick="toggleAuthMode()" class="link-btn" id="auth-toggle-btn">Create one</button></p>
       <div class="auth-divider"><span>or</span></div>
       <button class="btn-secondary btn-full" onclick="guestAccess()">Continue as Guest</button>
+      <p style="margin-top:0.75rem;font-size:0.8rem;"><a href="member-dashboard.html">Open Member Dashboard →</a></p>
     </div>
   </div>
 
-  <!-- MAIN APP -->
   <div id="app" style="display:none;">
     <div class="top-bar">
       <div class="top-bar-left">
@@ -130,20 +99,17 @@
         <span style="font-size:0.65rem;margin-left:8px;opacity:0.6;font-family:JetBrains Mono,monospace;">ACTIVE BUILD</span>
       </div>
       <div class="top-bar-center">
-        <div class="search-box">
-          <span>🔍</span>
-          <input type="text" placeholder="Search platform, commands, AI tasks..." id="global-search">
-        </div>
+        <div class="search-box"><span>🔍</span><input type="text" placeholder="Search platform, commands, AI tasks..." id="global-search"></div>
       </div>
       <div class="top-bar-right">
         <button class="icon-btn" title="Notifications">🔔<span class="badge">3</span></button>
         <button class="icon-btn" title="Messages">💬</button>
         <div class="user-pill" onclick="toggleUserMenu()">
           <div class="avatar" id="user-avatar">M</div>
-          <span id="user-name">Michael</span>
-          <span>▼</span>
+          <span id="user-name">Michael</span><span>▼</span>
         </div>
         <div id="user-menu" class="dropdown-menu">
+          <a href="member-dashboard.html">👤 Member Dashboard</a>
           <a href="#" onclick="switchTab('settings'); toggleUserMenu(); return false;">⚙️ Settings</a>
           <a href="#" onclick="switchTab('business'); toggleUserMenu(); return false;">🏢 Business Profile</a>
           <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/STATUS.md" target="_blank">📋 Live Status</a>
@@ -157,217 +123,99 @@
       <aside class="sidebar" id="sidebar">
         <nav class="nav-section">
           <div class="nav-label">Platform</div>
-          <button class="nav-item active" data-tab="dashboard" onclick="switchTab('dashboard')">
-            <span class="nav-icon">📊</span><span class="nav-text">Dashboard</span>
-          </button>
-          <button class="nav-item" data-tab="ai-workspace" onclick="switchTab('ai-workspace')">
-            <span class="nav-icon">🤖</span><span class="nav-text">AI Workspace</span><span class="nav-badge">LIVE</span>
-          </button>
-          <button class="nav-item" data-tab="business" onclick="switchTab('business')">
-            <span class="nav-icon">🏢</span><span class="nav-text">Business Hub</span>
-          </button>
+          <button class="nav-item active" data-tab="dashboard" onclick="switchTab('dashboard')"><span class="nav-icon">📊</span><span class="nav-text">Dashboard</span></button>
+          <button class="nav-item" data-tab="ai-workspace" onclick="switchTab('ai-workspace')"><span class="nav-icon">🤖</span><span class="nav-text">AI Workspace</span><span class="nav-badge">LIVE</span></button>
+          <button class="nav-item" data-tab="business" onclick="switchTab('business')"><span class="nav-icon">🏢</span><span class="nav-text">Business Hub</span></button>
         </nav>
         <nav class="nav-section">
           <div class="nav-label">Commerce</div>
-          <button class="nav-item" data-tab="shopify" onclick="switchTab('shopify')">
-            <span class="nav-icon">🛒</span><span class="nav-text">Shopify Store</span>
-          </button>
-          <button class="nav-item" data-tab="payments" onclick="switchTab('payments')">
-            <span class="nav-icon">💳</span><span class="nav-text">Payments</span>
-          </button>
-          <button class="nav-item" data-tab="orders" onclick="switchTab('orders')">
-            <span class="nav-icon">📦</span><span class="nav-text">Orders</span>
-          </button>
-          <button class="nav-item" data-tab="checkout" onclick="switchTab('checkout')">
-            <span class="nav-icon">🛍️</span><span class="nav-text">Checkout</span><span class="nav-badge">NEW</span>
-          </button>
+          <button class="nav-item" data-tab="shopify" onclick="switchTab('shopify')"><span class="nav-icon">🛒</span><span class="nav-text">Shopify Store</span></button>
+          <button class="nav-item" data-tab="payments" onclick="switchTab('payments')"><span class="nav-icon">💳</span><span class="nav-text">Payments</span></button>
+          <button class="nav-item" data-tab="orders" onclick="switchTab('orders')"><span class="nav-icon">📦</span><span class="nav-text">Orders</span></button>
+          <button class="nav-item" data-tab="checkout" onclick="switchTab('checkout')"><span class="nav-icon">🛍️</span><span class="nav-text">Checkout</span><span class="nav-badge">NEW</span></button>
         </nav>
         <nav class="nav-section">
           <div class="nav-label">Presence</div>
-          <button class="nav-item" data-tab="social" onclick="switchTab('social')">
-            <span class="nav-icon">🌐</span><span class="nav-text">Social Nexus</span>
-          </button>
-          <button class="nav-item" data-tab="content" onclick="switchTab('content')">
-            <span class="nav-icon">📝</span><span class="nav-text">Content Studio</span>
-          </button>
+          <button class="nav-item" data-tab="social" onclick="switchTab('social')"><span class="nav-icon">🌐</span><span class="nav-text">Social Nexus</span></button>
+          <button class="nav-item" data-tab="content" onclick="switchTab('content')"><span class="nav-icon">📝</span><span class="nav-text">Content Studio</span></button>
         </nav>
         <nav class="nav-section">
           <div class="nav-label">System</div>
-          <button class="nav-item" data-tab="settings" onclick="switchTab('settings')">
-            <span class="nav-icon">⚙️</span><span class="nav-text">Settings</span>
-          </button>
-          <button class="nav-item" data-tab="help" onclick="switchTab('help')">
-            <span class="nav-icon">❓</span><span class="nav-text">Help & Docs</span>
-          </button>
+          <button class="nav-item" data-tab="settings" onclick="switchTab('settings')"><span class="nav-icon">⚙️</span><span class="nav-text">Settings</span></button>
+          <button class="nav-item" data-tab="help" onclick="switchTab('help')"><span class="nav-icon">❓</span><span class="nav-text">Help & Docs</span></button>
         </nav>
         <div class="sidebar-footer">
-          <div class="sovereign-badge">
-            <span>🛡️</span>
-            <div>
-              <div class="sovereign-title">Sovereign Mode</div>
-              <div class="sovereign-status">Edge-resilient active</div>
-            </div>
-          </div>
+          <div class="sovereign-badge"><span>🛡️</span><div><div class="sovereign-title">Sovereign Mode</div><div class="sovereign-status">Edge-resilient active</div></div></div>
         </div>
       </aside>
 
       <main class="main-content" id="main-content">
-        <!-- BUSINESS HUB -->
         <section id="tab-business" class="tab-panel">
-          <div class="page-header">
-            <h1>🏢 Business Hub</h1>
-            <p>Executive Networks, Communication Endpoints, Media Channels & Infrastructure Nodes</p>
-          </div>
+          <div class="page-header"><h1>🏢 Business Hub</h1><p>Executive Networks, Communication, Media & Infrastructure</p></div>
           <div class="biz-grid">
-            <div class="biz-card">
-              <div class="biz-icon">🌐</div>
-              <h3>Executive Networks</h3>
-              <div class="biz-links">
-                <a href="https://about.me/mikecomplexai" target="_blank">🆔 about.me/mikecomplexai</a>
-                <a href="https://www.linkedin.com/in/michaelujukumorim" target="_blank">💼 LinkedIn Profile</a>
-                <a href="https://medium.com/@mikecomplexai" target="_blank">📰 Medium Articles</a>
-                <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform" target="_blank">💻 GitHub Command Repo</a>
-                <a href="https://mikecomplexai.substack.com" target="_blank">📬 Substack Publication</a>
-              </div>
-            </div>
-            <div class="biz-card">
-              <div class="biz-icon">📡</div>
-              <h3>Direct Communication</h3>
-              <div class="biz-links">
-                <a href="mailto:cortexnexus@proton.me">📧 cortexnexus@proton.me</a>
-                <a href="https://wa.me/2349010251577" target="_blank">📱 WhatsApp: +234 901 025 1577</a>
-                <a href="https://t.me/mikecomplexai" target="_blank">✈️ Telegram: @mikecomplexai</a>
-                <a href="https://www.snapchat.com/add/mikecomplexai" target="_blank">👻 Snapchat: @mikecomplexai</a>
-              </div>
-            </div>
-            <div class="biz-card">
-              <div class="biz-icon">🎬</div>
-              <h3>Content & Media</h3>
-              <div class="biz-links">
-                <a href="https://www.youtube.com/@MikecomplexAI-i2e" target="_blank">▶️ YouTube Channel</a>
-                <a href="https://www.tiktok.com/@cinisnio.ai" target="_blank">🎵 TikTok: @cinisnio.ai</a>
-                <a href="https://x.com/MikeComplexAie" target="_blank">𝕏 X (Twitter): @MikeComplexAie</a>
-              </div>
-            </div>
-            <div class="biz-card">
-              <div class="biz-icon">🏗️</div>
-              <h3>Infrastructure Nodes</h3>
-              <div class="biz-links">
-                <a href="https://cortex-platforms.netlify.app" target="_blank">⚡ Netlify App</a>
-                <a href="https://cortex-nexus-sovereign-industrial-ai.github.io/cortex-platform/" target="_blank">📄 GitHub Pages</a>
-                <a href="https://cortex-intelligence-nexus.myshopify.com" target="_blank">🛒 Shopify Store</a>
-                <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/COMMAND_CENTER.md" target="_blank">🧭 Command Center</a>
-                <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/STATUS.md" target="_blank">📋 Live Status Board</a>
-                <a href="https://cinisnio.ai" target="_blank">🎯 cinisnio.ai</a>
-              </div>
-            </div>
+            <div class="biz-card"><div class="biz-icon">🌐</div><h3>Executive Networks</h3><div class="biz-links">
+              <a href="https://about.me/mikecomplexai" target="_blank">about.me/mikecomplexai</a>
+              <a href="https://www.linkedin.com/in/michaelujukumorim" target="_blank">LinkedIn</a>
+              <a href="https://medium.com/@mikecomplexai" target="_blank">Medium</a>
+              <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform" target="_blank">GitHub Command Repo</a>
+              <a href="https://mikecomplexai.substack.com" target="_blank">Substack</a>
+            </div></div>
+            <div class="biz-card"><div class="biz-icon">📡</div><h3>Direct Communication</h3><div class="biz-links">
+              <a href="mailto:cortexnexus@proton.me">cortexnexus@proton.me</a>
+              <a href="https://wa.me/2349010251577" target="_blank">WhatsApp +234 901 025 1577</a>
+              <a href="https://t.me/mikecomplexai" target="_blank">Telegram @mikecomplexai</a>
+            </div></div>
+            <div class="biz-card"><div class="biz-icon">🎬</div><h3>Content & Media</h3><div class="biz-links">
+              <a href="https://www.youtube.com/@MikecomplexAI-i2e" target="_blank">YouTube</a>
+              <a href="https://www.tiktok.com/@cinisnio.ai" target="_blank">TikTok @cinisnio.ai</a>
+              <a href="https://x.com/MikeComplexAie" target="_blank">X @MikeComplexAie</a>
+            </div></div>
+            <div class="biz-card"><div class="biz-icon">🏗️</div><h3>Infrastructure Nodes</h3><div class="biz-links">
+              <a href="member-dashboard.html">Member Dashboard</a>
+              <a href="https://cortex-platforms.netlify.app" target="_blank">Netlify App</a>
+              <a href="https://cortex-nexus-sovereign-industrial-ai.github.io/cortex-platform/" target="_blank">GitHub Pages</a>
+              <a href="https://cortex-intelligence-nexus.myshopify.com" target="_blank">Shopify Store</a>
+              <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/COMMAND_CENTER.md" target="_blank">Command Center</a>
+              <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/STATUS.md" target="_blank">Live Status</a>
+            </div></div>
           </div>
         </section>
 
-        <!-- HELP & DOCS -->
         <section id="tab-help" class="tab-panel">
-          <div class="page-header">
-            <h1>❓ Help & Docs</h1>
-            <p>Tracked documentation and command surfaces</p>
-          </div>
+          <div class="page-header"><h1>❓ Help & Docs</h1><p>Tracked documentation and command surfaces</p></div>
           <div class="biz-grid">
-            <div class="biz-card">
-              <h3>Command Surfaces</h3>
-              <div class="biz-links">
-                <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/COMMAND_CENTER.md" target="_blank">Command Center</a>
-                <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/STATUS.md" target="_blank">Live Status</a>
-                <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/PUBLIC_SURFACES.md" target="_blank">Public Surfaces Map</a>
-                <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/ACTIVITY_BADGE.md" target="_blank">Activity Signal</a>
-              </div>
-            </div>
-            <div class="biz-card">
-              <h3>Operations</h3>
-              <div class="biz-links">
-                <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/docs/operations/SHOPIFY_INTEGRATION.md" target="_blank">Shopify Integration</a>
-                <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/docs/operations/AUTH_SETUP.md" target="_blank">Auth Setup</a>
-                <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/docs/operations/NETLIFY_READINESS.md" target="_blank">Netlify Readiness</a>
-              </div>
-            </div>
+            <div class="biz-card"><h3>Command Surfaces</h3><div class="biz-links">
+              <a href="member-dashboard.html">Member Dashboard</a>
+              <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/COMMAND_CENTER.md" target="_blank">Command Center</a>
+              <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/STATUS.md" target="_blank">Live Status</a>
+              <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/PUBLIC_SURFACES.md" target="_blank">Public Surfaces</a>
+            </div></div>
+            <div class="biz-card"><h3>Operations</h3><div class="biz-links">
+              <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/docs/operations/SHOPIFY_INTEGRATION.md" target="_blank">Shopify Integration</a>
+              <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/docs/operations/AUTH_SETUP.md" target="_blank">Auth Setup</a>
+              <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/docs/operations/NETLIFY_READINESS.md" target="_blank">Netlify Readiness</a>
+            </div></div>
           </div>
         </section>
 
-        <!-- SOCIAL NEXUS -->
         <section id="tab-social" class="tab-panel">
-          <div class="page-header">
-            <h1>🌐 Social Nexus</h1>
-            <p>All Connected Media Channels</p>
-          </div>
+          <div class="page-header"><h1>🌐 Social Nexus</h1><p>Connected media channels</p></div>
           <div class="social-grid">
-            <a href="https://x.com/MikeComplexAie" target="_blank" class="social-card x-card">
-              <div class="social-icon">𝕏</div>
-              <h3>X (Twitter)</h3>
-              <p class="social-handle">@MikeComplexAie</p>
-              <p class="social-desc">Real-time technical updates</p>
-              <span class="social-link">Open Profile →</span>
-            </a>
-            <a href="https://www.youtube.com/@MikecomplexAI-i2e" target="_blank" class="social-card yt-card">
-              <div class="social-icon">▶️</div>
-              <h3>YouTube</h3>
-              <p class="social-handle">@MikecomplexAI-i2e</p>
-              <p class="social-desc">Deep-dive video documentation</p>
-              <span class="social-link">Open Channel →</span>
-            </a>
-            <a href="https://www.tiktok.com/@cinisnio.ai" target="_blank" class="social-card tt-card">
-              <div class="social-icon">🎵</div>
-              <h3>TikTok</h3>
-              <p class="social-handle">@cinisnio.ai</p>
-              <p class="social-desc">Dynamic demonstrations</p>
-              <span class="social-link">Open Profile →</span>
-            </a>
-            <a href="https://medium.com/@mikecomplexai" target="_blank" class="social-card fb-card">
-              <div class="social-icon">📰</div>
-              <h3>Medium</h3>
-              <p class="social-handle">@mikecomplexai</p>
-              <p class="social-desc">Technical articles</p>
-              <span class="social-link">Open Page →</span>
-            </a>
-            <a href="https://www.linkedin.com/in/michaelujukumorim" target="_blank" class="social-card ig-card">
-              <div class="social-icon">💼</div>
-              <h3>LinkedIn</h3>
-              <p class="social-handle">michaelujukumorim</p>
-              <p class="social-desc">Professional networking</p>
-              <span class="social-link">Open Profile →</span>
-            </a>
-            <a href="https://mikecomplexai.substack.com" target="_blank" class="social-card li-card">
-              <div class="social-icon">📬</div>
-              <h3>Substack</h3>
-              <p class="social-handle">mikecomplexai</p>
-              <p class="social-desc">Publication & updates</p>
-              <span class="social-link">Open Publication →</span>
-            </a>
+            <a href="https://x.com/MikeComplexAie" target="_blank" class="social-card x-card"><div class="social-icon">𝕏</div><h3>X</h3><p class="social-handle">@MikeComplexAie</p><span class="social-link">Open →</span></a>
+            <a href="https://www.youtube.com/@MikecomplexAI-i2e" target="_blank" class="social-card yt-card"><div class="social-icon">▶️</div><h3>YouTube</h3><p class="social-handle">@MikecomplexAI-i2e</p><span class="social-link">Open →</span></a>
+            <a href="https://www.tiktok.com/@cinisnio.ai" target="_blank" class="social-card tt-card"><div class="social-icon">🎵</div><h3>TikTok</h3><p class="social-handle">@cinisnio.ai</p><span class="social-link">Open →</span></a>
+            <a href="https://medium.com/@mikecomplexai" target="_blank" class="social-card fb-card"><div class="social-icon">📰</div><h3>Medium</h3><p class="social-handle">@mikecomplexai</p><span class="social-link">Open →</span></a>
+            <a href="https://www.linkedin.com/in/michaelujukumorim" target="_blank" class="social-card ig-card"><div class="social-icon">💼</div><h3>LinkedIn</h3><p class="social-handle">michaelujukumorim</p><span class="social-link">Open →</span></a>
+            <a href="https://mikecomplexai.substack.com" target="_blank" class="social-card li-card"><div class="social-icon">📬</div><h3>Substack</h3><p class="social-handle">mikecomplexai</p><span class="social-link">Open →</span></a>
           </div>
         </section>
 
-        <!-- OWNER DEV CONSOLE -->
-        <section id="secret-dev-console" class="tab-panel" style="display:none; background: #0c0f12; border: 1px solid #1a2332; padding: 20px; border-radius: 8px; margin-top: 20px;">
-          <h2 style="color: #00ff66; font-family: 'JetBrains Mono', monospace; display: flex; align-items: center; gap: 10px;">
-            <span>🟢</span> CINIS Engine Terminal Active
-          </h2>
-          <p style="font-family: 'JetBrains Mono', monospace; color: #8892b0; font-size: 0.9rem;">
-            Owner secure identity confirmed. Cognitive linkages to high-level Hugging Face permissions initialized.
-          </p>
-          <div class="biz-grid" style="margin-top: 20px;">
-            <div class="biz-card" style="background: #161b22;">
-              <h3>Repository Controller</h3>
-              <p style="font-size: 0.85rem; color: #8b949e;">Structure builds and push data nodes to HF</p>
-              <button class="btn-primary" onclick="alert('Querying HF Spaces...')">Scan Repositories</button>
-            </div>
-            <div class="biz-card" style="background: #161b22;">
-              <h3>Colony Orchestrator</h3>
-              <p style="font-size: 0.85rem; color: #8b949e;">Initialize decentralized inference loops</p>
-              <button class="btn-primary" onclick="alert('Spinning up offline inference nodes...')">Boot Ghost Network</button>
-            </div>
-          </div>
+        <section id="secret-dev-console" class="tab-panel" style="display:none;background:#0c0f12;border:1px solid #1a2332;padding:20px;border-radius:8px;margin-top:20px;">
+          <h2 style="color:#00ff66;font-family:JetBrains Mono,monospace;">CINIS Engine Terminal Active</h2>
         </section>
       </main>
     </div>
 
-    <!-- FOOTER -->
     <footer class="app-footer">
       <div class="footer-left">
         <span>© 2026 CINIS NEXUS INDUSTRY OGOJA</span>
@@ -377,55 +225,20 @@
         <span style="opacity:0.7;">Active Build · Aug 2026</span>
       </div>
       <div class="footer-right">
+        <a href="member-dashboard.html">Members</a>
         <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform" target="_blank">GitHub</a>
         <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/STATUS.md" target="_blank">Status</a>
         <a href="https://about.me/mikecomplexai" target="_blank">About</a>
         <a href="https://mikecomplexai.substack.com" target="_blank">Substack</a>
         <a href="https://cortex-intelligence-nexus.myshopify.com" target="_blank">Shopify</a>
         <a href="mailto:cortexnexus@proton.me">Contact</a>
-        <a href="https://wa.me/2349010251577" target="_blank">WhatsApp</a>
-        <span class="footer-version">v2.4.0-command</span>
+        <span class="footer-version">v2.4.1-member</span>
       </div>
     </footer>
   </div>
 
   <script src="app.js"></script>
-
-<section id="secret-dev-console-panel" class="dev-console hidden" aria-hidden="true">
-  <div class="dev-console-inner">
-    <header class="dev-console-header">
-      <h3>CINIS Sovereign Core — Dev Console</h3>
-      <button id="devConsoleClose" aria-label="Close dev console">&times;</button>
-    </header>
-    <div class="dev-console-unlock">
-      <label for="devConsoleKey">Owner verification key</label>
-      <input type="password" id="devConsoleKey" placeholder="Paste key to unlock">
-      <button id="devConsoleUnlock">Unlock</button>
-      <p class="dev-console-note">
-        This only toggles the panel's visibility. The buttons below still
-        require your backend to accept a valid session before they do anything.
-      </p>
-    </div>
-    <div class="dev-console-panels" id="devConsolePanels" hidden>
-      <div class="dev-console-panel">
-        <h4>Repo status</h4>
-        <pre id="repoStatus">Not checked yet.</pre>
-        <button id="checkRepoStatus">Check repo status</button>
-      </div>
-      <div class="dev-console-panel">
-        <h4>Hugging Face sync</h4>
-        <pre id="hfStatus">Not checked yet.</pre>
-        <button id="checkHfStatus">Check HF status</button>
-      </div>
-      <div class="dev-console-panel">
-        <h4>Sync log</h4>
-        <pre id="syncLog"></pre>
-      </div>
-    </div>
-  </div>
-</section>
-
-<script src="hf-oauth-handler.js"></script>
-<script src="dev-console/dev-console.js"></script>
+  <script src="hf-oauth-handler.js"></script>
+  <script src="dev-console/dev-console.js"></script>
 </body>
 </html>
