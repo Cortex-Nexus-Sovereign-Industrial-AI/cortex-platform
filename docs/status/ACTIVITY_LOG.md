@@ -1,12 +1,15 @@
 # Activity Log — CINIS NEXUS
 
-## 2026-08-06 (continued)
-- Command Center, STATUS, docs hierarchy, security cleanup completed
-- Shopify product seed + auth routes wired
-- PUBLIC_SURFACES + ACTIVITY_BADGE created
-- **Frontend:** index.html updated — Business Hub, footer, help tab, social, and top bar now expose Command Center, Status, Shopify, Substack, Netlify, GitHub Pages
-- Version badge set to v2.4.0-command
-- Continuous professional commits visible
+## 2026-08-06 (session)
+- Command Center, STATUS, docs hierarchy, security cleanup
+- Shopify product seed + integration docs
+- Auth routes + requireAuth middleware
+- PUBLIC_SURFACES, ACTIVITY_BADGE, index.html CTA mirror
+- **Backend v2.2:** protected GET /api/orders and GET /api/stats with JWT
+- Added GET /api/auth/me (profile + grants)
+- access_grants table + grant on Paystack charge.success
+- Fixed dbRun lastID handling
+- Continuous professional commits on cortex-platform
 
-## Previous (pre-command-center)
-- HTML landings, portals, backend, Netlify functions, Shopify client, Python agents already present.
+## Previous
+- HTML landings, portals, Netlify functions, Shopify client, Python agents present pre-command-center.

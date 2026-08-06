@@ -6,31 +6,32 @@
 
 ### Completed
 - [x] Organization + repository established
-- [x] Frontend landings + portals
-- [x] Backend API (JWT auth, orders, Paystack webhook, stats)
+- [x] Frontend landings + public surface CTAs
+- [x] Backend API v2.2 (JWT auth, orders, Paystack, stats)
 - [x] Netlify configuration + functions
 - [x] Shopify client + product seed script
-- [x] about.me + Substack surfaces
-- [x] Command Center + STATUS + Activity Log
-- [x] Documentation structure + core docs consolidated
+- [x] Command Center + STATUS + Activity Log + docs hierarchy
 - [x] Security: tracked secrets removed
-- [x] Auth routes wired + requireAuth middleware
-- [x] PUBLIC_SURFACES.md + ACTIVITY_BADGE.md
-- [x] **index.html CTAs mirrored** — Business Hub, footer, help tab, social (Substack), activity badge
+- [x] Auth routes + requireAuth middleware
+- [x] PUBLIC_SURFACES + ACTIVITY_BADGE
+- [x] index.html CTAs mirrored
+- [x] **Member routes protected** — GET /api/orders, GET /api/stats require JWT
+- [x] **GET /api/auth/me** — profile + access grants
+- [x] **access_grants table** — created on Paystack charge.success
+- [x] dbRun lastID fix for reliable inserts
 
-### In Progress
-- [ ] Set SHOPIFY_ADMIN_TOKEN and run product seed
-- [ ] Configure production secrets in Netlify (JWT, Paystack, Shopify)
-- [ ] Protect selected member API routes
-- [ ] Root PDF / duplicate HTML cleanup
+### In Progress / Awaiting credentials
+- [ ] SHOPIFY_ADMIN_TOKEN → run product seed
+- [ ] Production secrets in Netlify (JWT_SECRET, PAYSTACK_*, SHOPIFY_*)
+- [ ] Root PDF / duplicate HTML cleanup (optional)
 
-### Not Started / Blocked
-- [ ] Revenue tracking dashboard UI
+### Not Started
+- [ ] Revenue dashboard UI
 - [ ] Mobile apps
-- [ ] Full multi-language voice layer
+- [ ] Multi-language voice layer
 - [ ] Automated content pipeline
 
 ## Activity Signal
-Command-center orchestration active. Frontend now exposes Command Center, Status, Shopify, Substack, Netlify, and GitHub Pages from the primary shell.
+Backend now enforces member protection and grants access after successful payment. Frontend exposes all public surfaces. Continuous commits visible.
 
-**Latest focus:** Frontend public surfaces live in index.html. Next: activate Shopify products when token available.
+**Latest focus:** Backend hardening complete for core member paths. Commerce activation awaits Shopify token.

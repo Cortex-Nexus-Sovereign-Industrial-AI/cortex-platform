@@ -1,37 +1,39 @@
 # Authentication Setup — CINIS NEXUS
 
-## What Exists
-- PKCE OAuth login flow (`backend/auth/login.js` + wired in `backend/routes/auth.js`)
-- OAuth callback with state + code_verifier validation
-- Session status endpoint: `GET /auth/status`
-- Logout: `POST /auth/logout`
-- Guard middleware: `backend/middleware/requireAuth.js`
+## Backend (server.js v2.2)
 
-## Required Environment Variables
-```
-OAUTH_AUTHORIZE_URL=
-OAUTH_TOKEN_URL=
-OAUTH_CLIENT_ID=
-OAUTH_CLIENT_SECRET=
-OAUTH_REDIRECT_URI=
-OAUTH_SCOPE=openid profile email
-SESSION_SECRET=
-```
-
-## Routes
+### Public
 | Method | Path | Purpose |
 |--------|------|--------|
-| GET | /auth/login | Start OAuth PKCE flow |
-| GET | /auth/callback | Exchange code for tokens |
-| GET | /auth/status | Check if session is authenticated |
-| POST | /auth/logout | Destroy session |
+| POST | /api/auth/register | Create account + JWT |
+| POST | /api/auth/login | Login + JWT |
+| GET | /api/health | Health check |
+| POST | /api/orders | Create checkout order |
+| GET | /api/orders/:id | Public receipt by id/ref |
+| POST | /api/payments/verify | Verify payment reference |
+| POST | /api/webhooks/paystack | Paystack webhook |
 
-## Protecting Member Routes
-```js
-const requireAuth = require('../middleware/requireAuth');
-router.get('/member/dashboard', requireAuth, handler);
+### Protected (Authorization: Bearer &lt;token&gt;)
+| Method | Path | Purpose |
+|--------|------|--------|
+| GET | /api/auth/me | Profile + active access grants |
+| GET | /api/orders | Full order list |
+| GET | /api/stats | Revenue and platform stats |
+
+### Access grants
+On `charge.success`, webhook writes a row to `access_grants` (email, product, order_ref, transaction_reference).
+`/api/auth/me` returns active grants for the logged-in user email.
+
+## Required env
+```
+JWT_SECRET=
+PAYSTACK_SECRET_KEY=
+PAYSTACK_PUBLIC_KEY=
+PAYSTACK_MODE=live
+FRONTEND_URL=
 ```
 
-## Notes
-- Frontend currently has a cosmetic auth overlay; real protection must remain server-side.
-- Until OAuth provider credentials are configured, `/auth/login` returns a clear config_missing error instead of failing silently.
+Never commit real secrets. Use Netlify / local `.env` only.
+
+## OAuth PKCE (optional alternate path)
+See `backend/routes/auth.js` for OAuth authorize/callback/status/logout when an external IdP is configured.
