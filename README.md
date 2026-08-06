@@ -1,131 +1,56 @@
-CINIS Nexus Industry HQ ⚡
+# Cortex Platform — CINIS NEXUS
+**Official hub for Cortex Intelligence Nexus-Intel Solution (CINIS)**  
+Sovereign Industrial AI · Ogoja, Nigeria · Founded by Michael Ujuku Morim
 
-Primary Production Engine & Orchestration Node  
-Engineered for high-performance, edge-resilient industrial automation.  
-Founded by Michael Ujuku Morim in Ogoja, Cross River State, Nigeria.  
-
----
-
-🌐 Unified Ecosystem
-
-- Live Platform: cortex-platforms.netlify.app  
-- GitHub Repository: Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform  
-- Identity: about.me/mikecomplexai  
-- Secure Email: cortexnexus@proton.me  
-
-📢 Connected Media Channels
-- X (Twitter): @MikeComplexAie — Real-time technical updates  
-- YouTube: @MikecomplexAI-i2e — Deep-dive documentation  
-- TikTok: @cinisnio.ai — Dynamic platform demonstrations  
-- Medium: @mikecomplexai — Technical articles & analysis  
-- LinkedIn: michaelujukumorim — Professional networking  
-- Snapchat: @mikecomplexai — Behind-the-scenes updates  
-
-📡 Direct Communication
-- WhatsApp: +234 901 025 1577  
-- Telegram: @mikecomplexai  
-- Email: cortexnexus@proton.me  
+[![Status](https://img.shields.io/badge/Status-Active%20Build-00C2FF)](./STATUS.md)
+[![Command Center](https://img.shields.io/badge/Command-Center-001F5B)](./COMMAND_CENTER.md)
 
 ---
 
-🏗️ Infrastructure
+## Quick Links
 
-- Custom Domains  
-  - Cinematic Analysis Hub → cortexintelligencenexusintelsolution.com  
-  - Matrix Routing Layer → getcortexintel.com  
-
-- Core Architecture  
-  - Deterministic Workflows: Zero-latency execution across local terminal environments (Termux, Pydroid-3).  
-  - Isolation of Concerns: Edge efficiency, decoupled from global API integrations.  
-  - Resilient Infrastructure: Data sovereignty, private node hosting, local survivability.  
-  - AI Command Center: 4 specialized agents:  
-    - Cortex Nexus → Orchestration & workflow automation  
-    - MikeComplex AI → Adaptive reasoning & contextual intelligence  
-    - Builder Bot → Automated deployment & CI/CD integration  
-    - Scout AI → Monitoring, anomaly detection, predictive analytics  
-
-- Commerce & Payments  
-  - Paystack (primary) + Flutterwave (secondary) with secure webhook validation  
-  - Shopify store integration with inventory sync + AI recommendations  
+- **Live Platform**: [cortex-nexus-sovereign-industrial-ai.github.io/cortex-platform](https://cortex-nexus-sovereign-industrial-ai.github.io/cortex-platform/)
+- **Netlify**: [cortex-platforms.netlify.app](https://cortex-platforms.netlify.app)
+- **Identity**: [about.me/mikecomplexai](https://about.me/mikecomplexai)
+- **Publication**: [mikecomplexai.substack.com](https://mikecomplexai.substack.com)
+- **Status Board**: [STATUS.md](./STATUS.md)
+- **Command Center**: [COMMAND_CENTER.md](./COMMAND_CENTER.md)
 
 ---
 
-⚙️ Repository Structure
+## What This Repository Contains
 
-`
-├── index.html              # SPA gateway
-├── styles.css              # Design system (responsive, accessible)
-├── app.js                  # Application logic & AI orchestration
-├── webhooktriggerengine.py # Flask webhook listener
-├── netlify.toml            # Netlify deployment config
-├── requirements.txt        # Python dependencies
-├── .env.example            # Secrets template
-├── .gitignore              # Git ignore rules
-└── README.md               # Documentation
-`
+- Frontend landings, portals and dashboards
+- Node.js backend + Python agents/orchestrators
+- Netlify functions (payments, status, auth helpers)
+- Shopify integration client + workflows
+- Full documentation set (architecture, roadmap, governance, features)
+- Command center and activity tracking (newly established)
 
 ---
 
-🧭 Quick Start
+## Current Focus
 
-Option A: Deploy to Netlify (Recommended)
-1. Fork this repository  
-2. Connect GitHub repo to Netlify  
-3. Set build command:  
-   `bash
-   echo "Static site"
-   `  
-4. Set publish directory: .  
-5. Configure environment variables in Netlify dashboard  
-6. Deploy → Your platform is live  
-
-Option B: Local Development
-`bash
-
-1. Clone repo
-git clone https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform.git
-cd cortex-platform
-
-2. Create virtual environment
-python -m venv venv
-source venv/bin/activate   # On Windows: venv\Scripts\activate
-
-3. Install dependencies
-pip install -r requirements.txt
-
-4. Configure secrets
-cp .env.example .env
-
-Edit .env with your real API keys
-
-5. Run webhook listener
-export FLASKAPP=webhooktrigger_engine.py
-flask run --port=8080
-
-6. Serve platform
-python -m http.server 3000
-`
+1. Consolidate all scattered documentation into tracked structure  
+2. Harden backend authentication and member experience  
+3. Bind Shopify storefront + product catalog  
+4. Complete Paystack live payment verification  
+5. Maintain visible daily/weekly activity so the platform surfaces professional momentum
 
 ---
 
-💳 Payment Integration
+## Stack Snapshot
 
-- Paystack  
-  - Enter Secret Key in Settings → Payment Config  
-  - Set webhook URL in Paystack dashboard  
-
-- Flutterwave  
-  - Enter Secret Key in Settings → Payment Config  
-  - Set webhook URL in Flutterwave dashboard  
-
----
-
-📄 License
-
-Proprietary — CINIS NEXUS INDUSTRY OGOJA.  
-All rights reserved. Built with sovereignty in mind. Powered by African innovation. 🇳🇬⚡
+| Layer        | Technology                          |
+|--------------|-------------------------------------|
+| Frontend     | HTML/CSS/JS + Netlify               |
+| Backend      | Node.js + Python                    |
+| Payments     | Paystack                            |
+| Commerce     | Shopify                             |
+| Agents       | MikeComplex AI · CINIS · Target i7  |
+| Hosting      | GitHub Pages + Netlify              |
 
 ---
-`
 
----
+**Built and maintained under active command by MikeComplex AI / CINIS NEXUS.**  
+All operational documents, code, and progress are now versioned in this repository.
