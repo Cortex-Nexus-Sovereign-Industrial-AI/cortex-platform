@@ -1,15 +1,15 @@
 # Activity Log — CINIS NEXUS
 
 ## 2026-08-06 (continued)
-- Established COMMAND_CENTER.md as single entry point
-- Created STATUS.md + NEXT_ACTIONS + Activity Log
-- Consolidated core docs into /docs hierarchy
-- Strengthened .gitignore; removed tracked .env / .env.local / backend/.env.production / .bash_history
-- Added archive policy
-- **Commerce:** confirmed Shopify store domain; created product seed script (4 products)
-- **Backend:** wired full auth routes (login / callback / status / logout) + requireAuth middleware
-- Added AUTH_SETUP and updated SHOPIFY_INTEGRATION docs
+- Command Center, STATUS, NEXT_ACTIONS, Activity Log established
+- Core docs consolidated into /docs
+- Security: tracked .env / .env.local / backend/.env.production / .bash_history removed
+- Archive policy added
+- Shopify store confirmed; product seed script (4 products) created
+- Auth routes fully wired + requireAuth middleware
+- **Frontend / public layer:** PUBLIC_SURFACES.md canonical link map created
+- Frontend notes + ACTIVITY_BADGE.md added for visible activity signal
 - Continuous professional commits visible on repository
 
 ## Previous (pre-command-center)
-- Multiple HTML landings, portals, backend stubs, Netlify functions, Shopify client, Python agents, and large document set already present.
+- HTML landings, portals, backend, Netlify functions, Shopify client, Python agents already present.

@@ -15,31 +15,32 @@
 | Netlify App | https://cortex-platforms.netlify.app | Live (shell) |
 | Identity Hub | https://about.me/mikecomplexai | Complete |
 | Publication | https://mikecomplexai.substack.com | Live |
-| Commerce | Shopify (cortexintelligencenexus / variants) | In progress |
+| Shopify Store | cortex-intelligence-nexus.myshopify.com | Seed ready |
 | This Command Repo | https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform | Master |
+| Public Surfaces Map | [PUBLIC_SURFACES.md](./PUBLIC_SURFACES.md) | Live |
+| Activity Signal | [ACTIVITY_BADGE.md](./ACTIVITY_BADGE.md) | Live |
+| Status Board | [STATUS.md](./STATUS.md) | Live |
 
 ---
 
 ## Stack Overview
 
-- **Frontend:** HTML / CSS / JS (multiple landing variants + portals) + Netlify
-- **Backend:** Node.js (server.js, routes, auth, payments) + Python agents/orchestrators
-- **Payments:** Paystack (documented + webhook functions)
-- **Commerce:** Shopify client + deploy workflows
-- **Agents:** MikeComplex AI (Runner), CINIS NEXUS AI (Architect), Target i7 A18+
-- **Infrastructure:** Netlify Functions, GitHub Actions, Docker, Prisma schema present
+- **Frontend:** HTML / CSS / JS + Netlify
+- **Backend:** Node.js (JWT auth, orders, Paystack) + Python agents
+- **Payments:** Paystack (server + Netlify webhook)
+- **Commerce:** Shopify client + seed script
+- **Agents:** MikeComplex AI · CINIS NEXUS AI · Target i7 A18+
+- **Infrastructure:** Netlify Functions, GitHub Actions, SQLite / Prisma
 
 ---
 
-## Immediate Priority Order (Execution Queue)
+## Immediate Priority Order
 
-1. Clean documentation hierarchy (in progress)
-2. Single authoritative README + STATUS
-3. Backend authentication + member dashboard
-4. Shopify storefront binding + product catalog
-5. Paystack live verification flow
-6. Content / activity surface (Substack + GitHub activity)
-7. Remove / archive root clutter
+1. Run Shopify product seed (requires Admin token)
+2. Mirror public surface links into primary index CTAs
+3. Set production secrets (JWT, Paystack, Shopify, OAuth) in Netlify
+4. Protect member API routes
+5. Continue visible activity commits
 
 ---
 

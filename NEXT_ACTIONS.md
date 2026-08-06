@@ -5,29 +5,32 @@
 ## Priority 1 — Visibility & Tracking
 - [x] Command Center + STATUS + Activity Log
 - [x] Continuous commits
+- [x] ACTIVITY_BADGE.md + PUBLIC_SURFACES.md
 
 ## Priority 2 — Documentation & Security
 - [x] Core docs into /docs
-- [x] .gitignore + remove tracked secrets
+- [x] Secrets removed from Git
 - [x] Archive policy
 
 ## Priority 3 — Commerce Surface
-- [x] Confirm Shopify store URL (cortex-intelligence-nexus.myshopify.com)
-- [x] Product seed script created
-- [ ] Set SHOPIFY_ADMIN_TOKEN and run `node scripts/seed-shopify-products.js`
-- [ ] Link store from main index and about.me
+- [x] Shopify store URL confirmed
+- [x] Product seed script ready
+- [ ] Run seed with SHOPIFY_ADMIN_TOKEN
+- [ ] Link storefront from index + about.me
 
 ## Priority 4 — Backend Hardening
-- [x] Auth routes wired (login / callback / status / logout)
-- [x] requireAuth middleware added
-- [ ] Configure OAuth env vars in production
-- [ ] Apply requireAuth to member dashboard routes
-- [ ] Wire Paystack webhook → access granting logic
+- [x] JWT auth in server.js (register/login)
+- [x] OAuth PKCE routes wired
+- [x] requireAuth middleware
+- [ ] Production secrets in Netlify
+- [ ] Protect selected member routes
+- [ ] Paystack success → access grant refinement
 
 ## Priority 5 — Frontend Polish
-- [ ] Canonical primary landing confirmed
-- [ ] CTAs point to live Shopify + docs surfaces
-- [ ] Visible Last Updated / activity signal
+- [x] Canonical public surfaces documented
+- [x] Activity signal file created
+- [ ] Mirror PUBLIC_SURFACES links into index.html CTAs (next micro-pass)
+- [ ] Optional: reduce duplicate index variants
 
 ---
 **Rule:** Completed items checked here and reflected in STATUS.md + ACTIVITY_LOG.md.
