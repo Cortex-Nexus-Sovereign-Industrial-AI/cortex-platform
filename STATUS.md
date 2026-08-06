@@ -16,10 +16,16 @@
 - [x] about.me identity hub live
 - [x] Substack publication started
 - [x] Paystack integration documented
+- [x] **Command Center established** (COMMAND_CENTER.md)
+- [x] **STATUS board live**
+- [x] **Documentation structure defined**
+- [x] **Shopify + Netlify readiness docs added**
+- [x] **Stack Map created**
+- [x] **Activity Log started** — platform now shows tracked professional activity
 
 ### In Progress
 - [ ] Clean root directory (many loose PDFs, duplicate files, env files)
-- [ ] Single source-of-truth documentation structure
+- [ ] Move key existing markdown into /docs hierarchy
 - [ ] Functional user authentication + protected member area
 - [ ] Live Shopify storefront with products
 - [ ] Production Paystack end-to-end flow
@@ -32,7 +38,7 @@
 - [ ] Automated content pipeline
 
 ## Activity Signal
-This repository is now under active command-center orchestration.  
-All future work will be committed here with clear messages so the platform shows continuous professional activity.
+This repository is under active command-center orchestration.  
+Commits are being made with clear messages so external viewers see continuous professional progress.
 
-**Next commit target:** Documentation cleanup + frontend polish + backend auth scaffolding.
+**Latest focus:** Documentation consolidation + operational readiness for Shopify & Netlify.
