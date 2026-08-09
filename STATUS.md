@@ -1,18 +1,28 @@
-# CINIS NEXUS PLATFORM — LIVE STATUS
-**Date:** 2026-08-06  
-**Repo:** Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform
+# CINIS NEXUS — LIVE STATUS
 
-## Overall Health: ACTIVE — STRUCTURAL WORK COMPLETE
+**Updated:** 2026-08-10  
+**Repo:** Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform  
+**Founder GitHub:** mikecomplexai-7
 
-### Done
-- [x] Command / HANDOFF / deploy / local-dev docs
-- [x] Backend v2.2 + member-dashboard + app.js JWT wiring
-- [x] Shopify seed + Netlify + Render
-- [x] **Netlify `health` function** → `/api/health` on static deploy
+## Health: PRODUCTION SHELL LIVE
 
-### Owner activation
-- [ ] Secrets + Express API host
-- [ ] Shopify seed + Paystack webhook
+| Component | State |
+|-----------|--------|
+| Landing (`index.html`) | Clean production design — LIVE |
+| Member dashboard | LIVE |
+| Netlify static | LIVE |
+| GitHub Pages | LIVE |
+| Command docs | LIVE |
+| Backend JWT API | Code ready — awaits host + secrets |
+| Shopify catalog | Seed ready — awaits Admin token |
+| Paystack webhooks | Code ready — awaits keys |
 
-**Handoff:** [HANDOFF.md](./HANDOFF.md)  
-**Local:** [docs/operations/LOCAL_DEV.md](./docs/operations/LOCAL_DEV.md)
+## Focus
+
+Centralized on GitHub account **mikecomplexai-7** and org **Cortex-Nexus-Sovereign-Industrial-AI**.  
+Website shell is clean and ready for public use.  
+Payments use legitimate Paystack only — no alternative bank routing in code.
+
+## Next (owner)
+
+See [DEPLOY_CHECKLIST.md](./DEPLOY_CHECKLIST.md).

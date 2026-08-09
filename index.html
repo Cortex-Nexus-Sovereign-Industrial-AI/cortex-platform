@@ -3,242 +3,386 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cortex Platform — Sovereign Industrial AI Core</title>
-  <meta name="description" content="CINIS NEXUS INDUSTRY HQ — Decentralized, offline-first agentic infrastructure for industrial automation.">
-  <meta name="author" content="Michael Ujuku Morim, CINIS NEXUS INDUSTRY OGOJA">
+  <title>CINIS NEXUS — Cortex Platform | Sovereign Industrial AI</title>
+  <meta name="description" content="CINIS NEXUS INDUSTRY OGOJA — Sovereign Industrial AI platform by Michael Ujuku Morim. Edge-resilient automation, payments, and commerce from Nigeria.">
+  <meta name="author" content="Michael Ujuku Morim">
   <link rel="canonical" href="https://cortex-platforms.netlify.app/">
-  <link rel="stylesheet" href="styles.css">
+  <meta property="og:title" content="CINIS NEXUS — Cortex Platform">
+  <meta property="og:description" content="Sovereign Industrial AI Core · Ogoja, Nigeria">
+  <meta property="og:url" content="https://cortex-platforms.netlify.app/">
+  <meta name="theme-color" content="#0a0e17">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <script src="https://js.paystack.co/v1/inline.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0e17;
+      --surface: #111827;
+      --surface2: #1a2234;
+      --border: #243044;
+      --text: #e8eef7;
+      --muted: #8b9bb4;
+      --accent: #3b82f6;
+      --accent2: #06b6d4;
+      --green: #22c55e;
+      --radius: 12px;
+      --font: 'Inter', system-ui, sans-serif;
+      --mono: 'JetBrains Mono', ui-monospace, monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    a { color: var(--accent2); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 1.25rem; }
+
+    /* NAV */
+    header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(10,14,23,0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px; gap: 1rem;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 0.6rem;
+      font-weight: 800; letter-spacing: 0.02em; color: var(--text);
+      text-decoration: none;
+    }
+    .brand-mark {
+      width: 32px; height: 32px; border-radius: 8px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: grid; place-items: center; font-size: 1rem;
+    }
+    .nav-links { display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap; }
+    .nav-links a { color: var(--muted); font-size: 0.9rem; font-weight: 500; text-decoration: none; }
+    .nav-links a:hover { color: var(--text); }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 0.65rem 1.15rem; border-radius: 8px; font-weight: 600;
+      font-size: 0.9rem; border: none; cursor: pointer; text-decoration: none;
+      transition: transform 0.15s, opacity 0.15s;
+    }
+    .btn:hover { transform: translateY(-1px); text-decoration: none; }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #2563eb);
+      color: #fff;
+    }
+    .btn-ghost {
+      background: transparent; color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    /* HERO */
+    .hero {
+      padding: 4.5rem 0 3.5rem;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(59,130,246,0.25), transparent),
+        var(--bg);
+    }
+    .badge {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-family: var(--mono); font-size: 0.75rem;
+      color: var(--green); background: rgba(34,197,94,0.1);
+      border: 1px solid rgba(34,197,94,0.3);
+      padding: 0.35rem 0.75rem; border-radius: 999px; margin-bottom: 1.25rem;
+    }
+    .badge::before {
+      content: ''; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--green); box-shadow: 0 0 8px var(--green);
+    }
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      font-weight: 800; line-height: 1.15;
+      letter-spacing: -0.03em; max-width: 18ch;
+    }
+    .hero-sub {
+      margin-top: 1rem; color: var(--muted); font-size: 1.1rem;
+      max-width: 42ch;
+    }
+    .hero-cta { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; }
+    .meta-row {
+      display: flex; flex-wrap: wrap; gap: 1.5rem;
+      margin-top: 2.5rem; padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.85rem; color: var(--muted);
+    }
+    .meta-row strong { color: var(--text); display: block; font-size: 0.95rem; }
+
+    /* SECTIONS */
+    section { padding: 3.5rem 0; }
+    .section-label {
+      font-family: var(--mono); font-size: 0.75rem;
+      color: var(--accent2); text-transform: uppercase; letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+    }
+    h2 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.5rem;
+    }
+    .section-lead { color: var(--muted); max-width: 50ch; margin-bottom: 2rem; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.35rem;
+      transition: border-color 0.2s;
+    }
+    .card:hover { border-color: var(--accent); }
+    .card h3 { font-size: 1.05rem; margin-bottom: 0.4rem; }
+    .card p { color: var(--muted); font-size: 0.9rem; }
+    .card-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: var(--surface2); display: grid; place-items: center;
+      margin-bottom: 0.85rem; font-size: 1.2rem;
+    }
+
+    .link-list { list-style: none; }
+    .link-list li {
+      border-bottom: 1px solid var(--border);
+      padding: 0.85rem 0;
+      display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+    }
+    .link-list li:last-child { border-bottom: none; }
+    .link-list span { color: var(--muted); font-size: 0.85rem; }
+
+    .status-board {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .status-row {
+      display: grid; grid-template-columns: 1fr auto;
+      padding: 0.9rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+    .status-row:last-child { border-bottom: none; }
+    .pill {
+      font-family: var(--mono); font-size: 0.7rem;
+      padding: 0.25rem 0.55rem; border-radius: 999px;
+      background: rgba(34,197,94,0.12); color: var(--green);
+      border: 1px solid rgba(34,197,94,0.25);
+    }
+    .pill.warn {
+      background: rgba(234,179,8,0.12); color: #eab308;
+      border-color: rgba(234,179,8,0.25);
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 0 2.5rem;
+      color: var(--muted); font-size: 0.85rem;
+    }
+    .footer-grid {
+      display: flex; flex-wrap: wrap; justify-content: space-between;
+      gap: 1.5rem; align-items: flex-start;
+    }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 1rem; }
+    .footer-links a { color: var(--muted); }
+    .footer-links a:hover { color: var(--text); }
+
+    @media (max-width: 640px) {
+      .nav-links .hide-sm { display: none; }
+      h1 { max-width: none; }
+    }
+  </style>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "CINIS NEXUS INDUSTRY OGOJA",
     "url": "https://cortex-platforms.netlify.app",
-    "founder": { "@type": "Person", "name": "Michael Ujuku Morim", "url": "https://about.me/mikecomplexai" },
-    "address": { "@type": "PostalAddress", "addressLocality": "Ogoja", "addressRegion": "Cross River State", "addressCountry": "Nigeria" },
+    "founder": {
+      "@type": "Person",
+      "name": "Michael Ujuku Morim",
+      "url": "https://about.me/mikecomplexai"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Ogoja",
+      "addressRegion": "Cross River State",
+      "addressCountry": "NG"
+    },
     "sameAs": [
-      "https://x.com/MikeComplexAie",
-      "https://www.youtube.com/@MikecomplexAI-i2e",
-      "https://www.linkedin.com/in/michaelujukumorim",
-      "https://medium.com/@mikecomplexai",
-      "https://www.tiktok.com/@cinisnio.ai",
       "https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform",
-      "https://mikecomplexai.substack.com"
-    ],
-    "contactPoint": { "@type": "ContactPoint", "telephone": "+2349010251577", "contactType": "customer support", "availableLanguage": "English" }
+      "https://github.com/mikecomplexai-7",
+      "https://x.com/MikeComplexAie",
+      "https://about.me/mikecomplexai"
+    ]
   }
-  </script>
-  <script>
-    const CortexEngine = {
-      hfToken: null, ownerAuthenticated: false,
-      init() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const authCode = urlParams.get('code');
-        const error = urlParams.get('error');
-        if (authCode) this.handleHandshake(authCode);
-        else if (error) console.error('[CORTEX ENGINE] Handshake Refused:', error);
-      },
-      handleHandshake(code) {
-        sessionStorage.setItem('cinis_auth_temp', code);
-        window.history.replaceState({}, document.title, window.location.pathname);
-        setTimeout(() => this.triggerOwnerVerification(), 800);
-      },
-      triggerOwnerVerification() {
-        const secretKey = prompt('[OWNER INITIALIZATION]\nEnter Secret Platform API Key:');
-        if (secretKey && secretKey.trim()) {
-          this.hfToken = secretKey; this.ownerAuthenticated = true;
-          const devConsole = document.getElementById('secret-dev-console');
-          if (devConsole) devConsole.style.display = 'block';
-        }
-      }
-    };
-    window.addEventListener('DOMContentLoaded', () => CortexEngine.init());
   </script>
 </head>
 <body>
-  <div id="auth-overlay" class="auth-overlay">
-    <div class="auth-card">
-      <div class="auth-logo">⚡</div>
-      <h2 id="auth-title">Welcome to Cortex</h2>
-      <p class="auth-subtitle">Sovereign Industrial AI Core — CINIS NEXUS INDUSTRY HQ</p>
-      <p style="font-size:0.75rem;opacity:0.7;margin-bottom:0.75rem;">Active build · <a href="member-dashboard.html" style="color:inherit;">Member login</a> · <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/STATUS.md" target="_blank" style="color:inherit;">Status</a></p>
-      <form id="auth-form" onsubmit="handleAuth(event)">
-        <div id="name-field" class="form-group" style="display:none;">
-          <label>Full Name</label>
-          <input type="text" id="auth-name" placeholder="Michael Ujuku Morim">
-        </div>
-        <div class="form-group">
-          <label>Email</label>
-          <input type="email" id="auth-email" placeholder="cortexnexus@proton.me" required>
-        </div>
-        <div class="form-group">
-          <label>Password</label>
-          <input type="password" id="auth-password" placeholder="••••••••" required minlength="8">
-        </div>
-        <div id="confirm-field" class="form-group" style="display:none;">
-          <label>Confirm Password</label>
-          <input type="password" id="auth-confirm" placeholder="••••••••">
-        </div>
-        <button type="submit" class="btn-primary btn-full" id="auth-btn">Sign In</button>
-      </form>
-      <p class="auth-toggle"><span id="auth-toggle-text">No account?</span> <button onclick="toggleAuthMode()" class="link-btn" id="auth-toggle-btn">Create one</button></p>
-      <div class="auth-divider"><span>or</span></div>
-      <button class="btn-secondary btn-full" onclick="guestAccess()">Continue as Guest</button>
-      <p style="margin-top:0.75rem;font-size:0.8rem;"><a href="member-dashboard.html">Open Member Dashboard →</a></p>
-    </div>
-  </div>
-
-  <div id="app" style="display:none;">
-    <div class="top-bar">
-      <div class="top-bar-left">
-        <div class="logo-sm">⚡</div>
-        <span class="brand-text">CORTEX</span>
-        <span style="font-size:0.65rem;margin-left:8px;opacity:0.6;font-family:JetBrains Mono,monospace;">ACTIVE BUILD</span>
-      </div>
-      <div class="top-bar-center">
-        <div class="search-box"><span>🔍</span><input type="text" placeholder="Search platform, commands, AI tasks..." id="global-search"></div>
-      </div>
-      <div class="top-bar-right">
-        <button class="icon-btn" title="Notifications">🔔<span class="badge">3</span></button>
-        <button class="icon-btn" title="Messages">💬</button>
-        <div class="user-pill" onclick="toggleUserMenu()">
-          <div class="avatar" id="user-avatar">M</div>
-          <span id="user-name">Michael</span><span>▼</span>
-        </div>
-        <div id="user-menu" class="dropdown-menu">
-          <a href="member-dashboard.html">👤 Member Dashboard</a>
-          <a href="#" onclick="switchTab('settings'); toggleUserMenu(); return false;">⚙️ Settings</a>
-          <a href="#" onclick="switchTab('business'); toggleUserMenu(); return false;">🏢 Business Profile</a>
-          <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/STATUS.md" target="_blank">📋 Live Status</a>
-          <div class="dropdown-divider"></div>
-          <a href="#" onclick="signOut(); return false;" class="text-danger">🚪 Sign Out</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="layout">
-      <aside class="sidebar" id="sidebar">
-        <nav class="nav-section">
-          <div class="nav-label">Platform</div>
-          <button class="nav-item active" data-tab="dashboard" onclick="switchTab('dashboard')"><span class="nav-icon">📊</span><span class="nav-text">Dashboard</span></button>
-          <button class="nav-item" data-tab="ai-workspace" onclick="switchTab('ai-workspace')"><span class="nav-icon">🤖</span><span class="nav-text">AI Workspace</span><span class="nav-badge">LIVE</span></button>
-          <button class="nav-item" data-tab="business" onclick="switchTab('business')"><span class="nav-icon">🏢</span><span class="nav-text">Business Hub</span></button>
-        </nav>
-        <nav class="nav-section">
-          <div class="nav-label">Commerce</div>
-          <button class="nav-item" data-tab="shopify" onclick="switchTab('shopify')"><span class="nav-icon">🛒</span><span class="nav-text">Shopify Store</span></button>
-          <button class="nav-item" data-tab="payments" onclick="switchTab('payments')"><span class="nav-icon">💳</span><span class="nav-text">Payments</span></button>
-          <button class="nav-item" data-tab="orders" onclick="switchTab('orders')"><span class="nav-icon">📦</span><span class="nav-text">Orders</span></button>
-          <button class="nav-item" data-tab="checkout" onclick="switchTab('checkout')"><span class="nav-icon">🛍️</span><span class="nav-text">Checkout</span><span class="nav-badge">NEW</span></button>
-        </nav>
-        <nav class="nav-section">
-          <div class="nav-label">Presence</div>
-          <button class="nav-item" data-tab="social" onclick="switchTab('social')"><span class="nav-icon">🌐</span><span class="nav-text">Social Nexus</span></button>
-          <button class="nav-item" data-tab="content" onclick="switchTab('content')"><span class="nav-icon">📝</span><span class="nav-text">Content Studio</span></button>
-        </nav>
-        <nav class="nav-section">
-          <div class="nav-label">System</div>
-          <button class="nav-item" data-tab="settings" onclick="switchTab('settings')"><span class="nav-icon">⚙️</span><span class="nav-text">Settings</span></button>
-          <button class="nav-item" data-tab="help" onclick="switchTab('help')"><span class="nav-icon">❓</span><span class="nav-text">Help & Docs</span></button>
-        </nav>
-        <div class="sidebar-footer">
-          <div class="sovereign-badge"><span>🛡️</span><div><div class="sovereign-title">Sovereign Mode</div><div class="sovereign-status">Edge-resilient active</div></div></div>
-        </div>
-      </aside>
-
-      <main class="main-content" id="main-content">
-        <section id="tab-business" class="tab-panel">
-          <div class="page-header"><h1>🏢 Business Hub</h1><p>Executive Networks, Communication, Media & Infrastructure</p></div>
-          <div class="biz-grid">
-            <div class="biz-card"><div class="biz-icon">🌐</div><h3>Executive Networks</h3><div class="biz-links">
-              <a href="https://about.me/mikecomplexai" target="_blank">about.me/mikecomplexai</a>
-              <a href="https://www.linkedin.com/in/michaelujukumorim" target="_blank">LinkedIn</a>
-              <a href="https://medium.com/@mikecomplexai" target="_blank">Medium</a>
-              <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform" target="_blank">GitHub Command Repo</a>
-              <a href="https://mikecomplexai.substack.com" target="_blank">Substack</a>
-            </div></div>
-            <div class="biz-card"><div class="biz-icon">📡</div><h3>Direct Communication</h3><div class="biz-links">
-              <a href="mailto:cortexnexus@proton.me">cortexnexus@proton.me</a>
-              <a href="https://wa.me/2349010251577" target="_blank">WhatsApp +234 901 025 1577</a>
-              <a href="https://t.me/mikecomplexai" target="_blank">Telegram @mikecomplexai</a>
-            </div></div>
-            <div class="biz-card"><div class="biz-icon">🎬</div><h3>Content & Media</h3><div class="biz-links">
-              <a href="https://www.youtube.com/@MikecomplexAI-i2e" target="_blank">YouTube</a>
-              <a href="https://www.tiktok.com/@cinisnio.ai" target="_blank">TikTok @cinisnio.ai</a>
-              <a href="https://x.com/MikeComplexAie" target="_blank">X @MikeComplexAie</a>
-            </div></div>
-            <div class="biz-card"><div class="biz-icon">🏗️</div><h3>Infrastructure Nodes</h3><div class="biz-links">
-              <a href="member-dashboard.html">Member Dashboard</a>
-              <a href="https://cortex-platforms.netlify.app" target="_blank">Netlify App</a>
-              <a href="https://cortex-nexus-sovereign-industrial-ai.github.io/cortex-platform/" target="_blank">GitHub Pages</a>
-              <a href="https://cortex-intelligence-nexus.myshopify.com" target="_blank">Shopify Store</a>
-              <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/COMMAND_CENTER.md" target="_blank">Command Center</a>
-              <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/STATUS.md" target="_blank">Live Status</a>
-            </div></div>
-          </div>
-        </section>
-
-        <section id="tab-help" class="tab-panel">
-          <div class="page-header"><h1>❓ Help & Docs</h1><p>Tracked documentation and command surfaces</p></div>
-          <div class="biz-grid">
-            <div class="biz-card"><h3>Command Surfaces</h3><div class="biz-links">
-              <a href="member-dashboard.html">Member Dashboard</a>
-              <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/COMMAND_CENTER.md" target="_blank">Command Center</a>
-              <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/STATUS.md" target="_blank">Live Status</a>
-              <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/PUBLIC_SURFACES.md" target="_blank">Public Surfaces</a>
-            </div></div>
-            <div class="biz-card"><h3>Operations</h3><div class="biz-links">
-              <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/docs/operations/SHOPIFY_INTEGRATION.md" target="_blank">Shopify Integration</a>
-              <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/docs/operations/AUTH_SETUP.md" target="_blank">Auth Setup</a>
-              <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/docs/operations/NETLIFY_READINESS.md" target="_blank">Netlify Readiness</a>
-            </div></div>
-          </div>
-        </section>
-
-        <section id="tab-social" class="tab-panel">
-          <div class="page-header"><h1>🌐 Social Nexus</h1><p>Connected media channels</p></div>
-          <div class="social-grid">
-            <a href="https://x.com/MikeComplexAie" target="_blank" class="social-card x-card"><div class="social-icon">𝕏</div><h3>X</h3><p class="social-handle">@MikeComplexAie</p><span class="social-link">Open →</span></a>
-            <a href="https://www.youtube.com/@MikecomplexAI-i2e" target="_blank" class="social-card yt-card"><div class="social-icon">▶️</div><h3>YouTube</h3><p class="social-handle">@MikecomplexAI-i2e</p><span class="social-link">Open →</span></a>
-            <a href="https://www.tiktok.com/@cinisnio.ai" target="_blank" class="social-card tt-card"><div class="social-icon">🎵</div><h3>TikTok</h3><p class="social-handle">@cinisnio.ai</p><span class="social-link">Open →</span></a>
-            <a href="https://medium.com/@mikecomplexai" target="_blank" class="social-card fb-card"><div class="social-icon">📰</div><h3>Medium</h3><p class="social-handle">@mikecomplexai</p><span class="social-link">Open →</span></a>
-            <a href="https://www.linkedin.com/in/michaelujukumorim" target="_blank" class="social-card ig-card"><div class="social-icon">💼</div><h3>LinkedIn</h3><p class="social-handle">michaelujukumorim</p><span class="social-link">Open →</span></a>
-            <a href="https://mikecomplexai.substack.com" target="_blank" class="social-card li-card"><div class="social-icon">📬</div><h3>Substack</h3><p class="social-handle">mikecomplexai</p><span class="social-link">Open →</span></a>
-          </div>
-        </section>
-
-        <section id="secret-dev-console" class="tab-panel" style="display:none;background:#0c0f12;border:1px solid #1a2332;padding:20px;border-radius:8px;margin-top:20px;">
-          <h2 style="color:#00ff66;font-family:JetBrains Mono,monospace;">CINIS Engine Terminal Active</h2>
-        </section>
-      </main>
-    </div>
-
-    <footer class="app-footer">
-      <div class="footer-left">
-        <span>© 2026 CINIS NEXUS INDUSTRY OGOJA</span>
-        <span class="footer-dot">•</span>
-        <span>Sovereign Industrial AI Core</span>
-        <span class="footer-dot">•</span>
-        <span style="opacity:0.7;">Active Build · Aug 2026</span>
-      </div>
-      <div class="footer-right">
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="/">
+        <span class="brand-mark">⚡</span>
+        <span>CINIS NEXUS</span>
+      </a>
+      <nav class="nav-links">
+        <a class="hide-sm" href="#platform">Platform</a>
+        <a class="hide-sm" href="#status">Status</a>
+        <a class="hide-sm" href="#surfaces">Surfaces</a>
         <a href="member-dashboard.html">Members</a>
-        <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform" target="_blank">GitHub</a>
-        <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/STATUS.md" target="_blank">Status</a>
-        <a href="https://about.me/mikecomplexai" target="_blank">About</a>
-        <a href="https://mikecomplexai.substack.com" target="_blank">Substack</a>
-        <a href="https://cortex-intelligence-nexus.myshopify.com" target="_blank">Shopify</a>
-        <a href="mailto:cortexnexus@proton.me">Contact</a>
-        <span class="footer-version">v2.4.1-member</span>
-      </div>
-    </footer>
-  </div>
+        <a class="btn btn-primary" href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </header>
 
-  <script src="app.js"></script>
-  <script src="hf-oauth-handler.js"></script>
-  <script src="dev-console/dev-console.js"></script>
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <div class="badge">ACTIVE BUILD · CORTEX PLATFORM</div>
+        <h1>Sovereign Industrial AI Core</h1>
+        <p class="hero-sub">
+          CINIS NEXUS INDUSTRY OGOJA — edge-resilient automation, commerce, and intelligence infrastructure founded by Michael Ujuku Morim.
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="member-dashboard.html">Open Member Dashboard</a>
+          <a class="btn btn-ghost" href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform" target="_blank" rel="noopener">Command Repository</a>
+          <a class="btn btn-ghost" href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/STATUS.md" target="_blank" rel="noopener">Live Status</a>
+        </div>
+        <div class="meta-row">
+          <div><strong>Founder</strong> Michael Ujuku Morim</div>
+          <div><strong>HQ</strong> Ogoja, Cross River, Nigeria</div>
+          <div><strong>GitHub</strong> mikecomplexai-7 · Cortex-Nexus org</div>
+          <div><strong>Stack</strong> Node · Netlify · Paystack · Shopify</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="platform">
+      <div class="wrap">
+        <div class="section-label">Platform</div>
+        <h2>Built for operations, not noise</h2>
+        <p class="section-lead">Clean surfaces, tracked command center, and production paths for auth, payments, and commerce.</p>
+        <div class="grid">
+          <div class="card">
+            <div class="card-icon">🧭</div>
+            <h3>Command Center</h3>
+            <p>Single source of truth for status, deploy checklist, and public surfaces — versioned on GitHub.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">🔐</div>
+            <h3>Member Auth</h3>
+            <p>JWT register/login, session profile, and access grants after verified Paystack payments.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">💳</div>
+            <h3>Payments</h3>
+            <p>Paystack integration with webhook verification and order recording. Secrets stay in environment variables only.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">🛒</div>
+            <h3>Commerce</h3>
+            <p>Shopify store domain ready with product seed script for catalog activation.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">☁️</div>
+            <h3>Deploy Paths</h3>
+            <p>Netlify for static + functions. Render blueprint for the Express API. Documented local development.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">🛡️</div>
+            <h3>Security Hygiene</h3>
+            <p>No production secrets in Git. Env examples only. Tracked cleanup of credential files.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="status">
+      <div class="wrap">
+        <div class="section-label">System Status</div>
+        <h2>Operational readiness</h2>
+        <p class="section-lead">Structural platform is complete. Live commerce and full JWT API activate when host secrets are set.</p>
+        <div class="status-board">
+          <div class="status-row"><span>GitHub command repository</span><span class="pill">LIVE</span></div>
+          <div class="status-row"><span>Netlify static shell</span><span class="pill">LIVE</span></div>
+          <div class="status-row"><span>GitHub Pages mirror</span><span class="pill">LIVE</span></div>
+          <div class="status-row"><span>Member dashboard UI</span><span class="pill">LIVE</span></div>
+          <div class="status-row"><span>Backend API (JWT / orders)</span><span class="pill warn">AWAITS HOST</span></div>
+          <div class="status-row"><span>Shopify product catalog</span><span class="pill warn">AWAITS TOKEN</span></div>
+          <div class="status-row"><span>Paystack live webhooks</span><span class="pill warn">AWAITS KEYS</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="surfaces">
+      <div class="wrap">
+        <div class="section-label">Surfaces</div>
+        <h2>Centralized on GitHub</h2>
+        <p class="section-lead">Primary identity and source of truth: GitHub account <strong style="color:var(--text)">mikecomplexai-7</strong> and organization <strong style="color:var(--text)">Cortex-Nexus-Sovereign-Industrial-AI</strong>.</p>
+        <div class="card" style="padding:0 1.25rem;">
+          <ul class="link-list">
+            <li>
+              <a href="https://github.com/mikecomplexai-7" target="_blank" rel="noopener">GitHub — mikecomplexai-7</a>
+              <span>Founder account</span>
+            </li>
+            <li>
+              <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform" target="_blank" rel="noopener">cortex-platform repository</a>
+              <span>Command repo</span>
+            </li>
+            <li>
+              <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/COMMAND_CENTER.md" target="_blank" rel="noopener">COMMAND_CENTER.md</a>
+              <span>Ops entry</span>
+            </li>
+            <li>
+              <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/DEPLOY_CHECKLIST.md" target="_blank" rel="noopener">DEPLOY_CHECKLIST.md</a>
+              <span>Activation</span>
+            </li>
+            <li>
+              <a href="member-dashboard.html">Member Dashboard</a>
+              <span>Auth UI</span>
+            </li>
+            <li>
+              <a href="https://about.me/mikecomplexai" target="_blank" rel="noopener">about.me/mikecomplexai</a>
+              <span>Identity</span>
+            </li>
+            <li>
+              <a href="https://cortex-intelligence-nexus.myshopify.com" target="_blank" rel="noopener">Shopify store</a>
+              <span>Commerce</span>
+            </li>
+            <li>
+              <a href="mailto:cortexnexus@proton.me">cortexnexus@proton.me</a>
+              <span>Contact</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-grid">
+      <div>
+        <strong style="color:var(--text)">© 2026 CINIS NEXUS INDUSTRY OGOJA</strong><br>
+        Sovereign Industrial AI · Founded by Michael Ujuku Morim
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform">GitHub</a>
+        <a href="https://x.com/MikeComplexAie">X</a>
+        <a href="https://mikecomplexai.substack.com">Substack</a>
+        <a href="https://wa.me/2349010251577">WhatsApp</a>
+        <a href="member-dashboard.html">Members</a>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>

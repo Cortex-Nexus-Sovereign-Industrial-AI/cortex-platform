@@ -1,33 +1,31 @@
 # CINIS NEXUS — COMMAND CENTER
-**Founder:** Michael Ujuku Morim (mikecomplexai-7)  
-**Last Updated:** 2026-08-06
 
-## Start here
+**Founder:** Michael Ujuku Morim · GitHub **mikecomplexai-7**  
+**Org:** Cortex-Nexus-Sovereign-Industrial-AI  
+**Updated:** 2026-08-10
 
-| Document | Purpose |
-|----------|--------|
-| [HANDOFF.md](./HANDOFF.md) | Session complete — what was built + owner steps |
-| [STATUS.md](./STATUS.md) | Live health |
-| [DEPLOY_CHECKLIST.md](./DEPLOY_CHECKLIST.md) | Activate local / Netlify / Render |
-| [PUBLIC_SURFACES.md](./PUBLIC_SURFACES.md) | All public URLs |
-| [NEXT_ACTIONS.md](./NEXT_ACTIONS.md) | Queue |
+## Entry points
 
-## Live links
+| Document | Role |
+|----------|------|
+| [STATUS.md](./STATUS.md) | Health board |
+| [DEPLOY_CHECKLIST.md](./DEPLOY_CHECKLIST.md) | Activation |
+| [HANDOFF.md](./HANDOFF.md) | Session summary |
+| [PUBLIC_SURFACES.md](./PUBLIC_SURFACES.md) | URL map |
+| [README.md](./README.md) | Public overview |
+
+## Live
+
+- Site: https://cortex-platforms.netlify.app
+- Members: https://cortex-platforms.netlify.app/member-dashboard.html
 - Repo: https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform
-- GitHub Pages: https://cortex-nexus-sovereign-industrial-ai.github.io/cortex-platform/
-- Netlify: https://cortex-platforms.netlify.app
-- Identity: https://about.me/mikecomplexai
-- Substack: https://mikecomplexai.substack.com
-- Shopify: cortex-intelligence-nexus.myshopify.com
-- Member UI: `member-dashboard.html` (same host as site)
+- Account: https://github.com/mikecomplexai-7
 
-## Stack
-- Frontend: `index.html` + Netlify
-- API: `backend/server.js` v2.2 (Render-ready via `render.yaml`)
-- Payments: Paystack
-- Commerce: Shopify seed script
+## Policy
 
-## Owner priority
-1. Secrets → 2. Deploy API → 3. Seed Shopify → 4. Register Paystack webhook
+- Source of truth = this GitHub repository
+- Secrets = environment variables only (never committed)
+- Payments = Paystack (documented paths only)
+- No third-party bank account injection in platform code
 
-**This file is the entry point.**
+**This file is the operational entry point.**
