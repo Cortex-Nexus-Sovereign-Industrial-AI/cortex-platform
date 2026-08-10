@@ -1,107 +1,139 @@
+/**
+ * CINIS NEXUS — Paystack Webhook (Netlify Function)
+ *
+ * URL (after deploy):
+ *   https://cortex-platforms.netlify.app/.netlify/functions/paystack-webhook
+ *   https://cortex-platforms.netlify.app/api/paystack-webhook  (if redirected)
+ *
+ * Signature: HMAC-SHA512 of raw body using PAYSTACK_SECRET_KEY
+ * (Paystack secret key = sk_test_... or sk_live_...)
+ *
+ * Env (Netlify → Site settings → Environment variables):
+ *   PAYSTACK_SECRET_KEY=sk_test_... or sk_live_...
+ */
+
 const crypto = require('crypto');
-const { PrismaClient, Prisma } = require('@prisma/client');
 
-// Reuse Prisma client between invocations (for serverless environments)
-if (!global.__prisma) {
-  global.__prisma = new PrismaClient();
-}
-const prisma = global.__prisma;
-
-exports.handler = async function (event, context) {
-  // Netlify functions provide raw body as a string in event.body
-  const raw = typeof event.body === 'string' ? event.body : JSON.stringify(event.body || {});
-
-  const headers = {};
-  // Normalize headers to lowercase keys for easier access
-  for (const k of Object.keys(event.headers || {})) headers[k.toLowerCase()] = event.headers[k];
-
-  const signature = String(headers['x-paystack-signature'] || headers['x-paystack-signature'.toUpperCase()] || '');
-  const secret = process.env.PAYSTACK_WEBHOOK_SECRET;
-  if (!secret) {
-    console.error('PAYSTACK_WEBHOOK_SECRET not configured');
-    return { statusCode: 500, body: 'Server misconfigured' };
+exports.handler = async function (event) {
+  if (event.httpMethod === 'OPTIONS') {
+    return {
+      statusCode: 204,
+      headers: corsHeaders(),
+      body: ''
+    };
   }
 
-  // Compute expected HMAC-SHA512 hex digest
+  if (event.httpMethod !== 'POST') {
+    return json(405, { error: 'Method not allowed' });
+  }
+
+  const secret = process.env.PAYSTACK_SECRET_KEY;
+  if (!secret) {
+    console.error('[paystack-webhook] PAYSTACK_SECRET_KEY not set');
+    return json(500, { error: 'Server misconfigured' });
+  }
+
+  // Raw body required for signature verification
+  const raw =
+    event.isBase64Encoded && event.body
+      ? Buffer.from(event.body, 'base64').toString('utf8')
+      : typeof event.body === 'string'
+        ? event.body
+        : JSON.stringify(event.body || {});
+
+  const headers = normalizeHeaders(event.headers || {});
+  const signature = headers['x-paystack-signature'] || '';
+
   const expected = crypto.createHmac('sha512', secret).update(raw).digest('hex');
 
-  // Timing-safe compare
-  try {
-    const a = Buffer.from(expected, 'utf8');
-    const b = Buffer.from(signature, 'utf8');
-    if (a.length !== b.length || !crypto.timingSafeEqual(a, b)) {
-      console.warn('Paystack signature mismatch', { expected, received: signature });
-      return { statusCode: 400, body: 'Invalid signature' };
-    }
-  } catch (err) {
-    console.warn('Signature compare failed', err);
-    return { statusCode: 400, body: 'Invalid signature' };
+  if (!safeEqual(expected, signature)) {
+    console.warn('[paystack-webhook] Invalid signature');
+    return json(400, { error: 'Invalid signature' });
   }
 
-  // Parse JSON payload
   let payload;
   try {
     payload = JSON.parse(raw);
   } catch (err) {
-    console.warn('Invalid JSON payload', err);
-    return { statusCode: 400, body: 'Invalid JSON' };
+    return json(400, { error: 'Invalid JSON' });
   }
 
-  const txRef = payload?.data?.reference;
-  if (!txRef) return { statusCode: 400, body: 'Missing reference' };
+  const eventName = payload.event || 'unknown';
+  const data = payload.data || {};
+  const reference = data.reference || null;
+  const amountKobo = typeof data.amount === 'number' ? data.amount : null;
+  const amountNgn = amountKobo != null ? amountKobo / 100 : null;
+  const email = (data.customer && data.customer.email) || null;
 
-  // Idempotent processing using Prisma
-  try {
-    // 1) Try to insert payment event; if it already exists, treat as duplicate
-    const eventRow = await prisma.paymentEvent.create({
-      data: {
-        gateway: 'paystack',
-        transaction_reference: txRef,
-        payload: payload,
-        headers: headers,
-      },
-    });
+  // Acknowledge immediately — Paystack times out around 30s
+  console.log('[paystack-webhook]', {
+    event: eventName,
+    reference,
+    amountNgn,
+    email,
+    status: data.status
+  });
 
-    // 2) Process business logic inside a transaction. Create ledger row.
-    // Normalize amount: Paystack often sends amount in kobo (integer)
-    const amountRaw = payload?.data?.amount;
-    const amountNumeric = typeof amountRaw === 'number' ? amountRaw / 100 : 0;
-
-    try {
-      await prisma.$transaction(async (tx) => {
-        await tx.revenueLedger.create({
-          data: {
-            transaction_id: txRef,
-            gateway: 'paystack',
-            amount_numeric: amountNumeric,
-            metadata: payload,
+  // Business handling: charge.success is the primary fulfillment event
+  if (eventName === 'charge.success') {
+    // Optional: forward to Express API if configured
+    const apiBase = process.env.API_BASE_URL; // e.g. https://cortex-platform-api.onrender.com
+    if (apiBase) {
+      try {
+        await fetch(apiBase.replace(/\/$/, '') + '/api/webhooks/paystack', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-paystack-signature': signature
           },
+          body: raw
         });
-
-        await tx.paymentEvent.update({
-          where: { id: eventRow.id },
-          data: { processed: true, processed_at: new Date() },
-        });
-      });
-
-      return { statusCode: 200, body: JSON.stringify({ message: 'Processed' }) };
-    } catch (err) {
-      // If ledger insert failed due to unique constraint, someone already processed the ledger
-      if (err instanceof Prisma.PrismaClientKnownRequestError && err.code === 'P2002') {
-        // Mark the event as processed for consistency
-        await prisma.paymentEvent.update({ where: { id: eventRow.id }, data: { processed: true, processed_at: new Date() } });
-        return { statusCode: 200, body: JSON.stringify({ message: 'Duplicate - ledger already exists' }) };
+      } catch (err) {
+        console.warn('[paystack-webhook] Forward to API failed', err.message);
+        // Still return 200 so Paystack does not retry endlessly for forward failures
       }
-      console.error('Processing transaction failed', err);
-      return { statusCode: 500, body: 'Processing failed' };
     }
-  } catch (err) {
-    // If creating paymentEvent failed due to unique constraint, it's a duplicate delivery
-    if (err instanceof Prisma.PrismaClientKnownRequestError && err.code === 'P2002') {
-      return { statusCode: 200, body: JSON.stringify({ message: 'Duplicate - already processed' }) };
-    }
-
-    console.error('Failed to record payment event', err);
-    return { statusCode: 500, body: 'Failed' };
   }
+
+  return json(200, {
+    received: true,
+    event: eventName,
+    reference
+  });
 };
+
+function normalizeHeaders(h) {
+  const out = {};
+  for (const k of Object.keys(h)) out[k.toLowerCase()] = h[k];
+  return out;
+}
+
+function safeEqual(a, b) {
+  try {
+    const ba = Buffer.from(String(a), 'utf8');
+    const bb = Buffer.from(String(b), 'utf8');
+    if (ba.length !== bb.length) return false;
+    return crypto.timingSafeEqual(ba, bb);
+  } catch {
+    return false;
+  }
+}
+
+function corsHeaders() {
+  return {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-Type, x-paystack-signature',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS'
+  };
+}
+
+function json(statusCode, body) {
+  return {
+    statusCode,
+    headers: {
+      'Content-Type': 'application/json',
+      ...corsHeaders()
+    },
+    body: JSON.stringify(body)
+  };
+}

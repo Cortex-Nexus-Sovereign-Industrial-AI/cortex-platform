@@ -1,48 +1,53 @@
 # Deploy Checklist — CINIS NEXUS
-**Updated:** 2026-08-06
+
+## Paystack webhooks (quick)
+
+1. Netlify env: `PAYSTACK_SECRET_KEY` (+ optional `API_BASE_URL` for Render forward)  
+2. Redeploy Netlify  
+3. Paystack Dashboard → **Settings → API Keys & Webhooks**  
+4. Webhook URL (Test and Live separately):
+
+```
+https://cortex-platforms.netlify.app/.netlify/functions/paystack-webhook
+```
+
+Or when Express API is on Render:
+
+```
+https://<your-service>.onrender.com/api/webhooks/paystack
+```
+
+5. Full guide: [docs/operations/PAYSTACK_WEBHOOKS.md](./docs/operations/PAYSTACK_WEBHOOKS.md)
+
+---
 
 ## A. Local API
 
 ```bash
-cd backend
-npm install
-cp .env.example .env
-# JWT_SECRET, PAYSTACK_*, FRONTEND_URL
+cd backend && npm install && cp .env.example .env
+# JWT_SECRET, PAYSTACK_SECRET_KEY, PAYSTACK_PUBLIC_KEY, FRONTEND_URL
 npm start
-# GET http://localhost:5000/api/health
 ```
 
-Open `member-dashboard.html` with the API running.
-
-## B. Shopify products
+## B. Shopify (optional)
 
 ```bash
 export SHOPIFY_ADMIN_TOKEN=shpat_...
 node scripts/seed-shopify-products.js
 ```
 
-## C. Netlify (static + functions)
+## C. Netlify
 
-1. Connect repo → branch `main`
-2. Env: `PAYSTACK_*`, optional Shopify tokens
-3. Confirm `netlify.toml` publish = `.`
-4. Test `/` and `/member-dashboard.html`
-5. Optional webhook: `https://cortex-platforms.netlify.app/.netlify/functions/paystack-webhook`
+- Branch `main`, env vars above, redeploy  
+- Test: `/` and `/.netlify/functions/health`
 
-## D. Render (Express API — recommended for JWT/SQLite)
+## D. Render API (JWT + access grants)
 
-1. New Blueprint from this repo (`render.yaml`)
-2. Service: `cortex-platform-api` (rootDir `backend`)
-3. Set env: `FRONTEND_URL`, `PAYSTACK_*`, confirm `JWT_SECRET`
-4. Health: `https://<service>.onrender.com/api/health`
-5. Paystack webhook: `https://<service>.onrender.com/api/webhooks/paystack`
-6. Point member-dashboard `API_BASE` or host under same CORS origin via `FRONTEND_URL`
+- Blueprint `render.yaml` · env: `JWT_SECRET`, `PAYSTACK_*`, `FRONTEND_URL`  
+- Webhook: `https://<service>.onrender.com/api/webhooks/paystack`
 
 ## E. Verify
 
-- [ ] /api/health OK
-- [ ] Register/login on member-dashboard
-- [ ] No `.env` in Git
-- [ ] STATUS.md still accurate
-
-**Command Center:** [COMMAND_CENTER.md](./COMMAND_CENTER.md)
+- [ ] Test payment with test card  
+- [ ] Webhook log shows `charge.success`  
+- [ ] No secrets in Git  
