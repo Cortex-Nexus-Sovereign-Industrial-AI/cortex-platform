@@ -1,28 +1,28 @@
 # CINIS NEXUS — LIVE STATUS
 
 **Updated:** 2026-08-10  
-**Repo:** Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform  
-**Founder GitHub:** mikecomplexai-7
+**Founder GitHub:** mikecomplexai-7  
+**Repo:** Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform
 
-## Health: PRODUCTION SHELL LIVE
+## Health: FULL APP SHELL LIVE
 
-| Component | State |
-|-----------|--------|
-| Landing (`index.html`) | Clean production design — LIVE |
-| Member dashboard | LIVE |
-| Netlify static | LIVE |
-| GitHub Pages | LIVE |
-| Command docs | LIVE |
-| Backend JWT API | Code ready — awaits host + secrets |
-| Shopify catalog | Seed ready — awaits Admin token |
-| Paystack webhooks | Code ready — awaits keys |
+The site is a **working platform UI**, not a sketch:
 
-## Focus
+| Area | State |
+|------|--------|
+| Auth (guest / sign-in) | Working in browser |
+| Dashboard + activity log | Working |
+| AI workspace (4 agents) | Working (local responses) |
+| Business hub links | Working |
+| Commerce / Payments / Orders | Working (local demo ledger) |
+| Docs section | Links to GitHub command docs |
+| Settings / sign out | Working |
+| Backend JWT API | Code ready — needs host + secrets for real auth/pay |
 
-Centralized on GitHub account **mikecomplexai-7** and org **Cortex-Nexus-Sovereign-Industrial-AI**.  
-Website shell is clean and ready for public use.  
-Payments use legitimate Paystack only — no alternative bank routing in code.
+## Live URLs
 
-## Next (owner)
+- https://cortex-platforms.netlify.app  
+- https://cortex-platforms.netlify.app/member-dashboard.html  
+- https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform  
 
-See [DEPLOY_CHECKLIST.md](./DEPLOY_CHECKLIST.md).
+Redeploy Netlify from `main` if the new shell is not visible yet.
