@@ -1,7 +1,9 @@
-h# Cortex Platform Dependencies
-# CINIS NEXUS INDUSTRY OGOJA
-
-flask>=2.3.0
-python-dotenv>=1.0.0
-gunicorn>=21.0.0
-requests>=2.31.0
+# Cortex Platform — optional Python deps (local/Flask only)
+# Netlify static + functions do not need these.
+# Fixed: previous file had invalid line "h# ..." which failed pip.
+#
+# Uncomment if you run a local Python service:
+# flask>=2.3.0
+# python-dotenv>=1.0.0
+# gunicorn>=21.0.0
+# requests>=2.31.0
