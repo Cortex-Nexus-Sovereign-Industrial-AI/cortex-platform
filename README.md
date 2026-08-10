@@ -1,10 +1,29 @@
-# Cortex Platform — CINIS NEXUS
+# Cortex AI Nexus
 
-**Sovereign Industrial AI · Ogoja, Nigeria**  
+**Formerly:** Cortex Intelligence Nexus-Intel Solution  
+**Command product:** cortex-platform · **Industry line:** CINIS NEXUS INDUSTRY OGOJA  
 **Founder:** Michael Ujuku Morim ([@mikecomplexai-7](https://github.com/mikecomplexai-7))
 
-[![Status](https://img.shields.io/badge/Status-Production%20Shell-3b82f6)](./STATUS.md)
-[![GitHub](https://img.shields.io/badge/GitHub-Command%20Repo-111827)](https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform)
+[![Status](https://img.shields.io/badge/Status-Active-22c55e)](./STATUS.md)
+[![Live](https://img.shields.io/badge/Live-cortex--platforms.netlify.app-3b82f6)](https://cortex-platforms.netlify.app)
+
+---
+
+## Official enterprise description
+
+**Cortex AI Nexus** is an advanced autonomous intelligence and industrial automation workspace engineered for high-throughput edge execution, real-time activity rendering, and end-to-end digital pipeline orchestration.
+
+### Core capabilities
+
+| Capability | Description |
+|------------|-------------|
+| **Autonomous pipeline orchestration** | Backend automation connecting multi-channel streams, localized workflows, content funnels, and SDK deployments across web hubs |
+| **Hand-set AI & sub-module granularity** | Modular runtimes with direct-control AI settings, sub-module rendering, API adapters, and high-concurrency execution engines |
+| **Parallel computing & acceleration** | Architectures aligned with CUDA/GPU patterns for heavy workloads, predictive analytics, and low-latency telemetry |
+| **Edge diagnostics & local execution** | Resilient offloading for remote/hybrid deployments and secure sync via custom MCP integrations |
+| **Developer ecosystem** | Pipelines aligned with GitHub, Netlify, and browser interfaces for CI/CD, testing, and auditing |
+
+Full text: [docs/product/CORTEX_AI_NEXUS.md](./docs/product/CORTEX_AI_NEXUS.md)
 
 ---
 
@@ -12,13 +31,11 @@
 
 | Layer | Location |
 |-------|----------|
-| **Founder account** | [github.com/mikecomplexai-7](https://github.com/mikecomplexai-7) |
-| **Organization** | [Cortex-Nexus-Sovereign-Industrial-AI](https://github.com/Cortex-Nexus-Sovereign-Industrial-AI) |
-| **This command repo** | [cortex-platform](https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform) |
-| **Live site** | [cortex-platforms.netlify.app](https://cortex-platforms.netlify.app) |
-| **Identity hub** | [about.me/mikecomplexai](https://about.me/mikecomplexai) |
-
-All operational truth is versioned here. No bank routing, no off-repo secret stores in Git.
+| Founder GitHub | [mikecomplexai-7](https://github.com/mikecomplexai-7) |
+| Organization | [Cortex-Nexus-Sovereign-Industrial-AI](https://github.com/Cortex-Nexus-Sovereign-Industrial-AI) |
+| Command repo | [cortex-platform](https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform) |
+| Live site | [cortex-platforms.netlify.app](https://cortex-platforms.netlify.app) |
+| Identity | [about.me/mikecomplexai](https://about.me/mikecomplexai) |
 
 ---
 
@@ -28,32 +45,22 @@ All operational truth is versioned here. No bank routing, no off-repo secret sto
 |---------|-----|
 | Production shell | https://cortex-platforms.netlify.app |
 | Member dashboard | https://cortex-platforms.netlify.app/member-dashboard.html |
-| GitHub Pages | https://cortex-nexus-sovereign-industrial-ai.github.io/cortex-platform/ |
 | Command Center | [COMMAND_CENTER.md](./COMMAND_CENTER.md) |
 | Status | [STATUS.md](./STATUS.md) |
 | Deploy checklist | [DEPLOY_CHECKLIST.md](./DEPLOY_CHECKLIST.md) |
-| Handoff | [HANDOFF.md](./HANDOFF.md) |
+| Enterprise description | [docs/product/CORTEX_AI_NEXUS.md](./docs/product/CORTEX_AI_NEXUS.md) |
 
 ---
 
-## Ready now
+## Stack (operational)
 
-- Clean production landing (`index.html`)
-- Member dashboard (JWT-ready UI)
-- Backend API v2.2 (`backend/server.js`)
-- Paystack webhook path + Shopify seed script
-- Netlify + Render deploy configs
-- Secrets kept out of Git
+- Frontend app shell + member dashboard (Netlify)
+- Backend API v2.3 — JWT, orders, idempotent Paystack webhooks
+- Commerce — Shopify domain + seed script
+- Secrets — environment variables only (never in Git)
 
-## Activate (owner)
-
-1. Set env secrets (JWT, Paystack, optional Shopify)
-2. Host API: `cd backend && npm start` or Render blueprint
-3. Redeploy Netlify from `main`
-4. Optional: `node scripts/seed-shopify-products.js`
-
-Full steps: [DEPLOY_CHECKLIST.md](./DEPLOY_CHECKLIST.md)
+**Activate:** [DEPLOY_CHECKLIST.md](./DEPLOY_CHECKLIST.md)
 
 ---
 
-**CINIS NEXUS INDUSTRY OGOJA** · Contact: cortexnexus@proton.me
+© CINIS NEXUS INDUSTRY OGOJA · cortexnexus@proton.me

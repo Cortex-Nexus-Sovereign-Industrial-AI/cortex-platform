@@ -1,28 +1,29 @@
-# CINIS NEXUS — LIVE STATUS
+# Cortex AI Nexus — LIVE STATUS
 
 **Updated:** 2026-08-10  
-**Founder GitHub:** mikecomplexai-7  
-**Repo:** Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform
+**Product:** Cortex AI Nexus (cortex-platform)  
+**Founder GitHub:** mikecomplexai-7
 
-## Health: FULL APP SHELL LIVE
+## Identity
 
-The site is a **working platform UI**, not a sketch:
+Official enterprise description is versioned at [docs/product/CORTEX_AI_NEXUS.md](./docs/product/CORTEX_AI_NEXUS.md) and embedded in README + Command Center + app About section.
 
-| Area | State |
-|------|--------|
-| Auth (guest / sign-in) | Working in browser |
-| Dashboard + activity log | Working |
-| AI workspace (4 agents) | Working (local responses) |
-| Business hub links | Working |
-| Commerce / Payments / Orders | Working (local demo ledger) |
-| Docs section | Links to GitHub command docs |
-| Settings / sign out | Working |
-| Backend JWT API | Code ready — needs host + secrets for real auth/pay |
+## Health
 
-## Live URLs
+| Component | State |
+|-----------|--------|
+| Enterprise description | Embedded in repo |
+| App shell | LIVE (after Netlify green deploy) |
+| Member dashboard | LIVE |
+| Paystack webhook code | Ready — needs green Netlify deploy |
+| Backend JWT API | Code ready — awaits host |
 
-- https://cortex-platforms.netlify.app  
-- https://cortex-platforms.netlify.app/member-dashboard.html  
-- https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform  
+## Netlify note
 
-Redeploy Netlify from `main` if the new shell is not visible yet.
+If deploys fail on pip/`requirements.txt`, use the fixed file on `main` and **Clear cache and deploy**.
+
+## Next
+
+1. Green Netlify deploy  
+2. Paystack webhook URL registered  
+3. Optional: Render API for JWT grants  

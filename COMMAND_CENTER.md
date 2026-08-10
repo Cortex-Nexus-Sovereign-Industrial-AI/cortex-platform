@@ -1,8 +1,14 @@
-# CINIS NEXUS — COMMAND CENTER
+# Cortex AI Nexus — Command Center
 
 **Founder:** Michael Ujuku Morim · GitHub **mikecomplexai-7**  
 **Org:** Cortex-Nexus-Sovereign-Industrial-AI  
 **Updated:** 2026-08-10
+
+## Enterprise identity
+
+**Cortex AI Nexus** (formerly Cortex Intelligence Nexus-Intel Solution) — autonomous intelligence and industrial automation workspace for edge execution, real-time activity rendering, and end-to-end pipeline orchestration.
+
+Full description: [docs/product/CORTEX_AI_NEXUS.md](./docs/product/CORTEX_AI_NEXUS.md)
 
 ## Entry points
 
@@ -10,8 +16,8 @@
 |----------|------|
 | [STATUS.md](./STATUS.md) | Health board |
 | [DEPLOY_CHECKLIST.md](./DEPLOY_CHECKLIST.md) | Activation |
+| [docs/product/CORTEX_AI_NEXUS.md](./docs/product/CORTEX_AI_NEXUS.md) | Official enterprise description |
 | [HANDOFF.md](./HANDOFF.md) | Session summary |
-| [PUBLIC_SURFACES.md](./PUBLIC_SURFACES.md) | URL map |
 | [README.md](./README.md) | Public overview |
 
 ## Live
@@ -24,8 +30,7 @@
 ## Policy
 
 - Source of truth = this GitHub repository
-- Secrets = environment variables only (never committed)
+- Secrets = environment variables only
 - Payments = Paystack (documented paths only)
-- No third-party bank account injection in platform code
 
 **This file is the operational entry point.**
