@@ -6,24 +6,21 @@
 
 ## Identity
 
-Official enterprise description is versioned at [docs/product/CORTEX_AI_NEXUS.md](./docs/product/CORTEX_AI_NEXUS.md) and embedded in README + Command Center + app About section.
+- Enterprise: [docs/product/CORTEX_AI_NEXUS.md](./docs/product/CORTEX_AI_NEXUS.md)
+- Architecture: [docs/product/TECHNICAL_OVERVIEW_ARCHITECTURE.md](./docs/product/TECHNICAL_OVERVIEW_ARCHITECTURE.md)
 
 ## Health
 
 | Component | State |
 |-----------|--------|
-| Enterprise description | Embedded in repo |
-| App shell | LIVE (after Netlify green deploy) |
-| Member dashboard | LIVE |
-| Paystack webhook code | Ready — needs green Netlify deploy |
-| Backend JWT API | Code ready — awaits host |
-
-## Netlify note
-
-If deploys fail on pip/`requirements.txt`, use the fixed file on `main` and **Clear cache and deploy**.
+| Enterprise description | In repo + app Enterprise tab |
+| Technical overview architecture | In repo + app Architecture section |
+| App shell | Awaits green Netlify deploy |
+| Paystack webhook code | Ready after green deploy |
+| Backend JWT API | Code ready — host optional |
 
 ## Next
 
-1. Green Netlify deploy  
-2. Paystack webhook URL registered  
-3. Optional: Render API for JWT grants  
+1. Netlify clear-cache deploy (green)
+2. Paystack webhook URL live
+3. Optional Render API
