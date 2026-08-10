@@ -1,28 +1,28 @@
 /**
  * CINIS NEXUS — Paystack Webhook (Netlify Function)
+ * Idempotent: same event+reference returns 200 without re-side-effects on warm isolates.
+ * Durable store = Express API when API_BASE_URL is set.
  *
- * URL (after deploy):
- *   https://cortex-platforms.netlify.app/.netlify/functions/paystack-webhook
- *   https://cortex-platforms.netlify.app/api/paystack-webhook  (if redirected)
- *
- * Signature: HMAC-SHA512 of raw body using PAYSTACK_SECRET_KEY
- * (Paystack secret key = sk_test_... or sk_live_...)
- *
- * Env (Netlify → Site settings → Environment variables):
- *   PAYSTACK_SECRET_KEY=sk_test_... or sk_live_...
+ * URL: https://cortex-platforms.netlify.app/.netlify/functions/paystack-webhook
+ * Env: PAYSTACK_SECRET_KEY, optional API_BASE_URL
  */
 
 const crypto = require('crypto');
 
+const seen = global.__paystackSeen || (global.__paystackSeen = new Map());
+const SEEN_TTL_MS = 24 * 60 * 60 * 1000;
+
+function pruneSeen() {
+  const now = Date.now();
+  for (const [k, t] of seen.entries()) {
+    if (now - t > SEEN_TTL_MS) seen.delete(k);
+  }
+}
+
 exports.handler = async function (event) {
   if (event.httpMethod === 'OPTIONS') {
-    return {
-      statusCode: 204,
-      headers: corsHeaders(),
-      body: ''
-    };
+    return { statusCode: 204, headers: corsHeaders(), body: '' };
   }
-
   if (event.httpMethod !== 'POST') {
     return json(405, { error: 'Method not allowed' });
   }
@@ -33,7 +33,6 @@ exports.handler = async function (event) {
     return json(500, { error: 'Server misconfigured' });
   }
 
-  // Raw body required for signature verification
   const raw =
     event.isBase64Encoded && event.body
       ? Buffer.from(event.body, 'base64').toString('utf8')
@@ -43,7 +42,6 @@ exports.handler = async function (event) {
 
   const headers = normalizeHeaders(event.headers || {});
   const signature = headers['x-paystack-signature'] || '';
-
   const expected = crypto.createHmac('sha512', secret).update(raw).digest('hex');
 
   if (!safeEqual(expected, signature)) {
@@ -54,33 +52,39 @@ exports.handler = async function (event) {
   let payload;
   try {
     payload = JSON.parse(raw);
-  } catch (err) {
+  } catch {
     return json(400, { error: 'Invalid JSON' });
   }
 
   const eventName = payload.event || 'unknown';
   const data = payload.data || {};
   const reference = data.reference || null;
-  const amountKobo = typeof data.amount === 'number' ? data.amount : null;
-  const amountNgn = amountKobo != null ? amountKobo / 100 : null;
-  const email = (data.customer && data.customer.email) || null;
+  const idemKey = reference ? `${eventName}::${reference}` : null;
 
-  // Acknowledge immediately — Paystack times out around 30s
+  pruneSeen();
+  if (idemKey && seen.has(idemKey)) {
+    console.log('[paystack-webhook] idempotent warm-skip', idemKey);
+    return json(200, {
+      received: true,
+      idempotent: true,
+      event: eventName,
+      reference,
+      message: 'Already handled on this isolate'
+    });
+  }
+
   console.log('[paystack-webhook]', {
     event: eventName,
     reference,
-    amountNgn,
-    email,
-    status: data.status
+    amountNgn: typeof data.amount === 'number' ? data.amount / 100 : null,
+    email: data.customer && data.customer.email
   });
 
-  // Business handling: charge.success is the primary fulfillment event
   if (eventName === 'charge.success') {
-    // Optional: forward to Express API if configured
-    const apiBase = process.env.API_BASE_URL; // e.g. https://cortex-platform-api.onrender.com
+    const apiBase = process.env.API_BASE_URL;
     if (apiBase) {
       try {
-        await fetch(apiBase.replace(/\/$/, '') + '/api/webhooks/paystack', {
+        const res = await fetch(apiBase.replace(/\/$/, '') + '/api/webhooks/paystack', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -88,15 +92,19 @@ exports.handler = async function (event) {
           },
           body: raw
         });
+        const body = await res.text();
+        console.log('[paystack-webhook] forwarded to API', res.status, body.slice(0, 200));
       } catch (err) {
-        console.warn('[paystack-webhook] Forward to API failed', err.message);
-        // Still return 200 so Paystack does not retry endlessly for forward failures
+        console.warn('[paystack-webhook] Forward failed', err.message);
       }
     }
   }
 
+  if (idemKey) seen.set(idemKey, Date.now());
+
   return json(200, {
     received: true,
+    idempotent: false,
     event: eventName,
     reference
   });
@@ -130,10 +138,7 @@ function corsHeaders() {
 function json(statusCode, body) {
   return {
     statusCode,
-    headers: {
-      'Content-Type': 'application/json',
-      ...corsHeaders()
-    },
+    headers: { 'Content-Type': 'application/json', ...corsHeaders() },
     body: JSON.stringify(body)
   };
 }
