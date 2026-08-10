@@ -1,0 +1,7 @@
+{
+  "name": "cortex-platform",
+  "version": "2.4.3",
+  "private": true,
+  "description": "Static site + Netlify functions (no install deps required)",
+  "engines": { "node": ">=18" }
+}
