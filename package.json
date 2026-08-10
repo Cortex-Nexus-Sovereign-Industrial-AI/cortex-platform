@@ -1,44 +1,15 @@
 {
   "name": "cortex-platform",
-  "version": "2.4.1",
-  "description": "CINIS NEXUS — Cortex Platform. Sovereign Industrial AI hub, governance, commerce, and agents.",
-  "main": "backend/server.js",
+  "version": "2.4.2",
+  "description": "CINIS NEXUS — Cortex Platform static site + Netlify Functions",
+  "private": true,
   "scripts": {
-    "start": "node backend/server.js",
-    "server": "node backend/server.js",
-    "seed:shopify": "node scripts/seed-shopify-products.js",
-    "test": "jest",
-    "lint": "eslint src/**/*.js",
-    "build": "webpack --mode production",
-    "dev": "webpack --mode development --watch"
-  },
-  "keywords": [
-    "cortex",
-    "cinis",
-    "ai",
-    "sovereign",
-    "industrial",
-    "paystack",
-    "shopify"
-  ],
-  "author": "Michael Ujuku Morim / Cortex-Nexus-Sovereign-Industrial-AI",
-  "license": "MIT",
-  "dependencies": {
-    "express": "^4.18.2",
-    "cors": "^2.8.5",
-    "dotenv": "^16.3.1",
-    "axios": "^1.5.0"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.23.0",
-    "@babel/preset-env": "^7.23.0",
-    "babel-loader": "^9.1.0",
-    "eslint": "^8.50.0",
-    "jest": "^29.7.0",
-    "webpack": "^5.89.0",
-    "webpack-cli": "^5.1.0"
+    "start": "node backend/server.js"
   },
   "engines": {
     "node": ">=18"
-  }
+  },
+  "dependencies": {},
+  "author": "Michael Ujuku Morim",
+  "license": "MIT"
 }
