@@ -25,25 +25,28 @@
 
 | Capability | Description |
 |------------|-------------|
-| **Dynamic threat parsing** | Real-time NLP to decode semantic intent across multi-channel communications; surface zero-day vectors and social-engineering anomalies |
-| **Contextual policy synthesis** | Translate high-level strategic directives into deterministic, low-latency firewall, IAM, and edge security rule sets |
-| **Cognitive load optimization** | Filter signal-to-noise; present predictive triage matrices instead of raw alert volume |
+| **Dynamic threat parsing** | Real-time NLP to decode semantic intent across multi-channel communications |
+| **Contextual policy synthesis** | Translate directives into firewall, IAM, and edge security rule sets |
+| **Cognitive load optimization** | Predictive triage matrices instead of raw alert volume |
 
 ### 2. Autonomous kinetic & robotic integration
 
 | Capability | Description |
 |------------|-------------|
-| **Edge safety & control** | Real-time safety kernels for AGVs, robotic arms, and spatial sensors to prevent kinetic accidents during material handling |
-| **Hardened telemetry pipelines** | M2M communication via micro-segmented TLS/Noise tunnels to reduce MitM command injection risk |
-| **Adaptive path planning** | Spatial telemetry + supply-chain priority queues for dynamic transport vectors |
+| **Edge safety & control** | Real-time safety kernels for AGVs, robotic arms, and spatial sensors |
+| **Hardened telemetry pipelines** | M2M via micro-segmented TLS/Noise tunnels |
+| **Adaptive path planning** | Spatial telemetry + supply-chain priority queues |
+
+**Implemented prototype (repo):**  
+[`edge/cbf/actuator_cbf_solver.cpp`](../../edge/cbf/actuator_cbf_solver.cpp) — Control Barrier Function (CBF) QP filter using OSQP for single-actuator safe acceleration. See [`edge/cbf/README.md`](../../edge/cbf/README.md).
 
 ### 3. Zero-trust security & inventory orchestration
 
 | Capability | Description |
 |------------|-------------|
-| **Immutable material tracking** | Asset movement (RFID, computer vision, local sensor grids) linked to encrypted ledger structures |
-| **Cryptographic identity verification** | Every robotic node, API endpoint, and operator role treated as untrusted until continuous re-authentication |
-| **Automated exception handling** | Dynamic isolation when anomalous physical or digital inventory variance is detected |
+| **Immutable material tracking** | RFID / vision / sensors linked to encrypted ledger structures |
+| **Cryptographic identity verification** | Continuous re-authentication of nodes, APIs, operators |
+| **Automated exception handling** | Isolation on anomalous inventory variance |
 
 ---
 
@@ -66,8 +69,8 @@
 |-------|-------------------------|-------------------|
 | Web command shell | Live (Netlify) | Operator surface |
 | Payments / commerce | Paystack + Shopify paths | Business channel |
-| Cognitive / NLP policy | Spec + AI workspace personas | Full vector 1 |
-| Kinetic / robotics | Spec only | Vector 2 (future edge)
-| Zero-trust inventory | Spec only | Vector 3 (future edge)
+| Cognitive / NLP policy | Spec + AI workspace personas | Vector 1 |
+| Kinetic / robotics | **CBF source in `edge/cbf/`** | Vector 2 (edge compile) |
+| Zero-trust inventory | Spec only | Vector 3 |
 
 Canonical product identity: [CORTEX_AI_NEXUS.md](./CORTEX_AI_NEXUS.md)

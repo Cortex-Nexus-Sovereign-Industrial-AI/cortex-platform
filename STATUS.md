@@ -8,19 +8,18 @@
 
 - Enterprise: [docs/product/CORTEX_AI_NEXUS.md](./docs/product/CORTEX_AI_NEXUS.md)
 - Architecture: [docs/product/TECHNICAL_OVERVIEW_ARCHITECTURE.md](./docs/product/TECHNICAL_OVERVIEW_ARCHITECTURE.md)
+- Edge CBF: [edge/cbf/](./edge/cbf/)
 
 ## Health
 
 | Component | State |
 |-----------|--------|
-| Enterprise description | In repo + app Enterprise tab |
-| Technical overview architecture | In repo + app Architecture section |
-| App shell | Awaits green Netlify deploy |
-| Paystack webhook code | Ready after green deploy |
-| Backend JWT API | Code ready — host optional |
+| Enterprise description | Repo + app |
+| Technical architecture | Repo + app |
+| Edge ActuatorCBFSolver | **Source pushed** (`edge/cbf/`) — compile on robot/host |
+| App shell | Netlify (clear-cache deploy if needed) |
+| Paystack webhook | Ready after green Netlify deploy |
 
-## Next
+## Note on “deploy” for CBF
 
-1. Netlify clear-cache deploy (green)
-2. Paystack webhook URL live
-3. Optional Render API
+CBF C++ is **not** deployed via Netlify. Build on a machine with Eigen + OSQP (see `edge/cbf/README.md`).
