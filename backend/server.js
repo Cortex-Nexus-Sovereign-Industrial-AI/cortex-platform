@@ -1,5 +1,5 @@
 /* ============================================
-   CORTEX PLATFORM v2.2 — Backend API Server
+   CORTEX PLATFORM v2.3 — Backend API Server (idempotent webhooks)
    Node.js + Express + SQLite
    CINIS NEXUS INDUSTRY OGOJA
    ============================================ */
@@ -144,7 +144,23 @@ function initializeDatabase() {
       )
     `);
 
-    console.log('Database schema initialized');
+    db.run(`
+      CREATE TABLE IF NOT EXISTS processed_webhooks (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        event_type TEXT NOT NULL,
+        reference TEXT NOT NULL,
+        paystack_id TEXT,
+        status TEXT DEFAULT 'processed',
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        UNIQUE(event_type, reference)
+      )
+    `);
+
+    db.run(`CREATE UNIQUE INDEX IF NOT EXISTS idx_orders_paystack_ref ON orders(paystack_ref) WHERE paystack_ref IS NOT NULL`);
+    db.run(`CREATE UNIQUE INDEX IF NOT EXISTS idx_access_grants_tx_ref ON access_grants(transaction_reference) WHERE transaction_reference IS NOT NULL`);
+    db.run(`CREATE UNIQUE INDEX IF NOT EXISTS idx_transactions_reference ON transactions(reference)`);
+
+    console.log('Database schema initialized (idempotent webhooks)');
   });
 }
 
@@ -160,18 +176,17 @@ const verifyToken = (req, res, next) => {
   }
 };
 
-// ---------- Health (public) ----------
 app.get('/api/health', (req, res) => {
   res.json({
     status: 'ok',
-    platform: 'Cortex Platform v2.2',
+    platform: 'Cortex Platform v2.3',
+    idempotency: true,
     timestamp: new Date().toISOString(),
     database: 'SQLite3',
     paystack_mode: process.env.PAYSTACK_MODE || 'LIVE'
   });
 });
 
-// ---------- Auth (public register/login) ----------
 app.post('/api/auth/register', async (req, res) => {
   try {
     const { name, email, password, company, location } = req.body;
@@ -187,11 +202,7 @@ app.post('/api/auth/register', async (req, res) => {
       `INSERT INTO users (name, email, password, company, location) VALUES (?, ?, ?, ?, ?)`,
       [name, email, hashedPassword, company || null, location || null]
     );
-    const token = jwt.sign(
-      { id: result.id, email, name },
-      JWT_SECRET,
-      { expiresIn: '30d' }
-    );
+    const token = jwt.sign({ id: result.id, email, name }, JWT_SECRET, { expiresIn: '30d' });
     res.status(201).json({
       message: 'User registered successfully',
       user: { id: result.id, name, email },
@@ -229,7 +240,6 @@ app.post('/api/auth/login', async (req, res) => {
   }
 });
 
-// Member: current user profile + grants
 app.get('/api/auth/me', verifyToken, async (req, res) => {
   try {
     const user = await dbGet(
@@ -248,8 +258,6 @@ app.get('/api/auth/me', verifyToken, async (req, res) => {
   }
 });
 
-// ---------- Orders ----------
-// Create order remains public (checkout flow)
 app.post('/api/orders', async (req, res) => {
   try {
     const { customer_name, email, phone, product, amount_ngn } = req.body;
@@ -284,7 +292,6 @@ app.post('/api/orders', async (req, res) => {
   }
 });
 
-// List all orders — member only
 app.get('/api/orders', verifyToken, async (req, res) => {
   try {
     const orders = await dbAll('SELECT * FROM orders ORDER BY created_at DESC');
@@ -295,7 +302,6 @@ app.get('/api/orders', verifyToken, async (req, res) => {
   }
 });
 
-// Single order — public by ref for receipt; sensitive fields still limited
 app.get('/api/orders/:id', async (req, res) => {
   try {
     const order = await dbGet(
@@ -310,7 +316,6 @@ app.get('/api/orders/:id', async (req, res) => {
   }
 });
 
-// ---------- Paystack ----------
 const PAYSTACK_SECRET_KEY = process.env.PAYSTACK_SECRET_KEY || 'sk_live_your_secret_key';
 
 const verifyPaystackSignature = (req, secret) => {
@@ -340,58 +345,137 @@ app.post('/api/webhooks/paystack', async (req, res) => {
     }
 
     const { event, data } = req.body;
+    const reference = data?.reference || null;
+
+    if (reference) {
+      const already = await dbGet(
+        'SELECT id, status, created_at FROM processed_webhooks WHERE event_type = ? AND reference = ?',
+        [event || 'unknown', reference]
+      );
+      if (already) {
+        console.log(`[idempotent] skip ${event} ${reference} (processed_webhooks#${already.id})`);
+        return res.status(200).json({
+          success: true,
+          idempotent: true,
+          message: 'Event already processed',
+          reference,
+          processed_at: already.created_at
+        });
+      }
+    }
+
+    if (event === 'charge.success' && reference) {
+      const existingTx = await dbGet(
+        "SELECT id, status FROM transactions WHERE reference = ? AND status = 'verified'",
+        [reference]
+      );
+      if (existingTx) {
+        await dbRun(
+          `INSERT OR IGNORE INTO processed_webhooks (event_type, reference, paystack_id, status) VALUES (?, ?, ?, 'processed')`,
+          [event, reference, data?.id != null ? String(data.id) : null]
+        );
+        console.log(`[idempotent] skip charge.success ${reference} (tx#${existingTx.id})`);
+        return res.status(200).json({
+          success: true,
+          idempotent: true,
+          message: 'Payment already verified',
+          reference
+        });
+      }
+    }
 
     if (event === 'charge.success') {
-      const { reference, amount, customer, metadata } = data;
-      const amount_ngn = amount / 100;
-      const email = customer?.email || metadata?.email || 'unknown@cortex.local';
-      const product = metadata?.product || 'Cortex Platform';
+      if (!reference) {
+        return res.status(400).json({ error: 'Missing payment reference' });
+      }
+
+      const amount = data.amount;
+      const amount_ngn = (typeof amount === 'number' ? amount : 0) / 100;
+      const customer = data.customer || {};
+      const metadata = data.metadata || {};
+      const email = customer.email || metadata.email || 'unknown@cortex.local';
+      const product = metadata.product || 'Cortex Platform';
 
       let order = await dbGet('SELECT * FROM orders WHERE paystack_ref = ?', [reference]);
 
       if (!order) {
-        const order_ref = `CORTEX-WEBHOOK-${Date.now()}`;
-        const result = await dbRun(
-          `INSERT INTO orders (order_ref, customer_name, email, phone, product, amount_ngn, amount_kobo, status, paystack_ref, paystack_transaction_id, payment_channel, paid_at)
-           VALUES (?, ?, ?, ?, ?, ?, ?, 'completed', ?, ?, 'paystack', CURRENT_TIMESTAMP)`,
-          [
-            order_ref,
-            metadata?.customer_name || email,
-            email,
-            metadata?.phone || null,
-            product,
-            amount_ngn,
-            amount,
-            reference,
-            data.id
-          ]
-        );
-        order = { id: result.id, order_ref };
-      } else {
+        const order_ref = `CORTEX-WEBHOOK-${Date.now()}-${String(reference).slice(-6)}`;
+        try {
+          const result = await dbRun(
+            `INSERT INTO orders (order_ref, customer_name, email, phone, product, amount_ngn, amount_kobo, status, paystack_ref, paystack_transaction_id, payment_channel, paid_at)
+             VALUES (?, ?, ?, ?, ?, ?, ?, 'completed', ?, ?, 'paystack', CURRENT_TIMESTAMP)`,
+            [
+              order_ref,
+              metadata.customer_name || customer.first_name || email,
+              email,
+              metadata.phone || customer.phone || null,
+              product,
+              amount_ngn,
+              amount || 0,
+              reference,
+              data.id || null
+            ]
+          );
+          order = { id: result.id, order_ref };
+        } catch (insertErr) {
+          order = await dbGet('SELECT * FROM orders WHERE paystack_ref = ?', [reference]);
+          if (!order) throw insertErr;
+        }
+      } else if (order.status !== 'completed') {
         await dbRun(
           `UPDATE orders SET status = 'completed', paystack_transaction_id = ?, paid_at = CURRENT_TIMESTAMP WHERE id = ?`,
-          [data.id, order.id]
+          [data.id || null, order.id]
         );
       }
 
-      await dbRun(
-        `INSERT INTO transactions (order_id, reference, amount_ngn, gateway, status, verified_at, raw_response)
-         VALUES (?, ?, ?, 'paystack', 'verified', CURRENT_TIMESTAMP, ?)`,
-        [order.id, reference, amount_ngn, JSON.stringify(data)]
-      );
+      try {
+        await dbRun(
+          `INSERT INTO transactions (order_id, reference, amount_ngn, gateway, status, verified_at, raw_response)
+           VALUES (?, ?, ?, 'paystack', 'verified', CURRENT_TIMESTAMP, ?)`,
+          [order.id, reference, amount_ngn, JSON.stringify(data)]
+        );
+      } catch (txErr) {
+        console.log(`[idempotent] transaction insert race for ${reference}`);
+      }
 
-      // Grant access after successful payment
+      const existingGrant = await dbGet(
+        'SELECT id FROM access_grants WHERE transaction_reference = ?',
+        [reference]
+      );
+      if (!existingGrant) {
+        try {
+          await dbRun(
+            `INSERT INTO access_grants (email, product, order_ref, transaction_reference, active)
+             VALUES (?, ?, ?, ?, 1)`,
+            [email, product, order.order_ref || null, reference]
+          );
+        } catch (grantErr) {
+          console.log(`[idempotent] access_grant insert race for ${reference}`);
+        }
+      }
+
       await dbRun(
-        `INSERT INTO access_grants (email, product, order_ref, transaction_reference, active)
-         VALUES (?, ?, ?, ?, 1)`,
-        [email, product, order.order_ref || null, reference]
+        `INSERT OR IGNORE INTO processed_webhooks (event_type, reference, paystack_id, status) VALUES (?, ?, ?, 'processed')`,
+        [event, reference, data?.id != null ? String(data.id) : null]
       );
 
       console.log(`Payment verified + access granted: ${reference} (₦${amount_ngn}) → ${email}`);
-      return res.json({ success: true, message: 'Payment verified and access granted' });
+      return res.status(200).json({
+        success: true,
+        idempotent: false,
+        message: 'Payment verified and access granted',
+        reference
+      });
     }
 
-    res.json({ success: true });
+    if (reference) {
+      await dbRun(
+        `INSERT OR IGNORE INTO processed_webhooks (event_type, reference, paystack_id, status) VALUES (?, ?, ?, 'processed')`,
+        [event || 'unknown', reference, data?.id != null ? String(data.id) : null]
+      );
+    }
+
+    res.status(200).json({ success: true, event: event || 'unknown' });
   } catch (err) {
     console.error('Webhook error:', err);
     res.status(500).json({ error: 'Webhook processing failed' });
@@ -424,7 +508,6 @@ app.post('/api/payments/verify', async (req, res) => {
   }
 });
 
-// Stats — member only (contains revenue)
 app.get('/api/stats', verifyToken, async (req, res) => {
   try {
     const totalOrders = await dbGet('SELECT COUNT(*) as count FROM orders');
@@ -438,7 +521,7 @@ app.get('/api/stats', verifyToken, async (req, res) => {
       pending_orders: pendingOrders.count || 0,
       total_revenue_ngn: totalRevenue.total || 0,
       active_access_grants: grants.count || 0,
-      platform: 'Cortex v2.2',
+      platform: 'Cortex v2.3',
       timestamp: new Date().toISOString()
     });
   } catch (err) {
@@ -459,7 +542,7 @@ app.use((req, res) => {
 app.listen(PORT, () => {
   console.log(`
   ═══════════════════════════════════════════════════════════
-  CORTEX PLATFORM v2.2 — Backend API
+  CORTEX PLATFORM v2.3 — Backend API (idempotent webhooks)
   ═══════════════════════════════════════════════════════════
   Port: ${PORT}
   Env: ${process.env.NODE_ENV || 'development'}
