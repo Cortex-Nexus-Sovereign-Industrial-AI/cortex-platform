@@ -1,66 +1,135 @@
-# Cortex AI Nexus
+# Cortex-Platform  
+**Sovereign Industrial AI • Enterprise SDK & Governance Framework**
 
-**Formerly:** Cortex Intelligence Nexus-Intel Solution  
-**Command product:** cortex-platform · **Industry line:** CINIS NEXUS INDUSTRY OGOJA  
-**Founder:** Michael Ujuku Morim ([@mikecomplexai-7](https://github.com/mikecomplexai-7))
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)  
+[![Netlify Status](https://api.netlify.com/api/v1/badges/<YOUR_NETLIFY_SITE_ID>/deploy-status)](https://app.netlify.com/sites/<YOUR_SITE>/deploys)  
+![CI](https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/actions/workflows/ci.yml/badge.svg)
 
-[![Status](https://img.shields.io/badge/Status-Active-22c55e)](./STATUS.md)
-[![Live](https://img.shields.io/badge/Live-cortex--platforms.netlify.app-3b82f6)](https://cortex-platforms.netlify.app)
-
----
-
-## Official enterprise description
-
-**Cortex AI Nexus** is an advanced autonomous intelligence and industrial automation workspace engineered for high-throughput edge execution, real-time activity rendering, and end-to-end digital pipeline orchestration.
-
-### Core capabilities
-
-| Capability | Description |
-|------------|-------------|
-| **Autonomous pipeline orchestration** | Backend automation connecting multi-channel streams, localized workflows, content funnels, and SDK deployments across web hubs |
-| **Hand-set AI & sub-module granularity** | Modular runtimes with direct-control AI settings, sub-module rendering, API adapters, and high-concurrency execution engines |
-| **Parallel computing & acceleration** | Architectures aligned with CUDA/GPU patterns for heavy workloads, predictive analytics, and low-latency telemetry |
-| **Edge diagnostics & local execution** | Resilient offloading for remote/hybrid deployments and secure sync via custom MCP integrations |
-| **Developer ecosystem** | Pipelines aligned with GitHub, Netlify, and browser interfaces for CI/CD, testing, and auditing |
-
-Full text: [docs/product/CORTEX_AI_NEXUS.md](./docs/product/CORTEX_AI_NEXUS.md)
+> Build once, run anywhere—on-prem, edge, or sovereign cloud—under your governance, not Big-Tech’s.
 
 ---
 
-## Central identity
+## 60-second Quick Start
 
-| Layer | Location |
-|-------|----------|
-| Founder GitHub | [mikecomplexai-7](https://github.com/mikecomplexai-7) |
-| Organization | [Cortex-Nexus-Sovereign-Industrial-AI](https://github.com/Cortex-Nexus-Sovereign-Industrial-AI) |
-| Command repo | [cortex-platform](https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform) |
-| Live site | [cortex-platforms.netlify.app](https://cortex-platforms.netlify.app) |
-| Identity | [about.me/mikecomplexai](https://about.me/mikecomplexai) |
+```bash
+git clone https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform.git
+cd cortex-platform
+docker compose up          # spins up local dev cluster + API
+curl http://localhost:8080/health
+```
 
----
+SDK smoke-test (Python ≥3.9):
 
-## Live surfaces
-
-| Surface | URL |
-|---------|-----|
-| Production shell | https://cortex-platforms.netlify.app |
-| Member dashboard | https://cortex-platforms.netlify.app/member-dashboard.html |
-| Command Center | [COMMAND_CENTER.md](./COMMAND_CENTER.md) |
-| Status | [STATUS.md](./STATUS.md) |
-| Deploy checklist | [DEPLOY_CHECKLIST.md](./DEPLOY_CHECKLIST.md) |
-| Enterprise description | [docs/product/CORTEX_AI_NEXUS.md](./docs/product/CORTEX_AI_NEXUS.md) |
+```bash
+pip install -e ./millions-sdk-core
+python - <<'PY'
+from cortex.millions import Agent
+print(Agent("demo").run("ping"))
+PY
+```
 
 ---
 
-## Stack (operational)
+## Why Cortex-Platform?
 
-- Frontend app shell + member dashboard (Netlify)
-- Backend API v2.3 — JWT, orders, idempotent Paystack webhooks
-- Commerce — Shopify domain + seed script
-- Secrets — environment variables only (never in Git)
-
-**Activate:** [DEPLOY_CHECKLIST.md](./DEPLOY_CHECKLIST.md)
+| Pain | Our Answer |
+|---|---|
+| Vendor lock-in & data exfil | Air-gapped containers, signed images, policy-as-code |
+| Fragmented OT/IT stacks | One control-plane for agents, pipelines, edge inference |
+| Compliance overhead | SBOM, provenance, immutable audit logs out-of-the-box |
 
 ---
 
-© CINIS NEXUS INDUSTRY OGOJA · cortexnexus@proton.me
+## Architecture (one picture)
+
+```
+┌─────────────┐      gRPC        ┌──────────────┐
+│   Agents    │◄───────────────►│  Core API    │
+└─────────────┘                 └──────┬───────┘
+                                       │HTTPS
+                               ┌───────▼───────┐
+                               │  Edge Nodes   │
+                               └───────────────┘
+```
+
+Full diagram & ADRs → [`ARCHITECTURE.md`](ARCHITECTURE.md)
+
+---
+
+## Repository Layout
+
+```
+agents/               – pluggable autonomous workers
+api/                  – FastAPI gateway + OpenAPI specs
+backend/              – Go/Python micro-services
+docs/                 – MkDocs sources → Netlify
+edge/                 – ONNX/TensorRT runtimes for NVIDIA Jetson, etc.
+frontend/             – React dev-console
+millions-sdk-core/    – Python SDK (`pip install cortex-millions`)
+prisma/               – schema & migrations
+```
+
+---
+
+## Contributing
+
+See [`CONTRIBUTING.md`](CONTRIBUTING.md).  
+We follow Conventional Commits + signed DCO.
+
+---
+
+## Enterprise & Security
+
+- **License**: Apache 2.0 (commercial-friendly)  
+- **Security policy**: [`SECURITY.md`](SECURITY.md)  
+- **Contact sales / pilot**: <info@cortex-platforms.netlify.app>
+
+© 2025 Cortex Intelligence Nexus – EU sovereign stack.
+```
+
+────────────────
+2. One-liner to push the new README
+
+```bash
+# Run from the repo root on your laptop or Codespace
+curl -s https://raw.githubusercontent.com/<your-username>/cortex-platform/main/README.md \
+  > README.md.new \
+&& mv README.md.new README.md \
+&& git add README.md \
+&& git commit -m "docs: enterprise-grade README + badges" \
+&& git push origin main
+```
+
+────────────────
+3. GitHub Action – auto-deploy docs to Netlify  
+
+`.github/workflows/deploy-netlify.yml`
+
+```yaml
+name: Deploy Docs to Netlify
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**'
+      - 'README.md'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm i -g netlify-cli
+      - name: Deploy
+        run: netlify deploy --prod --dir=site --message "docs update ${{ github.sha }}"
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+```
+
+Add the two secrets in **Settings → Secrets and variables → Actions**.
