@@ -67,4 +67,3 @@ contact_links:
     about: Please report security issues here.
 ```
 
-Reply **“3”** after you push these three files.
