@@ -33,6 +33,7 @@
 | App shell | Netlify — https://cortex-platforms.netlify.app |
 | Paystack webhook code | Ready; secret in env only |
 | Member dashboard | /member-dashboard.html |
+| X ↔ Shopify Activity Tracker | Design ready — [docs/operations/X_SHOPIFY_ACTIVITY_TRACKER.md](./docs/operations/X_SHOPIFY_ACTIVITY_TRACKER.md) |
 
 ---
 
