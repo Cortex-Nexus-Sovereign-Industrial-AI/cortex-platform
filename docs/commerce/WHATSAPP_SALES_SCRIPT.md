@@ -1,6 +1,11 @@
-# WhatsApp sales scripts — mid-ticket
+# WhatsApp Sales Scripts — 30-Day AI Content System
+**Brand:** Cortex Intelligence Nexus  
+**Price:** ₦22,000  
+**Updated:** 2026-08-16
 
-Replace `[PASTE PAYSTACK LINK]` with your real Paystack URL after you create the product.
+Replace every instance of `[PASTE PAYSTACK LINK]` with your real Paystack payment link after you create it in the Paystack Dashboard.
+
+---
 
 ## On reply SYSTEM
 
@@ -24,6 +29,8 @@ If that works for you, I’ll send the Paystack link.
 Reply YES and I’ll send it.
 ```
 
+---
+
 ## On YES
 
 ```
@@ -42,6 +49,8 @@ After payment, send me:
 Once I have that, your 5-day timer starts.
 ```
 
+---
+
 ## Hesitation
 
 ```
@@ -58,6 +67,8 @@ I only take a few at a time so delivery stays on time.
 If you want in, reply YES and I’ll send payment.
 ```
 
+---
+
 ## Discount ask
 
 ```
@@ -71,6 +82,8 @@ What I can do:
 If ₦22k is outside budget now, use the 7-day pack fully first, then upgrade when you’re ready.
 ```
 
+---
+
 ## Results ask
 
 ```
@@ -83,7 +96,9 @@ If you want assets + structure, this fits.
 If you need guaranteed leads or sales, this is not the offer.
 ```
 
-## After payment
+---
+
+## After payment (confirmation)
 
 ```
 Payment received — thank you.
@@ -99,6 +114,8 @@ Samples/link (optional):
 As soon as this is in, I’ll start.
 Delivery target: within 5 days.
 ```
+
+---
 
 ## On delivery
 
@@ -116,6 +133,8 @@ Included:
 You have 7 days for one revision pass — reply with anything to adjust.
 ```
 
+---
+
 ## Follow-up (Day 2, unpaid YES only once)
 
 ```
@@ -126,3 +145,10 @@ Link is here if yes:
 
 If timing is bad, no stress. The 7-day pack still works until you’re ready.
 ```
+
+---
+
+## Internal note
+- Max concurrent active mid-ticket orders: 5 (adjust as needed).
+- Always confirm payment via Paystack dashboard or webhook log before starting work.
+- Keep delivery promise strict: 5 days from brief receipt.
