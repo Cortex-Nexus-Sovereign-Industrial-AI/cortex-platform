@@ -1,100 +1,66 @@
-# HANDOFF — CINIS NEXUS Orchestration Session
-**Date:** 2026-08-06  
+# HANDOFF — Commerce & Payment Reception Build
+**Date:** 2026-08-16  
 **Repo:** https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform  
-**Founder:** Michael Ujuku Morim (mikecomplexai-7)
-
-This document closes the structural orchestration. Everything below is in the repository and tracked.
-
----
-
-## What was built / aligned
-
-### Command & tracking
-- `COMMAND_CENTER.md` — single entry point
-- `STATUS.md` — live health board
-- `NEXT_ACTIONS.md` — queue
-- `docs/status/ACTIVITY_LOG.md` — session log
-- `ACTIVITY_BADGE.md` — public activity signal
-- `PUBLIC_SURFACES.md` — all public URLs
-- `docs/product/ROOT_INVENTORY.md` — canonical vs experimental files
-
-### Security
-- Tracked `.env` / `.env.local` / `backend/.env.production` / `.bash_history` removed from Git
-- Root + `backend/.env.example` sanitized (placeholders only)
-- `.gitignore` strengthened earlier in session
-
-### Backend (v2.2)
-- `backend/server.js` — JWT register/login, `/api/auth/me`, protected orders/stats
-- `access_grants` table; grants written on Paystack `charge.success`
-- `backend/routes/auth.js` — OAuth PKCE module
-- `backend/middleware/requireAuth.js`
-- `backend/package.json` v2.2.0
-
-### Frontend
-- `index.html` — public CTAs (Command Center, Status, Shopify, Substack, Member Dashboard)
-- `member-dashboard.html` — login/register + profile + grants via API
-
-### Commerce
-- Store domain: `cortex-intelligence-nexus.myshopify.com`
-- `scripts/seed-shopify-products.js` — 4 products ready to push
-- `docs/operations/SHOPIFY_INTEGRATION.md`
-
-### Deploy
-- `DEPLOY_CHECKLIST.md` — local / Netlify / Render
-- `netlify.toml` — functions + CSP for Paystack/Shopify
-- `render.yaml` — Node API service (`backend/`)
+**Founder:** Michael Ujuku Morim (mikecomplexai-7)  
+**Brand locked:** Cortex Intelligence Nexus
 
 ---
 
-## What only you can do next
+## What was completed in this session
 
-1. **Secrets** (never commit):
-   - `JWT_SECRET`
-   - `PAYSTACK_SECRET_KEY` / `PAYSTACK_PUBLIC_KEY`
-   - `SHOPIFY_ADMIN_TOKEN`
+### Identity & Merchant Profile
+- Single unified brand name confirmed and documented: **Cortex Intelligence Nexus**
+- Matched across Google Business, Paystack, and Shopify store (`cortex-intelligence-nexus.myshopify.com`)
+- Full merchant profile written: `MERCHANT_PROFILE.md`
 
-2. **Run API**
-   ```bash
-   cd backend && npm install && cp .env.example .env
-   # edit .env
-   npm start
-   ```
-   Or deploy Render blueprint from `render.yaml`.
+### Commerce readiness
+- WhatsApp sales scripts updated and ready (`docs/commerce/WHATSAPP_SALES_SCRIPT.md`)
+- New internal SOP: Payment → Brief → Delivery (`docs/commerce/PAYMENT_TO_DELIVERY_SOP.md`)
+- Shopify seed script expanded to include the flagship ₦22,000 “30-Day AI Content System” plus existing access tiers
+- STATUS.md refreshed with current payment-ready state
 
-3. **Seed Shopify** (optional)
-   ```bash
-   export SHOPIFY_ADMIN_TOKEN=shpat_...
-   node scripts/seed-shopify-products.js
-   ```
-
-4. **Netlify** — set same env vars; confirm site is linked to this repo.
-
-5. **Paystack** — webhook URL → Render `/api/webhooks/paystack` or Netlify function.
-
-Full steps: [DEPLOY_CHECKLIST.md](./DEPLOY_CHECKLIST.md)
+### Infrastructure already present (verified)
+- Paystack webhook function path documented and ready
+- Netlify deploy path + env var requirements clear
+- Member dashboard and public shell live
+- Previous seed products + Shopify domain already coded
 
 ---
 
-## Canonical surfaces
+## What only the Founder can do (credentials required)
 
-| What | Where |
-|------|--------|
-| This handoff | `HANDOFF.md` |
-| Command entry | `COMMAND_CENTER.md` |
-| Status | `STATUS.md` |
-| Member UI | `member-dashboard.html` |
-| Primary shell | `index.html` |
-| API | `backend/server.js` |
+1. **Create the Paystack payment link** for ₦22,000 under the exact business name Cortex Intelligence Nexus.
+2. Paste that link into the WhatsApp scripts.
+3. Place `PAYSTACK_SECRET_KEY` (and optionally public key) into Netlify environment variables → redeploy.
+4. Save the webhook URL in Paystack Dashboard (both Test and Live modes).
+5. Optionally run the Shopify seed with `SHOPIFY_ADMIN_TOKEN`.
+6. Enforce the concurrent order cap (recommended 5) and perform fulfillment.
 
----
-
-## Optional later (Founder decision)
-
-- Move large root PDFs into `docs/archive/`
-- Delete or archive duplicate `funnel-lane*` / old `index-*` HTML
-- Point about.me / social posts at STATUS + live deploy URLs
+No further code or documentation changes are required for first payment reception.
 
 ---
 
-**Structural heavy lifting is complete.**  
-Further progress requires credentials, a running API host, and your product/content decisions.
+## Canonical files produced / updated this session
+
+| File | Purpose |
+|------|---------|
+| `MERCHANT_PROFILE.md` | Single source of truth for brand + payment channels |
+| `STATUS.md` | Live health + owner next actions |
+| `HANDOFF.md` | This session close-out |
+| `docs/commerce/WHATSAPP_SALES_SCRIPT.md` | Ready-to-use scripts |
+| `docs/commerce/PAYMENT_TO_DELIVERY_SOP.md` | Operational process |
+| `scripts/seed-shopify-products.js` | Includes mid-ticket product |
+
+---
+
+## Clean activity track
+
+- Branding consistency: complete
+- Payment infrastructure: complete (awaiting secret + live link)
+- Delivery process: documented and ready
+- Order control: cap + tracking process defined
+- Secrets policy: unchanged (env only, never in Git)
+
+**You are ready to receive payment once the Paystack link is created and the secret key is set.**
+
+Further progress on this track requires only the founder’s credentials and the live payment link.
