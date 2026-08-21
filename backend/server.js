@@ -1,5 +1,5 @@
 /* ============================================
-   CORTEX PLATFORM v2.3 — Backend API Server (idempotent webhooks)
+   CORTEX PLATFORM v2.3 — Backend API Server (durable idempotent webhooks)
    Node.js + Express + SQLite
    CINIS NEXUS INDUSTRY OGOJA
    ============================================ */
@@ -12,6 +12,11 @@ const sqlite3 = require('sqlite3').verbose();
 const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const {
+  verifyPaystackRaw,
+  claimWebhookEvent,
+  markWebhookProcessed
+} = require('./lib/webhookIdempotency');
 
 dotenv.config();
 
@@ -26,7 +31,15 @@ app.use(cors({
   origin: process.env.FRONTEND_URL || 'http://localhost:3000',
   credentials: true
 }));
-app.use(express.json());
+
+// Capture raw body for Paystack HMAC; parse JSON for all routes
+app.use(
+  express.json({
+    verify: (req, res, buf) => {
+      req.rawBody = buf ? buf.toString('utf8') : '';
+    }
+  })
+);
 app.use(express.urlencoded({ extended: true }));
 
 const dbPath = path.join(__dirname, 'data', 'cortex.db');
@@ -160,7 +173,7 @@ function initializeDatabase() {
     db.run(`CREATE UNIQUE INDEX IF NOT EXISTS idx_access_grants_tx_ref ON access_grants(transaction_reference) WHERE transaction_reference IS NOT NULL`);
     db.run(`CREATE UNIQUE INDEX IF NOT EXISTS idx_transactions_reference ON transactions(reference)`);
 
-    console.log('Database schema initialized (idempotent webhooks)');
+    console.log('Database schema initialized (durable idempotent webhooks)');
   });
 }
 
@@ -180,7 +193,7 @@ app.get('/api/health', (req, res) => {
   res.json({
     status: 'ok',
     platform: 'Cortex Platform v2.3',
-    idempotency: true,
+    idempotency: 'durable-sqlite',
     timestamp: new Date().toISOString(),
     database: 'SQLite3',
     paystack_mode: process.env.PAYSTACK_MODE || 'LIVE'
@@ -316,25 +329,29 @@ app.get('/api/orders/:id', async (req, res) => {
   }
 });
 
-const PAYSTACK_SECRET_KEY = process.env.PAYSTACK_SECRET_KEY || 'sk_live_your_secret_key';
-
-const verifyPaystackSignature = (req, secret) => {
-  const hash = crypto
-    .createHmac('sha512', secret)
-    .update(JSON.stringify(req.body))
-    .digest('hex');
-  return hash === req.headers['x-paystack-signature'];
-};
+const PAYSTACK_SECRET_KEY = process.env.PAYSTACK_SECRET_KEY || '';
 
 app.post('/api/webhooks/paystack', async (req, res) => {
   try {
-    const isValid = verifyPaystackSignature(req, PAYSTACK_SECRET_KEY);
+    const rawBody =
+      typeof req.rawBody === 'string' && req.rawBody.length
+        ? req.rawBody
+        : JSON.stringify(req.body || {});
+    const signature = req.headers['x-paystack-signature'] || '';
+
+    if (!PAYSTACK_SECRET_KEY) {
+      console.error('[paystack-webhook] PAYSTACK_SECRET_KEY not set');
+      return res.status(500).json({ error: 'Server misconfigured' });
+    }
+
+    const isValid = verifyPaystackRaw(rawBody, signature, PAYSTACK_SECRET_KEY);
+
     await dbRun(
       `INSERT INTO webhook_logs (event_type, data, signature, verified) VALUES (?, ?, ?, ?)`,
       [
-        req.body.event || 'unknown',
-        JSON.stringify(req.body),
-        req.headers['x-paystack-signature'] || '',
+        (req.body && req.body.event) || 'unknown',
+        rawBody,
+        signature,
         isValid ? 1 : 0
       ]
     );
@@ -344,44 +361,31 @@ app.post('/api/webhooks/paystack', async (req, res) => {
       return res.status(401).json({ error: 'Invalid signature' });
     }
 
-    const { event, data } = req.body;
-    const reference = data?.reference || null;
+    const event = (req.body && req.body.event) || 'unknown';
+    const data = (req.body && req.body.data) || {};
+    const reference = data.reference || null;
 
-    if (reference) {
-      const already = await dbGet(
-        'SELECT id, status, created_at FROM processed_webhooks WHERE event_type = ? AND reference = ?',
-        [event || 'unknown', reference]
-      );
-      if (already) {
-        console.log(`[idempotent] skip ${event} ${reference} (processed_webhooks#${already.id})`);
-        return res.status(200).json({
-          success: true,
-          idempotent: true,
-          message: 'Event already processed',
-          reference,
-          processed_at: already.created_at
-        });
+    // Atomic durable claim — first writer wins under concurrent retries
+    const claim = await claimWebhookEvent(
+      { dbRun, dbGet },
+      {
+        eventType: event,
+        reference,
+        paystackId: data.id != null ? String(data.id) : null
       }
-    }
+    );
 
-    if (event === 'charge.success' && reference) {
-      const existingTx = await dbGet(
-        "SELECT id, status FROM transactions WHERE reference = ? AND status = 'verified'",
-        [reference]
+    if (!claim.claimed) {
+      console.log(
+        `[idempotent] skip ${event} ${reference} (processed_webhooks#${claim.existing && claim.existing.id})`
       );
-      if (existingTx) {
-        await dbRun(
-          `INSERT OR IGNORE INTO processed_webhooks (event_type, reference, paystack_id, status) VALUES (?, ?, ?, 'processed')`,
-          [event, reference, data?.id != null ? String(data.id) : null]
-        );
-        console.log(`[idempotent] skip charge.success ${reference} (tx#${existingTx.id})`);
-        return res.status(200).json({
-          success: true,
-          idempotent: true,
-          message: 'Payment already verified',
-          reference
-        });
-      }
+      return res.status(200).json({
+        success: true,
+        idempotent: true,
+        message: 'Event already processed',
+        reference,
+        processed_at: claim.existing && claim.existing.created_at
+      });
     }
 
     if (event === 'charge.success') {
@@ -438,26 +442,17 @@ app.post('/api/webhooks/paystack', async (req, res) => {
         console.log(`[idempotent] transaction insert race for ${reference}`);
       }
 
-      const existingGrant = await dbGet(
-        'SELECT id FROM access_grants WHERE transaction_reference = ?',
-        [reference]
-      );
-      if (!existingGrant) {
-        try {
-          await dbRun(
-            `INSERT INTO access_grants (email, product, order_ref, transaction_reference, active)
-             VALUES (?, ?, ?, ?, 1)`,
-            [email, product, order.order_ref || null, reference]
-          );
-        } catch (grantErr) {
-          console.log(`[idempotent] access_grant insert race for ${reference}`);
-        }
+      try {
+        await dbRun(
+          `INSERT OR IGNORE INTO access_grants (email, product, order_ref, transaction_reference, active)
+           VALUES (?, ?, ?, ?, 1)`,
+          [email, product, order.order_ref || null, reference]
+        );
+      } catch (grantErr) {
+        console.log(`[idempotent] access_grant insert race for ${reference}`);
       }
 
-      await dbRun(
-        `INSERT OR IGNORE INTO processed_webhooks (event_type, reference, paystack_id, status) VALUES (?, ?, ?, 'processed')`,
-        [event, reference, data?.id != null ? String(data.id) : null]
-      );
+      await markWebhookProcessed({ dbRun }, { eventType: event, reference });
 
       console.log(`Payment verified + access granted: ${reference} (₦${amount_ngn}) → ${email}`);
       return res.status(200).json({
@@ -468,14 +463,8 @@ app.post('/api/webhooks/paystack', async (req, res) => {
       });
     }
 
-    if (reference) {
-      await dbRun(
-        `INSERT OR IGNORE INTO processed_webhooks (event_type, reference, paystack_id, status) VALUES (?, ?, ?, 'processed')`,
-        [event || 'unknown', reference, data?.id != null ? String(data.id) : null]
-      );
-    }
-
-    res.status(200).json({ success: true, event: event || 'unknown' });
+    await markWebhookProcessed({ dbRun }, { eventType: event, reference });
+    res.status(200).json({ success: true, event });
   } catch (err) {
     console.error('Webhook error:', err);
     res.status(500).json({ error: 'Webhook processing failed' });
@@ -542,7 +531,7 @@ app.use((req, res) => {
 app.listen(PORT, () => {
   console.log(`
   ═══════════════════════════════════════════════════════════
-  CORTEX PLATFORM v2.3 — Backend API (idempotent webhooks)
+  CORTEX PLATFORM v2.3 — Backend API (durable idempotent webhooks)
   ═══════════════════════════════════════════════════════════
   Port: ${PORT}
   Env: ${process.env.NODE_ENV || 'development'}
