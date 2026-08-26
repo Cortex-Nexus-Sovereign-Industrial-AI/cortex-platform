@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MikeComplex AI | Sovereign Official Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cortex: {
+                            50: '#f0f4ff',
+                            100: '#e0eaff',
+                            500: '#3b82f6',
+                            800: '#1e3a8a',
+                            900: '#0f172a',
+                            950: '#020617',
+                        },
+                        gold: {
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        },
+                        cyber: {
+                            green: '#10b981',
+                            neon: '#06b6d4',
+                            purple: '#8b5cf6',
+                        }
+                    },
+                    fontFamily: {
+                        mono: ['JetBrains Mono', 'Fira Code', 'Monaco', 'monospace'],
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #020617;
+            color: #f8fafc;
+        }
+        .glow-border { box-shadow: 0 0 15px rgba(59, 130, 246, 0.15); }
+        .glow-gold { box-shadow: 0 0 20px rgba(245, 158, 11, 0.2); }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #0f172a; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #475569; }
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.85; transform: scale(0.99); }
+        }
+        .pulse-effect { animation: pulse-slow 4s infinite ease-in-out; }
+        .tab-view { display: none; }
+        .tab-view.active { display: block; }
+        .tab-btn.active { background: #2563eb !important; color: white !important; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col bg-slate-950 text-slate-100 custom-scrollbar selection:bg-blue-600 selection:text-white">
+
+    <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <a href="index.html" class="h-10 w-10 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-amber-500 flex items-center justify-center font-black text-xl text-white shadow-lg glow-border">
+                    MC
+                </a>
+                <div>
+                    <div class="flex items-center space-x-2">
+                        <span class="font-black tracking-wider text-lg text-white">MIKECOMPLEX <span class="text-blue-500">AI</span></span>
+                        <span class="bg-amber-500/10 text-amber-400 border border-amber-500/30 text-xs px-2 py-0.5 rounded-full font-mono font-medium">SOVEREIGN V2.0</span>
+                    </div>
+                    <p class="text-xs text-slate-400 font-mono flex items-center gap-1.5">
+                        <span class="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-ping"></span>
+                        <span>cortex-platforms.netlify.app</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="hidden sm:flex items-center gap-3 bg-slate-900 border border-purple-500/30 px-3 py-1.5 rounded-xl">
+                <i class="fa-solid fa-wand-magic-sparkles text-purple-400 animate-pulse"></i>
+                <div>
+                    <p class="text-[10px] font-mono text-purple-300 font-bold uppercase">Gemini Neural Engine</p>
+                    <p class="text-xs text-slate-300 font-mono">LLM • Vision • TTS Active</p>
+                </div>
+            </div>
+
+            <div class="hidden md:flex items-center space-x-6">
+                <div class="text-right">
+                    <p class="text-xs text-slate-400 font-mono uppercase">Authority Node</p>
+                    <p class="text-sm font-semibold text-amber-400 flex items-center justify-end gap-1.5">
+                        <i class="fa-solid fa-crown text-xs"></i> Lord King Michael Ujuku Morim
+                    </p>
+                </div>
+                <div class="h-8 w-px bg-slate-800"></div>
+                <div class="flex items-center space-x-2">
+                    <span class="bg-slate-800 border border-slate-700 text-slate-300 font-mono text-xs px-3 py-1.5 rounded-lg flex items-center gap-2">
+                        <i class="fa-solid fa-fingerprint text-blue-400"></i>
+                        <span>@michaelmorim2</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+
+        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-4 flex items-center justify-between hover:border-slate-700 transition">
+                <div>
+                    <p class="text-xs font-mono text-slate-400 uppercase">Core Status</p>
+                    <p class="text-xl font-bold text-emerald-400 mt-1 flex items-center gap-2">
+                        <span>ONLINE</span>
+                        <span class="text-xs font-normal text-slate-400 font-mono">(0.08ms)</span>
+                    </p>
+                </div>
+                <div class="h-12 w-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 text-lg">
+                    <i class="fa-solid fa-server"></i>
+                </div>
+            </div>
+            <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-4 flex items-center justify-between hover:border-slate-700 transition">
+                <div>
+                    <p class="text-xs font-mono text-slate-400 uppercase">Social Buffer Queue</p>
+                    <p id="hud-queue-count" class="text-xl font-bold text-blue-400 mt-1">0 Assets <span class="text-xs font-normal text-slate-400">Ready</span></p>
+                </div>
+                <div class="h-12 w-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 text-lg">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </div>
+            </div>
+            <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-4 flex items-center justify-between hover:border-slate-700 transition">
+                <div>
+                    <p class="text-xs font-mono text-slate-400 uppercase">Gemini LLM Mesh</p>
+                    <p class="text-xl font-bold text-purple-400 mt-1">Flash <span class="text-xs font-normal text-slate-400">Ready</span></p>
+                </div>
+                <div class="h-12 w-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 text-lg">
+                    <i class="fa-solid fa-brain"></i>
+                </div>
+            </div>
+            <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-4 flex items-center justify-between hover:border-slate-700 transition">
+                <div>
+                    <p class="text-xs font-mono text-slate-400 uppercase">Sound Borough Sync</p>
+                    <p class="text-xl font-bold text-amber-400 mt-1">60 / 120 BPM <span class="text-xs font-normal text-slate-400">Locked</span></p>
+                </div>
+                <div class="h-12 w-12 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 text-lg">
+                    <i class="fa-solid fa-wave-square"></i>
+                </div>
+            </div>
+        </section>
+
+        <div class="border-b border-slate-800 flex space-x-2 overflow-x-auto custom-scrollbar pb-1">
+            <button onclick="switchTab('buffer')" id="tab-buffer" class="tab-btn active px-4 py-2.5 rounded-xl font-medium text-sm flex items-center gap-2 bg-blue-600 text-white transition">
+                <i class="fa-solid fa-arrows-split-up-and-left"></i> Sovereign Buffer & Gemini Studio
+            </button>
+            <button onclick="switchTab('sound')" id="tab-sound" class="tab-btn px-4 py-2.5 rounded-xl font-medium text-sm flex items-center gap-2 bg-slate-900 text-slate-400 hover:text-white transition">
+                <i class="fa-solid fa-record-vinyl"></i> Sound Borough Audio & Voice
+            </button>
+            <button onclick="switchTab('cortex')" id="tab-cortex" class="tab-btn px-4 py-2.5 rounded-xl font-medium text-sm flex items-center gap-2 bg-slate-900 text-slate-400 hover:text-white transition">
+                <i class="fa-solid fa-network-wired"></i> Cortex Integration Matrix
+            </button>
+            <button onclick="switchTab('terminal')" id="tab-terminal" class="tab-btn px-4 py-2.5 rounded-xl font-medium text-sm flex items-center gap-2 bg-slate-900 text-slate-400 hover:text-white transition">
+                <i class="fa-solid fa-terminal"></i> Neural AI Terminal
+            </button>
+        </div>
+
+        <section id="view-buffer" class="tab-view active space-y-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 space-y-4 shadow-xl">
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                        <div class="flex items-center gap-2.5">
+                            <div class="h-8 w-8 rounded-lg bg-blue-500/10 border border-blue-500/30 text-blue-400 flex items-center justify-center">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-bold text-white">Gemini Multi-Platform AI Dispatcher</h3>
+                                <p class="text-[11px] text-slate-400">Generate formatted posts. Wire your Gemini API key for live generation.</p>
+                            </div>
+                        </div>
+                        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20">gemini-flash</span>
+                    </div>
+                    <div class="space-y-3">
+                        <div>
+                            <label class="block text-xs font-mono text-slate-300 mb-1">Sovereign Directive / Content Idea:</label>
+                            <textarea id="ai-dispatch-prompt" rows="3" placeholder="e.g. Announce Sound Borough V2.0 + Cortex NXD Dust integration..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-blue-500 transition custom-scrollbar"></textarea>
+                        </div>
+                        <div class="flex flex-wrap items-center justify-between gap-3 bg-slate-950/60 p-2.5 rounded-xl border border-slate-800">
+                            <label class="flex items-center gap-2 text-xs text-slate-300 cursor-pointer">
+                                <input type="checkbox" id="ai-dispatch-grounding" class="rounded bg-slate-900 border-slate-700 text-blue-600 focus:ring-0">
+                                <i class="fa-solid fa-globe text-emerald-400 text-xs"></i>
+                                <span>Enable Search Grounding</span>
+                            </label>
+                            <select id="ai-dispatch-tone" class="bg-slate-900 text-xs text-slate-300 border border-slate-800 rounded-lg px-2.5 py-1 focus:outline-none">
+                                <option value="sovereign">Tone: Sovereign & Strategic</option>
+                                <option value="tech">Tone: Tech & Developer</option>
+                                <option value="exciting">Tone: Bold & Announcements</option>
+                            </select>
+                        </div>
+                        <button onclick="generateAIDispatch()" id="btn-generate-dispatch" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold text-xs flex items-center justify-center gap-2 transition shadow-lg">
+                            <i class="fa-solid fa-bolt"></i> Generate Multi-Platform Drafts
+                        </button>
+                    </div>
+                    <div id="ai-dispatch-result" class="hidden space-y-3 pt-2">
+                        <div class="p-3 bg-slate-950 border border-slate-800 rounded-xl space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[10px] font-mono text-blue-400 font-bold uppercase"><i class="fa-brands fa-x-twitter"></i> X / Twitter Draft</span>
+                                <button onclick="copyDraft('x-draft-text')" class="text-[10px] text-slate-400 hover:text-white"><i class="fa-solid fa-copy"></i> Copy</button>
+                            </div>
+                            <p id="x-draft-text" class="text-xs text-slate-300 leading-relaxed font-sans"></p>
+                        </div>
+                        <div class="p-3 bg-slate-950 border border-slate-800 rounded-xl space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[10px] font-mono text-indigo-400 font-bold uppercase"><i class="fa-brands fa-linkedin"></i> LinkedIn Draft</span>
+                                <button onclick="copyDraft('linkedin-draft-text')" class="text-[10px] text-slate-400 hover:text-white"><i class="fa-solid fa-copy"></i> Copy</button>
+                            </div>
+                            <p id="linkedin-draft-text" class="text-xs text-slate-300 leading-relaxed font-sans"></p>
+                        </div>
+                        <button onclick="pushAIToQueue()" class="w-full py-2 bg-emerald-600/20 hover:bg-emerald-600/30 border border-emerald-500/40 text-emerald-300 text-xs font-mono rounded-xl transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-plus"></i> Add All AI Drafts to Sovereign Queue
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 space-y-4 shadow-xl flex flex-col">
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                        <div class="flex items-center gap-2.5">
+                            <div class="h-8 w-8 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-400 flex items-center justify-center">
+                                <i class="fa-solid fa-image"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-bold text-white">Gemini Visual Campaign Studio</h3>
+                                <p class="text-[11px] text-slate-400">Art & banners. Connect Gemini image model for live assets.</p>
+                            </div>
+                        </div>
+                        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">flash-image</span>
+                    </div>
+                    <div class="space-y-3 flex-1">
+                        <div>
+                            <label class="block text-xs font-mono text-slate-300 mb-1">Visual Prompt Description:</label>
+                            <textarea id="ai-image-prompt" rows="2" placeholder="e.g. Cyberpunk gold sovereign command portal, NXD Dust particles, Ogoja emblem..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-amber-500 transition custom-scrollbar"></textarea>
+                        </div>
+                        <div class="flex items-center justify-between gap-2">
+                            <select id="ai-image-aspect" class="bg-slate-950 text-xs text-slate-300 border border-slate-800 rounded-lg px-2.5 py-1.5 focus:outline-none">
+                                <option value="16:9">Aspect: 16:9 (Banner / X)</option>
+                                <option value="1:1">Aspect: 1:1 (Square / Feed)</option>
+                                <option value="9:16">Aspect: 9:16 (Story / Reel)</option>
+                            </select>
+                            <button onclick="generateAIImage()" id="btn-generate-image" class="px-4 py-1.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold text-xs flex items-center gap-2 transition shadow-lg">
+                                <i class="fa-solid fa-paint-brush"></i> Generate Art Asset
+                            </button>
+                        </div>
+                        <div id="ai-image-container" class="h-44 bg-slate-950 border border-slate-800 rounded-xl flex items-center justify-center relative overflow-hidden">
+                            <div id="ai-image-placeholder" class="text-center p-4">
+                                <i class="fa-regular fa-image text-3xl text-slate-700 mb-2"></i>
+                                <p class="text-xs text-slate-500">Visual campaign preview will render here.</p>
+                            </div>
+                            <img id="ai-image-output" class="hidden w-full h-full object-cover rounded-xl" alt="Generated Art">
+                            <div id="ai-image-loading" class="hidden text-center">
+                                <i class="fa-solid fa-spinner fa-spin text-2xl text-amber-400 mb-2"></i>
+                                <p class="text-xs text-slate-400">Synthesizing visual asset...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 shadow-xl">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
+                    <h3 class="text-sm font-bold text-white flex items-center gap-2"><i class="fa-solid fa-layer-group text-blue-400"></i> Sovereign Dispatch Queue</h3>
+                    <span id="queue-badge" class="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20">0 items</span>
+                </div>
+                <div id="sovereign-queue" class="space-y-2 min-h-[80px]">
+                    <p class="text-xs text-slate-500 text-center py-6">Queue empty — generate drafts above to populate.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-sound" class="tab-view space-y-6">
+            <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 shadow-xl">
+                <div class="flex items-center gap-3 border-b border-slate-800 pb-4 mb-4">
+                    <div class="h-10 w-10 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400 flex items-center justify-center">
+                        <i class="fa-solid fa-record-vinyl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-white">Sound Borough — Audio & Voice Synthesis</h3>
+                        <p class="text-xs text-slate-400">Frequency engine · TTS · Campaign audio beds</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div class="bg-slate-950 border border-slate-800 rounded-xl p-4">
+                        <p class="text-xs font-mono text-slate-400 uppercase mb-1">BPM Lock</p>
+                        <p class="text-2xl font-bold text-amber-400">60 / 120</p>
+                    </div>
+                    <div class="bg-slate-950 border border-slate-800 rounded-xl p-4">
+                        <p class="text-xs font-mono text-slate-400 uppercase mb-1">Voice Engine</p>
+                        <p class="text-2xl font-bold text-emerald-400">TTS Ready</p>
+                    </div>
+                    <div class="bg-slate-950 border border-slate-800 rounded-xl p-4">
+                        <p class="text-xs font-mono text-slate-400 uppercase mb-1">Stems</p>
+                        <p class="text-2xl font-bold text-blue-400">0 Loaded</p>
+                    </div>
+                </div>
+                <div class="space-y-3">
+                    <label class="block text-xs font-mono text-slate-300">Voice synthesis prompt</label>
+                    <textarea id="tts-prompt" rows="2" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-slate-200 focus:outline-none focus:border-amber-500" placeholder="Script for sovereign voiceover..."></textarea>
+                    <button onclick="alert('Wire Gemini TTS / external voice API key for live synthesis. UI shell is ready.')" class="px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold text-xs">
+                        <i class="fa-solid fa-microphone"></i> Synthesize Voice Bed
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-cortex" class="tab-view space-y-6">
+            <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 shadow-xl">
+                <div class="flex items-center gap-3 border-b border-slate-800 pb-4 mb-4">
+                    <div class="h-10 w-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center">
+                        <i class="fa-solid fa-network-wired"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-white">Cortex Integration Matrix</h3>
+                        <p class="text-xs text-slate-400">Links to live Cortex AI Nexus · NXD Dust · Ogoja surfaces</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <a href="index.html" class="block bg-slate-950 border border-slate-800 hover:border-cyan-500/50 rounded-xl p-4 transition">
+                        <p class="font-bold text-white text-sm">Cortex AI Nexus Dashboard</p>
+                        <p class="text-xs text-slate-400 mt-1">Main operations HUD · NXD Dust · Payments · Docs</p>
+                    </a>
+                    <a href="index.html" class="block bg-slate-950 border border-slate-800 hover:border-amber-500/50 rounded-xl p-4 transition">
+                        <p class="font-bold text-amber-400 text-sm">NXD Dust Liquidity Rails</p>
+                        <p class="text-xs text-slate-400 mt-1">Fractional micro-settlement · Velocity cushioning</p>
+                    </a>
+                    <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform" target="_blank" class="block bg-slate-950 border border-slate-800 hover:border-blue-500/50 rounded-xl p-4 transition">
+                        <p class="font-bold text-white text-sm">GitHub Command Repo</p>
+                        <p class="text-xs text-slate-400 mt-1">Source of truth · Specs · CI</p>
+                    </a>
+                    <a href="https://cortex-intelligence-nexus.myshopify.com" target="_blank" class="block bg-slate-950 border border-slate-800 hover:border-emerald-500/50 rounded-xl p-4 transition">
+                        <p class="font-bold text-white text-sm">Shopify Commerce</p>
+                        <p class="text-xs text-slate-400 mt-1">cortex-intelligence-nexus.myshopify.com</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-terminal" class="tab-view space-y-6">
+            <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 shadow-xl">
+                <div class="flex items-center gap-3 border-b border-slate-800 pb-3 mb-4">
+                    <div class="h-8 w-8 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center">
+                        <i class="fa-solid fa-terminal"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-bold text-white">Neural AI Terminal</h3>
+                        <p class="text-[11px] text-slate-400">Local command log · Gemini prompts will route here when API is bound</p>
+                    </div>
+                </div>
+                <div id="terminal-log" class="font-mono text-xs bg-slate-950 border border-slate-800 rounded-xl p-4 h-64 overflow-y-auto custom-scrollbar space-y-1">
+                    <p class="text-emerald-400">[SYSTEM] MikeComplex Sovereign Hub online.</p>
+                    <p class="text-slate-400">[SYSTEM] Gemini mesh: awaiting API key binding (client-side or Netlify function).</p>
+                    <p class="text-slate-400">[SYSTEM] Tabs: Buffer · Sound Borough · Cortex Matrix · Terminal.</p>
+                    <p class="text-amber-400">[READY] Issue directives from Buffer Studio or type below.</p>
+                </div>
+                <div class="mt-3 flex gap-2">
+                    <input id="terminal-input" type="text" placeholder="sovereign command..." class="flex-1 bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-emerald-500 font-mono" onkeydown="if(event.key==='Enter')runTerminal()">
+                    <button onclick="runTerminal()" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs">Run</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-slate-800 py-4 text-center text-xs text-slate-500 font-mono">
+        © 2026 CINIS NEXUS · MikeComplex AI Sovereign Hub · <a href="index.html" class="text-blue-400 hover:underline">Cortex Dashboard</a> · <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform" class="text-blue-400 hover:underline">GitHub</a>
+    </footer>
+
+<script>
+let queue = JSON.parse(localStorage.getItem('mc_sovereign_queue') || '[]');
+
+function switchTab(id) {
+  document.querySelectorAll('.tab-view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    b.classList.remove('active', 'bg-blue-600', 'text-white');
+    b.classList.add('bg-slate-900', 'text-slate-400');
+  });
+  document.getElementById('view-' + id).classList.add('active');
+  const btn = document.getElementById('tab-' + id);
+  btn.classList.add('active', 'bg-blue-600', 'text-white');
+  btn.classList.remove('bg-slate-900', 'text-slate-400');
+}
+
+function generateAIDispatch() {
+  const prompt = document.getElementById('ai-dispatch-prompt').value.trim();
+  if (!prompt) { alert('Enter a content directive first.'); return; }
+  const tone = document.getElementById('ai-dispatch-tone').value;
+  const xText = '[' + tone.toUpperCase() + '] ' + prompt.slice(0, 180) + (prompt.length > 180 ? '…' : '') + ' #MikeComplexAI #CortexNexus #NXDDust';
+  const liText = 'Sovereign update from MikeComplex AI / Cortex platforms.\n\n' + prompt + '\n\n— Authority: Lord King Michael Ujuku Morim · CINIS NEXUS OGOJA';
+  document.getElementById('x-draft-text').textContent = xText;
+  document.getElementById('linkedin-draft-text').textContent = liText;
+  document.getElementById('ai-dispatch-result').classList.remove('hidden');
+  logTerm('Generated dispatch drafts (stub). Bind Gemini for live LLM.');
+}
+
+function generateAIImage() {
+  const prompt = document.getElementById('ai-image-prompt').value.trim();
+  if (!prompt) { alert('Enter a visual prompt first.'); return; }
+  document.getElementById('ai-image-placeholder').classList.add('hidden');
+  document.getElementById('ai-image-loading').classList.remove('hidden');
+  document.getElementById('ai-image-output').classList.add('hidden');
+  setTimeout(() => {
+    document.getElementById('ai-image-loading').classList.add('hidden');
+    document.getElementById('ai-image-placeholder').classList.remove('hidden');
+    document.getElementById('ai-image-placeholder').innerHTML = '<p class="text-xs text-amber-400 px-4 text-center">Image generation requires Gemini API key binding. UI shell ready. Prompt stored: ' + prompt.slice(0, 60) + '…</p>';
+    logTerm('Image request queued (stub).');
+  }, 1200);
+}
+
+function copyDraft(id) {
+  const t = document.getElementById(id).textContent;
+  navigator.clipboard.writeText(t).then(() => logTerm('Copied draft to clipboard.'));
+}
+
+function pushAIToQueue() {
+  const x = document.getElementById('x-draft-text').textContent;
+  const li = document.getElementById('linkedin-draft-text').textContent;
+  if (!x && !li) return;
+  if (x) queue.push({ platform: 'X', text: x, ts: Date.now() });
+  if (li) queue.push({ platform: 'LinkedIn', text: li, ts: Date.now() });
+  localStorage.setItem('mc_sovereign_queue', JSON.stringify(queue));
+  renderQueue();
+  logTerm('Drafts added to Sovereign Queue.');
+}
+
+function renderQueue() {
+  const el = document.getElementById('sovereign-queue');
+  const badge = document.getElementById('queue-badge');
+  const hud = document.getElementById('hud-queue-count');
+  badge.textContent = queue.length + ' items';
+  hud.innerHTML = queue.length + ' Assets <span class="text-xs font-normal text-slate-400">Ready</span>';
+  if (!queue.length) {
+    el.innerHTML = '<p class="text-xs text-slate-500 text-center py-6">Queue empty — generate drafts above to populate.</p>';
+    return;
+  }
+  el.innerHTML = queue.map((q, i) => `
+    <div class="flex items-start justify-between gap-3 bg-slate-950 border border-slate-800 rounded-xl p-3">
+      <div>
+        <span class="text-[10px] font-mono text-blue-400">${q.platform}</span>
+        <p class="text-xs text-slate-300 mt-1 line-clamp-2">${q.text.slice(0, 120)}…</p>
+      </div>
+      <button onclick="queue.splice(${i},1);localStorage.setItem('mc_sovereign_queue',JSON.stringify(queue));renderQueue()" class="text-slate-500 hover:text-red-400 text-xs"><i class="fa-solid fa-trash"></i></button>
+    </div>`).join('');
+}
+
+function runTerminal() {
+  const input = document.getElementById('terminal-input');
+  const msg = input.value.trim();
+  if (!msg) return;
+  logTerm('> ' + msg, 'text-slate-200');
+  input.value = '';
+  logTerm('ACK — command logged. Bind Gemini / Cortex agents for live execution.', 'text-emerald-400');
+}
+
+function logTerm(msg, cls = 'text-slate-400') {
+  const log = document.getElementById('terminal-log');
+  if (!log) return;
+  const line = document.createElement('p');
+  line.className = cls;
+  line.textContent = '[' + new Date().toLocaleTimeString() + '] ' + msg;
+  log.appendChild(line);
+  log.scrollTop = log.scrollHeight;
+}
+
+renderQueue();
+</script>
+</body>
+</html>
