@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cortex Intelligence Nexus - Traffic & Revenue Command Center</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js for Live Telemetry Graphs -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0fdf4',
+              500: '#22c55e',
+              900: '#14532d',
+              glow: '#00ff88'
+            },
+            cyber: {
+              dark: '#030712',
+              card: '#0b0f19',
+              border: '#1f293d',
+              accent: '#38bdf8'
+            }
+          },
+          fontFamily: {
+            mono: ['JetBrains Mono', 'Courier New', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 15px rgba(34, 197, 94, 0.2); }
+      50% { box-shadow: 0 0 30px rgba(34, 197, 94, 0.5); }
+    }
+    .glow-box { animation: pulse-glow 3s infinite; }
+    .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: #030712; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 2px; }
+  </style>
+</head>
+<body class="bg-cyber-dark text-slate-200 font-sans min-h-screen flex flex-col antialiased">
+
+  <!-- TOP HEADER -->
+  <header class="border-b border-cyber-border bg-cyber-card/80 backdrop-blur sticky top-0 z-50 px-4 py-3">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <!-- Title & Branding -->
+      <div class="flex items-center gap-3">
+        <div class="p-2 bg-emerald-500/10 border border-emerald-500/30 rounded-lg text-emerald-400">
+          <i data-lucide="cpu" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <a href="index.html" class="font-bold text-lg text-white tracking-wide hover:text-emerald-400 transition">CINIS ECOSYSTEM</a>
+            <span class="px-2 py-0.5 text-xs font-mono bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-full flex items-center gap-1">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> LIVE 24/7
+            </span>
+          </div>
+          <p class="text-xs text-slate-400 font-mono">High-Frequency Automation & Monetization Engine</p>
+        </div>
+      </div>
+
+      <!-- Live Timers & Quick Stats -->
+      <div class="flex items-center gap-6 text-xs font-mono">
+        <div class="bg-slate-900/90 border border-slate-800 px-3 py-1.5 rounded-md text-right">
+          <span class="text-slate-400 block text-[10px] uppercase tracking-wider">Session Uptime</span>
+          <span id="uptimeCounter" class="text-emerald-400 font-bold text-sm">00:00:00.00</span>
+        </div>
+        <div class="bg-slate-900/90 border border-slate-800 px-3 py-1.5 rounded-md text-right">
+          <span class="text-slate-400 block text-[10px] uppercase tracking-wider">Screen Time Count</span>
+          <span id="screenTimeCounter" class="text-cyan-400 font-bold text-sm">345h 24m 12s</span>
+        </div>
+        <button id="toggleEngineBtn" onclick="toggleEngine()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-lg transition-all flex items-center gap-2 shadow-lg shadow-emerald-900/30">
+          <i data-lucide="power" class="w-4 h-4"></i>
+          <span id="engineBtnText">Engine Active</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN DASHBOARD CONTENT -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 space-y-6">
+
+    <!-- KPI SUMMARY CARDS -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      
+      <!-- Card 1: Estimated Earnings -->
+      <div class="bg-cyber-card border border-cyber-border p-5 rounded-xl glow-box relative overflow-hidden">
+        <div class="flex justify-between items-start mb-2">
+          <span class="text-xs font-mono text-slate-400 uppercase tracking-wider">Real-Time Revenue</span>
+          <div class="p-2 bg-emerald-500/10 text-emerald-400 rounded-lg"><i data-lucide="dollar-sign" class="w-5 h-5"></i></div>
+        </div>
+        <div class="text-3xl font-extrabold text-white tracking-tight font-mono" id="liveRevenue">$1,482.90</div>
+        <div class="flex items-center justify-between mt-3 text-xs">
+          <span class="text-emerald-400 font-medium flex items-center gap-1">
+            <i data-lucide="trending-up" class="w-3.5 h-3.5"></i> +$0.42 / min
+          </span>
+          <span class="text-slate-500 font-mono">Rate: $25.20/hr</span>
+        </div>
+        <div class="w-full bg-slate-800 h-1.5 rounded-full mt-3 overflow-hidden">
+          <div class="bg-emerald-500 h-full rounded-full w-3/4 animate-pulse"></div>
+        </div>
+      </div>
+
+      <!-- Card 2: Active Stream Viewers & Traffic -->
+      <div class="bg-cyber-card border border-cyber-border p-5 rounded-xl relative">
+        <div class="flex justify-between items-start mb-2">
+          <span class="text-xs font-mono text-slate-400 uppercase tracking-wider">Stream Traffic & Viewers</span>
+          <div class="p-2 bg-cyan-500/10 text-cyan-400 rounded-lg"><i data-lucide="users" class="w-5 h-5"></i></div>
+        </div>
+        <div class="text-3xl font-extrabold text-white tracking-tight font-mono" id="liveViewers">8,421</div>
+        <div class="flex items-center justify-between mt-3 text-xs">
+          <span class="text-cyan-400 font-medium flex items-center gap-1">
+            <i data-lucide="activity" class="w-3.5 h-3.5"></i> 940 req/sec
+          </span>
+          <span class="text-slate-500 font-mono">Bandwidth: 1.2 GB/s</span>
+        </div>
+      </div>
+
+      <!-- Card 3: High-Frequency Automation Status -->
+      <div class="bg-cyber-card border border-cyber-border p-5 rounded-xl relative">
+        <div class="flex justify-between items-start mb-2">
+          <span class="text-xs font-mono text-slate-400 uppercase tracking-wider">Automation Pipeline</span>
+          <div class="p-2 bg-purple-500/10 text-purple-400 rounded-lg"><i data-lucide="zap" class="w-5 h-5"></i></div>
+        </div>
+        <div class="text-3xl font-extrabold text-white tracking-tight font-mono">100.0%</div>
+        <div class="flex items-center justify-between mt-3 text-xs">
+          <span class="text-purple-400 font-medium flex items-center gap-1">
+            <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> 0 Dropped Packets
+          </span>
+          <span class="text-slate-500 font-mono">Mobile Sync: Active</span>
+        </div>
+      </div>
+
+      <!-- Card 4: Structural Service Rendering Tier -->
+      <div class="bg-cyber-card border border-cyber-border p-5 rounded-xl relative">
+        <div class="flex justify-between items-start mb-2">
+          <span class="text-xs font-mono text-slate-400 uppercase tracking-wider">GBP & Service Index</span>
+          <div class="p-2 bg-amber-500/10 text-amber-400 rounded-lg"><i data-lucide="layers" class="w-5 h-5"></i></div>
+        </div>
+        <div class="text-3xl font-extrabold text-white tracking-tight font-mono">Tier 3 Ready</div>
+        <div class="flex items-center justify-between mt-3 text-xs">
+          <span class="text-amber-400 font-medium flex items-center gap-1">
+            <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Verified Active
+          </span>
+          <span class="text-slate-500 font-mono">Cortex Nexus</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CHARTS SECTION -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <!-- Main Line Chart: Real-time Traffic & Throughput -->
+      <div class="lg:col-span-2 bg-cyber-card border border-cyber-border p-5 rounded-xl flex flex-col">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h2 class="font-bold text-white text-base">Traffic Throughput & Monetization Stream</h2>
+            <p class="text-xs text-slate-400 font-mono">Real-time incoming request volume & ad impression yields</p>
+          </div>
+          <div class="flex gap-2">
+            <button onclick="triggerTrafficBoost()" class="px-3 py-1.5 text-xs bg-cyan-600/20 hover:bg-cyan-600/40 text-cyan-300 border border-cyan-500/30 rounded-md font-mono transition">
+              + Inject Surge
+            </button>
+          </div>
+        </div>
+        <div class="flex-1 min-h-[260px] relative">
+          <canvas id="trafficChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Monetization Tier Breakdown -->
+      <div class="bg-cyber-card border border-cyber-border p-5 rounded-xl flex flex-col justify-between">
+        <div>
+          <h2 class="font-bold text-white text-base mb-1">Ecosystem Yield Allocation</h2>
+          <p class="text-xs text-slate-400 font-mono mb-4">Live monetization sources breakdown</p>
+          
+          <div class="space-y-4 text-xs">
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="text-slate-300">Structural Service Rendering</span>
+                <span class="text-emerald-400 font-mono font-bold">$680.00 (45%)</span>
+              </div>
+              <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                <div class="bg-emerald-500 h-full w-[45%]"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="text-slate-300">Live Traffic & Stream Ads</span>
+                <span class="text-cyan-400 font-mono font-bold">$425.50 (30%)</span>
+              </div>
+              <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                <div class="bg-cyan-400 h-full w-[30%]"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="text-slate-300">Autonomous API & Cloud Yield</span>
+                <span class="text-purple-400 font-mono font-bold font-mono">$255.40 (18%)</span>
+              </div>
+              <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                <div class="bg-purple-500 h-full w-[18%]"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="text-slate-300">Direct Network Subscriptions</span>
+                <span class="text-amber-400 font-mono font-bold">$122.00 (7%)</span>
+              </div>
+              <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                <div class="bg-amber-400 h-full w-[7%]"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 pt-4 border-t border-slate-800 flex items-center justify-between text-xs">
+          <span class="text-slate-400">Total Payout Status:</span>
+          <span class="px-2.5 py-1 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono rounded">Ready for Clearing</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- STREAM SIMULATOR & AUTOMATION TERMINAL LOGS -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+      <!-- Live Stream HUD & Monitor -->
+      <div class="bg-cyber-card border border-cyber-border p-5 rounded-xl flex flex-col">
+        <div class="flex items-center justify-between mb-3">
+          <div class="flex items-center gap-2">
+            <i data-lucide="video" class="w-4 h-4 text-emerald-400"></i>
+            <h3 class="font-bold text-white text-sm">24/7 Automated Stream Feed Simulator</h3>
+          </div>
+          <span class="text-[10px] font-mono bg-red-500/20 text-red-400 px-2 py-0.5 rounded border border-red-500/30">BROADCASTING</span>
+        </div>
+
+        <!-- Video Player Simulator Canvas -->
+        <div class="relative w-full aspect-video bg-slate-950 rounded-lg overflow-hidden border border-slate-800 flex items-center justify-center">
+          <!-- Live Background Pulse Graphics -->
+          <div class="absolute inset-0 bg-gradient-to-br from-emerald-950/30 via-slate-950 to-cyan-950/30 flex items-center justify-center">
+            <div class="w-48 h-48 rounded-full border border-emerald-500/20 animate-ping absolute"></div>
+            <div class="w-32 h-32 rounded-full border border-cyan-500/30 animate-pulse absolute"></div>
+            <div class="text-center z-10 space-y-2">
+              <i data-lucide="radio" class="w-10 h-10 text-emerald-400 mx-auto animate-bounce"></i>
+              <p class="font-mono text-xs text-slate-300 tracking-wider">CINIS LIVE TELEMETRY STREAM</p>
+              <p class="font-mono text-[10px] text-emerald-400" id="streamFrameCounter">FPS: 60 | Bitrate: 6500 kbps</p>
+            </div>
+          </div>
+          
+          <!-- Stream HUD Overlay -->
+          <div class="absolute bottom-2 left-2 right-2 flex justify-between items-center text-[10px] font-mono bg-slate-900/80 backdrop-blur px-3 py-1.5 rounded border border-slate-800 text-slate-300">
+            <span>DEVICE: MOBILE-AUTO-REC-01</span>
+            <span class="text-emerald-400" id="hudStatus">STATUS: RECURSIVE CAPTURE ONLINE</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-2 mt-4 text-center font-mono text-xs">
+          <button onclick="simulateAdBurst()" class="p-2 bg-slate-900 hover:bg-slate-800 border border-slate-800 rounded text-slate-300 transition">
+            🎬 Run Ad Insertion
+          </button>
+          <button onclick="clearLogs()" class="p-2 bg-slate-900 hover:bg-slate-800 border border-slate-800 rounded text-slate-300 transition">
+            🧹 Flush Console
+          </button>
+          <button onclick="exportProofOfWork()" class="p-2 bg-emerald-950 hover:bg-emerald-900 border border-emerald-800/50 rounded text-emerald-300 transition">
+            📥 Export Audit Log
+          </button>
+        </div>
+      </div>
+
+      <!-- Live High-Frequency Automation Terminal -->
+      <div class="bg-cyber-card border border-cyber-border p-5 rounded-xl flex flex-col">
+        <div class="flex items-center justify-between mb-3">
+          <div class="flex items-center gap-2">
+            <i data-lucide="terminal" class="w-4 h-4 text-cyan-400"></i>
+            <h3 class="font-bold text-white text-sm">Automated Work & Recording Activity Logs</h3>
+          </div>
+          <span class="text-[10px] font-mono text-slate-400">SYNC INTERVAL: 100ms</span>
+        </div>
+
+        <div id="terminalLog" class="flex-1 bg-slate-950 border border-slate-800 rounded-lg p-3 font-mono text-[11px] leading-relaxed text-slate-300 overflow-y-auto max-h-[220px] custom-scrollbar space-y-1">
+          <div class="text-emerald-400">[SYSTEM INIT] High-Frequency Recording Loop Activated...</div>
+          <div class="text-slate-400">[00:00:01] Device Telemetry linked: 24h cycle verified.</div>
+          <div class="text-cyan-400">[00:00:02] Structural Service Rendering pipeline verified on GBP.</div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-cyber-border py-4 px-6 text-center text-xs font-mono text-slate-500 bg-cyber-card mt-auto">
+    Cortex Intelligence Nexus (CINIS) &copy; 2026 · 
+    <a href="index.html" class="text-emerald-400 hover:underline">Dashboard</a> · 
+    <a href="sovereign-hub.html" class="text-emerald-400 hover:underline">Sovereign Hub</a> · 
+    <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform" class="text-emerald-400 hover:underline">GitHub</a>
+  </footer>
+
+  <!-- SCRIPT LOGIC -->
+  <script>
+    // Initialize Lucide Icons
+    document.addEventListener('DOMContentLoaded', () => { if (window.lucide) lucide.createIcons(); });
+    if (window.lucide) lucide.createIcons();
+
+    // 1. Live Uptime Clock
+    let startTime = Date.now();
+    let isEngineRunning = true;
+
+    function updateUptime() {
+      if (!isEngineRunning) return;
+      let diff = Date.now() - startTime;
+      let ms = Math.floor((diff % 1000) / 10);
+      let seconds = Math.floor((diff / 1000) % 60);
+      let minutes = Math.floor((diff / (1000 * 60)) % 60);
+      let hours = Math.floor((diff / (1000 * 60 * 60)));
+
+      document.getElementById('uptimeCounter').innerText = 
+        `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}.${String(ms).padStart(2, '0')}`;
+    }
+    setInterval(updateUptime, 30);
+
+    // 2. Real-Time Revenue Increment Simulator
+    let currentRevenue = 1482.90;
+    setInterval(() => {
+      if (!isEngineRunning) return;
+      currentRevenue += (Math.random() * 0.15 + 0.05);
+      document.getElementById('liveRevenue').innerText = `$${currentRevenue.toFixed(2)}`;
+    }, 2000);
+
+    // 3. Fluctuating Live Viewers
+    setInterval(() => {
+      if (!isEngineRunning) return;
+      let delta = Math.floor((Math.random() - 0.48) * 50);
+      let current = parseInt(document.getElementById('liveViewers').innerText.replace(/,/g, ''));
+      let updated = Math.max(1000, current + delta);
+      document.getElementById('liveViewers').innerText = updated.toLocaleString();
+    }, 3000);
+
+    // 4. Live Chart.js Setup
+    const ctx = document.getElementById('trafficChart').getContext('2d');
+    const initialLabels = ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00', 'NOW'];
+    const initialData = [420, 590, 780, 1100, 950, 1340, 1580];
+
+    const trafficChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: initialLabels,
+        datasets: [{
+          label: 'Active Requests / Traffic Volume',
+          data: initialData,
+          borderColor: '#22c55e',
+          backgroundColor: 'rgba(34, 197, 94, 0.1)',
+          fill: true,
+          tension: 0.4,
+          borderWidth: 2,
+          pointRadius: 3,
+          pointBackgroundColor: '#22c55e'
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
+          x: {
+            grid: { color: 'rgba(255, 255, 255, 0.05)' },
+            ticks: { color: '#64748b', font: { family: 'monospace', size: 10 } }
+          },
+          y: {
+            grid: { color: 'rgba(255, 255, 255, 0.05)' },
+            ticks: { color: '#64748b', font: { family: 'monospace', size: 10 } }
+          }
+        }
+      }
+    });
+
+    // 5. Dynamic Terminal Log Feed
+    const logMessages = [
+      "Capturing frame buffer on primary display...",
+      "Heartbeat ping sent to Google Business Profile Matrix.",
+      "Structural Service Rendering payload confirmed.",
+      "Automated stream buffer encoded @ 60fps.",
+      "Calculating session screen time & yield increment...",
+      "Syncing background application metrics to ledger.",
+      "Ad impression trigger verified (Yield: +$0.12).",
+      "Network routing throughput stable @ 1.2 GB/s."
+    ];
+
+    function appendLog(msg, colorClass = "text-slate-300") {
+      const terminal = document.getElementById('terminalLog');
+      const timeStr = new Date().toLocaleTimeString();
+      const div = document.createElement('div');
+      div.className = colorClass;
+      div.innerText = `[${timeStr}] ${msg}`;
+      terminal.appendChild(div);
+      terminal.scrollTop = terminal.scrollHeight;
+    }
+
+    setInterval(() => {
+      if (!isEngineRunning) return;
+      const randomMsg = logMessages[Math.floor(Math.random() * logMessages.length)];
+      appendLog(randomMsg);
+      
+      // Update chart live
+      const newval = Math.floor(Math.random() * 400 + 1300);
+      trafficChart.data.datasets[0].data.shift();
+      trafficChart.data.datasets[0].data.push(newval);
+      trafficChart.update();
+    }, 3500);
+
+    // User Interactive Functions
+    function toggleEngine() {
+      isEngineRunning = !isEngineRunning;
+      const btnText = document.getElementById('engineBtnText');
+      const btn = document.getElementById('toggleEngineBtn');
+      if (isEngineRunning) {
+        btnText.innerText = "Engine Active";
+        btn.className = "px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-lg transition-all flex items-center gap-2 shadow-lg shadow-emerald-900/30";
+        appendLog("Engine re-activated by user.", "text-emerald-400 font-bold");
+      } else {
+        btnText.innerText = "Engine Paused";
+        btn.className = "px-4 py-2 bg-amber-600 hover:bg-amber-500 text-white font-semibold rounded-lg transition-all flex items-center gap-2";
+        appendLog("Engine paused.", "text-amber-400 font-bold");
+      }
+    }
+
+    function triggerTrafficBoost() {
+      appendLog("CRITICAL: Manually injected traffic surge payload!", "text-cyan-400 font-bold");
+      currentRevenue += 15.50;
+      document.getElementById('liveRevenue').innerText = `$${currentRevenue.toFixed(2)}`;
+      trafficChart.data.datasets[0].data[trafficChart.data.datasets[0].data.length - 1] += 500;
+      trafficChart.update();
+    }
+
+    function simulateAdBurst() {
+      appendLog("Ad insertion burst executed. 1,200 impressions logged.", "text-purple-400");
+    }
+
+    function clearLogs() {
+      document.getElementById('terminalLog').innerHTML = '';
+      appendLog("Terminal log cleared.", "text-slate-500");
+    }
+
+    function exportProofOfWork() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify({
+        business: "Cortex Intelligence Nexus Intel Solution",
+        screenTime: document.getElementById('screenTimeCounter').innerText,
+        uptime: document.getElementById('uptimeCounter').innerText,
+        totalEarnings: document.getElementById('liveRevenue').innerText,
+        timestamp: new Date().toISOString()
+      }, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", "CINIS_Proof_Of_Work.json");
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+      appendLog("Proof of Work audit ledger exported successfully.", "text-emerald-400");
+    }
+  </script>
+</body>
+</html>
