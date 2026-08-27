@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Platform Pulse — Cortex Intelligence Nexus</title>
+  <meta name="description" content="Phase 0 platform registry for Cortex Intelligence Nexus. Documented channels and integration status — not live API metrics." />
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --card: #12181f;
+      --text: #e8eef5;
+      --muted: #9aa8b8;
+      --accent: #3b82f6;
+      --border: #1e293b;
+      --ok: #22c55e;
+      --warn: #eab308;
+      --pending: #94a3b8;
+      --manual: #38bdf8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding: 1.25rem 1rem 3rem;
+    }
+    .wrap { max-width: 960px; margin: 0 auto; }
+    header { margin-bottom: 1.5rem; }
+    h1 { font-size: 1.5rem; margin: 0 0 0.35rem; }
+    .sub { color: var(--muted); font-size: 0.95rem; margin: 0; }
+    .banner {
+      background: #1a2332;
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--warn);
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    .banner strong { color: var(--text); }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 0.85rem;
+      margin-bottom: 1.75rem;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.1rem;
+    }
+    .card h2 {
+      font-size: 1rem;
+      margin: 0 0 0.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+    .badge {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      padding: 0.2rem 0.45rem;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .badge.documented { background: #1e293b; color: var(--pending); }
+    .badge.manual { background: #0c4a6e; color: var(--manual); }
+    .badge.api_pending { background: #422006; color: var(--warn); }
+    .badge.connected { background: #14532d; color: var(--ok); }
+    .meta { font-size: 0.85rem; color: var(--muted); margin: 0.35rem 0; }
+    .meta a { color: #60a5fa; text-decoration: none; }
+    .meta a:hover { text-decoration: underline; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      margin-bottom: 1.75rem;
+    }
+    th, td {
+      text-align: left;
+      padding: 0.55rem 0.4rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    th { color: var(--muted); font-weight: 500; }
+    .section-title {
+      font-size: 1.05rem;
+      color: var(--accent);
+      margin: 0 0 0.75rem;
+    }
+    .stream {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.1rem;
+      margin-bottom: 1.5rem;
+    }
+    .stream li { margin-bottom: 0.45rem; color: var(--muted); font-size: 0.9rem; }
+    .stream strong { color: var(--text); }
+    footer {
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    footer a { color: #60a5fa; }
+    @media (max-width: 560px) {
+      h1 { font-size: 1.25rem; }
+      table { font-size: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Platform Pulse</h1>
+      <p class="sub">Cortex Intelligence Nexus · Phase 0 registry (truth surface)</p>
+    </header>
+
+    <div class="banner">
+      <strong>Honest mode.</strong>
+      This page is a documented channel registry — not live subscriber/follower APIs.
+      Status labels: <em>documented</em> (listed in repo), <em>manual</em> (update by hand),
+      <em>api_pending</em> (integration not wired), <em>connected</em> (only after a real check exists).
+      No platform is marked connected in Phase 0.
+    </div>
+
+    <div class="grid" id="cards"></div>
+
+    <h2 class="section-title">Overview</h2>
+    <div style="overflow-x:auto;">
+      <table>
+        <thead>
+          <tr>
+            <th>Platform</th>
+            <th>Handle / ID</th>
+            <th>Status</th>
+            <th>Primary metric (future)</th>
+            <th>Source</th>
+          </tr>
+        </thead>
+        <tbody id="table-body"></tbody>
+      </table>
+    </div>
+
+    <div class="stream">
+      <h2 class="section-title" style="margin-top:0;">Activity &amp; integration notes</h2>
+      <ul id="stream" style="margin:0;padding-left:1.1rem;"></ul>
+    </div>
+
+    <footer>
+      Canonical identity:
+      <a href="/identity.html">identity.html</a> ·
+      <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/IDENTITY.md">IDENTITY.md</a> ·
+      <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/PUBLIC_SURFACES.md">PUBLIC_SURFACES.md</a><br />
+      Live host: <a href="https://cortex-platforms.netlify.app">cortex-platforms.netlify.app</a>
+      · Google Business:
+      <a href="https://maps.google.com/maps?cid=2073161413550473641" rel="noopener">Maps listing</a>
+      <span id="generated"></span>
+    </footer>
+  </div>
+
+  <script>
+    /** Phase 0 static registry — aligned with IDENTITY.md / PUBLIC_SURFACES.md */
+    const PLATFORMS = [
+      {
+        id: 'youtube',
+        name: 'YouTube',
+        handle: '@MikecomplexAI-i2e',
+        url: 'https://www.youtube.com/@MikecomplexAI-i2e',
+        status: 'documented',
+        primary: 'Subscribers / views',
+        note: 'MEDIA.md also mentions @cinisnexus — resolve handle consistency later',
+        source: 'PUBLIC_SURFACES.md'
+      },
+      {
+        id: 'tiktok',
+        name: 'TikTok',
+        handle: '@cinisnio.ai',
+        url: 'https://www.tiktok.com/@cinisnio.ai',
+        status: 'documented',
+        primary: 'Followers / likes',
+        note: 'No API token in platform env for metrics',
+        source: 'PUBLIC_SURFACES.md'
+      },
+      {
+        id: 'instagram',
+        name: 'Instagram',
+        handle: '—',
+        url: null,
+        status: 'api_pending',
+        primary: 'Followers / reach',
+        note: 'Not listed in PUBLIC_SURFACES canonical table',
+        source: 'gap'
+      },
+      {
+        id: 'facebook',
+        name: 'Facebook',
+        handle: '—',
+        url: null,
+        status: 'api_pending',
+        primary: 'Page fans / engagement',
+        note: 'Not listed in PUBLIC_SURFACES canonical table',
+        source: 'gap'
+      },
+      {
+        id: 'x',
+        name: 'X (Twitter)',
+        handle: '@MikeComplexAie · @CinisIndustry',
+        url: 'https://x.com/MikeComplexAie',
+        status: 'documented',
+        primary: 'Followers / posts',
+        note: 'Founder + company accounts in IDENTITY.md',
+        source: 'IDENTITY.md'
+      },
+      {
+        id: 'linkedin',
+        name: 'LinkedIn',
+        handle: 'michaelujukumorim',
+        url: 'https://www.linkedin.com/in/michaelujukumorim',
+        status: 'documented',
+        primary: 'Connections / posts',
+        note: 'Personal profile listed',
+        source: 'PUBLIC_SURFACES.md'
+      },
+      {
+        id: 'github',
+        name: 'GitHub',
+        handle: 'Cortex-Nexus-Sovereign-Industrial-AI',
+        url: 'https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform',
+        status: 'documented',
+        primary: 'Repos / stars (public API possible in Phase 1)',
+        note: 'Best candidate for first live metric without secrets',
+        source: 'IDENTITY.md'
+      },
+      {
+        id: 'huggingface',
+        name: 'Hugging Face',
+        handle: '—',
+        url: null,
+        status: 'api_pending',
+        primary: 'Models / downloads',
+        note: 'HF helpers exist on Netlify; public metrics not wired to this board',
+        source: 'netlify/functions'
+      },
+      {
+        id: 'google',
+        name: 'Google Business',
+        handle: 'CID 2073161413550473641',
+        url: 'https://maps.google.com/maps?cid=2073161413550473641',
+        status: 'manual',
+        primary: 'Reviews / visibility',
+        note: 'Verified listing; website field → cortex-platforms.netlify.app',
+        source: 'IDENTITY.md'
+      },
+      {
+        id: 'medium',
+        name: 'Medium',
+        handle: '@mikecomplexai',
+        url: 'https://medium.com/@mikecomplexai',
+        status: 'documented',
+        primary: 'Followers / reads',
+        note: 'Publication surface',
+        source: 'PUBLIC_SURFACES.md'
+      },
+      {
+        id: 'netlify',
+        name: 'Live Platform',
+        handle: 'cortex-platforms.netlify.app',
+        url: 'https://cortex-platforms.netlify.app',
+        status: 'documented',
+        primary: 'Deploy health',
+        note: 'Primary public host (dynamic + static)',
+        source: 'COMMAND_CENTER.md'
+      }
+    ];
+
+    const STREAM = [
+      { t: 'Phase 0', d: 'Registry board published — no live API claims.' },
+      { t: 'Sync', d: 'Auto-update intervals (6h / 12h) not scheduled until Phase 1+ APIs exist.' },
+      { t: 'Social module', d: 'social-media-integration/ is documented; metrics UI not connected to this page.' },
+      { t: 'Google', d: 'Business Profile verified; treat as external identity signal, not a metrics API.' },
+      { t: 'Next', d: 'Phase 1 candidate: GitHub public repo stats (no secret required).' }
+    ];
+
+    function badgeClass(s) {
+      return 'badge ' + (s || 'documented');
+    }
+
+    function render() {
+      const cards = document.getElementById('cards');
+      const tbody = document.getElementById('table-body');
+      const stream = document.getElementById('stream');
+
+      cards.innerHTML = PLATFORMS.map(function (p) {
+        const link = p.url
+          ? '<div class="meta"><a href="' + p.url + '" target="_blank" rel="noopener">Open channel</a></div>'
+          : '<div class="meta">No canonical URL in repo yet</div>';
+        return (
+          '<article class="card">' +
+            '<h2><span>' + p.name + '</span><span class="' + badgeClass(p.status) + '">' + p.status.replace('_', ' ') + '</span></h2>' +
+            '<div class="meta">' + p.handle + '</div>' +
+            link +
+            '<div class="meta">' + p.note + '</div>' +
+          '</article>'
+        );
+      }).join('');
+
+      tbody.innerHTML = PLATFORMS.map(function (p) {
+        return (
+          '<tr>' +
+            '<td>' + p.name + '</td>' +
+            '<td>' + p.handle + '</td>' +
+            '<td><span class="' + badgeClass(p.status) + '">' + p.status.replace('_', ' ') + '</span></td>' +
+            '<td>' + p.primary + '</td>' +
+            '<td>' + p.source + '</td>' +
+          '</tr>'
+        );
+      }).join('');
+
+      stream.innerHTML = STREAM.map(function (s) {
+        return '<li><strong>' + s.t + ':</strong> ' + s.d + '</li>';
+      }).join('');
+
+      document.getElementById('generated').textContent =
+        ' · Generated ' + new Date().toISOString().slice(0, 19) + 'Z (client clock)';
+    }
+
+    render();
+  </script>
+</body>
+</html>
