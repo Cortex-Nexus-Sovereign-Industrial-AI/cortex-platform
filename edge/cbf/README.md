@@ -52,6 +52,12 @@ double u_safe = solver.solve(q, q_dot, u_nom);
 
 On QP failure the solver returns `u_min` (emergency deceleration).
 
+## Theory & Robustness
+
+Full mathematical development (relative degree, HOCBF, robust variants, adaptive HOCBF, σ-modification, parameter drift, concurrent learning) is documented in:
+
+**[HOCBF_THEORY_AND_ROBUSTNESS.md](./HOCBF_THEORY_AND_ROBUSTNESS.md)**
+
 ## Safety note
 
 Research / prototype code. Validate on hardware with proper limits, watchdogs, and E-stop before any physical deployment.
@@ -61,5 +67,6 @@ Research / prototype code. Validate on hardware with proper limits, watchdogs, a
 | Path | Role |
 |------|------|
 | `actuator_cbf_solver.cpp` | Solver class + 1 kHz demo `main` |
+| `HOCBF_THEORY_AND_ROBUSTNESS.md` | Theory, robust & adaptive extensions |
 | This README | Build & context |
 | Architecture doc | Product-level Vector 2 narrative |
