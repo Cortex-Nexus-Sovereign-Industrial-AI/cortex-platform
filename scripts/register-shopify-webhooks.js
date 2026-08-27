@@ -3,23 +3,21 @@
  * Upsert Shopify webhooks via Admin GraphQL API
  *
  * Usage:
- *   SHOPIFY_STORE_DOMAIN="your-store.myshopify.com" \
+ *   SHOPIFY_STORE_DOMAIN="cortex-intelligence-nexus.myshopify.com" \
  *   SHOPIFY_ADMIN_TOKEN="shpat_xxx" \
+ *   WEBHOOK_CALLBACK_URL="https://cortex-platforms.netlify.app/api/webhooks/shopify" \
  *   node scripts/register-shopify-webhooks.js
  *
- * The script will create webhook subscriptions for:
- *  - ORDERS_CREATED
- *  - ORDERS_UPDATED
- *  - INVENTORY_LEVELS_UPDATE
- *
- * It checks existing webhooks and will skip duplicates based on callbackUrl + topic.
+ * Topics include commerce + Activity Tracker product events.
+ * Duplicate callbackUrl + topic pairs are skipped.
  */
 
 const assert = require('assert');
 
 const SHOP = process.env.SHOPIFY_STORE_DOMAIN;
 const TOKEN = process.env.SHOPIFY_ADMIN_TOKEN;
-const CALLBACK_URL = process.env.WEBHOOK_CALLBACK_URL || 'https://cortex-platforms.netlify.app/api/webhooks/shopify';
+const CALLBACK_URL =
+  process.env.WEBHOOK_CALLBACK_URL || 'https://cortex-platforms.netlify.app/api/webhooks/shopify';
 const API_VERSION = process.env.SHOPIFY_API_VERSION || '2024-10';
 
 assert(SHOP, 'Missing SHOPIFY_STORE_DOMAIN env');
@@ -29,6 +27,8 @@ const topics = [
   'ORDERS_CREATED',
   'ORDERS_UPDATED',
   'INVENTORY_LEVELS_UPDATE',
+  'PRODUCTS_CREATE',
+  'PRODUCTS_UPDATE'
 ];
 
 async function graphqlRequest(query, variables = {}) {
@@ -36,9 +36,9 @@ async function graphqlRequest(query, variables = {}) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'X-Shopify-Access-Token': TOKEN,
+      'X-Shopify-Access-Token': TOKEN
     },
-    body: JSON.stringify({ query, variables }),
+    body: JSON.stringify({ query, variables })
   });
   const json = await res.json();
   if (json.errors) throw new Error(JSON.stringify(json.errors, null, 2));
@@ -66,10 +66,10 @@ async function listExistingWebhooks() {
   `;
   const data = await graphqlRequest(query);
   const edges = data?.webhookSubscriptions?.edges || [];
-  return edges.map(e => ({
+  return edges.map((e) => ({
     id: e.node.id,
     topic: e.node.topic,
-    callbackUrl: e.node.endpoint?.callbackUrl,
+    callbackUrl: e.node.endpoint?.callbackUrl
   }));
 }
 
@@ -112,7 +112,7 @@ async function createWebhook(topic) {
     console.log(`Found ${existing.length} existing webhook subscriptions.`);
 
     for (const topic of topics) {
-      const already = existing.find(w => w.topic === topic && w.callbackUrl === CALLBACK_URL);
+      const already = existing.find((w) => w.topic === topic && w.callbackUrl === CALLBACK_URL);
       if (already) {
         console.log(`Webhook for ${topic} already exists at ${CALLBACK_URL} (id=${already.id}). Skipping.`);
         continue;
