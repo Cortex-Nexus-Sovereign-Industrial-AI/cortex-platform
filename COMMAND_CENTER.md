@@ -1,40 +1,59 @@
-# Cortex AI Nexus — Command Center
+# Cortex Intelligence Nexus — Command Center
 
 **Founder:** Michael Ujuku Morim · GitHub **mikecomplexai-7**  
 **Org:** Cortex-Nexus-Sovereign-Industrial-AI  
-**Updated:** 2026-08-21
+**Updated:** 2026-08-27
+
+---
 
 ## Enterprise identity
 
-**Cortex AI Nexus** (formerly Cortex Intelligence Nexus-Intel Solution) — autonomous intelligence and industrial automation workspace for edge execution, real-time activity rendering, and end-to-end pipeline orchestration.
+**Cortex Intelligence Nexus** (CINIS) — industrial AI and autonomous systems platform for practical capability building, agentic systems, and sovereign automation tools.
 
 Full description: [docs/product/CORTEX_AI_NEXUS.md](./docs/product/CORTEX_AI_NEXUS.md)  
-Canonical identity surface: [IDENTITY.md](./IDENTITY.md)
+**Canonical identity surface (Single Source of Truth):** [IDENTITY.md](./IDENTITY.md)
+
+---
 
 ## Entry points
 
 | Document | Role |
 |----------|------|
+| [IDENTITY.md](./IDENTITY.md) | **Single Source of Truth** — name, links, Google Business, agents, rules |
 | [STATUS.md](./STATUS.md) | Health board |
 | [DEPLOY_CHECKLIST.md](./DEPLOY_CHECKLIST.md) | Activation |
 | [docs/product/CORTEX_AI_NEXUS.md](./docs/product/CORTEX_AI_NEXUS.md) | Official enterprise description |
-| [IDENTITY.md](./IDENTITY.md) | Identity & Verification (incl. Google Business Profile) |
+| [GOVERNANCE.md](./GOVERNANCE.md) | Authority model |
 | [HANDOFF.md](./HANDOFF.md) | Session summary |
 | [README.md](./README.md) | Public overview |
 
-## Live
+---
 
-- Site: https://cortex-platforms.netlify.app
-- Members: https://cortex-platforms.netlify.app/member-dashboard.html
-- Repo: https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform
-- Account: https://github.com/mikecomplexai-7
-- Google Business Profile: https://maps.google.com/maps?cid=2073161413550473641
-- Direct Review Link: https://search.google.com/local/writereview?placeid=ChIJu_fwtQXAO6gRqQG5UFJZxRw
+## Live surfaces
+
+| Surface | URL |
+|---------|-----|
+| **Website** | https://cortex-platforms.netlify.app |
+| **Member Dashboard** | https://cortex-platforms.netlify.app/member-dashboard.html |
+| **Repository** | https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform |
+| **Founder Account** | https://github.com/mikecomplexai-7 |
+| **Google Business Profile** | https://maps.google.com/maps?cid=2073161413550473641 |
+| **Direct Review Link** | https://search.google.com/local/writereview?placeid=ChIJu_fwtQXAO6gRqQG5UFJZxRw |
+| **X Founder** | https://x.com/MikeComplexAie |
+| **X Company** | https://x.com/CinisIndustry |
+
+---
 
 ## Policy
 
-- Source of truth = this GitHub repository
-- Secrets = environment variables only
-- Payments = Paystack (documented paths only)
+- **Source of truth** = this repository (especially IDENTITY.md)
+- **Secrets** = environment variables only
+- **Payments** = Paystack (documented paths only)
+- **Public name** = Cortex Intelligence Nexus only
+- **Founder name** = Michael Ujuku Morim only
+- Never link to unrelated domains (including cortex-nexus.com)
 
-**This file is the operational entry point.**
+---
+
+**This file is the operational entry point.**  
+All identity, branding, and public-link decisions route through [IDENTITY.md](./IDENTITY.md).
