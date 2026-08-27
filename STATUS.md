@@ -1,65 +1,78 @@
-# Cortex AI Nexus — LIVE STATUS
-**Updated:** 2026-08-27  
-**Founder GitHub:** mikecomplexai-7  
-**Brand:** Cortex Intelligence Nexus
+# Cortex Intelligence Nexus — LIVE STATUS
+**Updated:** 2026-08-27 (section activation pass)  
+**Brand (public only):** Cortex Intelligence Nexus  
+**Founder:** Michael Ujuku Morim · GitHub mikecomplexai-7  
+**Runner agent (not public brand):** Mike Complex AI
 
 ---
 
-## Commerce (payment-ready)
+## Section activation map
+
+| Section | State | Exploit now |
+|---------|--------|-------------|
+| **Identity / GBP** | Verified; IDENTITY.md SSOT; identity.html + aligned index | Use Maps + review links only under company name |
+| **GitHub Pages** | Marketing index aligned (Cortex Intelligence Nexus) | https://cortex-nexus-sovereign-industrial-ai.github.io/cortex-platform/ |
+| **Netlify primary** | cortex-platforms.netlify.app — functions + static | After this pass: no SPA swallow of HTML files |
+| **Platform Pulse** | Phase 0 on main (`metrics-dashboard.html`) | Honest registry; no fake live APIs |
+| **JSON-LD / ns** | Custom context merged | Agents: `/ns/context.jsonld`; SEO: Schema.org only |
+| **SOFA** | Env placeholders + Netlify helpers | Set `SOFA_API_KEY` on Netlify if using |
+| **Paystack webhooks** | Code + durable idempotency merged | **Founder:** secret key + payment link |
+| **Shopify** | Store + seed scripts; password on | Optional seed; remove password when live |
+| **Commerce docs** | Offer ladder + WhatsApp scripts | **Founder:** paste real Paystack link |
+| **Member / admin HTML** | Present as static files | Open by path after static-route fix |
+| **Edge CBF / HOCBF** | Theory docs merged | Engineering reference; not a public product page |
+| **Activity tracker** | Dry-run default | Secrets + X creds before live |
+| **Social module** | Spec-heavy under social-media-integration/ | Do not claim all APIs connected |
+| **Open PRs cleaned** | Merged #22, #25, #20, #18 | Stale #9/#12 left open (review before merge) |
+
+---
+
+## Host truth (important)
+
+| Host | Role |
+|------|------|
+| **https://cortex-platforms.netlify.app** | Primary dynamic + static (IDENTITY website field) |
+| **https://cortex-nexus-sovereign-industrial-ai.github.io/cortex-platform/** | Public shell / marketing |
+| **https://cortex-intelligence-nexus.netlify.app** | Separate Netlify project in account — do not treat as SSOT unless you deliberately alias |
+
+---
+
+## Commerce (payment-ready infrastructure)
 
 | Asset | State |
 |-------|--------|
-| Merchant profile | Unified under **Cortex Intelligence Nexus** (Google + Paystack + Shopify matched) |
-| Shopify store | cortex-intelligence-nexus.myshopify.com (password protected until public) |
-| Offer ladder | docs/commerce/OFFER_LADDER.md |
-| Mid-ticket stack | docs/commerce/MID_TICKET_OFFER.md (₦22,000) |
-| WhatsApp scripts | docs/commerce/WHATSAPP_SALES_SCRIPT.md (ready — paste real Paystack link) |
-| Payment → Delivery SOP | docs/commerce/PAYMENT_TO_DELIVERY_SOP.md |
-| Operating model | docs/commerce/OPERATING_MODEL.md |
-| Public offers page | offers.html → `/offers.html` after Netlify deploy |
-| Shopify seed | scripts/seed-shopify-products.js (includes 30-Day system + access tiers) |
+| Merchant profile | Unified under **Cortex Intelligence Nexus** |
+| Shopify | cortex-intelligence-nexus.myshopify.com (password protected) |
+| Offer ladder | docs/commerce/ |
+| Mid-ticket | ₦22,000 — 30-Day AI Content System |
+| Webhook | `/.netlify/functions/paystack-webhook` + Express idempotency |
 
-**Automated / open:** all docs, scripts, webhook function, offers page structure.  
-**Manual (founder):** Create Paystack payment link → paste into WhatsApp script → set secret key on Netlify → optional Shopify seed → order caps & fulfillment.
+**Founder-only blockers for first naira in:**
+
+1. Create Paystack payment link under **Cortex Intelligence Nexus**
+2. Paste into WhatsApp scripts (`[PASTE PAYSTACK LINK]`)
+3. Set `PAYSTACK_SECRET_KEY` on Netlify → redeploy
+4. Confirm Paystack webhook URL  
+5. Optional Shopify seed + remove store password
 
 ---
 
-## Platform
+## Platform components
 
 | Component | State |
 |-----------|--------|
-| Enterprise / architecture docs | In repo |
-| Edge CBF source | edge/cbf/ |
-| App shell | Netlify — https://cortex-platforms.netlify.app |
-| Paystack webhook code | Ready; secret in env only |
+| Edge CBF | edge/cbf/ + HOCBF docs |
 | Member dashboard | /member-dashboard.html |
-| X ↔ Shopify Activity Tracker | Code slice in repo, dry-run default — [docs/operations/X_SHOPIFY_ACTIVITY_TRACKER.md](./docs/operations/X_SHOPIFY_ACTIVITY_TRACKER.md) |
-| Shopify webhook receiver | `/.netlify/functions/shopify-webhook` + `/api/webhooks/shopify` |
+| Offers | /offers.html |
+| Identity | /identity.html |
+| Pulse | /metrics-dashboard.html |
+| SOFA helpers | /api/sofa-status, /api/sofa-session |
 
 ---
 
-## Owner next actions (payment reception)
+## Policy
 
-1. Create Paystack payment link / product for ₦22,000 under business name **Cortex Intelligence Nexus**.
-2. Paste the real link into every `[PASTE PAYSTACK LINK]` in WhatsApp scripts.
-3. Set `PAYSTACK_SECRET_KEY` on Netlify (and optionally `PAYSTACK_PUBLIC_KEY`) → redeploy.
-4. Confirm webhook URL saved in Paystack Dashboard (Test + Live):
-   `https://cortex-platforms.netlify.app/.netlify/functions/paystack-webhook`
-5. (Optional) `export SHOPIFY_ADMIN_TOKEN=shpat_... && node scripts/seed-shopify-products.js`
-6. Cap concurrent mid-ticket orders (recommend 5).
-7. Remove Shopify store password when ready for public traffic.
-
-## Owner next actions (Activity Tracker)
-
-1. Set `SHOPIFY_WEBHOOK_SECRET` on Netlify.
-2. Run `node scripts/register-shopify-webhooks.js` with Admin token.
-3. Leave `ACTIVITY_TRACKER_LIVE` unset/false and confirm dry-run logs on a product event.
-4. Add X user-context credentials for @MikeComplexAie, then set `ACTIVITY_TRACKER_LIVE=true`.
-
----
-
-## Payment readiness summary
-
-- Branding matched across Google, Paystack, Shopify.
-- Infrastructure (webhook, seed, scripts, SOP) complete.
-- Only remaining step for first payment: create the Paystack link and put the secret in environment variables.
+- Public name: **Cortex Intelligence Nexus** only
+- Mike Complex AI = internal runner only
+- Secrets = environment variables only
+- No fake “all APIs connected” metrics
