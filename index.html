@@ -1,391 +1,870 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Cortex AI Nexus — Sovereign Industrial Intelligence</title>
-<meta name="description" content="Cortex AI Nexus — autonomous intelligence, NXD Dust liquidity, CINIS NEXUS OGOJA">
-<link rel="canonical" href="https://cortex-platforms.netlify.app/">
-<meta name="theme-color" content="#0a0a0c">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-:root{
-  --bg:#0a0a0c;
-  --panel:#121216;
-  --panel2:#1a1a20;
-  --border:#2a2a32;
-  --text:#f0e6d2;
-  --muted:#9a8f7a;
-  --gold:#f5c542;
-  --gold-dim:#d4a017;
-  --gold-glow:rgba(245,197,66,.25);
-  --cyan:#22d3ee;
-  --green:#34d399;
-  --amber:#fbbf24;
-  --red:#f87171;
-  --radius:12px;
-  --font:'Inter',system-ui,sans-serif;
-  --mono:'JetBrains Mono',monospace;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-html,body{height:100%;font-family:var(--font);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;overflow-x:hidden}
-a{color:var(--gold);text-decoration:none}a:hover{text-decoration:underline;color:var(--amber)}
-button{font-family:inherit;cursor:pointer}
-.app{display:flex;flex-direction:column;min-height:100vh;max-width:1280px;margin:0 auto}
-.topbar{display:flex;align-items:center;gap:.75rem;padding:.65rem 1rem;border-bottom:1px solid var(--border);background:rgba(10,10,12,.92);position:sticky;top:0;z-index:40;backdrop-filter:blur(12px)}
-.logo{display:flex;align-items:center;gap:.45rem;font-weight:800;letter-spacing:.04em;flex-shrink:0;color:var(--gold)}
-.logo-mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--gold-dim),var(--gold));display:grid;place-items:center;font-size:.9rem;color:#0a0a0c;box-shadow:0 0 12px var(--gold-glow)}
-.search{flex:1;max-width:420px;display:flex;align-items:center;gap:.5rem;background:var(--panel);border:1px solid var(--border);border-radius:999px;padding:.4rem .9rem}
-.search input{flex:1;background:transparent;border:none;outline:none;color:var(--text);font-size:.85rem}
-.search input::placeholder{color:var(--muted)}
-.top-actions{display:flex;align-items:center;gap:.5rem;margin-left:auto}
-.icon-btn{width:36px;height:36px;border-radius:10px;border:1px solid var(--border);background:var(--panel);color:var(--text);display:grid;place-items:center;position:relative}
-.badge-dot{position:absolute;top:4px;right:4px;width:8px;height:8px;border-radius:50%;background:var(--red)}
-.user-pill{display:flex;align-items:center;gap:.4rem;background:var(--panel);border:1px solid var(--border);border-radius:999px;padding:.25rem .6rem .25rem .3rem;font-size:.8rem}
-.avatar{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--gold-dim),var(--gold));display:grid;place-items:center;font-size:.75rem;font-weight:700;color:#0a0a0c}
-.navscroll{display:flex;gap:.35rem;padding:.5rem .75rem;overflow-x:auto;border-bottom:1px solid var(--border);background:var(--panel);-webkit-overflow-scrolling:touch;scrollbar-width:none}
-.navscroll::-webkit-scrollbar{display:none}
-.nav-item{flex-shrink:0;display:flex;align-items:center;gap:.35rem;padding:.45rem .75rem;border-radius:8px;border:1px solid transparent;background:transparent;color:var(--muted);font-size:.8rem;font-weight:500}
-.nav-item.active,.nav-item:hover{background:var(--panel2);color:var(--gold);border-color:rgba(245,197,66,.25)}
-.nav-item .live{font-size:.65rem;color:var(--green);font-family:var(--mono);margin-left:.15rem}
-.main{flex:1;padding:1rem;padding-bottom:5rem;overflow-y:auto;-webkit-overflow-scrolling:touch}
-.page{display:none}.page.active{display:block;animation:fadeIn .28s ease}
-@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-.page-title{font-size:1.35rem;font-weight:700;letter-spacing:-.02em;margin-bottom:.25rem;color:var(--gold)}
-.page-sub{color:var(--muted);font-size:.9rem;margin-bottom:1.25rem}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.75rem;margin-bottom:1rem}
-.card{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;transition:border-color .2s,box-shadow .2s}
-.card:hover{border-color:rgba(245,197,66,.3);box-shadow:0 0 20px rgba(245,197,66,.08)}
-.card.stat .label{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:.35rem}
-.card.stat .value{font-size:1.35rem;font-weight:700;color:var(--text)}
-.card.stat .hint{font-size:.75rem;color:var(--muted);margin-top:.25rem}
-.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);margin-right:.35rem}
-.section{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:1rem;overflow:hidden}
-.section-h{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1rem;border-bottom:1px solid var(--border);font-weight:600;font-size:.9rem;color:var(--gold)}
-.section-b{padding:1rem}
-.log{font-family:var(--mono);font-size:.72rem;line-height:1.7;color:var(--muted);max-height:220px;overflow-y:auto}
-.log .ok{color:var(--green)}.log .warn{color:var(--amber)}.log .info{color:var(--cyan)}
-.qa-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
-.qa{display:flex;flex-direction:column;align-items:flex-start;gap:.2rem;padding:.85rem;border-radius:10px;border:1px solid var(--border);background:var(--panel2);color:var(--text);text-align:left}
-.qa strong{font-size:.85rem}.qa span{font-size:.72rem;color:var(--muted)}
-.qa:hover{border-color:var(--gold);box-shadow:0 0 12px var(--gold-glow)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;padding:.6rem 1rem;border-radius:8px;font-weight:600;font-size:.85rem;border:none}
-.btn-primary{background:linear-gradient(135deg,var(--gold-dim),var(--gold));color:#0a0a0c}
-.btn-primary:hover{box-shadow:0 0 16px var(--gold-glow)}
-.btn-ghost{background:transparent;color:var(--text);border:1px solid var(--border)}
-.btn-sm{padding:.35rem .7rem;font-size:.75rem}
-.list a{display:flex;justify-content:space-between;align-items:center;padding:.75rem 0;border-bottom:1px solid var(--border);color:var(--text);text-decoration:none}
-.list a:last-child{border-bottom:none}.list a span{color:var(--muted);font-size:.8rem}
-.list a:hover{color:var(--gold)}
-.chat{display:flex;flex-direction:column;gap:.75rem;min-height:240px;max-height:360px;overflow-y:auto;margin-bottom:.75rem}
-.bubble{max-width:90%;padding:.75rem .9rem;border-radius:12px;font-size:.88rem;line-height:1.5}
-.bubble.ai{background:var(--panel2);border:1px solid var(--border);align-self:flex-start}
-.bubble.user{background:rgba(245,197,66,.12);border:1px solid rgba(245,197,66,.35);align-self:flex-end}
-.bubble .who{font-size:.7rem;color:var(--muted);margin-bottom:.25rem;font-weight:600}
-.chat-input{display:flex;gap:.5rem}
-.chat-input input{flex:1;background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:.7rem .9rem;color:var(--text);outline:none}
-.voices{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.75rem}
-.voice{padding:.35rem .7rem;border-radius:999px;border:1px solid var(--border);background:var(--panel2);color:var(--muted);font-size:.75rem}
-.voice.active{border-color:var(--gold);color:var(--gold);background:rgba(245,197,66,.12)}
-form .field{margin-bottom:.85rem}
-form label{display:block;font-size:.75rem;color:var(--muted);margin-bottom:.3rem}
-form input,form select{width:100%;background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:.65rem .8rem;color:var(--text);outline:none}
-.table{width:100%;border-collapse:collapse;font-size:.8rem}
-.table th,.table td{padding:.55rem .4rem;text-align:left;border-bottom:1px solid var(--border)}
-.table th{color:var(--muted);font-weight:500;font-size:.7rem;text-transform:uppercase}
-.footer{border-top:1px solid var(--border);padding:1rem;text-align:center;font-size:.75rem;color:var(--muted)}
-.overlay{position:fixed;inset:0;background:rgba(5,5,8,.9);display:flex;align-items:center;justify-content:center;z-index:100;padding:1rem;backdrop-filter:blur(8px)}
-.overlay.hidden{display:none}
-.auth-card{width:100%;max-width:380px;background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:1.5rem;box-shadow:0 0 40px rgba(245,197,66,.1)}
-.auth-card h2{font-size:1.25rem;margin-bottom:.25rem;color:var(--gold)}
-.auth-card .sub{color:var(--muted);font-size:.85rem;margin-bottom:1.25rem}
-.auth-card .actions{display:flex;flex-direction:column;gap:.5rem;margin-top:1rem}
-.auth-card .toggle{text-align:center;font-size:.8rem;color:var(--muted);margin-top:.75rem}
-.nxd-hero{background:linear-gradient(160deg,rgba(245,197,66,.08),transparent 50%),var(--panel);border:1px solid rgba(245,197,66,.25);border-radius:var(--radius);padding:1.25rem;margin-bottom:1rem}
-.nxd-hero h2{color:var(--gold);font-size:1.15rem;margin-bottom:.5rem}
-.nxd-flow{font-family:var(--mono);font-size:.68rem;line-height:1.55;color:var(--muted);background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:1rem;overflow-x:auto;white-space:pre;margin:1rem 0}
-.nxd-card{background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:1rem;margin-bottom:.75rem}
-.nxd-card h3{font-size:.95rem;color:var(--gold);margin-bottom:.4rem}
-.nxd-card p,.nxd-card li{font-size:.85rem;color:var(--muted);line-height:1.55}
-.nxd-card ul{margin:.4rem 0 0 1.1rem}
-.prose{font-size:.9rem;line-height:1.65;color:var(--muted)}
-.prose strong{color:var(--text)}
-@media(min-width:768px){.main{padding:1.5rem 1.5rem 3rem}.qa-grid{grid-template-columns:repeat(3,1fr)}.grid{grid-template-columns:repeat(3,1fr)}}
-::-webkit-scrollbar{width:6px;height:6px}
-::-webkit-scrollbar-track{background:var(--bg)}
-::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
-::-webkit-scrollbar-thumb:hover{background:var(--gold-dim)}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cortex Intelligence Nexus - Industrial AI Engineering & Autonomous Systems Architecture. Verified Software Company.">
+    <meta name="keywords" content="AI, Autonomous Systems, Industrial AI, Machine Learning, Enterprise Solutions">
+    <meta name="theme-color" content="#0f172a">
+    <meta name="google-site-verification" content="cortex-intelligence-nexus">
+    
+    <!-- Structured Data for Google Business Profile -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareCompany",
+      "name": "Cortex Intelligence Nexus",
+      "description": "Industrial AI Engineering & Autonomous Systems Architecture",
+      "url": "https://cortex-platforms.netlify.app/",
+      "logo": "https://cortex-platforms.netlify.app/logo.png",
+      "telephone": "+234",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Ogoja",
+        "addressCountry": "NG"
+      },
+      "foundingDate": "2024",
+      "founder": {
+        "@type": "Person",
+        "name": "Michael Ujuku Morim"
+      },
+      "sameAs": [
+        "https://github.com/Cortex-Nexus-Sovereign-Industrial-AI",
+        "https://www.youtube.com/@MikecomplexAI-i2e",
+        "https://huggingface.co/mikecomplexai",
+        "https://maps.google.com/maps?cid=2073161413550473641"
+      ]
+    }
+    </script>
+
+    <title>Cortex Intelligence Nexus | Industrial AI Solutions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #94a3b8;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #1e293b;
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #00C7B7;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        nav .verified-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            background: rgba(0, 199, 183, 0.1);
+            border: 1px solid #00C7B7;
+            border-radius: 4px;
+            padding: 0.2rem 0.5rem;
+            font-size: 0.7rem;
+            color: #00C7B7;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #00C7B7;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 60px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+        }
+
+        .hero-content {
+            max-width: 900px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero .verified-entity {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(0, 199, 183, 0.1);
+            border: 1px solid #00C7B7;
+            border-radius: 6px;
+            padding: 0.5rem 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: #00C7B7;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            color: #f8fafc;
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+        }
+
+        .hero .tagline {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            color: #00C7B7;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background-color: #00C7B7;
+            color: #0f172a;
+        }
+
+        .btn-primary:hover {
+            background-color: #00b3a0;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: #1e293b;
+            color: #00C7B7;
+            border: 2px solid #00C7B7;
+        }
+
+        .btn-secondary:hover {
+            background-color: #0f172a;
+            transform: translateY(-2px);
+        }
+
+        /* Quick Links Component */
+        .quick-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 3rem;
+        }
+
+        .quick-links a {
+            display: inline-flex;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 6px;
+            border: 1px solid #1e293b;
+            transition: all 0.3s;
+        }
+
+        .quick-links a:hover {
+            background-color: rgba(0, 199, 183, 0.2);
+            border-color: #00C7B7;
+            transform: translateY(-2px);
+        }
+
+        /* Sections */
+        section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: #f8fafc;
+            margin-bottom: 3rem;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        /* Portals Grid */
+        .portals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .portal-card {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s;
+            cursor: pointer;
+            animation: fadeIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .portal-card:nth-child(1) { animation-delay: 0.1s; }
+        .portal-card:nth-child(2) { animation-delay: 0.2s; }
+        .portal-card:nth-child(3) { animation-delay: 0.3s; }
+        .portal-card:nth-child(4) { animation-delay: 0.4s; }
+        .portal-card:nth-child(5) { animation-delay: 0.5s; }
+
+        .portal-card:hover {
+            background: rgba(30, 41, 59, 0.8);
+            border-color: #00C7B7;
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 199, 183, 0.1);
+        }
+
+        .portal-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .portal-card h3 {
+            color: #f8fafc;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .portal-card p {
+            color: #cbd5e1;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .portal-card a {
+            color: #00C7B7;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .portal-card a:hover {
+            color: #00b3a0;
+        }
+
+        /* Verified Badge */
+        .verified-banner {
+            background: rgba(0, 199, 183, 0.05);
+            border: 1px solid #00C7B7;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .verified-banner h3 {
+            color: #00C7B7;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .verified-banner p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        /* Infinite Scroll Container */
+        .infinite-scroll {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            padding: 2rem 0;
+        }
+
+        .scroll-item {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid #1e293b;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+            animation: fadeIn 0.5s ease-out;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .scroll-item:hover {
+            background: rgba(30, 41, 59, 0.7);
+            border-color: #00C7B7;
+            transform: translateY(-5px);
+        }
+
+        .scroll-item .platform-name {
+            color: #f8fafc;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .scroll-item .platform-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Loading Indicator */
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #00C7B7;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 3px solid #1e293b;
+            border-top-color: #00C7B7;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Google Business Verification */
+        .google-business {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .google-business h3 {
+            color: #00C7B7;
+            margin-bottom: 1rem;
+        }
+
+        .google-business a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(0, 199, 183, 0.1);
+            border: 1px solid #00C7B7;
+            color: #00C7B7;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .google-business a:hover {
+            background: rgba(0, 199, 183, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0f172a;
+            color: #94a3b8;
+            padding: 3rem 2rem;
+            border-top: 1px solid #1e293b;
+            margin-top: 4rem;
+        }
+
+        footer .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        footer h4 {
+            color: #f8fafc;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        footer ul {
+            list-style: none;
+        }
+
+        footer li {
+            margin-bottom: 0.5rem;
+        }
+
+        footer a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: #00C7B7;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid #1e293b;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .verified-footer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            color: #00C7B7;
+            margin-top: 1rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 1rem;
+                font-size: 0.8rem;
+            }
+
+            .hero {
+                margin-top: 80px;
+                padding: 1.5rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .portals-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .infinite-scroll {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 1rem;
+            }
+
+            footer .container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #00C7B7;
+            color: #0f172a;
+            padding: 8px;
+            z-index: 100;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+    </style>
 </head>
 <body>
-<div class="overlay" id="auth">
-  <div class="auth-card">
-    <div class="logo" style="margin-bottom:1rem"><span class="logo-mark">⚡</span> CORTEX AI NEXUS</div>
-    <h2 id="auth-title">Welcome to Cortex AI Nexus</h2>
-    <p class="sub">Autonomous industrial intelligence · CINIS NEXUS · Ogoja · NXD Dust</p>
-    <form id="auth-form">
-      <div class="field" id="name-field" style="display:none"><label>Full name</label><input id="auth-name" placeholder="Michael Ujuku Morim"></div>
-      <div class="field"><label>Email</label><input id="auth-email" type="email" required placeholder="you@email.com"></div>
-      <div class="field"><label>Password</label><input id="auth-password" type="password" required minlength="6" placeholder="••••••••"></div>
-      <div class="actions">
-        <button type="submit" class="btn btn-primary" id="auth-btn" style="width:100%">Sign In</button>
-        <button type="button" class="btn btn-ghost" style="width:100%" onclick="guestEnter()">Continue as Guest</button>
-      </div>
-    </form>
-    <p class="toggle"><span id="toggle-text">No account?</span> <a href="#" id="toggle-mode">Create one</a></p>
-    <p class="toggle" style="margin-top:.5rem"><a href="member-dashboard.html">Member API dashboard →</a></p>
-  </div>
-</div>
+    <a href="#main" class="skip-link">Skip to main content</a>
 
-<div class="app" id="app" style="display:none">
-  <header class="topbar">
-    <div class="logo"><span class="logo-mark">⚡</span> CORTEX AI NEXUS</div>
-    <div class="search"><span style="opacity:.5">🔍</span><input id="global-search" placeholder="Search platform, NXD Dust, AI tasks..."></div>
-    <div class="top-actions">
-      <button class="icon-btn" title="Notifications">🔔<span class="badge-dot"></span></button>
-      <div class="user-pill"><span class="avatar" id="user-avatar">G</span><span id="user-name">Guest</span></div>
-    </div>
-  </header>
-
-  <nav class="navscroll" id="nav">
-    <button class="nav-item active" data-page="dashboard">📊 Dashboard</button>
-    <button class="nav-item" data-page="nxd">✨ NXD Dust</button>
-    <button class="nav-item" data-page="ai">🤖 AI <span class="live">LIVE</span></button>
-    <button class="nav-item" data-page="about">🏛️ Enterprise</button>
-    <button class="nav-item" data-page="business">🏢 Business</button>
-    <button class="nav-item" data-page="commerce">🛒 Commerce</button>
-    <button class="nav-item" data-page="payments">💳 Payments</button>
-    <button class="nav-item" data-page="orders">📦 Orders</button>
-    <button class="nav-item" data-page="docs">📚 Docs</button>
-    <button class="nav-item" data-page="settings">⚙️ Settings</button>
-  </nav>
-
-  <main class="main">
-    <div class="page active" id="page-dashboard">
-      <h1 class="page-title">Dashboard</h1>
-      <p class="page-sub">Real-time overview of your sovereign industrial operations</p>
-      <div class="grid">
-        <div class="card stat"><div class="label">Platform Status</div><div class="value"><span class="dot"></span>LIVE</div><div class="hint">cortex-platforms.netlify.app</div></div>
-        <div class="card stat"><div class="label">AI Agents Active</div><div class="value">4</div><div class="hint">Cortex · MikeComplex · Builder · Scout</div></div>
-        <div class="card stat"><div class="label">Revenue Today</div><div class="value" id="rev-today">₦0.00</div><div class="hint">Paystack ready</div></div>
-        <div class="card stat"><div class="label">Data Sovereignty</div><div class="value">100%</div><div class="hint">Edge-resilient · Offline-first</div></div>
-        <div class="card stat"><div class="label">Orders Today</div><div class="value" id="ord-today">0</div><div class="hint">Across all channels</div></div>
-        <div class="card stat"><div class="label">Session</div><div class="value" id="session-label">Guest</div><div class="hint">Local / API when hosted</div></div>
-      </div>
-      <div class="section">
-        <div class="section-h">⚡ System Activity Log <button class="btn btn-ghost btn-sm" onclick="clearLog()">Clear</button></div>
-        <div class="section-b"><div class="log" id="activity-log"></div></div>
-      </div>
-      <div class="section">
-        <div class="section-h">⚡ Quick Actions</div>
-        <div class="section-b"><div class="qa-grid">
-          <button class="qa" onclick="go('ai');preset('Write a professional partnership email for Cortex AI Nexus')"><strong>✉️ Generate Email</strong><span>AI business correspondence</span></button>
-          <button class="qa" onclick="go('ai');preset('Write a Python Paystack webhook handler')"><strong>💻 Write Code</strong><span>Python / JS automation</span></button>
-          <button class="qa" onclick="go('ai');preset('Create a marketing campaign for Cortex AI Nexus')"><strong>🎯 Marketing</strong><span>Campaign copy & strategy</span></button>
-          <button class="qa" onclick="go('ai');preset('Analyze Nigerian industrial AI market opportunities')"><strong>📈 Analyze</strong><span>Market intelligence</span></button>
-          <button class="qa" onclick="go('nxd')"><strong>✨ NXD Dust</strong><span>Liquidity mechanics</span></button>
-          <button class="qa" onclick="go('commerce')"><strong>🛒 Product Listing</strong><span>Shopify-ready surfaces</span></button>
-        </div></div>
-      </div>
-    </div>
-
-    <div class="page" id="page-nxd">
-      <h1 class="page-title">NXD-Nexus Dust System</h1>
-      <p class="page-sub">Autonomous High-Frequency Financial Settlement Protocol · CINIS-FIN-2026-NXD</p>
-      <div class="nxd-hero">
-        <h2>Core Problem → NXD Answer</h2>
-        <p class="prose">Legacy banking is high-latency, human-gated, and exclusionary. NXD replaces that with zero-latency autonomous nodes, real-time algorithmic compliance, fractional micro-liquidity, and velocity-based stability so daily purchasing power survives market shocks and local inflation.</p>
-      </div>
-      <div class="section">
-        <div class="section-h">Technical Architecture Flow</div>
-        <div class="section-b">
-          <pre class="nxd-flow">[ User Node / Mobile Terminal ]
-             │
-             ▼
-[ Autonomous Execution Layer ] ──(Algorithmic Compliance)──► [ Real-Time AML/KYC ]
-             │
-             ▼
-[ Dust Settlement Engine ] ──(Fractional Micro-Routing)──► [ Liquidity Protection Pool ]
-             │
-             ▼
-[ Global Multi-Pair Exchange ] ◄──(Dynamic Pricing Engine)──► [ Commodities & Fiat Pairs ]</pre>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">
+                ⚡ Cortex Intelligence Nexus
+                <span class="verified-badge">✓ VERIFIED</span>
+            </div>
+            <ul>
+                <li><a href="#portals">Portals</a></li>
+                <li><a href="#developer">Developer</a></li>
+                <li><a href="#media">Media</a></li>
+                <li><a href="#ecosystem">Ecosystem</a></li>
+            </ul>
         </div>
-      </div>
-      <div class="nxd-card">
-        <h3>1. Fractional Micro-Unit (“Nexus Dust”)</h3>
-        <ul>
-          <li><strong>Precision:</strong> Standardized to 10⁻⁸ units for true micro-settlement.</li>
-          <li><strong>Access:</strong> Ultra-low barrier entry for low-income and unbanked populations.</li>
-          <li><strong>Pegging:</strong> Aggregated pool of physical assets + digital reserves + fiat baskets to resist sudden collapse.</li>
-        </ul>
-      </div>
-      <div class="nxd-card">
-        <h3>2. Dust Settlement Engine & Micro-Routing</h3>
-        <ul>
-          <li>Peer-to-peer micro-settlement without branch or teller clearance.</li>
-          <li>AML/KYC and counter-fraud rules pre-compiled into every transaction vector.</li>
-          <li>Continuous fractional routing feeds the Liquidity Protection Pool.</li>
-        </ul>
-      </div>
-      <div class="nxd-card">
-        <h3>3. Velocity Cushioning (Stability Mechanic)</h3>
-        <p>High transaction volume at micro-scales absorbs shocks. When global values drop:</p>
-        <ul>
-          <li>Fees dynamically scale downward.</li>
-          <li>Internal liquidity routing redistributes systemic yield to micro-holders.</li>
-          <li>Result: daily transactional purchasing power is preserved.</li>
-        </ul>
-      </div>
-      <div class="nxd-card">
-        <h3>4. Multi-Century Horizoning</h3>
-        <p>Immutable smart-contract primitives intended to maintain programmatic inflation stability across multi-generational timeframes.</p>
-      </div>
-      <div class="section">
-        <div class="section-h">Deployment Roadmap</div>
-        <div class="section-b prose">
-          <ol style="margin-left:1.2rem">
-            <li>Schema finalization — JSON parameters for cross-border transaction vectors.</li>
-            <li>API endpoint integration — bind micro-settlement handlers to mobile & terminal layers.</li>
-            <li>Public technical publication — whitepaper surfaces on registered profiles and this platform.</li>
-          </ol>
-          <p style="margin-top:1rem"><a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/docs/nxd/NXD_NEXUS_DUST_SYSTEM_SPEC.md" target="_blank" rel="noopener">Full specification on GitHub →</a></p>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="verified-entity">
+                ✓ Verified Google Business Profile
+            </div>
+            
+            <h1>Cortex Intelligence Nexus</h1>
+            <p class="tagline">Industrial AI Engineering & Autonomous Systems Architecture</p>
+            <p><strong>Founder:</strong> Michael Ujuku Morim | <strong>Location:</strong> Ogoja, Nigeria</p>
+            <p><strong>Category:</strong> Software Company | <strong>Status:</strong> Verified & Operational</p>
+            
+            <div class="cta-buttons">
+                <a href="https://cortex-platforms.netlify.app" class="btn btn-primary" target="_blank">⚡ Launch Live App</a>
+                <a href="#portals" class="btn btn-secondary">📖 Explore Ecosystem</a>
+            </div>
+
+            <div class="quick-links">
+                <a href="https://cortex-platforms.netlify.app" target="_blank">⚡ Live App</a>
+                <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI" target="_blank">📦 GitHub Org</a>
+                <a href="https://huggingface.co/mikecomplexai" target="_blank">🤗 Hugging Face</a>
+                <a href="https://linktr.ee/cinisnioai" target="_blank">🌳 Linktree</a>
+                <a href="https://www.youtube.com/@MikecomplexAI-i2e" target="_blank">▶ YouTube</a>
+            </div>
         </div>
-      </div>
-    </div>
+    </section>
 
-    <div class="page" id="page-ai">
-      <h1 class="page-title">AI Workspace</h1>
-      <p class="page-sub">Four agent personas — Cortex AI Nexus modular runtime</p>
-      <div class="voices">
-        <button class="voice active" data-v="cortex" onclick="setVoice('cortex')">⚡ Cortex Nexus</button>
-        <button class="voice" data-v="mike" onclick="setVoice('mike')">🧠 MikeComplex</button>
-        <button class="voice" data-v="builder" onclick="setVoice('builder')">🔨 Builder</button>
-        <button class="voice" data-v="scout" onclick="setVoice('scout')">🔍 Scout</button>
-      </div>
-      <div class="section"><div class="section-b">
-        <div class="chat" id="chat"></div>
-        <div class="chat-input">
-          <input id="ai-input" placeholder="Ask the active agent..." onkeydown="if(event.key==='Enter')sendAI()">
-          <button class="btn btn-primary" onclick="sendAI()">Send</button>
+    <!-- Google Business Verification -->
+    <section id="verified">
+        <div class="verified-banner">
+            <h3>✓ Verified Business Entity</h3>
+            <p><strong>Cortex Intelligence Nexus</strong> - Registered & Verified Software Company</p>
+            <div style="margin-top: 1rem;">
+                <a href="https://maps.google.com/maps?cid=2073161413550473641" target="_blank">
+                    📍 View on Google Maps
+                </a>
+            </div>
         </div>
-      </div></div>
-    </div>
+    </section>
 
-    <div class="page" id="page-about">
-      <h1 class="page-title">Cortex AI Nexus</h1>
-      <p class="page-sub">Enterprise description · technical overview architecture</p>
-      <div class="section"><div class="section-b">
-        <p class="prose" style="margin-bottom:1rem">An advanced autonomous intelligence and industrial automation workspace engineered for high-throughput edge execution, real-time activity rendering, and end-to-end digital pipeline orchestration. Includes NXD Dust liquidity rails and Ogoja showcase surfaces.</p>
-        <div class="grid">
-          <div class="card stat"><div class="label">Orchestration</div><div class="value" style="font-size:1rem">Autonomous pipelines</div><div class="hint">Streams, workflows, content funnels</div></div>
-          <div class="card stat"><div class="label">AI modules</div><div class="value" style="font-size:1rem">Hand-set granularity</div><div class="hint">Direct-control settings, API adapters</div></div>
-          <div class="card stat"><div class="label">NXD Dust</div><div class="value" style="font-size:1rem">Micro-settlement</div><div class="hint">Fractional liquidity · velocity cushion</div></div>
-          <div class="card stat"><div class="label">Industry</div><div class="value" style="font-size:1rem">CINIS NEXUS</div><div class="hint">Ogoja · Michael Ujuku Morim</div></div>
+    <!-- Portals Section -->
+    <section id="portals">
+        <h2 class="section-title">🚀 Primary Portals & Deployments</h2>
+        <div class="portals-grid">
+            <div class="portal-card">
+                <div class="portal-icon">⚡</div>
+                <h3>Live Web App</h3>
+                <p>Access the live Cortex Intelligence platform on Netlify</p>
+                <a href="https://cortex-platforms.netlify.app" target="_blank">Visit Portal →</a>
+            </div>
+
+            <div class="portal-card">
+                <div class="portal-icon">📄</div>
+                <h3>Project Homepage</h3>
+                <p>Official documentation and project overview on GitHub Pages</p>
+                <a href="https://cortex-nexus-sovereign-industrial-ai.github.io/cortex-platform/" target="_blank">Visit Homepage →</a>
+            </div>
+
+            <div class="portal-card">
+                <div class="portal-icon">🔗</div>
+                <h3>Unified Hub</h3>
+                <p>Linktree portal connecting all ecosystem resources</p>
+                <a href="https://linktr.ee/cinisnioai" target="_blank">Visit Hub →</a>
+            </div>
+
+            <div class="portal-card">
+                <div class="portal-icon">👤</div>
+                <h3>Business Profile</h3>
+                <p>Official business information and contact details</p>
+                <a href="https://maps.google.com/maps?cid=2073161413550473641" target="_blank">View Profile →</a>
+            </div>
+
+            <div class="portal-card">
+                <div class="portal-icon">💾</div>
+                <h3>SourceForge</h3>
+                <p>Open source project repository and distribution</p>
+                <a href="https://sourceforge.net/projects/cortex-platform/" target="_blank">Visit SourceForge →</a>
+            </div>
         </div>
-      </div></div>
-    </div>
+    </section>
 
-    <div class="page" id="page-business">
-      <h1 class="page-title">Business Hub</h1>
-      <p class="page-sub">Identity, contact, and infrastructure nodes</p>
-      <div class="section"><div class="section-h">Executive & identity</div><div class="section-b list">
-        <a href="https://about.me/mikecomplexai" target="_blank">about.me/mikecomplexai <span>Identity</span></a>
-        <a href="https://github.com/mikecomplexai-7" target="_blank">GitHub mikecomplexai-7 <span>Founder</span></a>
-        <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform" target="_blank">cortex-platform repo <span>Command</span></a>
-        <a href="https://mikecomplexai.substack.com" target="_blank">Substack <span>Publication</span></a>
-      </div></div>
-      <div class="section"><div class="section-h">Contact</div><div class="section-b list">
-        <a href="mailto:cortexnexus@proton.me">cortexnexus@proton.me <span>Email</span></a>
-        <a href="https://wa.me/2349010251577" target="_blank">+234 901 025 1577 <span>WhatsApp</span></a>
-        <a href="https://x.com/MikeComplexAie" target="_blank">@MikeComplexAie <span>X</span></a>
-      </div></div>
-    </div>
+    <!-- Developer Section -->
+    <section id="developer">
+        <h2 class="section-title">🛠️ Developer Repositories & AI Hubs</h2>
+        <div class="portals-grid">
+            <div class="portal-card">
+                <div class="portal-icon">📦</div>
+                <h3>GitHub Organization</h3>
+                <p>Primary development organization with all repositories</p>
+                <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI" target="_blank">View Org →</a>
+            </div>
 
-    <div class="page" id="page-commerce">
-      <h1 class="page-title">Commerce</h1>
-      <p class="page-sub">Shopify · cortex-intelligence-nexus.myshopify.com</p>
-      <div class="section"><div class="section-b">
-        <a class="btn btn-primary" href="https://cortex-intelligence-nexus.myshopify.com" target="_blank">Open Shopify store</a>
-      </div></div>
-    </div>
+            <div class="portal-card">
+                <div class="portal-icon">🤖</div>
+                <h3>Hugging Face</h3>
+                <p>AI models, datasets, and machine learning resources</p>
+                <a href="https://huggingface.co/mikecomplexai" target="_blank">Visit Profile →</a>
+            </div>
 
-    <div class="page" id="page-payments">
-      <h1 class="page-title">Payments</h1>
-      <p class="page-sub">Paystack checkout · demo ledger until API host is live</p>
-      <div class="section"><div class="section-b">
-        <form id="pay-form" onsubmit="return fakePay(event)">
-          <div class="field"><label>Customer name</label><input id="pay-name" required></div>
-          <div class="field"><label>Email</label><input id="pay-email" type="email" required></div>
-          <div class="field"><label>Amount (NGN)</label><input id="pay-amount" type="number" min="100" value="1000" required></div>
-          <div class="field"><label>Product</label><input id="pay-product" value="Cortex AI Nexus — Starter"></div>
-          <button type="submit" class="btn btn-primary">Record demo payment</button>
-        </form>
-      </div></div>
-    </div>
+            <div class="portal-card">
+                <div class="portal-icon">📦</div>
+                <h3>Package Registry</h3>
+                <p>Published packages and artifacts for distribution</p>
+                <a href="https://github.com/orgs/Cortex-Nexus-Sovereign-Industrial-AI/packages" target="_blank">View Packages →</a>
+            </div>
 
-    <div class="page" id="page-orders">
-      <h1 class="page-title">Orders</h1>
-      <p class="page-sub">Local session orders</p>
-      <div class="section"><div class="section-b" style="overflow-x:auto">
-        <table class="table"><thead><tr><th>Ref</th><th>Customer</th><th>Amount</th><th>Status</th><th>Date</th></tr></thead>
-        <tbody id="orders-body"><tr><td colspan="5" style="color:var(--muted)">No orders yet</td></tr></tbody></table>
-      </div></div>
-    </div>
+            <div class="portal-card">
+                <div class="portal-icon">💬</div>
+                <h3>Discussions</h3>
+                <p>Community forum and project discussions</p>
+                <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/discussions" target="_blank">Join Discussion →</a>
+            </div>
+        </div>
+    </section>
 
-    <div class="page" id="page-docs">
-      <h1 class="page-title">Documentation</h1>
-      <p class="page-sub">Command documents on GitHub · structured for NXD & Ogoja</p>
-      <div class="section"><div class="section-h">NXD Dust</div><div class="section-b list">
-        <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/docs/nxd/NXD_NEXUS_DUST_SYSTEM_SPEC.md" target="_blank">NXD Nexus Dust System Spec <span>Primary</span></a>
-        <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/docs/nxd/DEPLOYMENT_NOTES.md" target="_blank">NXD Deployment Notes <span>Roadmap</span></a>
-      </div></div>
-      <div class="section"><div class="section-h">Ogoja · Turning Globe Glory</div><div class="section-b list">
-        <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/docs/ogoja/README.md" target="_blank">Ogoja Showcase README <span>Overview</span></a>
-        <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/docs/ogoja/TURNING_GLOBE_GLORY.md" target="_blank">Turning Globe Glory <span>Campaign</span></a>
-        <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/docs/ogoja/GALLERY_INDEX.md" target="_blank">Gallery Index <span>Assets</span></a>
-      </div></div>
-      <div class="section"><div class="section-h">Platform</div><div class="section-b list">
-        <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/docs/product/CORTEX_AI_NEXUS.md" target="_blank">Cortex AI Nexus Enterprise <span>Official</span></a>
-        <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/STATUS.md" target="_blank">Live Status <span>Health</span></a>
-        <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform" target="_blank">Full repository <span>Source</span></a>
-      </div></div>
-    </div>
+    <!-- Media Section with Infinite Scroll -->
+    <section id="media">
+        <h2 class="section-title">📢 Media, Social & Community Channels</h2>
+        <div class="infinite-scroll" id="mediaScroll">
+            <!-- Items loaded dynamically -->
+        </div>
+        <div id="loading" class="loading" style="display: none;">
+            <div class="spinner"></div>
+        </div>
+    </section>
 
-    <div class="page" id="page-settings">
-      <h1 class="page-title">Settings</h1>
-      <p class="page-sub">Session and platform information</p>
-      <div class="section"><div class="section-b">
-        <p style="margin-bottom:.75rem"><strong>User:</strong> <span id="set-user">Guest</span></p>
-        <p style="margin-bottom:.5rem;color:var(--muted);font-size:.85rem">Cortex AI Nexus · Michael Ujuku Morim · CINIS NEXUS INDUSTRY OGOJA</p>
-        <p style="margin-bottom:1rem;color:var(--muted);font-size:.85rem">Theme: Cyberpunk Gold Cinematic · NXD Dust module active</p>
-        <button class="btn btn-ghost" onclick="signOut()">Sign out</button>
-      </div></div>
-    </div>
-  </main>
+    <!-- Complete Ecosystem -->
+    <section id="ecosystem">
+        <h2 class="section-title">📍 Complete Ecosystem</h2>
+        <div class="google-business">
+            <h3>✓ Cortex Intelligence Nexus - Verified Business</h3>
+            <p>Registered software company offering enterprise AI solutions, autonomous systems, and industrial intelligence</p>
+            <a href="https://maps.google.com/maps?cid=2073161413550473641" target="_blank">
+                📍 View Google Business Profile
+            </a>
+        </div>
+        
+        <div class="portals-grid">
+            <div class="portal-card">
+                <div class="portal-icon">📺</div>
+                <h3>YouTube Channel</h3>
+                <p>Video content, tutorials, and project updates</p>
+                <a href="https://www.youtube.com/@MikecomplexAI-i2e" target="_blank">Subscribe →</a>
+            </div>
 
-  <footer class="footer">© 2026 CINIS NEXUS INDUSTRY OGOJA · Cortex AI Nexus · NXD Dust · <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform">GitHub</a></footer>
-</div>
+            <div class="portal-card">
+                <div class="portal-icon">📝</div>
+                <h3>Medium Publications</h3>
+                <p>In-depth technical articles and insights</p>
+                <a href="https://medium.com/@mikecomplexai" target="_blank">Read Articles →</a>
+            </div>
 
-<script>
-const VOICES={cortex:{name:'Cortex Nexus',greet:'Cortex AI Nexus online. Autonomous industrial command node ready. NXD Dust rails available.',replies:['Command acknowledged. Pipeline sequence prepared.','Edge-resilient path mapped for your request.','Infrastructure check complete. Proceeding.']},mike:{name:'MikeComplex AI',greet:'MikeComplex AI — strategy from Ogoja to the world.',replies:['Strong direction. Growth frame ready.','Focus on proof, payments, and presence.','Ship weekly; GitHub is the source of truth.']},builder:{name:'Builder Bot',greet:'Builder Bot ready.',replies:['Prefer Node + Netlify + Paystack webhooks.','Keep secrets in env only.','Structure: app shell, member-dashboard, backend API.']},scout:{name:'Scout AI',greet:'Scout AI reporting.',replies:['Nigerian SME automation demand is rising.','Track Paystack, Shopify, GitHub trust signals.','Agent packs and reports as first SKUs.']}};
-let voice='cortex',signup=false,orders=JSON.parse(localStorage.getItem('cortex_orders_v3')||'[]');
-function log(msg,cls='info'){const el=document.getElementById('activity-log');if(!el)return;const t=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit',second:'2-digit'});el.innerHTML+=`<div><span style="opacity:.6">[${t}]</span> <span class="${cls}">${msg}</span></div>`;el.scrollTop=el.scrollHeight}
-function clearLog(){document.getElementById('activity-log').innerHTML='';log('Log cleared','warn')}
-function go(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));document.getElementById('page-'+id).classList.add('active');const nav=document.querySelector('.nav-item[data-page="'+id+'"]');if(nav)nav.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});log('Navigated to '+id,'info')}
-document.getElementById('nav').addEventListener('click',e=>{const btn=e.target.closest('.nav-item');if(btn)go(btn.dataset.page)});
-function setVoice(v){voice=v;document.querySelectorAll('.voice').forEach(x=>x.classList.toggle('active',x.dataset.v===v));document.getElementById('chat').innerHTML=`<div class="bubble ai"><div class="who">${VOICES[v].name}</div>${VOICES[v].greet}</div>`;log('AI persona → '+VOICES[v].name,'ok')}
-function preset(t){document.getElementById('ai-input').value=t;sendAI()}
-function sendAI(){const input=document.getElementById('ai-input');const msg=input.value.trim();if(!msg)return;const chat=document.getElementById('chat');chat.innerHTML+=`<div class="bubble user"><div class="who">You</div>${esc(msg)}</div>`;input.value='';const v=VOICES[voice];const reply=v.replies[Math.floor(Math.random()*v.replies.length)];setTimeout(()=>{chat.innerHTML+=`<div class="bubble ai"><div class="who">${v.name}</div>${reply}<br><br><em style="color:var(--muted)">Re: ${esc(msg)}</em></div>`;chat.scrollTop=chat.scrollHeight},500)}
-function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
-function showApp(user){document.getElementById('auth').classList.add('hidden');document.getElementById('app').style.display='flex';document.getElementById('user-name').textContent=(user.name||'User').split(' ')[0];document.getElementById('user-avatar').textContent=(user.name||'U').charAt(0).toUpperCase();document.getElementById('session-label').textContent=user.isGuest?'Guest':(user.name||'Member').split(' ')[0];document.getElementById('set-user').textContent=user.email||user.name||'Guest';renderOrders();setVoice('cortex');log('Cortex AI Nexus session online','ok');log('AI agents loaded — 4 modules','ok');log('NXD Dust module ready','ok');log(user.isGuest?'Guest access':'Member session','ok')}
-function guestEnter(){const u={name:'Guest',email:'guest@cortex.local',isGuest:true};localStorage.setItem('cortex_user_v3',JSON.stringify(u));showApp(u)}
-function signOut(){localStorage.removeItem('cortex_user_v3');location.reload()}
-document.getElementById('toggle-mode').onclick=e=>{e.preventDefault();signup=!signup;document.getElementById('auth-title').textContent=signup?'Create Account':'Welcome to Cortex AI Nexus';document.getElementById('auth-btn').textContent=signup?'Create Account':'Sign In';document.getElementById('toggle-text').textContent=signup?'Have an account?':'No account?';document.getElementById('toggle-mode').textContent=signup?'Sign in':'Create one';document.getElementById('name-field').style.display=signup?'block':'none'};
-document.getElementById('auth-form').onsubmit=e=>{e.preventDefault();const email=document.getElementById('auth-email').value.trim();const name=signup?(document.getElementById('auth-name').value.trim()||email.split('@')[0]):email.split('@')[0];const u={name,email,isGuest:false};localStorage.setItem('cortex_user_v3',JSON.stringify(u));showApp(u)};
-function fakePay(e){e.preventDefault();const name=document.getElementById('pay-name').value,email=document.getElementById('pay-email').value,amount=+document.getElementById('pay-amount').value,product=document.getElementById('pay-product').value;const ref='CORTEX-DEMO-'+Date.now().toString(36).toUpperCase();orders.unshift({ref,name,email,amount,product,status:'Demo recorded',date:new Date().toLocaleString()});localStorage.setItem('cortex_orders_v3',JSON.stringify(orders));renderOrders();log('Demo payment ₦'+amount.toLocaleString(),'ok');go('orders');return false}
-function renderOrders(){document.getElementById('ord-today').textContent=orders.length;const total=orders.reduce((s,o)=>s+(+o.amount||0),0);document.getElementById('rev-today').textContent='₦'+total.toLocaleString();const tb=document.getElementById('orders-body');if(!orders.length){tb.innerHTML='<tr><td colspan="5" style="color:var(--muted)">No orders yet</td></tr>';return}tb.innerHTML=orders.map(o=>`<tr><td><code>${esc(o.ref)}</code></td><td>${esc(o.name)}</td><td>₦${(+o.amount).toLocaleString()}</td><td>${esc(o.status)}</td><td>${esc(o.date)}</td></tr>`).join('')}
-(function(){const saved=localStorage.getItem('cortex_user_v3');if(saved){try{showApp(JSON.parse(saved))}catch(e){}}})();
-</script>
+            <div class="portal-card">
+                <div class="portal-icon">🌍</div>
+                <h3>Social Presence</h3>
+                <p>Follow on Bluesky, X, Instagram, TikTok, Facebook</p>
+                <a href="https://linktr.ee/cinisnioai" target="_blank">All Links →</a>
+            </div>
+
+            <div class="portal-card">
+                <div class="portal-icon">📊</div>
+                <h3>Activity Metrics</h3>
+                <p>Unified metrics and analytics dashboard</p>
+                <a href="#metrics" target="_blank">View Metrics →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div>
+                <h4>Cortex Intelligence Nexus</h4>
+                <p><strong>Verified Software Company</strong></p>
+                <p>Industrial AI Engineering & Autonomous Systems Architecture</p>
+                <p>Founded by Michael Ujuku Morim | Ogoja, Nigeria</p>
+            </div>
+            <div>
+                <h4>Quick Navigation</h4>
+                <ul>
+                    <li><a href="#portals">Portals</a></li>
+                    <li><a href="#developer">Developer</a></li>
+                    <li><a href="#media">Media</a></li>
+                    <li><a href="#ecosystem">Ecosystem</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Developer Resources</h4>
+                <ul>
+                    <li><a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI" target="_blank">GitHub Org</a></li>
+                    <li><a href="https://huggingface.co/mikecomplexai" target="_blank">Hugging Face</a></li>
+                    <li><a href="https://medium.com/@mikecomplexai" target="_blank">Medium</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Connect & Verify</h4>
+                <ul>
+                    <li><a href="https://maps.google.com/maps?cid=2073161413550473641" target="_blank">📍 Google Business</a></li>
+                    <li><a href="https://linktr.ee/cinisnioai" target="_blank">🌳 All Links</a></li>
+                    <li><a href="https://cortex-platforms.netlify.app" target="_blank">⚡ Live App</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="verified-footer">
+                ✓ Verified Entity: Cortex Intelligence Nexus
+            </div>
+            <p>© 2026 Cortex Intelligence Nexus. All rights reserved.</p>
+            <p>Ogoja, Nigeria | <a href="/ECOSYSTEM_INDEX.md">Ecosystem Index</a></p>
+            <p><small>Software Company | Enterprise AI Solutions | Autonomous Systems</small></p>
+        </div>
+    </footer>
+
+    <script>
+        // Infinite Scroll Media Channels
+        const mediaChannels = [
+            { icon: '📺', name: 'YouTube', url: 'https://www.youtube.com/@MikecomplexAI-i2e' },
+            { icon: '🐦', name: 'X (Twitter)', url: 'https://x.com/mikecomplexai' },
+            { icon: '🎨', name: 'Instagram', url: 'https://www.instagram.com/mikecomplexai' },
+            { icon: '📱', name: 'TikTok', url: 'https://www.tiktok.com/@mikecomplexai' },
+            { icon: '📘', name: 'Facebook', url: 'https://www.facebook.com/mikecomplexai' },
+            { icon: '🦋', name: 'Bluesky', url: 'https://bsky.app/profile/cortexnexus.bsky.social' },
+            { icon: '📝', name: 'Medium', url: 'https://medium.com/@mikecomplexai' },
+            { icon: '🎤', name: 'Audiomack', url: 'https://audiomack.com/mikecomplexai-' },
+            { icon: '🎫', name: 'Tix Africa', url: 'https://tix.africa/discover/cortex-intelligence-nexus' },
+            { icon: '🛍️', name: 'Hotmart', url: 'https://pay.hotmart.com/M105781259N' },
+            { icon: '📦', name: 'GitHub', url: 'https://github.com/Cortex-Nexus-Sovereign-Industrial-AI' },
+            { icon: '🤗', name: 'Hugging Face', url: 'https://huggingface.co/mikecomplexai' }
+        ];
+
+        let currentIndex = 0;
+
+        function loadMoreChannels() {
+            const container = document.getElementById('mediaScroll');
+            const loadingDiv = document.getElementById('loading');
+            loadingDiv.style.display = 'block';
+
+            // Simulate network delay
+            setTimeout(() => {
+                const itemsToAdd = 4;
+                for (let i = 0; i < itemsToAdd && currentIndex < mediaChannels.length; i++) {
+                    const channel = mediaChannels[currentIndex];
+                    const item = document.createElement('a');
+                    item.href = channel.url;
+                    item.target = '_blank';
+                    item.rel = 'noopener noreferrer';
+                    item.className = 'scroll-item';
+                    item.innerHTML = `
+                        <div class="platform-icon">${channel.icon}</div>
+                        <div class="platform-name">${channel.name}</div>
+                    `;
+                    container.appendChild(item);
+                    currentIndex++;
+                }
+                loadingDiv.style.display = 'none';
+            }, 300);
+        }
+
+        // Initial load
+        loadMoreChannels();
+
+        // Infinite scroll detection
+        window.addEventListener('scroll', () => {
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 1000) {
+                if (currentIndex < mediaChannels.length) {
+                    loadMoreChannels();
+                }
+            }
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>
