@@ -1,4 +1,7 @@
-# CINIS NEXUS — Netlify (static + pure Node functions, no heavy npm deps)
+# CINIS NEXUS — Netlify (static + pure Node functions)
+# Primary public host: https://cortex-platforms.netlify.app
+# Identity SSOT: IDENTITY.md — brand = Cortex Intelligence Nexus only
+
 [build]
   publish = "."
   command = "echo build-ok"
@@ -7,11 +10,11 @@
 [build.environment]
   NODE_VERSION = "20"
 
-# Use default zisi bundler (no esbuild install)
 [functions]
   directory = "netlify/functions"
   node_bundler = "zisi"
 
+# --- API (functions) ---
 [[redirects]]
   from = "/api/health"
   to = "/.netlify/functions/health"
@@ -31,14 +34,23 @@
   force = true
 
 [[redirects]]
+  from = "/api/sofa-status"
+  to = "/.netlify/functions/sofa-status"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/sofa-session"
+  to = "/.netlify/functions/sofa-session"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/:splat"
   status = 200
   force = false
 
-# Do not force SPA for real files; only unknown paths
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-  force = false
+# Do NOT rewrite /* → index.html.
+# That SPA rule was swallowing real files (metrics-dashboard, identity, offers).
+# Unknown paths → 404 (honest). Explicit public pages live as root HTML files.
