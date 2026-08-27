@@ -1,5 +1,5 @@
 # Cortex AI Nexus — LIVE STATUS
-**Updated:** 2026-08-16  
+**Updated:** 2026-08-27  
 **Founder GitHub:** mikecomplexai-7  
 **Brand:** Cortex Intelligence Nexus
 
@@ -33,7 +33,8 @@
 | App shell | Netlify — https://cortex-platforms.netlify.app |
 | Paystack webhook code | Ready; secret in env only |
 | Member dashboard | /member-dashboard.html |
-| X ↔ Shopify Activity Tracker | Design ready — [docs/operations/X_SHOPIFY_ACTIVITY_TRACKER.md](./docs/operations/X_SHOPIFY_ACTIVITY_TRACKER.md) |
+| X ↔ Shopify Activity Tracker | Code slice in repo, dry-run default — [docs/operations/X_SHOPIFY_ACTIVITY_TRACKER.md](./docs/operations/X_SHOPIFY_ACTIVITY_TRACKER.md) |
+| Shopify webhook receiver | `/.netlify/functions/shopify-webhook` + `/api/webhooks/shopify` |
 
 ---
 
@@ -47,6 +48,13 @@
 5. (Optional) `export SHOPIFY_ADMIN_TOKEN=shpat_... && node scripts/seed-shopify-products.js`
 6. Cap concurrent mid-ticket orders (recommend 5).
 7. Remove Shopify store password when ready for public traffic.
+
+## Owner next actions (Activity Tracker)
+
+1. Set `SHOPIFY_WEBHOOK_SECRET` on Netlify.
+2. Run `node scripts/register-shopify-webhooks.js` with Admin token.
+3. Leave `ACTIVITY_TRACKER_LIVE` unset/false and confirm dry-run logs on a product event.
+4. Add X user-context credentials for @MikeComplexAie, then set `ACTIVITY_TRACKER_LIVE=true`.
 
 ---
 

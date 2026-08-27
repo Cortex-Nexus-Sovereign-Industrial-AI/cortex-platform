@@ -1,84 +1,58 @@
-# HANDOFF — X & Shopify Activity Tracker + Commerce Continuity
-**Date:** 2026-08-16  
+# HANDOFF — X & Shopify Activity Tracker implementation slice
+**Date:** 2026-08-27  
 **Repo:** https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform  
 **Founder / Operator:** Michael Ujuku Morim (Mike Complex) · GitHub **mikecomplexai-7**  
 **Brand locked:** Cortex Intelligence Nexus · CINIS NEXUS INDUSTRY OGOJA  
-**Persona (Activity role):** Sole operator of the encrypted private loop. All activity tracking, posting decisions, and data sovereignty rest with the founder. No external agents share the private log or automation control plane.
+**Persona (Activity role):** Sole operator of the encrypted private loop.
 
 ---
 
-## What was completed in this sequential pass
+## What landed this session
 
-### 1. Secure Automation Blueprint formalized
-- Document locked at `docs/operations/X_SHOPIFY_ACTIVITY_TRACKER.md`
-- Target account: **@MikeComplexAie**
-- Scope: Encrypted private loop, strictly owner-only
-- Actions covered:
-  - Direct Post Initiation from Shopify triggers
-  - Cross-sectional engagement tracking
-  - Mandatory hashtag tagging (`#MikeComplexAI #CINIS #Shopify`)
-  - Proprietary encrypted activity logging mapped to internal dashboard metrics
-- Alignment: reuses existing `social-media-integration/`, Shopify client, webhook patterns, and GOVERNANCE.md absolute founder authority
+The blueprint is no longer design-only. First automation slice is in `main`:
 
-### 2. STATUS.md already reflects the tracker
-- Platform section now lists the X ↔ Shopify Activity Tracker as “Design ready” with direct link to the operations document.
+- `netlify/functions/shopify-webhook.js` — HMAC check, idempotency, policy, response contract
+- `netlify/functions/lib/activity-tracker.js` — compose + mandatory tags + sealed log + optional X publish
+- `scripts/register-shopify-webhooks.js` — now also registers `PRODUCTS_CREATE` and `PRODUCTS_UPDATE`
+- `netlify.toml` — `/api/webhooks/shopify` → shopify-webhook function
+- Docs: `docs/operations/X_SHOPIFY_ACTIVITY_TRACKER.md`, `STATUS.md`, this file
 
-### 3. Commerce & payment readiness (prior session, still current)
-- Unified merchant profile under Cortex Intelligence Nexus
-- Paystack webhook path ready (env-only secrets)
-- Shopify seed + offers + WhatsApp scripts ready
-- Only remaining founder actions: live Paystack link + secret key placement
+**Default is dry-run.** No public post is sent unless the founder sets `ACTIVITY_TRACKER_LIVE=true` and supplies X user-context credentials for @MikeComplexAie.
+
+Policy baked in:
+- Active product create/update → draft/post
+- Inventory at or below threshold (default 3) → draft/post
+- Orders → log only unless `ACTIVITY_POST_ORDERS=true`
+- Tags always `#MikeComplexAI #CINIS #Shopify`
 
 ---
 
-## Data sovereignty & activity persona (explicit)
-
-- The system is built and operated under the single persona of **Michael Ujuku Morim (Mike Complex)**.
-- All automation activity (X posts, Shopify event mapping, engagement aggregation, encrypted logs) is restricted to the owner private loop.
-- English language is treated as a practical tool for specification, learning, group establishment, and optimization skills — never as a barrier. Every written word is retained for clarity and audit.
-- No synthesis or third-party voice is required for the activity role; the founder remains the sole human authority behind the system.
-- Secrets about existence, location context (including Lagos operational awareness), or operational method stay inside the private loop and are never exposed in public surfaces or logs.
-
----
-
-## What only the Founder can do next (credentials required)
+## What only the Founder can do next
 
 **Activity Tracker path**
-1. Confirm / supply X API credentials with write access for @MikeComplexAie (env only).
-2. Confirm Shopify Admin token scopes include webhook + product/inventory read.
-3. Decide initial auto-post policy rules (which Shopify events produce public posts).
-4. Authorize extension of `scripts/register-shopify-webhooks.js` and the webhook receiver.
-5. Enable dry-run mode first, then live publishing under the private log.
+1. Set `SHOPIFY_WEBHOOK_SECRET` on Netlify.
+2. Confirm Shopify Admin token scopes: `write_webhooks`, `read_products`, `read_orders`, `read_inventory`.
+3. Run `node scripts/register-shopify-webhooks.js`.
+4. Trigger a product event and read function logs (`mode: dry-run`).
+5. Place X API key/secret + access token/secret for @MikeComplexAie in Netlify env.
+6. Flip `ACTIVITY_TRACKER_LIVE=true` only after the dry-run copy looks correct.
 
 **Commerce path (unchanged)**
 1. Create the Paystack payment link for ₦22,000 under the exact business name.
 2. Paste the real link into WhatsApp scripts.
 3. Set `PAYSTACK_SECRET_KEY` on Netlify → redeploy.
-4. Register the webhook URL in Paystack Dashboard.
-5. Optional Shopify product seed + order-cap enforcement.
 
 ---
 
-## Canonical files (this sequential alignment)
+## Canonical files
 
 | File | Purpose |
 |------|---------|
-| `docs/operations/X_SHOPIFY_ACTIVITY_TRACKER.md` | Locked design specification for the private X ↔ Shopify loop |
-| `STATUS.md` | Live health board (now includes tracker) |
-| `HANDOFF.md` | This session close-out |
-| `GOVERNANCE.md` | Absolute founder authority model |
-| `docs/operations/SHOPIFY_INTEGRATION.md` | Shopify baseline |
-| `social-media-integration/` | Reusable posting + analytics surface |
+| `docs/operations/X_SHOPIFY_ACTIVITY_TRACKER.md` | Locked spec + current implementation notes |
+| `netlify/functions/shopify-webhook.js` | Public receiver |
+| `netlify/functions/lib/activity-tracker.js` | Composer / publisher / sealer |
+| `scripts/register-shopify-webhooks.js` | Topic registration |
+| `STATUS.md` | Health board |
+| `GOVERNANCE.md` | Absolute founder authority |
 
----
-
-## Clean activity track
-
-- Blueprint committed and linked from STATUS
-- Operator persona and data-sovereignty rules made explicit
-- Secrets policy unchanged (environment variables only)
-- Sequential path is clean: design → credentials → dry-run → live private loop
-
-**Next sequential step:** Founder supplies X credentials and initial policy rules so implementation of the first automation slice can begin under the private loop.
-
-Authority remains solely with Michael Ujuku Morim.
+Secrets stay out of Git. Authority remains solely with Michael Ujuku Morim.

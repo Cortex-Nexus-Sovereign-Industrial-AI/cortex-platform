@@ -5,8 +5,8 @@
 **Enterprise Entity:** Cortex Intelligence Nexus Intel Solution  
 **Operator:** Michael Ujuku Morim (Mike Complex)  
 **Access Scope:** Encrypted private loop — strictly restricted to owner activity  
-**Status:** Design specification (ready for implementation)  
-**Related:** `docs/operations/SHOPIFY_INTEGRATION.md`, `social-media-integration/`, `scripts/register-shopify-webhooks.js`
+**Status:** Implementation slice live in repo — dry-run default  
+**Related:** `docs/operations/SHOPIFY_INTEGRATION.md`, `social-media-integration/`, `scripts/register-shopify-webhooks.js`, `netlify/functions/shopify-webhook.js`
 
 ---
 
@@ -20,6 +20,8 @@
 | Governance | Absolute founder authority (GOVERNANCE.md) |
 | Loop type | Private / encrypted / owner-only |
 | Audit trail | Proprietary encrypted logs mapped to internal dashboard metrics |
+| Receiver | `/.netlify/functions/shopify-webhook` and `/api/webhooks/shopify` |
+| Publish gate | `ACTIVITY_TRACKER_LIVE=true` plus X user-context credentials |
 
 **Non-negotiable rules**
 - Secrets (`X_API_*`, `SHOPIFY_ADMIN_TOKEN`, webhook secrets) live only in environment variables (Netlify / Render / local `.env`). Never committed.
@@ -32,37 +34,37 @@
 ## 2. Integrated Automation Actions
 
 ### 2.1 Direct Post Initiation
-Automatically draft and publish updates on X when Shopify emits relevant events:
+Automatically draft and (when live) publish updates on X when Shopify emits relevant events:
 
-| Shopify Trigger | Suggested X Action |
-|-----------------|--------------------|
-| `products/create` or product published | New-release announcement with product title, short description, store link |
-| `inventory_levels/update` (threshold or restock) | Inventory / availability signal |
-| Key metric / order milestone (via `orders/create` or custom metric) | Milestone or performance note (owner-gated) |
+| Shopify Trigger | X Action |
+|-----------------|----------|
+| `products/create` or active `products/update` | New-release announcement with title, short description, store link |
+| `inventory_levels/update` at or below threshold (default 3) | Inventory signal |
+| `orders/create` | Logged always; public post only if `ACTIVITY_POST_ORDERS=true` |
 | Manual / scheduled content push | Owner-initiated drafts via social-media-integration queue |
 
-Implementation path:
-1. Extend existing Shopify webhook registration (`scripts/register-shopify-webhooks.js`) to include `PRODUCTS_CREATE`, `PRODUCTS_UPDATE` (or `PRODUCTS_PUBLISH` equivalent) in addition to the current `ORDERS_*` + `INVENTORY_LEVELS_UPDATE`.
-2. Webhook receiver (Netlify function or backend route at `/api/webhooks/shopify`) validates HMAC, normalizes payload, and enqueues a post job.
-3. Post composer (reuse / extend `social-media-integration` Twitter controller) builds the text, appends the three mandatory hashtags, and publishes via Twitter API v2 (OAuth 1.0a user context or app + user token for @MikeComplexAie).
+Implementation path (now in repo):
+1. `scripts/register-shopify-webhooks.js` registers `ORDERS_*`, `INVENTORY_LEVELS_UPDATE`, `PRODUCTS_CREATE`, `PRODUCTS_UPDATE`.
+2. `netlify/functions/shopify-webhook.js` validates HMAC, normalizes payload, applies policy, and enqueues or publishes.
+3. `netlify/functions/lib/activity-tracker.js` builds text, appends the three mandatory hashtags, optionally posts via Twitter API v2 (OAuth 1.0a), and seals the activity record.
 
 ### 2.2 Cross-Sectional Tracking
 Monitored logs run beneath all active automation sections and aggregate:
-- Engagement (likes, reposts, replies, quotes)
+- Engagement (likes, reposts, replies, quotes) — snapshot fields reserved; fill on a later metrics poll
 - Link clicks (UTM or X analytics if available)
 - Post performance vs. prior baseline
 - Mapping of every X post ID back to the originating Shopify event ID / product ID / order ID
 
-Storage recommendation:
-- Append-only encrypted activity log (local file or Prisma model under owner-only access).
-- Optional mirror into existing `analytics` table pattern from `social-media-integration/database/schema.sql`.
+Storage:
+- Append-only sealed activity record (AES-256-GCM when `ACTIVITY_LOG_ENCRYPTION_KEY` is set).
+- Warm-isolate idempotency by Shopify webhook id.
+- Optional later mirror into `social-media-integration/database/schema.sql` analytics tables.
 
 ### 2.3 Hashtag & Metric Tagging
 Every automated post **must** end with (or contain):
 ```
 #MikeComplexAI #CINIS #Shopify
 ```
-This creates a reliable internal audit trail that can be searched on X and matched against the proprietary log.
 
 ### 2.4 Proprietary Record Logging
 For every successful (or failed) post:
@@ -72,12 +74,11 @@ For every successful (or failed) post:
   "shopify_event": { "topic": "...", "id": "...", "product_id": "..." },
   "x_post": { "id": "...", "text_preview": "...", "url": "..." },
   "tags": ["#MikeComplexAI", "#CINIS", "#Shopify"],
-  "metrics_snapshot": { "likes": 0, "reposts": 0, ... },
+  "metrics_snapshot": { "likes": 0, "reposts": 0 },
   "status": "posted|failed|queued",
   "operator": "Mike Complex"
 }
 ```
-Logs are encrypted at rest (or stored in a private, access-controlled location). Only the founder can retrieve the full mapping.
 
 ---
 
@@ -87,26 +88,20 @@ Logs are encrypted at rest (or stored in a private, access-controlled location).
 Shopify Admin API / Webhooks
         |
         v
-[ /api/webhooks/shopify ]  ← HMAC validation, idempotency (see IDEMPOTENCY.md)
+[ /api/webhooks/shopify ]  ← HMAC validation, idempotency
         |
         v
 [ Activity Tracker Service ]
   - normalize event
   - decide whether to post (policy rules)
   - draft content + mandatory hashtags
-  - call Twitter controller
-  - write encrypted log entry
+  - call X API only if ACTIVITY_TRACKER_LIVE=true
+  - write sealed log entry
         |
         +----→ X API (@MikeComplexAie)
         |
-        +----→ Proprietary encrypted log / internal dashboard metrics
+        +----→ Proprietary sealed log / internal dashboard metrics
 ```
-
-Reuse existing pieces where possible:
-- `scripts/register-shopify-webhooks.js` — extend topic list
-- `social-media-integration/backend/controllers/twitterController.js` — post path
-- `social-media-integration` analytics / PostQueue models
-- Netlify function or `backend` Express route for the webhook endpoint (mirror Paystack pattern)
 
 ---
 
@@ -123,24 +118,25 @@ X_API_KEY=...
 X_API_SECRET=...
 X_ACCESS_TOKEN=...
 X_ACCESS_TOKEN_SECRET=...
-# or TWITTER_BEARER_TOKEN + user auth as preferred by twitter-api-v2
 
-# Optional
+# Gates
+ACTIVITY_TRACKER_LIVE=false         # set true only after dry-run verified
+ACTIVITY_POST_ORDERS=false
+ACTIVITY_INVENTORY_THRESHOLD=3
+ACTIVITY_LOG_ENCRYPTION_KEY=...
 WEBHOOK_CALLBACK_URL=https://cortex-platforms.netlify.app/api/webhooks/shopify
-ACTIVITY_LOG_ENCRYPTION_KEY=...     # for proprietary log encryption
 ```
 
 ---
 
 ## 5. Implementation Sequence (Founder-gated)
 
-1. **Credentials** — Obtain / rotate X API credentials with write access for @MikeComplexAie; confirm Shopify Admin token has `write_webhooks`, `read_products`, `read_orders`, `read_inventory`.
-2. **Extend webhook registration** — Add product-related topics to `scripts/register-shopify-webhooks.js` and re-run with env vars.
-3. **Webhook handler** — Implement or extend `/api/webhooks/shopify` (Netlify function preferred for parity with Paystack) with HMAC check + idempotency.
-4. **Post composer + logger** — Thin service that drafts, tags, posts via existing Twitter controller, and writes the encrypted activity record.
-5. **Policy gate** — Start with a simple allow-list (new product published → post; inventory below threshold → optional alert post). Owner can expand later.
-6. **Verify** — Dry-run mode that only logs without publishing; then enable live publishing.
-7. **Document** — Update `STATUS.md` and `HANDOFF.md` when the loop is live.
+1. **Credentials** — X API write access for @MikeComplexAie; Shopify token with `write_webhooks`, `read_products`, `read_orders`, `read_inventory`.
+2. **Register webhooks** — run `scripts/register-shopify-webhooks.js` with env vars.
+3. **Netlify env** — set `SHOPIFY_WEBHOOK_SECRET`; keep `ACTIVITY_TRACKER_LIVE=false` for dry-run.
+4. **Verify** — create/update a product and confirm function logs show `mode: dry-run` and tagged copy.
+5. **Go live** — set X credentials + `ACTIVITY_TRACKER_LIVE=true` and redeploy.
+6. **Document** — keep STATUS.md / HANDOFF.md current.
 
 ---
 
@@ -149,21 +145,23 @@ ACTIVITY_LOG_ENCRYPTION_KEY=...     # for proprietary log encryption
 - Follows GOVERNANCE.md absolute founder authority model.
 - Secrets never enter Git (Gitleaks-aware).
 - Private loop: no public exposure of automation internals.
-- Cross-reference with `docs/commerce/OPERATING_MODEL.md` — humans remain in the loop for money, promises, and delivery quality; this automation covers infrastructure and copy only.
-- Rate limits and error handling inherit from the social-media-integration rate limiter and errorHandler middleware.
+- Humans remain in the loop for money, promises, and delivery quality; this automation covers infrastructure and copy only.
+- Default is dry-run so a missing credential cannot spray unreviewed posts.
 
 ---
 
 ## 7. Success Criteria
 
-- [ ] Shopify product publish or inventory event produces a correctly tagged X post from @MikeComplexAie within the configured latency window.
-- [ ] Every post is mapped in the proprietary encrypted log to its Shopify source event.
+- [x] Webhook receiver + composer + sealed logger exist in repo.
+- [x] Product and inventory topics added to registration script.
+- [ ] Shopify product publish or inventory event produces a correctly tagged X post from @MikeComplexAie (requires founder credentials + live gate).
+- [ ] Every post is mapped in the proprietary sealed log to its Shopify source event.
 - [ ] Engagement metrics are aggregated under the cross-sectional tracker.
-- [ ] No secrets appear in repository history or logs.
-- [ ] STATUS.md reflects the live state of the tracker.
+- [x] No secrets appear in repository history.
+- [x] STATUS.md reflects the implementation slice.
 
 ---
 
 **Authority:** Michael Ujuku Morim, Founder & CEO  
 **Document location:** `docs/operations/X_SHOPIFY_ACTIVITY_TRACKER.md`  
-**Next concrete step:** Founder supplies or confirms X API credentials + decides initial policy rules (which Shopify events auto-post).
+**Next concrete step:** Founder sets Shopify webhook secret + X credentials, runs registration script, then flips `ACTIVITY_TRACKER_LIVE` after a dry-run.
