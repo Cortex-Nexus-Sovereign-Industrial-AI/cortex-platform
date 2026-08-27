@@ -2,7 +2,7 @@
 
 **Canonical identity surface for CINIS / Cortex AI Nexus**  
 **Source of truth:** this repository.  
-**Last aligned:** 2026-08-27
+**Last aligned:** 2026-08-27 (full build alignment)
 
 ---
 
@@ -17,13 +17,17 @@
 | **Organization** | [Cortex-Nexus-Sovereign-Industrial-AI](https://github.com/Cortex-Nexus-Sovereign-Industrial-AI) |
 | **Command Repository** | [cortex-platform](https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform) |
 | **Live Platform** | [https://cortex-platforms.netlify.app](https://cortex-platforms.netlify.app) |
+| **Identity page (canonical web)** | [https://cortex-platforms.netlify.app/identity.html](https://cortex-platforms.netlify.app/identity.html) |
 | **Member Dashboard** | [https://cortex-platforms.netlify.app/member-dashboard.html](https://cortex-platforms.netlify.app/member-dashboard.html) |
-| **Primary Identity Page** | [about.me/mikecomplexai](https://about.me/mikecomplexai) |
+| **Platform Pulse** | [https://cortex-platforms.netlify.app/metrics-dashboard.html](https://cortex-platforms.netlify.app/metrics-dashboard.html) |
+| **GitHub Pages shell** | [https://cortex-nexus-sovereign-industrial-ai.github.io/cortex-platform/](https://cortex-nexus-sovereign-industrial-ai.github.io/cortex-platform/) |
 | **Contact Email** | cortexnexus@proton.me |
 | **Phone** | 0901 025 1577 |
 | **HQ** | Ogoja, Cross River State, Nigeria |
 | **X (Founder)** | [@MikeComplexAie](https://x.com/MikeComplexAie) |
 | **X (Company)** | [@CinisIndustry](https://x.com/CinisIndustry) |
+
+Secondary profile hub (optional): [about.me/mikecomplexai](https://about.me/mikecomplexai) — not a substitute for the Netlify identity page.
 
 ---
 
@@ -53,36 +57,33 @@ Based in Ogoja. Serving Nigeria and enterprise operations.
 | **Place ID** | `ChIJu_fwtQXAO6gRqQG5UFJZxRw` |
 | **CID** | `2073161413550473641` |
 
-**Approved Description (use when updating the About section):**
+**Approved Description:**
 
 ```
 Cortex Intelligence Nexus delivers industrial AI, agentic systems, and sovereign automation tools. Based in Ogoja, Cross River State, we build scalable platforms, structured capability frameworks, and practical digital infrastructure so businesses and individuals develop real skill instead of dependency. Live platform and services available at our website.
 ```
 
-> Use the **Direct Review Link** when requesting reviews.  
-> The Maps Profile is the public-facing business presence on Google.
-
 ---
 
 ## 4. Internal Agents (operating roles only)
 
-These are execution layers under the single authority of Michael Ujuku Morim. They are not separate legal identities.
+Not separate legal identities. Not public company names.
 
 | Agent | Role | Function |
 |-------|------|----------|
-| **MikeComplex AI** | The Runner | Execution, content, scripts, platform delivery |
+| **Mike Complex AI** | The Runner | Execution, deploy checks, scripts, platform delivery |
 | **Target i7** | Analytics Engine | Measurement, pulse reports, diagnostics |
 | **CINIS NEXUS AI** | The Architect | Strategy, coherence, priority setting |
 
-All public output remains under the name **Cortex Intelligence Nexus** and **Michael Ujuku Morim**.
+All public output: **Cortex Intelligence Nexus** + **Michael Ujuku Morim**.
 
 ---
 
 ## 5. Commerce Snapshot
 
-- Mid-ticket offer: **30-Day AI Content System** — ₦22,000
-- Payment path: Paystack (documented in repo)
-- Sales scripts and SOPs: versioned under `docs/commerce/`
+- Mid-ticket: **30-Day AI Content System** — ₦22,000  
+- Payment: Paystack  
+- Docs: `docs/commerce/`
 
 ---
 
@@ -91,21 +92,18 @@ All public output remains under the name **Cortex Intelligence Nexus** and **Mic
 - Exact public name only: **Cortex Intelligence Nexus**
 - Exact founder name only: **Michael Ujuku Morim**
 - Primary website only: **https://cortex-platforms.netlify.app**
-- Never point to cortex-nexus.com or any unrelated third-party domain
-- Never revive old nicknames in public materials
-- All public posts, bios, and scripts must use the official website and review link above
-- Source of truth for identity = this file + COMMAND_CENTER.md
+- Never point to cortex-nexus.com or unrelated domains
+- Never present Mike Complex AI / mikecomplexai as the company identity
+- Source of truth = this file + COMMAND_CENTER.md
 
 ---
 
-## 7. Related Documents
+## 7. Related
 
-- [COMMAND_CENTER.md](./COMMAND_CENTER.md) — Operational entry point
-- [docs/product/CORTEX_AI_NEXUS.md](./docs/product/CORTEX_AI_NEXUS.md) — Official enterprise description
-- [GOVERNANCE.md](./GOVERNANCE.md) — Authority model
-- [STATUS.md](./STATUS.md) — Live health board
+- [COMMAND_CENTER.md](./COMMAND_CENTER.md)  
+- [STATUS.md](./STATUS.md)  
+- [PUBLIC_SURFACES.md](./PUBLIC_SURFACES.md)  
+- [docs/operations/SECTION_ACTIVATION.md](./docs/operations/SECTION_ACTIVATION.md)
 
----
-
-**Maintainer:** Michael Ujuku Morim (Founder)  
+**Maintainer:** Michael Ujuku Morim  
 **Repository:** Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform

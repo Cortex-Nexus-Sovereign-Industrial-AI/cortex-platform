@@ -1,135 +1,58 @@
-# Cortex-Platform  
-**Sovereign Industrial AI • Enterprise SDK & Governance Framework**
+# Cortex Intelligence Nexus — cortex-platform
 
-[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)  
-[![Netlify Status](https://api.netlify.com/api/v1/badges/<YOUR_NETLIFY_SITE_ID>/deploy-status)](https://app.netlify.com/sites/<YOUR_SITE>/deploys)  
-![CI](https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/actions/workflows/ci.yml/badge.svg)
+**Public brand:** Cortex Intelligence Nexus  
+**Product:** Cortex AI Nexus (this repository)  
+**Founder:** Michael Ujuku Morim  
+**Org:** [Cortex-Nexus-Sovereign-Industrial-AI](https://github.com/Cortex-Nexus-Sovereign-Industrial-AI)
 
-> Build once, run anywhere—on-prem, edge, or sovereign cloud—under your governance, not Big-Tech’s.
+Industrial AI engineering, agentic systems, and sovereign automation tools. Based in Ogoja, Cross River State, Nigeria.
 
 ---
 
-## 60-second Quick Start
+## Live surfaces (SSOT)
+
+| Surface | URL |
+|---------|-----|
+| **Primary website** | https://cortex-platforms.netlify.app |
+| **Identity** | https://cortex-platforms.netlify.app/identity.html |
+| **Platform Pulse (Phase 0)** | https://cortex-platforms.netlify.app/metrics-dashboard.html |
+| **Offers** | https://cortex-platforms.netlify.app/offers.html |
+| **GitHub Pages shell** | https://cortex-nexus-sovereign-industrial-ai.github.io/cortex-platform/ |
+| **Google Business** | https://maps.google.com/maps?cid=2073161413550473641 |
+| **Command repo** | https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform |
+
+**Identity source of truth:** [IDENTITY.md](./IDENTITY.md) · **Ops entry:** [COMMAND_CENTER.md](./COMMAND_CENTER.md) · **Health:** [STATUS.md](./STATUS.md)
+
+---
+
+## What this repo is
+
+- Static public HTML on Netlify (`publish = "."`) + pure Node functions under `netlify/functions/`
+- Express API under `backend/` (Paystack webhooks, JWT, SQLite when hosted)
+- Edge CBF sources under `edge/`
+- Internal agents under `agents/` (e.g. Mike Complex AI = **runner only**, not public company name)
+
+---
+
+## Local / deploy notes
 
 ```bash
-git clone https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform.git
-cd cortex-platform
-docker compose up          # spins up local dev cluster + API
-curl http://localhost:8080/health
+# No heavy root npm install required for static + functions
+# Netlify: linked to main → auto deploy
+# Secrets: Netlify env only (never commit)
 ```
 
-SDK smoke-test (Python ≥3.9):
+Required for payments (founder): `PAYSTACK_SECRET_KEY` on Netlify + Paystack payment link under business name **Cortex Intelligence Nexus**.
 
-```bash
-pip install -e ./millions-sdk-core
-python - <<'PY'
-from cortex.millions import Agent
-print(Agent("demo").run("ping"))
-PY
-```
+Optional: `SOFA_API_KEY`, Shopify tokens — see `backend/.env.example` and `docs/operations/`.
 
 ---
 
-## Why Cortex-Platform?
+## Policy
 
-| Pain | Our Answer |
-|---|---|
-| Vendor lock-in & data exfil | Air-gapped containers, signed images, policy-as-code |
-| Fragmented OT/IT stacks | One control-plane for agents, pipelines, edge inference |
-| Compliance overhead | SBOM, provenance, immutable audit logs out-of-the-box |
+- Public name: **Cortex Intelligence Nexus** only  
+- Founder name: **Michael Ujuku Morim** only  
+- Primary website: **https://cortex-platforms.netlify.app**  
+- Do not present Mike Complex AI / mikecomplexai as the company identity  
 
----
-
-## Architecture (one picture)
-
-```
-┌─────────────┐      gRPC        ┌──────────────┐
-│   Agents    │◄───────────────►│  Core API    │
-└─────────────┘                 └──────┬───────┘
-                                       │HTTPS
-                               ┌───────▼───────┐
-                               │  Edge Nodes   │
-                               └───────────────┘
-```
-
-Full diagram & ADRs → [`ARCHITECTURE.md`](ARCHITECTURE.md)
-
----
-
-## Repository Layout
-
-```
-agents/               – pluggable autonomous workers
-api/                  – FastAPI gateway + OpenAPI specs
-backend/              – Go/Python micro-services
-docs/                 – MkDocs sources → Netlify
-edge/                 – ONNX/TensorRT runtimes for NVIDIA Jetson, etc.
-frontend/             – React dev-console
-millions-sdk-core/    – Python SDK (`pip install cortex-millions`)
-prisma/               – schema & migrations
-```
-
----
-
-## Contributing
-
-See [`CONTRIBUTING.md`](CONTRIBUTING.md).  
-We follow Conventional Commits + signed DCO.
-
----
-
-## Enterprise & Security
-
-- **License**: Apache 2.0 (commercial-friendly)  
-- **Security policy**: [`SECURITY.md`](SECURITY.md)  
-- **Contact sales / pilot**: <info@cortex-platforms.netlify.app>
-
-© 2025 Cortex Intelligence Nexus – EU sovereign stack.
-```
-
-────────────────
-2. One-liner to push the new README
-
-```bash
-# Run from the repo root on your laptop or Codespace
-curl -s https://raw.githubusercontent.com/<your-username>/cortex-platform/main/README.md \
-  > README.md.new \
-&& mv README.md.new README.md \
-&& git add README.md \
-&& git commit -m "docs: enterprise-grade README + badges" \
-&& git push origin main
-```
-
-────────────────
-3. GitHub Action – auto-deploy docs to Netlify  
-
-`.github/workflows/deploy-netlify.yml`
-
-```yaml
-name: Deploy Docs to Netlify
-
-on:
-  push:
-    branches: [main]
-    paths:
-      - 'docs/**'
-      - 'README.md'
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - run: npm i -g netlify-cli
-      - name: Deploy
-        run: netlify deploy --prod --dir=site --message "docs update ${{ github.sha }}"
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-```
-
-Add the two secrets in **Settings → Secrets and variables → Actions**.
+© 2026 Cortex Intelligence Nexus
