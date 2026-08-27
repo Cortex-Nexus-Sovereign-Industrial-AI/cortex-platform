@@ -1,21 +1,21 @@
-# Cinis AI Nexus Documentation
+# Cortex Intelligence Nexus — Documentation entry
 
-**Official Documentation for Cortex-Nexus Platform**
+**Brand:** Cortex Intelligence Nexus  
+**Repo:** cortex-platform  
+**Founder:** Michael Ujuku Morim
 
-Welcome to the sovereign industrial AI platform.
+## Start here
 
-## Quick Navigation
-- [Installation Guide](installation.md)
-- [Quick Start (10 minutes)](quickstart.md)
-- [Architecture Overview](architecture.md)
-- [Millions SDK Reference](sdk-reference.md)
-- [Agents Guide](agents-guide.md)
-- [Offline Mode](offline-mode.md)
+- [IDENTITY.md](./IDENTITY.md) — single source of truth  
+- [COMMAND_CENTER.md](./COMMAND_CENTER.md) — ops entry  
+- [STATUS.md](./STATUS.md) — live health  
+- [ARCHITECTURE.md](./ARCHITECTURE.md) — system shape  
+- [docs/product/CORTEX_AI_NEXUS.md](./docs/product/CORTEX_AI_NEXUS.md) — enterprise description  
 
-## Core Features
-- Edge-resilient autonomous agents
-- Full data sovereignty & private nodes
-- Cortex Nexus, MikeComplex AI, Builder Bot, Scout AI
-- Paystack + Flutterwave payments
+## Live
 
-**Last Updated**: July 2026
+- Platform: https://cortex-platforms.netlify.app  
+- Identity: https://cortex-platforms.netlify.app/identity.html  
+- Pulse: https://cortex-platforms.netlify.app/metrics-dashboard.html  
+
+Internal agents (Mike Complex AI, etc.) are runners under the founder — not public brand names.
