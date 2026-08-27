@@ -3,868 +3,396 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Cortex Intelligence Nexus - Industrial AI Engineering & Autonomous Systems Architecture. Verified Software Company.">
-    <meta name="keywords" content="AI, Autonomous Systems, Industrial AI, Machine Learning, Enterprise Solutions">
+    <meta name="description" content="Cortex Intelligence Nexus — Industrial AI Engineering & Autonomous Systems. Verified software company, Ogoja, Nigeria.">
     <meta name="theme-color" content="#0f172a">
-    <meta name="google-site-verification" content="cortex-intelligence-nexus">
-    
-    <!-- Structured Data for Google Business Profile -->
+
+    <!-- Company identity only — IDENTITY.md / Google Business SSOT -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "SoftwareCompany",
+      "@type": "Organization",
       "name": "Cortex Intelligence Nexus",
-      "description": "Industrial AI Engineering & Autonomous Systems Architecture",
+      "alternateName": ["CINIS"],
+      "description": "Industrial AI engineering and autonomous systems architecture.",
       "url": "https://cortex-platforms.netlify.app/",
-      "logo": "https://cortex-platforms.netlify.app/logo.png",
-      "telephone": "+234",
+      "email": "cortexnexus@proton.me",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Ogoja",
+        "addressRegion": "Cross River State",
         "addressCountry": "NG"
       },
-      "foundingDate": "2024",
       "founder": {
         "@type": "Person",
         "name": "Michael Ujuku Morim"
       },
       "sameAs": [
+        "https://maps.google.com/maps?cid=2073161413550473641",
         "https://github.com/Cortex-Nexus-Sovereign-Industrial-AI",
+        "https://x.com/CinisIndustry",
         "https://www.youtube.com/@MikecomplexAI-i2e",
-        "https://huggingface.co/mikecomplexai",
-        "https://maps.google.com/maps?cid=2073161413550473641"
+        "https://www.linkedin.com/in/michaelujukumorim"
       ]
     }
     </script>
 
     <title>Cortex Intelligence Nexus | Industrial AI Solutions</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             color: #94a3b8;
             line-height: 1.6;
             overflow-x: hidden;
         }
-
-        /* Navigation */
         nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
+            position: fixed; top: 0; width: 100%;
             background: rgba(15, 23, 42, 0.95);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid #1e293b;
             z-index: 1000;
             padding: 1rem 2rem;
         }
-
         nav .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            max-width: 1200px; margin: 0 auto;
+            display: flex; justify-content: space-between; align-items: center;
         }
-
         nav .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #00C7B7;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            font-size: 1.25rem; font-weight: 700; color: #00C7B7;
+            display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;
         }
-
         nav .verified-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.3rem;
+            display: inline-flex; align-items: center; gap: 0.3rem;
             background: rgba(0, 199, 183, 0.1);
-            border: 1px solid #00C7B7;
-            border-radius: 4px;
-            padding: 0.2rem 0.5rem;
-            font-size: 0.7rem;
-            color: #00C7B7;
+            border: 1px solid #00C7B7; border-radius: 4px;
+            padding: 0.2rem 0.5rem; font-size: 0.7rem; color: #00C7B7;
         }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        nav a {
-            color: #94a3b8;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: #00C7B7;
-        }
-
-        /* Hero Section */
+        nav ul { display: flex; list-style: none; gap: 1.5rem; flex-wrap: wrap; }
+        nav a { color: #94a3b8; text-decoration: none; font-size: 0.9rem; }
+        nav a:hover { color: #00C7B7; }
         .hero {
-            margin-top: 60px;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            text-align: center;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            margin-top: 60px; min-height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            padding: 2rem; text-align: center;
         }
-
-        .hero-content {
-            max-width: 900px;
-            animation: fadeInUp 1s ease-out;
-        }
-
+        .hero-content { max-width: 900px; }
         .hero .verified-entity {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(0, 199, 183, 0.1);
-            border: 1px solid #00C7B7;
-            border-radius: 6px;
-            padding: 0.5rem 1rem;
-            margin-bottom: 1.5rem;
-            font-size: 0.9rem;
-            color: #00C7B7;
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: rgba(0, 199, 183, 0.1); border: 1px solid #00C7B7;
+            border-radius: 6px; padding: 0.5rem 1rem; margin-bottom: 1.5rem;
+            font-size: 0.9rem; color: #00C7B7;
         }
-
         .hero h1 {
-            font-size: clamp(2.5rem, 8vw, 4rem);
-            color: #f8fafc;
-            margin-bottom: 0.5rem;
-            font-weight: 800;
+            font-size: clamp(2rem, 7vw, 3.5rem); color: #f8fafc;
+            margin-bottom: 0.5rem; font-weight: 800;
         }
-
         .hero .tagline {
-            font-size: clamp(1rem, 3vw, 1.5rem);
-            color: #00C7B7;
-            margin-bottom: 2rem;
-            font-weight: 600;
+            font-size: clamp(1rem, 3vw, 1.35rem); color: #00C7B7;
+            margin-bottom: 1.5rem; font-weight: 600;
         }
-
-        .hero p {
-            font-size: 1.1rem;
-            color: #cbd5e1;
-            margin-bottom: 2rem;
-            line-height: 1.8;
-        }
-
+        .hero p { font-size: 1.05rem; color: #cbd5e1; margin-bottom: 1rem; }
         .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
+            display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem;
         }
-
         .btn {
-            padding: 0.75rem 2rem;
-            border: none;
-            border-radius: 6px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
+            padding: 0.75rem 1.75rem; border-radius: 6px; font-size: 1rem; font-weight: 600;
+            text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;
         }
-
-        .btn-primary {
-            background-color: #00C7B7;
-            color: #0f172a;
-        }
-
-        .btn-primary:hover {
-            background-color: #00b3a0;
-            transform: translateY(-2px);
-        }
-
+        .btn-primary { background: #00C7B7; color: #0f172a; border: none; }
         .btn-secondary {
-            background-color: #1e293b;
-            color: #00C7B7;
-            border: 2px solid #00C7B7;
+            background: #1e293b; color: #00C7B7; border: 2px solid #00C7B7;
         }
-
-        .btn-secondary:hover {
-            background-color: #0f172a;
-            transform: translateY(-2px);
-        }
-
-        /* Quick Links Component */
         .quick-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-            margin-top: 3rem;
+            display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 2.5rem;
         }
-
         .quick-links a {
-            display: inline-flex;
-            align-items: center;
-            background-color: rgba(255, 255, 255, 0.05);
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 600;
-            padding: 8px 16px;
-            border-radius: 6px;
-            border: 1px solid #1e293b;
-            transition: all 0.3s;
+            display: inline-flex; background: rgba(255,255,255,0.05); color: #fff;
+            text-decoration: none; font-size: 0.85rem; font-weight: 600;
+            padding: 8px 16px; border-radius: 6px; border: 1px solid #1e293b;
         }
-
-        .quick-links a:hover {
-            background-color: rgba(0, 199, 183, 0.2);
-            border-color: #00C7B7;
-            transform: translateY(-2px);
-        }
-
-        /* Sections */
-        section {
-            padding: 4rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
+        .quick-links a:hover { border-color: #00C7B7; }
+        section { padding: 3.5rem 2rem; max-width: 1200px; margin: 0 auto; }
         .section-title {
-            font-size: clamp(2rem, 5vw, 3rem);
-            color: #f8fafc;
-            margin-bottom: 3rem;
-            text-align: center;
-            font-weight: 700;
+            font-size: clamp(1.5rem, 4vw, 2.25rem); color: #f8fafc;
+            margin-bottom: 2rem; text-align: center; font-weight: 700;
         }
-
-        /* Portals Grid */
         .portals-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;
         }
-
         .portal-card {
-            background: rgba(30, 41, 59, 0.5);
-            border: 1px solid #1e293b;
-            border-radius: 12px;
-            padding: 2rem;
-            transition: all 0.3s;
-            cursor: pointer;
-            animation: fadeIn 0.6s ease-out forwards;
-            opacity: 0;
+            background: rgba(30, 41, 59, 0.5); border: 1px solid #1e293b;
+            border-radius: 12px; padding: 1.5rem;
         }
-
-        .portal-card:nth-child(1) { animation-delay: 0.1s; }
-        .portal-card:nth-child(2) { animation-delay: 0.2s; }
-        .portal-card:nth-child(3) { animation-delay: 0.3s; }
-        .portal-card:nth-child(4) { animation-delay: 0.4s; }
-        .portal-card:nth-child(5) { animation-delay: 0.5s; }
-
-        .portal-card:hover {
-            background: rgba(30, 41, 59, 0.8);
-            border-color: #00C7B7;
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 199, 183, 0.1);
-        }
-
-        .portal-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .portal-card h3 {
-            color: #f8fafc;
-            margin-bottom: 0.5rem;
-            font-size: 1.3rem;
-        }
-
-        .portal-card p {
-            color: #cbd5e1;
-            font-size: 0.9rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .portal-card a {
-            color: #00C7B7;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .portal-card a:hover {
-            color: #00b3a0;
-        }
-
-        /* Verified Badge */
+        .portal-card:hover { border-color: #00C7B7; }
+        .portal-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+        .portal-card h3 { color: #f8fafc; margin-bottom: 0.4rem; font-size: 1.15rem; }
+        .portal-card p { color: #cbd5e1; font-size: 0.9rem; margin-bottom: 1rem; }
+        .portal-card a { color: #00C7B7; text-decoration: none; font-weight: 600; }
         .verified-banner {
-            background: rgba(0, 199, 183, 0.05);
-            border: 1px solid #00C7B7;
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            text-align: center;
+            background: rgba(0, 199, 183, 0.05); border: 1px solid #00C7B7;
+            border-radius: 8px; padding: 1.5rem; text-align: center; margin-bottom: 1rem;
         }
-
-        .verified-banner h3 {
-            color: #00C7B7;
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
+        .verified-banner h3 { color: #00C7B7; margin-bottom: 0.5rem; }
+        .note {
+            font-size: 0.85rem; color: #64748b; text-align: center;
+            max-width: 640px; margin: 0 auto 2rem;
         }
-
-        .verified-banner p {
-            color: #94a3b8;
-            font-size: 0.9rem;
-        }
-
-        /* Infinite Scroll Container */
         .infinite-scroll {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 1.5rem;
-            padding: 2rem 0;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1rem;
         }
-
         .scroll-item {
-            background: rgba(30, 41, 59, 0.4);
-            border: 1px solid #1e293b;
-            border-radius: 8px;
-            padding: 1.5rem;
-            text-align: center;
-            transition: all 0.3s;
-            animation: fadeIn 0.5s ease-out;
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            background: rgba(30, 41, 59, 0.4); border: 1px solid #1e293b;
+            border-radius: 8px; padding: 1.25rem; text-align: center;
+            text-decoration: none; color: inherit; display: flex; flex-direction: column; align-items: center;
         }
-
-        .scroll-item:hover {
-            background: rgba(30, 41, 59, 0.7);
-            border-color: #00C7B7;
-            transform: translateY(-5px);
-        }
-
-        .scroll-item .platform-name {
-            color: #f8fafc;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .scroll-item .platform-icon {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Loading Indicator */
-        .loading {
-            text-align: center;
-            padding: 2rem;
-            color: #00C7B7;
-        }
-
-        .spinner {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            border: 3px solid #1e293b;
-            border-top-color: #00C7B7;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Google Business Verification */
+        .scroll-item:hover { border-color: #00C7B7; }
+        .scroll-item .platform-name { color: #f8fafc; font-weight: 600; font-size: 0.9rem; }
+        .scroll-item .platform-icon { font-size: 1.75rem; margin-bottom: 0.4rem; }
         .google-business {
-            background: rgba(30, 41, 59, 0.5);
-            border: 1px solid #1e293b;
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-            text-align: center;
+            background: rgba(30, 41, 59, 0.5); border: 1px solid #1e293b;
+            border-radius: 12px; padding: 1.75rem; margin-bottom: 2rem; text-align: center;
         }
-
-        .google-business h3 {
-            color: #00C7B7;
-            margin-bottom: 1rem;
-        }
-
+        .google-business h3 { color: #00C7B7; margin-bottom: 0.75rem; }
         .google-business a {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(0, 199, 183, 0.1);
-            border: 1px solid #00C7B7;
-            color: #00C7B7;
-            padding: 0.75rem 1.5rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
+            display: inline-flex; gap: 0.5rem; background: rgba(0, 199, 183, 0.1);
+            border: 1px solid #00C7B7; color: #00C7B7; padding: 0.65rem 1.25rem;
+            border-radius: 6px; text-decoration: none; font-weight: 600;
         }
-
-        .google-business a:hover {
-            background: rgba(0, 199, 183, 0.2);
-        }
-
-        /* Footer */
         footer {
-            background-color: #0f172a;
-            color: #94a3b8;
-            padding: 3rem 2rem;
-            border-top: 1px solid #1e293b;
-            margin-top: 4rem;
+            background: #0f172a; color: #94a3b8; padding: 2.5rem 2rem;
+            border-top: 1px solid #1e293b; margin-top: 3rem;
         }
-
         footer .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
+            max-width: 1200px; margin: 0 auto;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;
         }
-
-        footer h4 {
-            color: #f8fafc;
-            margin-bottom: 1rem;
-            font-size: 1rem;
-        }
-
-        footer ul {
-            list-style: none;
-        }
-
-        footer li {
-            margin-bottom: 0.5rem;
-        }
-
-        footer a {
-            color: #94a3b8;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        footer a:hover {
-            color: #00C7B7;
-        }
-
+        footer h4 { color: #f8fafc; margin-bottom: 0.75rem; }
+        footer ul { list-style: none; }
+        footer a { color: #94a3b8; text-decoration: none; }
+        footer a:hover { color: #00C7B7; }
         .footer-bottom {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding-top: 2rem;
-            border-top: 1px solid #1e293b;
-            text-align: center;
-            font-size: 0.9rem;
+            max-width: 1200px; margin: 1.5rem auto 0; padding-top: 1.5rem;
+            border-top: 1px solid #1e293b; text-align: center; font-size: 0.9rem;
         }
-
-        .verified-footer {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            color: #00C7B7;
-            margin-top: 1rem;
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Mobile Responsive */
+        .verified-footer { color: #00C7B7; margin-top: 0.75rem; }
         @media (max-width: 768px) {
-            nav ul {
-                gap: 1rem;
-                font-size: 0.8rem;
-            }
-
-            .hero {
-                margin-top: 80px;
-                padding: 1.5rem;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-            }
-
-            .btn {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .portals-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .infinite-scroll {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-                gap: 1rem;
-            }
-
-            footer .container {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Accessibility */
-        .skip-link {
-            position: absolute;
-            top: -40px;
-            left: 0;
-            background: #00C7B7;
-            color: #0f172a;
-            padding: 8px;
-            z-index: 100;
-        }
-
-        .skip-link:focus {
-            top: 0;
+            nav ul { gap: 0.75rem; font-size: 0.8rem; }
+            .cta-buttons { flex-direction: column; }
+            .btn { width: 100%; justify-content: center; }
         }
     </style>
 </head>
 <body>
-    <a href="#main" class="skip-link">Skip to main content</a>
-
-    <!-- Navigation -->
     <nav>
         <div class="container">
             <div class="logo">
-                ⚡ Cortex Intelligence Nexus
+                Cortex Intelligence Nexus
                 <span class="verified-badge">✓ VERIFIED</span>
             </div>
             <ul>
                 <li><a href="#portals">Portals</a></li>
                 <li><a href="#developer">Developer</a></li>
-                <li><a href="#media">Media</a></li>
+                <li><a href="#media">Channels</a></li>
                 <li><a href="#ecosystem">Ecosystem</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <div class="verified-entity">
-                ✓ Verified Google Business Profile
-            </div>
-            
+            <div class="verified-entity">✓ Verified Google Business Profile</div>
             <h1>Cortex Intelligence Nexus</h1>
             <p class="tagline">Industrial AI Engineering & Autonomous Systems Architecture</p>
-            <p><strong>Founder:</strong> Michael Ujuku Morim | <strong>Location:</strong> Ogoja, Nigeria</p>
-            <p><strong>Category:</strong> Software Company | <strong>Status:</strong> Verified & Operational</p>
-            
+            <p><strong>Founder:</strong> Michael Ujuku Morim · <strong>HQ:</strong> Ogoja, Cross River State, Nigeria</p>
+            <p><strong>Category:</strong> Software company · <strong>Status:</strong> Verified & operational</p>
             <div class="cta-buttons">
-                <a href="https://cortex-platforms.netlify.app" class="btn btn-primary" target="_blank">⚡ Launch Live App</a>
-                <a href="#portals" class="btn btn-secondary">📖 Explore Ecosystem</a>
+                <a href="https://cortex-platforms.netlify.app" class="btn btn-primary">Launch live platform</a>
+                <a href="https://cortex-platforms.netlify.app/identity.html" class="btn btn-secondary">Identity & verification</a>
             </div>
-
             <div class="quick-links">
-                <a href="https://cortex-platforms.netlify.app" target="_blank">⚡ Live App</a>
-                <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI" target="_blank">📦 GitHub Org</a>
-                <a href="https://huggingface.co/mikecomplexai" target="_blank">🤗 Hugging Face</a>
-                <a href="https://linktr.ee/cinisnioai" target="_blank">🌳 Linktree</a>
-                <a href="https://www.youtube.com/@MikecomplexAI-i2e" target="_blank">▶ YouTube</a>
+                <a href="https://cortex-platforms.netlify.app">Live platform</a>
+                <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI">GitHub organization</a>
+                <a href="https://maps.google.com/maps?cid=2073161413550473641">Google Business</a>
+                <a href="https://x.com/CinisIndustry">X · Company</a>
+                <a href="https://www.youtube.com/@MikecomplexAI-i2e">YouTube</a>
             </div>
         </div>
     </section>
 
-    <!-- Google Business Verification -->
     <section id="verified">
         <div class="verified-banner">
-            <h3>✓ Verified Business Entity</h3>
-            <p><strong>Cortex Intelligence Nexus</strong> - Registered & Verified Software Company</p>
-            <div style="margin-top: 1rem;">
-                <a href="https://maps.google.com/maps?cid=2073161413550473641" target="_blank">
-                    📍 View on Google Maps
-                </a>
-            </div>
+            <h3>✓ Verified business entity</h3>
+            <p><strong>Cortex Intelligence Nexus</strong> — public name and Google listing match. Founder: Michael Ujuku Morim.</p>
+            <p style="margin-top:0.75rem;">
+                <a href="https://maps.google.com/maps?cid=2073161413550473641" style="color:#00C7B7;">View on Google Maps</a>
+                ·
+                <a href="https://search.google.com/local/writereview?placeid=ChIJu_fwtQXAO6gRqQG5UFJZxRw" style="color:#00C7B7;">Leave a review</a>
+            </p>
         </div>
+        <p class="note">Internal system agents (e.g. execution runners) are not public company names. All public surfaces use <strong>Cortex Intelligence Nexus</strong> only.</p>
     </section>
 
-    <!-- Portals Section -->
     <section id="portals">
-        <h2 class="section-title">🚀 Primary Portals & Deployments</h2>
+        <h2 class="section-title">Primary portals</h2>
         <div class="portals-grid">
             <div class="portal-card">
                 <div class="portal-icon">⚡</div>
-                <h3>Live Web App</h3>
-                <p>Access the live Cortex Intelligence platform on Netlify</p>
-                <a href="https://cortex-platforms.netlify.app" target="_blank">Visit Portal →</a>
+                <h3>Live platform</h3>
+                <p>Primary public host (Netlify) — app, identity, member tools.</p>
+                <a href="https://cortex-platforms.netlify.app">Open →</a>
             </div>
-
             <div class="portal-card">
-                <div class="portal-icon">📄</div>
-                <h3>Project Homepage</h3>
-                <p>Official documentation and project overview on GitHub Pages</p>
-                <a href="https://cortex-nexus-sovereign-industrial-ai.github.io/cortex-platform/" target="_blank">Visit Homepage →</a>
+                <div class="portal-icon">🪪</div>
+                <h3>Identity & verification</h3>
+                <p>Canonical identity page and structured data.</p>
+                <a href="https://cortex-platforms.netlify.app/identity.html">Open →</a>
             </div>
-
             <div class="portal-card">
-                <div class="portal-icon">🔗</div>
-                <h3>Unified Hub</h3>
-                <p>Linktree portal connecting all ecosystem resources</p>
-                <a href="https://linktr.ee/cinisnioai" target="_blank">Visit Hub →</a>
+                <div class="portal-icon">📊</div>
+                <h3>Platform Pulse</h3>
+                <p>Phase 0 channel registry (honest status — not fake live APIs).</p>
+                <a href="https://cortex-platforms.netlify.app/metrics-dashboard.html">Open →</a>
             </div>
-
             <div class="portal-card">
-                <div class="portal-icon">👤</div>
-                <h3>Business Profile</h3>
-                <p>Official business information and contact details</p>
-                <a href="https://maps.google.com/maps?cid=2073161413550473641" target="_blank">View Profile →</a>
+                <div class="portal-icon">📍</div>
+                <h3>Google Business</h3>
+                <p>Verified listing — external identity signal.</p>
+                <a href="https://maps.google.com/maps?cid=2073161413550473641">Open →</a>
             </div>
-
             <div class="portal-card">
-                <div class="portal-icon">💾</div>
-                <h3>SourceForge</h3>
-                <p>Open source project repository and distribution</p>
-                <a href="https://sourceforge.net/projects/cortex-platform/" target="_blank">Visit SourceForge →</a>
+                <div class="portal-icon">📦</div>
+                <h3>Command repository</h3>
+                <p>Source of truth on GitHub.</p>
+                <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform">Open →</a>
             </div>
         </div>
     </section>
 
-    <!-- Developer Section -->
     <section id="developer">
-        <h2 class="section-title">🛠️ Developer Repositories & AI Hubs</h2>
+        <h2 class="section-title">Developer</h2>
         <div class="portals-grid">
             <div class="portal-card">
                 <div class="portal-icon">📦</div>
-                <h3>GitHub Organization</h3>
-                <p>Primary development organization with all repositories</p>
-                <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI" target="_blank">View Org →</a>
+                <h3>GitHub organization</h3>
+                <p>Cortex-Nexus-Sovereign-Industrial-AI</p>
+                <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI">View org →</a>
             </div>
-
-            <div class="portal-card">
-                <div class="portal-icon">🤖</div>
-                <h3>Hugging Face</h3>
-                <p>AI models, datasets, and machine learning resources</p>
-                <a href="https://huggingface.co/mikecomplexai" target="_blank">Visit Profile →</a>
-            </div>
-
-            <div class="portal-card">
-                <div class="portal-icon">📦</div>
-                <h3>Package Registry</h3>
-                <p>Published packages and artifacts for distribution</p>
-                <a href="https://github.com/orgs/Cortex-Nexus-Sovereign-Industrial-AI/packages" target="_blank">View Packages →</a>
-            </div>
-
             <div class="portal-card">
                 <div class="portal-icon">💬</div>
                 <h3>Discussions</h3>
-                <p>Community forum and project discussions</p>
-                <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/discussions" target="_blank">Join Discussion →</a>
+                <p>Project discussions on the command repo.</p>
+                <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/discussions">Join →</a>
+            </div>
+            <div class="portal-card">
+                <div class="portal-icon">👤</div>
+                <h3>Founder GitHub</h3>
+                <p>Michael Ujuku Morim — personal account (not company name).</p>
+                <a href="https://github.com/mikecomplexai-7">View →</a>
             </div>
         </div>
     </section>
 
-    <!-- Media Section with Infinite Scroll -->
     <section id="media">
-        <h2 class="section-title">📢 Media, Social & Community Channels</h2>
-        <div class="infinite-scroll" id="mediaScroll">
-            <!-- Items loaded dynamically -->
-        </div>
-        <div id="loading" class="loading" style="display: none;">
-            <div class="spinner"></div>
-        </div>
+        <h2 class="section-title">Official channels</h2>
+        <p class="note">Links match IDENTITY.md and PUBLIC_SURFACES.md. Unverified handles are not listed.</p>
+        <div class="infinite-scroll" id="mediaScroll"></div>
     </section>
 
-    <!-- Complete Ecosystem -->
     <section id="ecosystem">
-        <h2 class="section-title">📍 Complete Ecosystem</h2>
+        <h2 class="section-title">Ecosystem</h2>
         <div class="google-business">
-            <h3>✓ Cortex Intelligence Nexus - Verified Business</h3>
-            <p>Registered software company offering enterprise AI solutions, autonomous systems, and industrial intelligence</p>
-            <a href="https://maps.google.com/maps?cid=2073161413550473641" target="_blank">
-                📍 View Google Business Profile
-            </a>
+            <h3>✓ Cortex Intelligence Nexus — verified business</h3>
+            <p>Industrial AI, agentic systems, and sovereign automation tools. Ogoja, Nigeria.</p>
+            <a href="https://maps.google.com/maps?cid=2073161413550473641">View Google Business Profile</a>
         </div>
-        
         <div class="portals-grid">
             <div class="portal-card">
                 <div class="portal-icon">📺</div>
-                <h3>YouTube Channel</h3>
-                <p>Video content, tutorials, and project updates</p>
-                <a href="https://www.youtube.com/@MikecomplexAI-i2e" target="_blank">Subscribe →</a>
+                <h3>YouTube</h3>
+                <p>Video updates for the platform.</p>
+                <a href="https://www.youtube.com/@MikecomplexAI-i2e">Open →</a>
             </div>
-
             <div class="portal-card">
-                <div class="portal-icon">📝</div>
-                <h3>Medium Publications</h3>
-                <p>In-depth technical articles and insights</p>
-                <a href="https://medium.com/@mikecomplexai" target="_blank">Read Articles →</a>
+                <div class="portal-icon">🐦</div>
+                <h3>X · Company</h3>
+                <p>@CinisIndustry</p>
+                <a href="https://x.com/CinisIndustry">Open →</a>
             </div>
-
             <div class="portal-card">
-                <div class="portal-icon">🌍</div>
-                <h3>Social Presence</h3>
-                <p>Follow on Bluesky, X, Instagram, TikTok, Facebook</p>
-                <a href="https://linktr.ee/cinisnioai" target="_blank">All Links →</a>
+                <div class="portal-icon">🐦</div>
+                <h3>X · Founder</h3>
+                <p>@MikeComplexAie — founder channel, not company legal name.</p>
+                <a href="https://x.com/MikeComplexAie">Open →</a>
             </div>
-
             <div class="portal-card">
-                <div class="portal-icon">📊</div>
-                <h3>Activity Metrics</h3>
-                <p>Unified metrics and analytics dashboard</p>
-                <a href="#metrics" target="_blank">View Metrics →</a>
+                <div class="portal-icon">📱</div>
+                <h3>TikTok</h3>
+                <p>@cinisnio.ai</p>
+                <a href="https://www.tiktok.com/@cinisnio.ai">Open →</a>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
             <div>
                 <h4>Cortex Intelligence Nexus</h4>
-                <p><strong>Verified Software Company</strong></p>
-                <p>Industrial AI Engineering & Autonomous Systems Architecture</p>
-                <p>Founded by Michael Ujuku Morim | Ogoja, Nigeria</p>
+                <p>Verified software company</p>
+                <p>Founder: Michael Ujuku Morim · Ogoja, Nigeria</p>
+                <p>cortexnexus@proton.me</p>
             </div>
             <div>
-                <h4>Quick Navigation</h4>
+                <h4>Navigate</h4>
                 <ul>
                     <li><a href="#portals">Portals</a></li>
-                    <li><a href="#developer">Developer</a></li>
-                    <li><a href="#media">Media</a></li>
-                    <li><a href="#ecosystem">Ecosystem</a></li>
+                    <li><a href="https://cortex-platforms.netlify.app/identity.html">Identity</a></li>
+                    <li><a href="https://cortex-platforms.netlify.app/metrics-dashboard.html">Platform Pulse</a></li>
                 </ul>
             </div>
             <div>
-                <h4>Developer Resources</h4>
+                <h4>Verify</h4>
                 <ul>
-                    <li><a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI" target="_blank">GitHub Org</a></li>
-                    <li><a href="https://huggingface.co/mikecomplexai" target="_blank">Hugging Face</a></li>
-                    <li><a href="https://medium.com/@mikecomplexai" target="_blank">Medium</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4>Connect & Verify</h4>
-                <ul>
-                    <li><a href="https://maps.google.com/maps?cid=2073161413550473641" target="_blank">📍 Google Business</a></li>
-                    <li><a href="https://linktr.ee/cinisnioai" target="_blank">🌳 All Links</a></li>
-                    <li><a href="https://cortex-platforms.netlify.app" target="_blank">⚡ Live App</a></li>
+                    <li><a href="https://maps.google.com/maps?cid=2073161413550473641">Google Business</a></li>
+                    <li><a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI">GitHub org</a></li>
+                    <li><a href="https://cortex-platforms.netlify.app">Live platform</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <div class="verified-footer">
-                ✓ Verified Entity: Cortex Intelligence Nexus
-            </div>
+            <div class="verified-footer">✓ Public identity: Cortex Intelligence Nexus only</div>
             <p>© 2026 Cortex Intelligence Nexus. All rights reserved.</p>
-            <p>Ogoja, Nigeria | <a href="/ECOSYSTEM_INDEX.md">Ecosystem Index</a></p>
-            <p><small>Software Company | Enterprise AI Solutions | Autonomous Systems</small></p>
         </div>
     </footer>
 
     <script>
-        // Infinite Scroll Media Channels
-        const mediaChannels = [
-            { icon: '📺', name: 'YouTube', url: 'https://www.youtube.com/@MikecomplexAI-i2e' },
-            { icon: '🐦', name: 'X (Twitter)', url: 'https://x.com/mikecomplexai' },
-            { icon: '🎨', name: 'Instagram', url: 'https://www.instagram.com/mikecomplexai' },
-            { icon: '📱', name: 'TikTok', url: 'https://www.tiktok.com/@mikecomplexai' },
-            { icon: '📘', name: 'Facebook', url: 'https://www.facebook.com/mikecomplexai' },
-            { icon: '🦋', name: 'Bluesky', url: 'https://bsky.app/profile/cortexnexus.bsky.social' },
-            { icon: '📝', name: 'Medium', url: 'https://medium.com/@mikecomplexai' },
-            { icon: '🎤', name: 'Audiomack', url: 'https://audiomack.com/mikecomplexai-' },
-            { icon: '🎫', name: 'Tix Africa', url: 'https://tix.africa/discover/cortex-intelligence-nexus' },
-            { icon: '🛍️', name: 'Hotmart', url: 'https://pay.hotmart.com/M105781259N' },
-            { icon: '📦', name: 'GitHub', url: 'https://github.com/Cortex-Nexus-Sovereign-Industrial-AI' },
-            { icon: '🤗', name: 'Hugging Face', url: 'https://huggingface.co/mikecomplexai' }
-        ];
+      // Official channels only (IDENTITY.md / PUBLIC_SURFACES.md)
+      const mediaChannels = [
+        { icon: '📺', name: 'YouTube', url: 'https://www.youtube.com/@MikecomplexAI-i2e' },
+        { icon: '🐦', name: 'X · Company', url: 'https://x.com/CinisIndustry' },
+        { icon: '🐦', name: 'X · Founder', url: 'https://x.com/MikeComplexAie' },
+        { icon: '📱', name: 'TikTok', url: 'https://www.tiktok.com/@cinisnio.ai' },
+        { icon: '💼', name: 'LinkedIn', url: 'https://www.linkedin.com/in/michaelujukumorim' },
+        { icon: '📝', name: 'Medium', url: 'https://medium.com/@mikecomplexai' },
+        { icon: '📦', name: 'GitHub', url: 'https://github.com/Cortex-Nexus-Sovereign-Industrial-AI' },
+        { icon: '📍', name: 'Google Business', url: 'https://maps.google.com/maps?cid=2073161413550473641' },
+        { icon: '🪪', name: 'Identity', url: 'https://cortex-platforms.netlify.app/identity.html' },
+        { icon: '📊', name: 'Platform Pulse', url: 'https://cortex-platforms.netlify.app/metrics-dashboard.html' }
+      ];
 
-        let currentIndex = 0;
-
-        function loadMoreChannels() {
-            const container = document.getElementById('mediaScroll');
-            const loadingDiv = document.getElementById('loading');
-            loadingDiv.style.display = 'block';
-
-            // Simulate network delay
-            setTimeout(() => {
-                const itemsToAdd = 4;
-                for (let i = 0; i < itemsToAdd && currentIndex < mediaChannels.length; i++) {
-                    const channel = mediaChannels[currentIndex];
-                    const item = document.createElement('a');
-                    item.href = channel.url;
-                    item.target = '_blank';
-                    item.rel = 'noopener noreferrer';
-                    item.className = 'scroll-item';
-                    item.innerHTML = `
-                        <div class="platform-icon">${channel.icon}</div>
-                        <div class="platform-name">${channel.name}</div>
-                    `;
-                    container.appendChild(item);
-                    currentIndex++;
-                }
-                loadingDiv.style.display = 'none';
-            }, 300);
-        }
-
-        // Initial load
-        loadMoreChannels();
-
-        // Infinite scroll detection
-        window.addEventListener('scroll', () => {
-            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 1000) {
-                if (currentIndex < mediaChannels.length) {
-                    loadMoreChannels();
-                }
-            }
-        });
-
-        // Smooth scroll for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
-                if (href !== '#') {
-                    e.preventDefault();
-                    const target = document.querySelector(href);
-                    if (target) {
-                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                }
-            });
-        });
+      const container = document.getElementById('mediaScroll');
+      mediaChannels.forEach(function (channel) {
+        const item = document.createElement('a');
+        item.href = channel.url;
+        item.target = '_blank';
+        item.rel = 'noopener noreferrer';
+        item.className = 'scroll-item';
+        item.innerHTML =
+          '<div class="platform-icon">' + channel.icon + '</div>' +
+          '<div class="platform-name">' + channel.name + '</div>';
+        container.appendChild(item);
+      });
     </script>
 </body>
 </html>
