@@ -1,8 +1,22 @@
 # Cortex Intelligence Nexus — LIVE STATUS
-**Updated:** 2026-08-27 (section activation pass)  
+**Updated:** 2026-08-29 (SSOT push confirmation)  
 **Brand (public only):** Cortex Intelligence Nexus  
 **Founder:** Michael Ujuku Morim · GitHub mikecomplexai-7  
 **Runner agent (not public brand):** Mike Complex AI
+
+---
+
+## Single Source of Truth (LOCKED)
+
+| Layer | Canonical |
+|-------|-----------|
+| **Repository** | https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform |
+| **GitHub Pages shell** | https://cortex-nexus-sovereign-industrial-ai.github.io/cortex-platform/ |
+| **Primary live platform** | https://cortex-platforms.netlify.app |
+| **Identity SSOT** | IDENTITY.md + SSOT.md + /identity.html |
+| **Command entry** | COMMAND_CENTER.md |
+
+All public surfaces, Google Business, social CTAs, and agent outputs resolve to the above. No competing domains as SSOT.
 
 ---
 
@@ -76,3 +90,4 @@
 - Mike Complex AI = internal runner only
 - Secrets = environment variables only
 - No fake “all APIs connected” metrics
+- **SSOT locked 2026-08-29** via MikeComplex AI runner under Michael Ujuku Morim authority
