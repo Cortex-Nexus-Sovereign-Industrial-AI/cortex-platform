@@ -2,7 +2,7 @@
 
 > **Single Source of Truth (SSOT)**  
 > **Document Status:** Active  
-> **Last Aligned:** 27 August 2026  
+> **Last Aligned:** 30 August 2026  
 > **Founder & Sole Authority:** Michael Ujuku Morim
 
 ---
@@ -55,7 +55,8 @@ All internal agents operate strictly under the direction of **Michael Ujuku Mori
 
 * **Offer Name:** 30-Day AI Content System
 * **Price Tier:** ₦22,000 (Mid-ticket)
-* **Status:** Scripting & landing integration complete. Paystack authorization pending final activation.
+* **Paystack Link (live):** https://paystack.shop/pay/cortex-demo
+* **Status:** Live CTA on offers.html. Founder-authorized 2026-08-30.
 
 ---
 
