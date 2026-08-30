@@ -1,6 +1,7 @@
 # Mid-ticket: 30-Day AI Content System
 
-**Price:** ₦22,000 (test ₦18k first 10 / ₦28k after proof)  
+**Price:** ₦22,000  
+**Paystack (live):** https://paystack.shop/pay/cortex-demo  
 **Delivery:** within 5 days of payment + brief  
 **Guarantee:** not delivered in 5 days → full refund (delivery only)
 
@@ -22,7 +23,8 @@ Get a complete 30-day AI content system for your brand in 5 days.
 
 ## CTA
 
-Pay ₦22,000 → Submit brief → Receive system within 5 days.
+Pay ₦22,000 → https://paystack.shop/pay/cortex-demo  
+Submit brief → Receive system within 5 days.
 
 ## Brief fields
 
