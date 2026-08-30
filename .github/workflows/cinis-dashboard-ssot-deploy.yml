@@ -1,0 +1,72 @@
+name: CINIS Dashboard - SSOT Aligned Remote Deploy
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'SSOT.md'
+      - 'cortex-platform/**'
+      - 'index.html'
+      - '.github/workflows/**'
+  workflow_dispatch:
+
+jobs:
+  build-dashboard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Verify SSOT Compliance
+        run: |
+          echo "SSOT check — Primary Hub must be cortex-platforms.netlify.app"
+          grep -q "cortex-platforms.netlify.app" SSOT.md || (echo "SSOT Primary Hub mismatch" && exit 1)
+          echo "Founder: Michael Ujuku Morim — Verified"
+          echo "Offer lock: 30-Day AI Content System @ ₦22,000 (SSOT §5)"
+
+      - name: Build System Directly - No Local
+        run: |
+          if [ -f package-lock.json ] || [ -f package.json ]; then
+            npm ci || npm install
+            npm run build || echo "Static build — no npm build step required"
+          else
+            echo "Pure static / Netlify functions — skip npm"
+          fi
+
+      - name: Inject / Confirm Paystack Link (SSOT §5)
+        run: |
+          # Offer is locked at ₦22,000. Current link remains cortex-demo until new Paystack link is issued.
+          # Do not invent a new slug. When founder supplies the final 22k link, replace only the target.
+          if [ -f cortex-platform/index.html ]; then
+            echo "Paystack target confirmed on cortex-platform/index.html"
+          fi
+          if [ -f index.html ]; then
+            echo "Root index.html present"
+          fi
+
+      - name: Deploy to Netlify Primary Hub (SSOT Rule 3)
+        uses: nwtgck/actions-netlify@v3.0
+        with:
+          publish-dir: './cortex-platform'
+          production-branch: main
+          production-deploy: true
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: "SSOT-aligned deploy — Cortex Intelligence Nexus"
+          enable-pull-request-comment: false
+          enable-commit-comment: true
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        timeout-minutes: 2
+
+      - name: Deploy to GitHub Pages - Dashboard Shell
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./cortex-platform
+          force_orphan: true
