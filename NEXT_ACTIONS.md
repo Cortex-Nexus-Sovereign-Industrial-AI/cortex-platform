@@ -1,5 +1,5 @@
 # NEXT ACTIONS
-**Updated:** 2026-08-27
+**Updated:** 2026-08-30
 
 ## Done in repo (agents can continue from here)
 
@@ -11,10 +11,11 @@
 - HOCBF theory docs
 - Mike Complex AI agent module (runner)
 - netlify.toml: stop SPA rewrite swallowing static HTML
+- **Paystack payment link injected** → https://paystack.shop/pay/cortex-demo (offers.html)
 
 ## Founder only (cannot be faked in git)
 
-1. Paystack payment link (₦22,000) under **Cortex Intelligence Nexus**
+1. ~~Paystack payment link (₦22,000) under **Cortex Intelligence Nexus**~~ → LIVE
 2. `PAYSTACK_SECRET_KEY` (+ optional public key) on Netlify
 3. Paste Paystack URL into WhatsApp scripts
 4. Confirm webhook in Paystack dashboard
