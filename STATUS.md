@@ -1,5 +1,5 @@
 # Cortex Intelligence Nexus — LIVE STATUS
-**Updated:** 2026-08-29 (SSOT push confirmation)  
+**Updated:** 2026-08-30  
 **Brand (public only):** Cortex Intelligence Nexus  
 **Founder:** Michael Ujuku Morim · GitHub mikecomplexai-7  
 **Runner agent (not public brand):** Mike Complex AI
@@ -26,14 +26,15 @@ All public surfaces, Google Business, social CTAs, and agent outputs resolve to 
 |---------|--------|-------------|
 | **Identity / GBP** | Verified; IDENTITY.md SSOT; identity.html + aligned index | Use Maps + review links only under company name |
 | **GitHub Pages** | Marketing index aligned (Cortex Intelligence Nexus) | https://cortex-nexus-sovereign-industrial-ai.github.io/cortex-platform/ |
-| **Netlify primary** | cortex-platforms.netlify.app — functions + static | After this pass: no SPA swallow of HTML files |
+| **Netlify primary** | cortex-platforms.netlify.app — functions + static | publish = "." (root HTML files live) |
 | **Platform Pulse** | Phase 0 on main (`metrics-dashboard.html`) | Honest registry; no fake live APIs |
 | **JSON-LD / ns** | Custom context merged | Agents: `/ns/context.jsonld`; SEO: Schema.org only |
 | **SOFA** | Env placeholders + Netlify helpers | Set `SOFA_API_KEY` on Netlify if using |
-| **Paystack webhooks** | Code + durable idempotency merged | **Founder:** secret key + payment link |
+| **Paystack payment link** | **LIVE** — https://paystack.shop/pay/cortex-demo | offers.html CTA + WhatsApp scripts |
+| **Paystack webhooks** | Code + durable idempotency merged | **Founder:** secret key + webhook URL |
 | **Shopify** | Store + seed scripts; password on | Optional seed; remove password when live |
-| **Commerce docs** | Offer ladder + WhatsApp scripts | **Founder:** paste real Paystack link |
-| **Member / admin HTML** | Present as static files | Open by path after static-route fix |
+| **Commerce docs** | Offer ladder + WhatsApp scripts aligned | Ready for sales |
+| **Member / admin HTML** | Present as static files | Open by path |
 | **Edge CBF / HOCBF** | Theory docs merged | Engineering reference; not a public product page |
 | **Activity tracker** | Dry-run default | Secrets + X creds before live |
 | **Social module** | Spec-heavy under social-media-integration/ | Do not claim all APIs connected |
@@ -59,14 +60,16 @@ All public surfaces, Google Business, social CTAs, and agent outputs resolve to 
 | Shopify | cortex-intelligence-nexus.myshopify.com (password protected) |
 | Offer ladder | docs/commerce/ |
 | Mid-ticket | ₦22,000 — 30-Day AI Content System |
-| Webhook | `/.netlify/functions/paystack-webhook` + Express idempotency |
+| Payment link | https://paystack.shop/pay/cortex-demo (**LIVE**) |
+| Webhook function | `/.netlify/functions/paystack-webhook` |
 
 **Founder-only blockers for first naira in:**
 
-1. Create Paystack payment link under **Cortex Intelligence Nexus**
-2. Paste into WhatsApp scripts (`[PASTE PAYSTACK LINK]`)
-3. Set `PAYSTACK_SECRET_KEY` on Netlify → redeploy
-4. Confirm Paystack webhook URL  
+1. ~~Create Paystack payment link~~ → LIVE
+2. ~~Paste into WhatsApp scripts~~ → DONE
+3. Set `PAYSTACK_SECRET_KEY` on Netlify (Project configuration → Environment variables) → redeploy
+4. Confirm Paystack webhook URL:  
+   `https://cortex-platforms.netlify.app/.netlify/functions/paystack-webhook`
 5. Optional Shopify seed + remove store password
 
 ---
@@ -77,7 +80,7 @@ All public surfaces, Google Business, social CTAs, and agent outputs resolve to 
 |-----------|--------|
 | Edge CBF | edge/cbf/ + HOCBF docs |
 | Member dashboard | /member-dashboard.html |
-| Offers | /offers.html |
+| Offers | /offers.html (live Paystack CTA) |
 | Identity | /identity.html |
 | Pulse | /metrics-dashboard.html |
 | SOFA helpers | /api/sofa-status, /api/sofa-session |
@@ -90,4 +93,4 @@ All public surfaces, Google Business, social CTAs, and agent outputs resolve to 
 - Mike Complex AI = internal runner only
 - Secrets = environment variables only
 - No fake “all APIs connected” metrics
-- **SSOT locked 2026-08-29** via MikeComplex AI runner under Michael Ujuku Morim authority
+- **SSOT locked; commerce link live 2026-08-30** via MikeComplex AI runner under Michael Ujuku Morim authority
