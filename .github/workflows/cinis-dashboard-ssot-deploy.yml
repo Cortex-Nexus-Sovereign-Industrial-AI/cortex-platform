@@ -7,6 +7,7 @@ on:
       - 'SSOT.md'
       - 'cortex-platform/**'
       - 'index.html'
+      - 'offers.html'
       - '.github/workflows/**'
   workflow_dispatch:
 
@@ -28,6 +29,7 @@ jobs:
           grep -q "cortex-platforms.netlify.app" SSOT.md || (echo "SSOT Primary Hub mismatch" && exit 1)
           echo "Founder: Michael Ujuku Morim — Verified"
           echo "Offer lock: 30-Day AI Content System @ ₦22,000 (SSOT §5)"
+          echo "Paystack live link: https://paystack.shop/pay/cortex-demo"
 
       - name: Build System Directly - No Local
         run: |
@@ -38,15 +40,13 @@ jobs:
             echo "Pure static / Netlify functions — skip npm"
           fi
 
-      - name: Inject / Confirm Paystack Link (SSOT §5)
+      - name: Confirm Paystack Link (SSOT §5)
         run: |
-          # Offer is locked at ₦22,000. Current link remains cortex-demo until new Paystack link is issued.
-          # Do not invent a new slug. When founder supplies the final 22k link, replace only the target.
-          if [ -f cortex-platform/index.html ]; then
-            echo "Paystack target confirmed on cortex-platform/index.html"
-          fi
-          if [ -f index.html ]; then
-            echo "Root index.html present"
+          # Locked by founder 2026-08-30: https://paystack.shop/pay/cortex-demo
+          if grep -q "paystack.shop/pay/cortex-demo" offers.html; then
+            echo "Paystack CTA confirmed in offers.html"
+          else
+            echo "WARNING: Paystack link missing from offers.html"
           fi
 
       - name: Deploy to Netlify Primary Hub (SSOT Rule 3)
