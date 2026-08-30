@@ -1,9 +1,8 @@
 # WhatsApp Sales Scripts — 30-Day AI Content System
 **Brand:** Cortex Intelligence Nexus  
 **Price:** ₦22,000  
-**Updated:** 2026-08-16
-
-Replace every instance of `[PASTE PAYSTACK LINK]` with your real Paystack payment link after you create it in the Paystack Dashboard.
+**Paystack (live):** https://paystack.shop/pay/cortex-demo  
+**Updated:** 2026-08-30
 
 ---
 
@@ -37,7 +36,7 @@ Reply YES and I’ll send it.
 Perfect.
 
 Pay here:
-[PASTE PAYSTACK LINK]
+https://paystack.shop/pay/cortex-demo
 
 After payment, send me:
 1) Brand / page name
@@ -141,7 +140,7 @@ You have 7 days for one revision pass — reply with anything to adjust.
 Quick check — still want the 30-day system?
 
 Link is here if yes:
-[PASTE PAYSTACK LINK]
+https://paystack.shop/pay/cortex-demo
 
 If timing is bad, no stress. The 7-day pack still works until you’re ready.
 ```
@@ -152,3 +151,4 @@ If timing is bad, no stress. The 7-day pack still works until you’re ready.
 - Max concurrent active mid-ticket orders: 5 (adjust as needed).
 - Always confirm payment via Paystack dashboard or webhook log before starting work.
 - Keep delivery promise strict: 5 days from brief receipt.
+- Live Paystack link locked 2026-08-30: https://paystack.shop/pay/cortex-demo
