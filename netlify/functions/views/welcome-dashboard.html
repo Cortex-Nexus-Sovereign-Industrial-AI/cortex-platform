@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CINIS Activation — Cortex Intelligence Nexus</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .logo {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+        h1 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+        .subtitle {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .badge {
+            display: inline-block;
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .message {
+            background: #f5f5f5;
+            border-left: 4px solid #667eea;
+            padding: 16px;
+            margin: 20px 0;
+            border-radius: 4px;
+            color: #555;
+            font-size: 14px;
+        }
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+        }
+        .card-header {
+            padding: 20px;
+            border-bottom: 1px solid #f0f0f0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .card-description {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+        .card-body {
+            padding: 20px;
+        }
+        .button {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        .button-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .button-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        .button-secondary {
+            background: #f0f0f0;
+            color: #333;
+            border: 2px solid #e0e0e0;
+            margin-top: 8px;
+        }
+        .button-secondary:hover {
+            background: #e8e8e8;
+        }
+        .button-tertiary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+            margin-top: 8px;
+        }
+        .button-tertiary:hover {
+            background: #f8f8ff;
+        }
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+        }
+        .video-card {
+            background: #f5f5f5;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .video-card:hover {
+            transform: scale(1.05);
+        }
+        .video-thumbnail {
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+        }
+        .video-info {
+            padding: 10px;
+            font-size: 12px;
+            color: #666;
+        }
+        .video-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+        .social-link {
+            flex: 1;
+            min-width: 150px;
+            padding: 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            font-weight: 600;
+            font-size: 13px;
+            transition: all 0.3s ease;
+        }
+        .social-telegram {
+            background: #0088cc;
+            color: white;
+        }
+        .social-telegram:hover {
+            background: #0077b5;
+            transform: translateY(-2px);
+        }
+        .social-messenger {
+            background: #0a66c2;
+            color: white;
+        }
+        .social-messenger:hover {
+            background: #095399;
+            transform: translateY(-2px);
+        }
+        .social-youtube {
+            background: #ff0000;
+            color: white;
+        }
+        .social-youtube:hover {
+            background: #cc0000;
+            transform: translateY(-2px);
+        }
+        .footer {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+        }
+        .code-display {
+            background: #f5f5f5;
+            padding: 12px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: #666;
+            word-break: break-all;
+            margin: 16px 0;
+        }
+        .tabs {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .tab {
+            padding: 12px 16px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-weight: 600;
+            color: #999;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .tab.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .loading {
+            display: none;
+            text-align: center;
+        }
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .level-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+        .level-l0 { background: #e3f2fd; color: #1976d2; }
+        @media (max-width: 768px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+            h1 {
+                font-size: 20px;
+            }
+            .social-links {
+                flex-direction: column;
+            }
+            .social-link {
+                min-width: unset;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">🌐</div>
+            <h1>Welcome to Cortex</h1>
+            <p class="subtitle">Intelligence Nexus — Industrial AI & Automation</p>
+            <div class="badge">✓ Verified Activation</div>
+            <div class="message">
+                You arrived through a validated CINIS activation point.
+                <br><br>
+                <strong>Campaign:</strong> {{CAMPAIGN}} | <strong>Site:</strong> {{SITE}}
+            </div>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="main-grid">
+            <!-- YouTube Education Track -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">📚 Learn from Zero to Master</div>
+                    <div class="card-description">Complete educational pathway on Cortex platform</div>
+                </div>
+                <div class="card-body">
+                    <p style="font-size: 13px; color: #666; margin-bottom: 12px;">
+                        Start from foundational concepts and progress through intermediate to advanced topics. All content is monetized and ready for enterprise adoption.
+                    </p>
+                    
+                    <div class="tabs">
+                        <button class="tab active" onclick="switchTab('featured')">Featured</button>
+                        <button class="tab" onclick="switchTab('playlists')">Playlists</button>
+                    </div>
+
+                    <!-- Featured Videos Tab -->
+                    <div id="featured" class="tab-content active">
+                        <div class="video-grid" id="featured-videos">
+                            <div class="loading">
+                                <div class="spinner"></div>
+                                <p style="margin-top: 12px; color: #666;">Loading videos...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Playlists Tab -->
+                    <div id="playlists" class="tab-content">
+                        <div class="video-grid" id="playlists-grid">
+                            <div class="loading">
+                                <div class="spinner"></div>
+                                <p style="margin-top: 12px; color: #666;">Loading playlists...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="https://www.youtube.com/@MikecomplexAI-i2e/videos" 
+                       class="button button-primary"
+                       onclick="trackAction('youtube-education')">
+                        ▶️ Watch Full Channel
+                    </a>
+                    <a href="/activate/onboarding?code={{ACTIVATION_CODE}}&session={{SESSION_ID}}&entry=youtube" 
+                       class="button button-secondary"
+                       onclick="trackAction('activate-from-youtube')">
+                        Continue to Cortex Platform
+                    </a>
+                </div>
+            </div>
+
+            <!-- Cortex Platform Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">🚀 Activate Cortex</div>
+                    <div class="card-description">Join the intelligence network immediately</div>
+                </div>
+                <div class="card-body">
+                    <p style="font-size: 13px; color: #666; margin-bottom: 12px;">
+                        Skip straight to Cortex platform activation. Complete your identity, set up your profile, and access agents, AI services, voice interface, and directory.
+                    </p>
+                    
+                    <div style="background: #f5f5f5; padding: 12px; border-radius: 8px; margin: 12px 0; font-size: 12px; color: #666;">
+                        <strong>Quick paths:</strong>
+                        <ul style="margin-left: 16px; margin-top: 8px;">
+                            <li>Explore → Browse agents & services</li>
+                            <li>Join Network → Create identity</li>
+                            <li>Developer → API access & SDK</li>
+                        </ul>
+                    </div>
+
+                    <a href="/activate/onboarding?code={{ACTIVATION_CODE}}&session={{SESSION_ID}}" 
+                       class="button button-primary"
+                       onclick="trackAction('activate-cortex')">
+                        → Start Onboarding
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Communication Channels -->
+        <div class="card" style="margin-bottom: 30px;">
+            <div class="card-header">
+                <div class="card-title">💬 Connect & Support</div>
+                <div class="card-description">Multiple channels for communication and assistance</div>
+            </div>
+            <div class="card-body">
+                <p style="font-size: 13px; color: #666; margin-bottom: 16px;">
+                    Join our community, get support, and stay updated on the latest developments in the Cortex Intelligence Nexus ecosystem.
+                </p>
+                
+                <div class="social-links">
+                    <a href="https://t.me/cortexintelligencenexus" 
+                       class="social-link social-telegram"
+                       onclick="trackAction('telegram-community')">
+                        📢 Community (Telegram)
+                    </a>
+                    <a href="https://t.me/cortexHrbot" 
+                       class="social-link social-telegram"
+                       onclick="trackAction('telegram-hrbot')">
+                        🤖 HRbot (Telegram)
+                    </a>
+                    <a href="https://www.messenger.com/t/cortexHrbot" 
+                       class="social-link social-messenger"
+                       onclick="trackAction('messenger-hrbot')">
+                        💬 Messenger
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Secondary Actions -->
+        <div class="main-grid">
+            <!-- Explore Platform Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">🔍 Explore Features</div>
+                    <div class="card-description">Discover platform capabilities</div>
+                </div>
+                <div class="card-body">
+                    <p style="font-size: 13px; color: #666; margin-bottom: 12px;">
+                        Learn about Cortex capabilities: AI agents, voice interface, workflow automation, industrial control, and enterprise services.
+                    </p>
+                    <a href="/explore" 
+                       class="button button-primary"
+                       onclick="trackAction('explore-platform')">
+                        🔍 Explore Features
+                    </a>
+                </div>
+            </div>
+
+            <!-- Partners & Business Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">🤝 Partnerships</div>
+                    <div class="card-description">Enterprise solutions & integrations</div>
+                </div>
+                <div class="card-body">
+                    <p style="font-size: 13px; color: #666; margin-bottom: 12px;">
+                        Explore partnership opportunities, enterprise licensing, and integration options for your organization.
+                    </p>
+                    <a href="/partnerships" 
+                       class="button button-primary"
+                       onclick="trackAction('explore-partnerships')">
+                        💼 View Partnerships
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="code-display">{{ACTIVATION_CODE}}</div>
+            Session: {{SESSION_ID}} | Activation Time: {{TIMESTAMP}}
+        </div>
+    </div>
+
+    <script>
+        // Load YouTube content data
+        const featuredVideos = {{FEATURED_VIDEOS_JSON}};
+        const playlists = {{PLAYLISTS_JSON}};
+
+        function renderFeaturedVideos() {
+            const container = document.getElementById('featured-videos');
+            if (!featuredVideos || featuredVideos.length === 0) {
+                container.innerHTML = '<p style="color: #999; grid-column: 1/-1;">No featured videos available</p>';
+                return;
+            }
+
+            container.innerHTML = featuredVideos.map(video => `
+                <div class="video-card" onclick="trackVideoClick('${video.videoId}', '${video.title.replace(/'/g, "\\'")}')">
+                    <div class="video-thumbnail" style="background-image: url('${video.thumbnail}'); background-size: cover;">
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title" title="${video.title}">${video.title.substring(0, 20)}...</div>
+                        <div class="level-badge level-l0">Intro</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderPlaylists() {
+            const container = document.getElementById('playlists-grid');
+            if (!playlists || playlists.length === 0) {
+                container.innerHTML = '<p style="color: #999; grid-column: 1/-1;">No playlists available</p>';
+                return;
+            }
+
+            container.innerHTML = playlists.map(playlist => `
+                <div class="video-card" onclick="trackPlaylistClick('${playlist.playlistId}', '${playlist.title.replace(/'/g, "\\'")}')">
+                    <div class="video-thumbnail" style="font-size: 24px;">
+                        📺
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title" title="${playlist.title}">${playlist.title.substring(0, 18)}...</div>
+                        <div style="font-size: 11px; color: #999;">
+                            ${playlist.videoCount} videos
+                        </div>
+                        <div class="level-badge level-l0">Path</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+
+            trackAction(`tab-switched-${tabName}`);
+        }
+
+        async function trackAction(action) {
+            try {
+                await fetch('/api/events', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        event: 'ACTIVATION_ACTION',
+                        action: action,
+                        activation_code: '{{ACTIVATION_CODE}}',
+                        session_id: '{{SESSION_ID}}',
+                        timestamp: new Date().toISOString()
+                    })
+                }).catch(err => console.error('Event log failed:', err));
+            } catch (error) {
+                console.error('Track action error:', error);
+            }
+        }
+
+        function trackVideoClick(videoId, title) {
+            trackAction(`video-clicked-${videoId}`);
+            window.open(`https://youtube.com/watch?v=${videoId}`, '_blank');
+        }
+
+        function trackPlaylistClick(playlistId, title) {
+            trackAction(`playlist-clicked-${playlistId}`);
+            window.open(`https://youtube.com/playlist?list=${playlistId}`, '_blank');
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            renderFeaturedVideos();
+            renderPlaylists();
+
+            // Log page view
+            fetch('/api/events', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    event: 'ACTIVATION_DASHBOARD_VIEWED',
+                    activation_code: '{{ACTIVATION_CODE}}',
+                    session_id: '{{SESSION_ID}}',
+                    timestamp: new Date().toISOString()
+                })
+            }).catch(err => console.error('Event log failed:', err));
+        });
+    </script>
+</body>
+</html>
