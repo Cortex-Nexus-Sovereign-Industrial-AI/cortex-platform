@@ -1,5 +1,5 @@
 # Build Status — Director Session
-**Updated:** 2026-09-20 ~23:25 WAT
+**Updated:** 2026-09-20 ~23:55 WAT
 
 ## Mode
 **Test keys** — do not switch to live until Director issues the reminder.
@@ -16,6 +16,7 @@
 | Directory (search) | `/member/directory.html` |
 | Post-payment success | `/member/success.html` |
 | Profile stub | `/member/profile.html` |
+| Shared member nav helper | `/member/_nav.js` |
 | Offers → member path | `offers.html` |
 | Webhook grant logging | `netlify/functions/paystack-webhook.js` |
 | Tracking issues | #32 #33 #34 |

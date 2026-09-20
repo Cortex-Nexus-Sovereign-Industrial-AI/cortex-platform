@@ -1,29 +1,30 @@
 # NEXT ACTIONS — Director Update
-**Updated:** 2026-09-20 (late evening)
+**Updated:** 2026-09-20 ~23:55 WAT
 
 ## Founder instruction (locked)
 - Finish coding and wiring first.
 - Keep clean placeholder for live key switch.
 - **Remind Founder before conclusion** so live `sk_live_...` can be set cleanly.
 
-## Completed this session (momentum)
+## Completed this session
 
 - [x] PLATFORM_STRUCTURE.md
 - [x] MEMBERSHIP_FOUNDATION.md
-- [x] LIVE_KEY_SWITCH.md (clean placeholder)
-- [x] ACCESS_FLOW.md (payment → webhook → member path)
-- [x] `/member/index.html` dashboard (refined)
-- [x] `/member/directory.html` (searchable scaffold)
-- [x] `/member/success.html` (post-payment landing)
+- [x] LIVE_KEY_SWITCH.md
+- [x] ACCESS_FLOW.md
+- [x] BUILD_STATUS.md
+- [x] `/member/` — dashboard, directory, success, profile, nav helper
+- [x] offers.html member path
+- [x] Webhook membership grant intent logging
 - [x] Issues #32 #33 #34 + PR #35
-- [x] Confirmed PAYSTACK_SECRET_KEY present on Netlify (test)
+- [x] PAYSTACK_SECRET_KEY confirmed on Netlify (test)
 
 ## Still coding / wiring
 
-1. Keep access path documented and consistent
-2. Member area ready for real status when grant store is connected
-3. Webhook already verifies HMAC — next is durable grant side-effect when API/store is available
-4. Do **not** switch to live keys until Director reminder
+1. Durable grant store when backend/API_BASE_URL is active
+2. Full auth (signup/login) progressive
+3. Real directory content (curated listings)
+4. Keep docs in sync
 
 ## Explicit reminder (mandatory before round-up)
 
