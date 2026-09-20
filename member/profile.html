@@ -25,9 +25,11 @@
       padding: 16px 24px;
       border-bottom: 1px solid #1e3a5f;
       background: linear-gradient(135deg, #001a36, #003366);
+      flex-wrap: wrap;
+      gap: 12px;
     }
     .header h1 { font-size: 1.1rem; color: var(--teal); }
-    .header a { color: var(--teal); text-decoration: none; font-size: 0.9rem; }
+    #member-nav { width: 100%; padding: 8px 0 0; }
     .container { max-width: 640px; margin: 0 auto; padding: 32px 24px; }
     h2 { margin-bottom: 8px; }
     .sub { color: var(--muted); margin-bottom: 24px; }
@@ -52,7 +54,7 @@
 <body>
   <header class="header">
     <h1>Member Profile</h1>
-    <a href="index.html">← Dashboard</a>
+    <div id="member-nav"></div>
   </header>
   <div class="container">
     <h2>Your profile</h2>
@@ -71,8 +73,9 @@
         <div class="value" id="ref" style="font-size:0.9rem;word-break:break-all;">—</div>
       </div>
     </div>
-    <p class="note">Full login/signup and durable profile storage will connect next. Live key switch only after Director reminder.</p>
+    <p class="note">Full login/signup and durable profile storage will connect next. Live key switch only on Director command. See docs/commerce/LIVE_KEY_SWITCH.md.</p>
   </div>
+  <script src="_nav.js"></script>
   <script>
     (function () {
       document.getElementById('plan').textContent = localStorage.getItem('cinis_plan') || 'Professional (demo)';
