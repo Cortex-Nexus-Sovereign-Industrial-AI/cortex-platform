@@ -2,7 +2,7 @@
 
 **Canonical identity surface for CINIS / Cortex AI Nexus**  
 **Source of truth:** this repository.  
-**Last aligned:** 2026-08-27 (full build alignment)
+**Last aligned:** 2026-09-20 (visual intelligence layer alignment)
 
 ---
 
@@ -60,7 +60,9 @@ Based in Ogoja. Serving Nigeria and enterprise operations.
 **Approved Description:**
 
 ```
-Cortex Intelligence Nexus delivers industrial AI, agentic systems, and sovereign automation tools. Based in Ogoja, Cross River State, we build scalable platforms, structured capability frameworks, and practical digital infrastructure so businesses and individuals develop real skill instead of dependency. Live platform and services available at our website.
+Cortex Intelligence Nexus delivers industrial AI, agentic systems, and sovereign automation tools. Based in Ogoja, Cross River State, we build scalable platforms, structured capability frameworks, and practical digital infrastructure so businesses and individuals develop real skill instead of dependency.
+
+Our visual intelligence layer turns GitHub repositories into interactive architectural blueprints and converts web articles into clear, professional infographics — giving teams immediate clarity on systems, processes, and strategy. Live platform and services available at our website.
 ```
 
 ---
@@ -103,7 +105,8 @@ All public output: **Cortex Intelligence Nexus** + **Michael Ujuku Morim**.
 - [COMMAND_CENTER.md](./COMMAND_CENTER.md)  
 - [STATUS.md](./STATUS.md)  
 - [PUBLIC_SURFACES.md](./PUBLIC_SURFACES.md)  
-- [docs/operations/SECTION_ACTIVATION.md](./docs/operations/SECTION_ACTIVATION.md)
+- [docs/operations/SECTION_ACTIVATION.md](./docs/operations/SECTION_ACTIVATION.md)  
+- [docs/marketing/GOOGLE_BUSINESS_POSTS.md](./docs/marketing/GOOGLE_BUSINESS_POSTS.md)
 
 **Maintainer:** Michael Ujuku Morim  
 **Repository:** Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform
