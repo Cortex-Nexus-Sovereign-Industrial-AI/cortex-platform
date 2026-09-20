@@ -4,7 +4,10 @@
  * Durable store = Express API when API_BASE_URL is set.
  *
  * URL: https://cortex-platforms.netlify.app/.netlify/functions/paystack-webhook
- * Env: PAYSTACK_SECRET_KEY, optional API_BASE_URL
+ * Env: PAYSTACK_SECRET_KEY (test or live — switch via Netlify env only)
+ * Optional: API_BASE_URL to forward charge.success for durable access grants
+ *
+ * Live key switch: only after Director reminder — see docs/commerce/LIVE_KEY_SWITCH.md
  */
 
 const crypto = require('crypto');
@@ -33,6 +36,8 @@ exports.handler = async function (event) {
     return json(500, { error: 'Server misconfigured' });
   }
 
+  const keyMode = String(secret).startsWith('sk_live_') ? 'live' : 'test';
+
   const raw =
     event.isBase64Encoded && event.body
       ? Buffer.from(event.body, 'base64').toString('utf8')
@@ -59,6 +64,8 @@ exports.handler = async function (event) {
   const eventName = payload.event || 'unknown';
   const data = payload.data || {};
   const reference = data.reference || null;
+  const email = (data.customer && data.customer.email) || null;
+  const amountNgn = typeof data.amount === 'number' ? data.amount / 100 : null;
   const idemKey = reference ? `${eventName}::${reference}` : null;
 
   pruneSeen();
@@ -69,6 +76,7 @@ exports.handler = async function (event) {
       idempotent: true,
       event: eventName,
       reference,
+      keyMode,
       message: 'Already handled on this isolate'
     });
   }
@@ -76,11 +84,24 @@ exports.handler = async function (event) {
   console.log('[paystack-webhook]', {
     event: eventName,
     reference,
-    amountNgn: typeof data.amount === 'number' ? data.amount / 100 : null,
-    email: data.customer && data.customer.email
+    amountNgn,
+    email,
+    keyMode
   });
 
+  let grantForwarded = false;
+  let grantNote = 'logged_only';
+
   if (eventName === 'charge.success') {
+    // Membership intent: successful charge → access should be granted
+    console.log('[paystack-webhook] MEMBERSHIP_GRANT_INTENT', {
+      reference,
+      email,
+      amountNgn,
+      keyMode,
+      next: 'forward_to_API_if_set_or_record_locally'
+    });
+
     const apiBase = process.env.API_BASE_URL;
     if (apiBase) {
       try {
@@ -94,9 +115,16 @@ exports.handler = async function (event) {
         });
         const body = await res.text();
         console.log('[paystack-webhook] forwarded to API', res.status, body.slice(0, 200));
+        grantForwarded = res.ok;
+        grantNote = res.ok ? 'forwarded_ok' : 'forward_failed_' + res.status;
       } catch (err) {
         console.warn('[paystack-webhook] Forward failed', err.message);
+        grantNote = 'forward_error';
       }
+    } else {
+      // No durable API yet — event is verified and logged; member area is ready
+      grantNote = 'verified_logged_no_API_BASE_URL';
+      console.log('[paystack-webhook] No API_BASE_URL — grant recorded in logs only. Member area scaffold is live under /member/');
     }
   }
 
@@ -106,7 +134,10 @@ exports.handler = async function (event) {
     received: true,
     idempotent: false,
     event: eventName,
-    reference
+    reference,
+    keyMode,
+    grantForwarded,
+    grantNote
   });
 };
 
