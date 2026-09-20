@@ -11,6 +11,7 @@
       --card: #1a3a52;
       --text: #e2e8f0;
       --muted: #a0aec0;
+      --green: #48bb78;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -48,7 +49,7 @@
       padding: 32px 24px;
     }
     .welcome {
-      margin-bottom: 32px;
+      margin-bottom: 28px;
     }
     .welcome h2 {
       font-size: 1.6rem;
@@ -57,11 +58,33 @@
     .welcome p {
       color: var(--muted);
     }
+    .status-box {
+      background: linear-gradient(135deg, #1a3a52, #0f2940);
+      border: 1px solid var(--teal);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin-bottom: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .status-box .label {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-bottom: 4px;
+    }
+    .status-box .value {
+      color: var(--teal);
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 20px;
-      margin-bottom: 40px;
+      margin-bottom: 36px;
     }
     .card {
       background: linear-gradient(135deg, #1a3a52, #0f2940);
@@ -92,35 +115,16 @@
       font-size: 0.85rem;
       font-weight: 600;
     }
-    .status-box {
-      background: linear-gradient(135deg, #1a3a52, #0f2940);
-      border: 1px solid var(--teal);
-      border-radius: 10px;
-      padding: 20px 24px;
-      margin-bottom: 32px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-    .status-box .label {
-      color: var(--muted);
-      font-size: 0.85rem;
-    }
-    .status-box .value {
-      color: var(--teal);
-      font-size: 1.2rem;
-      font-weight: 700;
-    }
-    .note {
-      margin-top: 40px;
-      padding: 16px;
+    .flow-note {
+      margin-top: 8px;
+      padding: 16px 18px;
       border-left: 3px solid var(--teal);
       background: rgba(0, 212, 255, 0.05);
       color: var(--muted);
       font-size: 0.85rem;
+      line-height: 1.55;
     }
+    .flow-note strong { color: var(--text); }
     footer {
       text-align: center;
       padding: 24px;
@@ -134,13 +138,13 @@
 <body>
   <header class="header">
     <h1>Cortex Intelligence Nexus — Member Area</h1>
-    <span class="badge" id="planBadge">Checking plan…</span>
+    <span class="badge" id="planBadge">Checking…</span>
   </header>
 
   <div class="container">
     <div class="welcome">
       <h2>Welcome to your Member Dashboard</h2>
-      <p>This is the protected area for Professional and Enterprise members. Real value (directory, reports, alerts) will live here.</p>
+      <p>Protected area for Professional and Enterprise members. Directory, reports and opportunities live here.</p>
     </div>
 
     <div class="status-box">
@@ -149,8 +153,12 @@
         <div class="value" id="planValue">Loading…</div>
       </div>
       <div>
-        <div class="label">Status</div>
+        <div class="label">Access Status</div>
         <div class="value" id="statusValue">—</div>
+      </div>
+      <div>
+        <div class="label">Mode</div>
+        <div class="value" id="modeValue" style="font-size:0.95rem;">Test (scaffold)</div>
       </div>
     </div>
 
@@ -177,8 +185,10 @@
       </div>
     </div>
 
-    <div class="note">
-      <strong>Director note (2026-09-20):</strong> This is the foundation scaffold. Full authentication and automatic plan detection from Paystack will be connected next. Until then, treat this page as the structural home for paid members.
+    <div class="flow-note">
+      <strong>Access path (current wiring):</strong><br>
+      Payment → Paystack webhook → signature check with <code>PAYSTACK_SECRET_KEY</code> → access grant → this dashboard.<br>
+      We are still on <strong>test keys</strong>. Live key switch will be requested only when coding is complete. See <code>docs/commerce/ACCESS_FLOW.md</code> and <code>docs/commerce/LIVE_KEY_SWITCH.md</code>.
     </div>
   </div>
 
@@ -187,20 +197,21 @@
   </footer>
 
   <script>
-    // Placeholder logic — will be replaced by real auth / subscription check
-    // For now we surface a clear status so the structure is visible.
     (function () {
       const planBadge = document.getElementById('planBadge');
       const planValue = document.getElementById('planValue');
       const statusValue = document.getElementById('statusValue');
+      const modeValue = document.getElementById('modeValue');
 
-      // Temporary demo state. Real system will read from auth + Paystack webhook record.
-      const demoPlan = localStorage.getItem('cinis_plan') || 'Professional (demo)';
-      const demoStatus = localStorage.getItem('cinis_status') || 'Active (scaffold)';
+      // Temporary demo state while durable grant store is being connected.
+      // Real system will read from webhook-backed access record.
+      const plan = localStorage.getItem('cinis_plan') || 'Professional (demo)';
+      const status = localStorage.getItem('cinis_status') || 'Active (scaffold)';
 
-      planBadge.textContent = demoPlan;
-      planValue.textContent = demoPlan;
-      statusValue.textContent = demoStatus;
+      planBadge.textContent = plan;
+      planValue.textContent = plan;
+      statusValue.textContent = status;
+      modeValue.textContent = 'Test keys — live switch pending';
     })();
   </script>
 </body>
