@@ -1,0 +1,6 @@
+{
+  "name": "Cortex Intelligence Nexus",
+  "description": "Industrial AI Engineering & Autonomous Systems Architecture",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -14,10 +14,9 @@ let PAYSTACK_PUBLIC_KEY = PAYSTACK_PUBLIC_KEY_LIVE;
 let PAYSTACK_MODE = 'live';
 
 // API base: local backend when developing; same-origin / empty for production proxy
-const API_BASE = (typeof window !== 'undefined' &&
-  (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'))
-  ? 'http://localhost:5000'
-  : (window.CORTEX_API_BASE || '');
+const API_BASE = (typeof window !== 'undefined' && window.CORTEX_API_BASE)
+  ? window.CORTEX_API_BASE
+  : '';
 
 const TOKEN_KEY = 'cortex_jwt';
 

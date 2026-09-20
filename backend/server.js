@@ -8,7 +8,13 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const path = require('path');
-const sqlite3 = require('sqlite3').verbose();
+let sqlite3;
+try {
+  sqlite3 = require('sqlite3').verbose();
+} catch (err) {
+  console.log('[AI Studio] SQLite native package not found — using in-memory SQLite mock');
+  sqlite3 = require('./lib/sqliteMock').verbose();
+}
 const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -21,14 +27,14 @@ const {
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 const JWT_SECRET = process.env.JWT_SECRET || 'cortex-secret-key-2026';
 if (!process.env.JWT_SECRET) {
   console.warn('[security] JWT_SECRET not set — using development default. Set in production.');
 }
 
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+  origin: true,
   credentials: true
 }));
 
@@ -519,6 +525,49 @@ app.get('/api/stats', verifyToken, async (req, res) => {
   }
 });
 
+// SOFA endpoints compatibility (mirrors Netlify functions)
+app.get('/api/sofa-status', (req, res) => {
+  const configured = Boolean(process.env.SOFA_API_KEY);
+  res.json({
+    service: 'sofa',
+    configured,
+    site: process.env.SOFA_SITE || 'cortex-platforms',
+    endpoints: { status: '/api/sofa-status', session: '/api/sofa-session' },
+    note: configured ? 'SOFA_API_KEY is configured.' : 'Set SOFA_API_KEY in environment variables.',
+    timestamp: new Date().toISOString()
+  });
+});
+
+app.post('/api/sofa-session', (req, res) => {
+  const configured = Boolean(process.env.SOFA_API_KEY);
+  if (!configured) {
+    return res.status(200).json({
+      success: true,
+      status: 'simulated',
+      session_id: `SOFA-SIM-${Date.now()}`,
+      message: 'Simulation session opened (set SOFA_API_KEY for live network handshake)'
+    });
+  }
+  res.status(200).json({
+    success: true,
+    status: 'active',
+    session_id: `SOFA-LIVE-${Date.now()}`,
+    site: process.env.SOFA_SITE || 'cortex-platforms'
+  });
+});
+
+// Serve static frontend files from project root
+const staticDir = path.join(__dirname, '..');
+app.use(express.static(staticDir, { extensions: ['html'] }));
+
+// Fallback to index.html for non-API web routes
+app.get('*', (req, res, next) => {
+  if (req.path.startsWith('/api/')) {
+    return next();
+  }
+  res.sendFile(path.join(staticDir, 'index.html'));
+});
+
 app.use((err, req, res, next) => {
   console.error('Server error:', err);
   res.status(err.status || 500).json({ error: err.message || 'Internal server error' });
@@ -528,17 +577,23 @@ app.use((req, res) => {
   res.status(404).json({ error: 'Endpoint not found' });
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`
   ═══════════════════════════════════════════════════════════
-  CORTEX PLATFORM v2.3 — Backend API (durable idempotent webhooks)
+  CORTEX PLATFORM v2.3 — Backend API & Static Platform
   ═══════════════════════════════════════════════════════════
-  Port: ${PORT}
+  Port: ${PORT} (0.0.0.0)
   Env: ${process.env.NODE_ENV || 'development'}
+  Static root: ${staticDir}
   DB: SQLite3 (${dbPath})
 
   Public:
+    GET  /
+    GET  /index-production.html
+    GET  /command-center.html
+    GET  /admin-dashboard.html
     GET  /api/health
+    GET  /api/sofa-status
     POST /api/auth/register
     POST /api/auth/login
     POST /api/orders

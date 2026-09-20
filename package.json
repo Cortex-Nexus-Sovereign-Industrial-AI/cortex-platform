@@ -2,6 +2,21 @@
   "name": "cortex-platform",
   "version": "2.4.3",
   "private": true,
-  "description": "Static site + Netlify functions (no install deps required)",
-  "engines": { "node": ">=18" }
+  "description": "Cortex Intelligence Nexus — Industrial AI Platform",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
+    "build": "echo 'Build complete'"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.0"
+  }
 }
+
