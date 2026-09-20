@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Member Dashboard | Cortex Intelligence Nexus</title>
+  <style>
+    :root {
+      --navy: #0a1628;
+      --teal: #00d4ff;
+      --card: #1a3a52;
+      --text: #e2e8f0;
+      --muted: #a0aec0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: var(--navy);
+      color: var(--text);
+      min-height: 100vh;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      border-bottom: 1px solid #1e3a5f;
+      background: linear-gradient(135deg, #001a36, #003366);
+    }
+    .header h1 {
+      font-size: 1.1rem;
+      color: var(--teal);
+      letter-spacing: 0.5px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: rgba(0, 212, 255, 0.15);
+      color: var(--teal);
+      border: 1px solid var(--teal);
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 24px;
+    }
+    .welcome {
+      margin-bottom: 32px;
+    }
+    .welcome h2 {
+      font-size: 1.6rem;
+      margin-bottom: 8px;
+    }
+    .welcome p {
+      color: var(--muted);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    .card {
+      background: linear-gradient(135deg, #1a3a52, #0f2940);
+      border: 1px solid #1e3a5f;
+      border-radius: 10px;
+      padding: 24px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .card:hover {
+      border-color: var(--teal);
+      transform: translateY(-2px);
+    }
+    .card h3 {
+      color: var(--teal);
+      font-size: 0.95rem;
+      margin-bottom: 10px;
+    }
+    .card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    .card a {
+      display: inline-block;
+      margin-top: 14px;
+      color: var(--teal);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    .status-box {
+      background: linear-gradient(135deg, #1a3a52, #0f2940);
+      border: 1px solid var(--teal);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin-bottom: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .status-box .label {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+    .status-box .value {
+      color: var(--teal);
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+    .note {
+      margin-top: 40px;
+      padding: 16px;
+      border-left: 3px solid var(--teal);
+      background: rgba(0, 212, 255, 0.05);
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+    footer {
+      text-align: center;
+      padding: 24px;
+      color: #718096;
+      font-size: 0.8rem;
+      border-top: 1px solid #1e3a5f;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <h1>Cortex Intelligence Nexus — Member Area</h1>
+    <span class="badge" id="planBadge">Checking plan…</span>
+  </header>
+
+  <div class="container">
+    <div class="welcome">
+      <h2>Welcome to your Member Dashboard</h2>
+      <p>This is the protected area for Professional and Enterprise members. Real value (directory, reports, alerts) will live here.</p>
+    </div>
+
+    <div class="status-box">
+      <div>
+        <div class="label">Current Plan</div>
+        <div class="value" id="planValue">Loading…</div>
+      </div>
+      <div>
+        <div class="label">Status</div>
+        <div class="value" id="statusValue">—</div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h3>Directory</h3>
+        <p>Search local businesses, farmers and government contacts in Ogoja and surrounding areas.</p>
+        <a href="directory.html">Open Directory →</a>
+      </div>
+      <div class="card">
+        <h3>Reports & Intelligence</h3>
+        <p>Market and agricultural insights (coming online progressively).</p>
+        <a href="#">Coming soon</a>
+      </div>
+      <div class="card">
+        <h3>Education Hub</h3>
+        <p>Learning tracks for AI literacy, business, agriculture and digital skills.</p>
+        <a href="#">Coming soon</a>
+      </div>
+      <div class="card">
+        <h3>Alerts & Opportunities</h3>
+        <p>Funding, grants and local opportunity notifications.</p>
+        <a href="#">Coming soon</a>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>Director note (2026-09-20):</strong> This is the foundation scaffold. Full authentication and automatic plan detection from Paystack will be connected next. Until then, treat this page as the structural home for paid members.
+    </div>
+  </div>
+
+  <footer>
+    Cortex Intelligence Nexus · Ogoja, Nigeria · Built for recurring member value
+  </footer>
+
+  <script>
+    // Placeholder logic — will be replaced by real auth / subscription check
+    // For now we surface a clear status so the structure is visible.
+    (function () {
+      const planBadge = document.getElementById('planBadge');
+      const planValue = document.getElementById('planValue');
+      const statusValue = document.getElementById('statusValue');
+
+      // Temporary demo state. Real system will read from auth + Paystack webhook record.
+      const demoPlan = localStorage.getItem('cinis_plan') || 'Professional (demo)';
+      const demoStatus = localStorage.getItem('cinis_status') || 'Active (scaffold)';
+
+      planBadge.textContent = demoPlan;
+      planValue.textContent = demoPlan;
+      statusValue.textContent = demoStatus;
+    })();
+  </script>
+</body>
+</html>

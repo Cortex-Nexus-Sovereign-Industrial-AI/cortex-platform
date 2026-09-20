@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Directory | Cortex Member Area</title>
+  <style>
+    :root {
+      --navy: #0a1628;
+      --teal: #00d4ff;
+      --card: #1a3a52;
+      --text: #e2e8f0;
+      --muted: #a0aec0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: var(--navy);
+      color: var(--text);
+      min-height: 100vh;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      border-bottom: 1px solid #1e3a5f;
+      background: linear-gradient(135deg, #001a36, #003366);
+    }
+    .header a {
+      color: var(--teal);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .header h1 {
+      font-size: 1.1rem;
+      color: var(--teal);
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 24px;
+    }
+    h2 {
+      margin-bottom: 8px;
+    }
+    .sub {
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+    .search {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+    .search input, .search select {
+      padding: 10px 14px;
+      border-radius: 6px;
+      border: 1px solid #1e3a5f;
+      background: #0f2940;
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+    .search input {
+      flex: 1;
+      min-width: 200px;
+    }
+    .list {
+      display: grid;
+      gap: 16px;
+    }
+    .item {
+      background: linear-gradient(135deg, #1a3a52, #0f2940);
+      border: 1px solid #1e3a5f;
+      border-radius: 10px;
+      padding: 20px;
+    }
+    .item h3 {
+      color: var(--teal);
+      margin-bottom: 6px;
+    }
+    .item .meta {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-bottom: 10px;
+    }
+    .item p {
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      background: rgba(0, 212, 255, 0.12);
+      color: var(--teal);
+      margin-right: 6px;
+    }
+    .note {
+      margin-top: 32px;
+      padding: 16px;
+      border-left: 3px solid var(--teal);
+      background: rgba(0, 212, 255, 0.05);
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <h1>Member Directory</h1>
+    <a href="index.html">← Back to Dashboard</a>
+  </header>
+
+  <div class="container">
+    <h2>Ogoja & Regional Directory</h2>
+    <p class="sub">Businesses · Farmers · Government & Community contacts</p>
+
+    <div class="search">
+      <input type="search" id="q" placeholder="Search name, sector or location…" oninput="filterList()">
+      <select id="cat" onchange="filterList()">
+        <option value="all">All categories</option>
+        <option value="business">Business</option>
+        <option value="farmer">Farmer / Agriculture</option>
+        <option value="government">Government</option>
+        <option value="ngo">NGO / Partner</option>
+      </select>
+    </div>
+
+    <div class="list" id="list">
+      <!-- Starter curated examples — replace with real data -->
+      <div class="item" data-cat="business" data-name="example trading company ogoja">
+        <h3>Example Trading Company</h3>
+        <div class="meta"><span class="tag">Business</span> Ogoja · Trade & Supply</div>
+        <p>Placeholder listing. Replace with verified local businesses. Contact and claim flows will be added next.</p>
+      </div>
+      <div class="item" data-cat="farmer" data-name="example farm cooperative">
+        <h3>Example Farm Cooperative</h3>
+        <div class="meta"><span class="tag">Farmer</span> Ogoja · Agriculture</div>
+        <p>Placeholder agricultural listing. Real farmer and cooperative data will be curated here.</p>
+      </div>
+      <div class="item" data-cat="government" data-name="local government contact">
+        <h3>Local Government Contact Point</h3>
+        <div class="meta"><span class="tag">Government</span> Ogoja LGA</div>
+        <p>Placeholder government contact. Official channels and funding notices will appear in this section.</p>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>Director note:</strong> This is the structural foundation of the directory. Real curated listings and a proper data source will replace the placeholders. Search already works client-side for the starter items.
+    </div>
+  </div>
+
+  <script>
+    function filterList() {
+      const q = document.getElementById('q').value.toLowerCase();
+      const cat = document.getElementById('cat').value;
+      document.querySelectorAll('.item').forEach(item => {
+        const name = item.getAttribute('data-name') || '';
+        const itemCat = item.getAttribute('data-cat') || '';
+        const matchQ = !q || name.includes(q);
+        const matchCat = cat === 'all' || itemCat === cat;
+        item.style.display = (matchQ && matchCat) ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>
