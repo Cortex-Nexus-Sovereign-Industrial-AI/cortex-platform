@@ -1,53 +1,43 @@
 # NEXT ACTIONS — Director Update
-**Updated:** 2026-09-20 (Acting Technical Director)
+**Updated:** 2026-09-20 (evening)
 
-## Completed / Locked in this session
+## Locked instructions from Founder
 
-- [x] Full account & repository examination completed
-- [x] Authoritative PLATFORM_STRUCTURE.md created
-- [x] MEMBERSHIP_FOUNDATION.md created
-- [x] Clear priority order locked
-- [x] Working branch `director/platform-structure-2026-09` opened
+- Finish coding and wiring first.
+- Keep a clean placeholder for the live key switch.
+- **Remind the Founder before conclusion / round-up** so the live `sk_live_...` key can be set cleanly.
 
-## Highest Priority Remaining (in order)
+## Completed this session
 
-### 1. Close Payment → Access Loop (Founder + Director)
-- [ ] Confirm `PAYSTACK_SECRET_KEY` exists in Netlify environment variables
-- [ ] Confirm Paystack webhook URL is correctly set to the Netlify function
-- [ ] End-to-end test: pay → webhook fires → membership status becomes active
-- [ ] Document exact webhook payload handling in `netlify/functions`
-
-### 2. Membership Scaffold (Director can lead)
-- [ ] Create `/member/` protected area structure
-- [ ] Basic member dashboard HTML + status display
-- [ ] Access control logic (even if initially simple)
-- [ ] Link from offers/payment success into member area
-
-### 3. Minimal Viable Directory
-- [ ] Curated starter listings (Business / Farmer / Government)
-- [ ] Search / filter UI inside member area
-- [ ] Claim / contact flow (even if manual at first)
-
-### 4. Admin Visibility for Founder
-- [ ] Simple admin view of users / active subscriptions / recent payments
-- [ ] Move beyond pure mock HTML
-
-### 5. Documentation & Single Source of Truth
-- [x] PLATFORM_STRUCTURE.md
+- [x] Full platform examination
+- [x] PLATFORM_STRUCTURE.md (authoritative map)
 - [x] MEMBERSHIP_FOUNDATION.md
-- [ ] Keep README.md pointing only to live surfaces + this structure
-- [ ] Archive or clearly mark secondary personal-account repos as non-production
+- [x] Member area scaffold (`/member/index.html` + `/member/directory.html`)
+- [x] Tracking issues #32, #33, #34
+- [x] PR opened: https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/pull/35
+- [x] Confirmed `PAYSTACK_SECRET_KEY` already exists on Netlify (test key)
+- [x] Clean live-key switch placeholder created: `docs/commerce/LIVE_KEY_SWITCH.md`
 
-## Founder-Only Items (cannot be completed by agent alone)
+## In progress / next coding steps
 
-1. Netlify environment secrets (`PAYSTACK_SECRET_KEY` and any others)
-2. Paystack dashboard webhook confirmation
-3. Final live payment test with real money
-4. Any external service credentials (Shopify, SOFA, etc.)
+1. Harden membership access path (how paid status is recognised and shown)
+2. Ensure webhook → access grant path is clear and documented
+3. Keep member dashboard and directory structure ready for real data
+4. Maintain single source of truth docs
 
-## Notes for Continuity
+## Explicit reminder (do not skip)
 
-All future agents or sessions should treat `docs/PLATFORM_STRUCTURE.md` as the governing map.  
-Work continues on branch `director/platform-structure-2026-09` until merged to `main` after review.
+Before the system build is declared complete / rounded up, the Acting Technical Director **must** tell the Founder:
 
-**Primary live site remains:** https://cortex-platforms.netlify.app
+> “Coding and wiring are finished. It is now time to switch to the live Paystack secret key (`sk_live_...`) and confirm the Live webhook. See `docs/commerce/LIVE_KEY_SWITCH.md`.”
+
+Until that reminder is given, stay on test keys.
+
+## Founder-only items (deferred until reminder)
+
+- Paste live secret key into Netlify production context
+- Register Live webhook URL in Paystack dashboard
+- One live payment verification
+
+## Primary live site
+https://cortex-platforms.netlify.app
