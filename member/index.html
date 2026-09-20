@@ -8,10 +8,8 @@
     :root {
       --navy: #0a1628;
       --teal: #00d4ff;
-      --card: #1a3a52;
       --text: #e2e8f0;
       --muted: #a0aec0;
-      --green: #48bb78;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -27,6 +25,8 @@
       padding: 16px 24px;
       border-bottom: 1px solid #1e3a5f;
       background: linear-gradient(135deg, #001a36, #003366);
+      flex-wrap: wrap;
+      gap: 12px;
     }
     .header h1 {
       font-size: 1.1rem;
@@ -43,21 +43,15 @@
       color: var(--teal);
       border: 1px solid var(--teal);
     }
+    #member-nav { width: 100%; padding: 8px 0 0; }
     .container {
       max-width: 1100px;
       margin: 0 auto;
       padding: 32px 24px;
     }
-    .welcome {
-      margin-bottom: 28px;
-    }
-    .welcome h2 {
-      font-size: 1.6rem;
-      margin-bottom: 8px;
-    }
-    .welcome p {
-      color: var(--muted);
-    }
+    .welcome { margin-bottom: 28px; }
+    .welcome h2 { font-size: 1.6rem; margin-bottom: 8px; }
+    .welcome p { color: var(--muted); }
     .status-box {
       background: linear-gradient(135deg, #1a3a52, #0f2940);
       border: 1px solid var(--teal);
@@ -70,16 +64,8 @@
       flex-wrap: wrap;
       gap: 16px;
     }
-    .status-box .label {
-      color: var(--muted);
-      font-size: 0.85rem;
-      margin-bottom: 4px;
-    }
-    .status-box .value {
-      color: var(--teal);
-      font-size: 1.15rem;
-      font-weight: 700;
-    }
+    .status-box .label { color: var(--muted); font-size: 0.85rem; margin-bottom: 4px; }
+    .status-box .value { color: var(--teal); font-size: 1.15rem; font-weight: 700; }
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -93,20 +79,9 @@
       padding: 24px;
       transition: border-color 0.2s, transform 0.2s;
     }
-    .card:hover {
-      border-color: var(--teal);
-      transform: translateY(-2px);
-    }
-    .card h3 {
-      color: var(--teal);
-      font-size: 0.95rem;
-      margin-bottom: 10px;
-    }
-    .card p {
-      color: var(--muted);
-      font-size: 0.9rem;
-      line-height: 1.5;
-    }
+    .card:hover { border-color: var(--teal); transform: translateY(-2px); }
+    .card h3 { color: var(--teal); font-size: 0.95rem; margin-bottom: 10px; }
+    .card p { color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
     .card a {
       display: inline-block;
       margin-top: 14px;
@@ -139,6 +114,7 @@
   <header class="header">
     <h1>Cortex Intelligence Nexus — Member Area</h1>
     <span class="badge" id="planBadge">Checking…</span>
+    <div id="member-nav"></div>
   </header>
 
   <div class="container">
@@ -188,7 +164,7 @@
     <div class="flow-note">
       <strong>Access path (current wiring):</strong><br>
       Payment → Paystack webhook → signature check with <code>PAYSTACK_SECRET_KEY</code> → access grant → this dashboard.<br>
-      We are still on <strong>test keys</strong>. Live key switch will be requested only when coding is complete. See <code>docs/commerce/ACCESS_FLOW.md</code> and <code>docs/commerce/LIVE_KEY_SWITCH.md</code>.
+      We are still on <strong>test keys</strong>. Live key switch only on Director command. See <code>docs/commerce/ACCESS_FLOW.md</code> and <code>docs/commerce/LIVE_KEY_SWITCH.md</code>.
     </div>
   </div>
 
@@ -196,22 +172,19 @@
     Cortex Intelligence Nexus · Ogoja, Nigeria · Built for recurring member value
   </footer>
 
+  <script src="_nav.js"></script>
   <script>
     (function () {
-      const planBadge = document.getElementById('planBadge');
-      const planValue = document.getElementById('planValue');
-      const statusValue = document.getElementById('statusValue');
-      const modeValue = document.getElementById('modeValue');
-
-      // Temporary demo state while durable grant store is being connected.
-      // Real system will read from webhook-backed access record.
-      const plan = localStorage.getItem('cinis_plan') || 'Professional (demo)';
-      const status = localStorage.getItem('cinis_status') || 'Active (scaffold)';
-
+      var planBadge = document.getElementById('planBadge');
+      var planValue = document.getElementById('planValue');
+      var statusValue = document.getElementById('statusValue');
+      var modeValue = document.getElementById('modeValue');
+      var plan = localStorage.getItem('cinis_plan') || 'Professional (demo)';
+      var status = localStorage.getItem('cinis_status') || 'Active (scaffold)';
       planBadge.textContent = plan;
       planValue.textContent = plan;
       statusValue.textContent = status;
-      modeValue.textContent = 'Test keys — live switch pending';
+      modeValue.textContent = 'Test keys — live switch pending Director command';
     })();
   </script>
 </body>
