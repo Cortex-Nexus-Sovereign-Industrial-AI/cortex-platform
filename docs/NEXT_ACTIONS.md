@@ -1,43 +1,35 @@
 # NEXT ACTIONS — Director Update
-**Updated:** 2026-09-20 (evening)
+**Updated:** 2026-09-20 (late evening)
 
-## Locked instructions from Founder
-
+## Founder instruction (locked)
 - Finish coding and wiring first.
-- Keep a clean placeholder for the live key switch.
-- **Remind the Founder before conclusion / round-up** so the live `sk_live_...` key can be set cleanly.
+- Keep clean placeholder for live key switch.
+- **Remind Founder before conclusion** so live `sk_live_...` can be set cleanly.
 
-## Completed this session
+## Completed this session (momentum)
 
-- [x] Full platform examination
-- [x] PLATFORM_STRUCTURE.md (authoritative map)
+- [x] PLATFORM_STRUCTURE.md
 - [x] MEMBERSHIP_FOUNDATION.md
-- [x] Member area scaffold (`/member/index.html` + `/member/directory.html`)
-- [x] Tracking issues #32, #33, #34
-- [x] PR opened: https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/pull/35
-- [x] Confirmed `PAYSTACK_SECRET_KEY` already exists on Netlify (test key)
-- [x] Clean live-key switch placeholder created: `docs/commerce/LIVE_KEY_SWITCH.md`
+- [x] LIVE_KEY_SWITCH.md (clean placeholder)
+- [x] ACCESS_FLOW.md (payment → webhook → member path)
+- [x] `/member/index.html` dashboard (refined)
+- [x] `/member/directory.html` (searchable scaffold)
+- [x] `/member/success.html` (post-payment landing)
+- [x] Issues #32 #33 #34 + PR #35
+- [x] Confirmed PAYSTACK_SECRET_KEY present on Netlify (test)
 
-## In progress / next coding steps
+## Still coding / wiring
 
-1. Harden membership access path (how paid status is recognised and shown)
-2. Ensure webhook → access grant path is clear and documented
-3. Keep member dashboard and directory structure ready for real data
-4. Maintain single source of truth docs
+1. Keep access path documented and consistent
+2. Member area ready for real status when grant store is connected
+3. Webhook already verifies HMAC — next is durable grant side-effect when API/store is available
+4. Do **not** switch to live keys until Director reminder
 
-## Explicit reminder (do not skip)
+## Explicit reminder (mandatory before round-up)
 
-Before the system build is declared complete / rounded up, the Acting Technical Director **must** tell the Founder:
+Before declaring the system build complete, tell the Founder:
 
-> “Coding and wiring are finished. It is now time to switch to the live Paystack secret key (`sk_live_...`) and confirm the Live webhook. See `docs/commerce/LIVE_KEY_SWITCH.md`.”
+> Coding and wiring are finished. It is now time to switch to the live Paystack secret key (`sk_live_...`) and confirm the Live webhook. See `docs/commerce/LIVE_KEY_SWITCH.md`.
 
-Until that reminder is given, stay on test keys.
-
-## Founder-only items (deferred until reminder)
-
-- Paste live secret key into Netlify production context
-- Register Live webhook URL in Paystack dashboard
-- One live payment verification
-
-## Primary live site
+## Primary site
 https://cortex-platforms.netlify.app

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Received | Cortex Intelligence Nexus</title>
+  <style>
+    :root {
+      --navy: #0a1628;
+      --teal: #00d4ff;
+      --text: #e2e8f0;
+      --muted: #a0aec0;
+      --green: #48bb78;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: var(--navy);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .card {
+      max-width: 480px;
+      width: 100%;
+      background: linear-gradient(135deg, #1a3a52, #0f2940);
+      border: 1px solid var(--teal);
+      border-radius: 12px;
+      padding: 36px 28px;
+      text-align: center;
+    }
+    .icon {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+    }
+    h1 {
+      color: var(--teal);
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+    }
+    p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.55;
+      margin-bottom: 12px;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 24px;
+      background: var(--teal);
+      color: var(--navy);
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    .btn:hover { opacity: 0.92; }
+    .note {
+      margin-top: 24px;
+      font-size: 0.8rem;
+      color: #718096;
+      line-height: 1.45;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="icon">✓</div>
+    <h1>Payment received</h1>
+    <p>Thank you. Your payment is being confirmed by Paystack.</p>
+    <p>When the webhook completes, your membership access will be active. You can enter the member area below.</p>
+    <a class="btn" href="index.html">Go to Member Dashboard →</a>
+    <p class="note">
+      Mode: Test keys while system wiring continues.<br>
+      Live key switch will be requested only when coding is complete.<br>
+      Docs: ACCESS_FLOW.md · LIVE_KEY_SWITCH.md
+    </p>
+  </div>
+  <script>
+    // Optional: if URL has reference from Paystack redirect, store for later verification
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const ref = params.get('reference') || params.get('trxref');
+      if (ref) {
+        try {
+          localStorage.setItem('cinis_last_payment_ref', ref);
+          localStorage.setItem('cinis_status', 'Payment received — verifying');
+        } catch (e) {}
+      }
+    })();
+  </script>
+</body>
+</html>
