@@ -58,6 +58,7 @@
     .item h3 { color: var(--teal); margin-bottom: 6px; }
     .item .meta { color: var(--muted); font-size: 0.85rem; margin-bottom: 10px; }
     .item p { font-size: 0.9rem; line-height: 1.5; }
+    .item .contact { margin-top: 10px; font-size: 0.85rem; color: var(--muted); }
     .tag {
       display: inline-block;
       padding: 2px 8px;
@@ -75,6 +76,7 @@
       color: var(--muted);
       font-size: 0.85rem;
     }
+    .empty { color: var(--muted); padding: 24px 0; }
   </style>
 </head>
 <body>
@@ -85,11 +87,11 @@
 
   <div class="container">
     <h2>Ogoja & Regional Directory</h2>
-    <p class="sub">Businesses · Farmers · Government & Community contacts</p>
+    <p class="sub">Businesses · Farmers · Government &amp; Community contacts — starter curated data</p>
 
     <div class="search">
-      <input type="search" id="q" placeholder="Search name, sector or location…" oninput="filterList()">
-      <select id="cat" onchange="filterList()">
+      <input type="search" id="q" placeholder="Search name, sector or location…" oninput="render()">
+      <select id="cat" onchange="render()">
         <option value="all">All categories</option>
         <option value="business">Business</option>
         <option value="farmer">Farmer / Agriculture</option>
@@ -98,42 +100,68 @@
       </select>
     </div>
 
-    <div class="list" id="list">
-      <div class="item" data-cat="business" data-name="example trading company ogoja">
-        <h3>Example Trading Company</h3>
-        <div class="meta"><span class="tag">Business</span> Ogoja · Trade & Supply</div>
-        <p>Placeholder listing. Replace with verified local businesses. Contact and claim flows next.</p>
-      </div>
-      <div class="item" data-cat="farmer" data-name="example farm cooperative">
-        <h3>Example Farm Cooperative</h3>
-        <div class="meta"><span class="tag">Farmer</span> Ogoja · Agriculture</div>
-        <p>Placeholder agricultural listing. Real farmer and cooperative data will be curated here.</p>
-      </div>
-      <div class="item" data-cat="government" data-name="local government contact">
-        <h3>Local Government Contact Point</h3>
-        <div class="meta"><span class="tag">Government</span> Ogoja LGA</div>
-        <p>Placeholder government contact. Official channels and funding notices will appear here.</p>
-      </div>
-    </div>
+    <div class="list" id="list"></div>
 
     <div class="note">
-      <strong>Director note:</strong> Structural foundation of the directory. Real curated listings will replace placeholders. Search works client-side for starter items. Live key switch only on Director command.
+      <strong>Director note:</strong> Data lives in <code>member/data/directory.json</code>. Expand with verified listings; sponsored placements later support Founder revenue. Netlify production deploy is paused on credits — code lands on GitHub until credits resume. Live key switch only on Director command.
     </div>
   </div>
 
   <script src="_nav.js"></script>
   <script>
-    function filterList() {
-      var q = document.getElementById('q').value.toLowerCase();
+    var DATA = { listings: [] };
+    var CAT_LABEL = {
+      business: 'Business',
+      farmer: 'Farmer',
+      government: 'Government',
+      ngo: 'NGO / Partner'
+    };
+
+    function render() {
+      var q = (document.getElementById('q').value || '').toLowerCase();
       var cat = document.getElementById('cat').value;
-      document.querySelectorAll('.item').forEach(function (item) {
-        var name = item.getAttribute('data-name') || '';
-        var itemCat = item.getAttribute('data-cat') || '';
-        var matchQ = !q || name.indexOf(q) !== -1;
-        var matchCat = cat === 'all' || itemCat === cat;
-        item.style.display = matchQ && matchCat ? '' : 'none';
+      var list = document.getElementById('list');
+      var items = (DATA.listings || []).filter(function (row) {
+        var hay = [row.name, row.location, row.sector, row.summary, row.contact].join(' ').toLowerCase();
+        var matchQ = !q || hay.indexOf(q) !== -1;
+        var matchCat = cat === 'all' || row.category === cat;
+        return matchQ && matchCat;
       });
+      if (!items.length) {
+        list.innerHTML = '<p class="empty">No listings match this search.</p>';
+        return;
+      }
+      list.innerHTML = items.map(function (row) {
+        return (
+          '<div class="item">' +
+          '<h3>' + escapeHtml(row.name) + '</h3>' +
+          '<div class="meta"><span class="tag">' + escapeHtml(CAT_LABEL[row.category] || row.category) + '</span> ' +
+          escapeHtml(row.location || '') + ' · ' + escapeHtml(row.sector || '') + '</div>' +
+          '<p>' + escapeHtml(row.summary || '') + '</p>' +
+          (row.contact ? '<div class="contact">Contact: ' + escapeHtml(row.contact) + '</div>' : '') +
+          '</div>'
+        );
+      }).join('');
     }
+
+    function escapeHtml(s) {
+      return String(s || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    fetch('data/directory.json')
+      .then(function (r) { return r.json(); })
+      .then(function (json) {
+        DATA = json;
+        render();
+      })
+      .catch(function () {
+        document.getElementById('list').innerHTML =
+          '<p class="empty">Could not load directory data. Ensure member/data/directory.json is deployed.</p>';
+      });
   </script>
 </body>
 </html>

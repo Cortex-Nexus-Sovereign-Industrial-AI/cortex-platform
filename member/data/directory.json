@@ -1,0 +1,70 @@
+{
+  "updated": "2026-09-21",
+  "region": "Ogoja / Cross River",
+  "note": "Starter curated listings. Replace or expand with verified contacts. Sponsored slots later for revenue.",
+  "listings": [
+    {
+      "id": "biz-001",
+      "name": "Ogoja Central Market Association",
+      "category": "business",
+      "location": "Ogoja",
+      "sector": "Trade & Retail",
+      "summary": "Coordination point for traders and market operators in Ogoja central market area.",
+      "contact": "Local association desk (to be verified)"
+    },
+    {
+      "id": "biz-002",
+      "name": "Cross River Agro-Input Supply (placeholder)",
+      "category": "business",
+      "location": "Ogoja",
+      "sector": "Agro-inputs",
+      "summary": "Starter listing for agro-input dealers serving farmers in Ogoja and nearby LGAs.",
+      "contact": "Claim / verify pending"
+    },
+    {
+      "id": "farm-001",
+      "name": "Yala–Ogoja Farmers Cooperative (starter)",
+      "category": "farmer",
+      "location": "Ogoja / Yala",
+      "sector": "Agriculture",
+      "summary": "Placeholder cooperative entry for cassava, yam and related produce networks.",
+      "contact": "Cooperative liaison (to be confirmed)"
+    },
+    {
+      "id": "farm-002",
+      "name": "Rice & Grains Cluster — Ogoja",
+      "category": "farmer",
+      "location": "Ogoja",
+      "sector": "Cereals",
+      "summary": "Starter cluster for rice and grain producers; expand with verified members.",
+      "contact": "Pending verification"
+    },
+    {
+      "id": "gov-001",
+      "name": "Ogoja Local Government Secretariat",
+      "category": "government",
+      "location": "Ogoja LGA",
+      "sector": "Local Government",
+      "summary": "Primary LGA administrative contact point for permits, community programmes and local notices.",
+      "contact": "LGA secretariat (public channel)"
+    },
+    {
+      "id": "gov-002",
+      "name": "Cross River State Agricultural Extension (regional)",
+      "category": "government",
+      "location": "Cross River",
+      "sector": "Agriculture / Extension",
+      "summary": "Regional extension and farmer support pathway (confirm current desk).",
+      "contact": "State agriculture desk (verify)"
+    },
+    {
+      "id": "ngo-001",
+      "name": "Community Development Partner — Ogoja (starter)",
+      "category": "ngo",
+      "location": "Ogoja",
+      "sector": "Community / Development",
+      "summary": "Placeholder for NGOs and partners active in skills, youth and rural development.",
+      "contact": "Partner intake (to be listed)"
+    }
+  ]
+}

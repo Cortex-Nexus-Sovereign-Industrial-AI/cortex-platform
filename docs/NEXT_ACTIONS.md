@@ -1,36 +1,28 @@
 # NEXT ACTIONS — Director Update
-**Updated:** 2026-09-20 ~23:55 WAT
+**Updated:** 2026-09-21
 
 ## Founder instruction (locked)
 - Finish coding and wiring first.
 - Keep clean placeholder for live key switch.
-- **Remind Founder before conclusion** so live `sk_live_...` can be set cleanly.
+- **Remind Founder before conclusion** for live `sk_live_...`.
 
-## Completed this session
+## Blocked externally (leave for now)
+- **Netlify production deploys** — team credits exceeded; deploys skipped. Site still online on operational credits.
+- Action when credits return: Clear cache and deploy site from Netlify UI.
 
-- [x] PLATFORM_STRUCTURE.md
-- [x] MEMBERSHIP_FOUNDATION.md
-- [x] LIVE_KEY_SWITCH.md
-- [x] ACCESS_FLOW.md
-- [x] BUILD_STATUS.md
-- [x] `/member/` — dashboard, directory, success, profile, nav helper
-- [x] offers.html member path
-- [x] Webhook membership grant intent logging
-- [x] Issues #32 #33 #34 + PR #35
-- [x] PAYSTACK_SECRET_KEY confirmed on Netlify (test)
+## Continue building (no live deploy required)
 
-## Still coding / wiring
-
-1. Durable grant store when backend/API_BASE_URL is active
-2. Full auth (signup/login) progressive
-3. Real directory content (curated listings)
-4. Keep docs in sync
+- [x] Member scaffold on main
+- [x] Directory MVP data file + search UI
+- [x] ACCESS_FLOW / LIVE_KEY_SWITCH docs
+- [ ] Expand verified directory listings (Founder can add real contacts to JSON)
+- [ ] Durable access-grant store when backend/API_BASE_URL ready
+- [ ] Full auth progressive
 
 ## Explicit reminder (mandatory before round-up)
 
-Before declaring the system build complete, tell the Founder:
-
-> Coding and wiring are finished. It is now time to switch to the live Paystack secret key (`sk_live_...`) and confirm the Live webhook. See `docs/commerce/LIVE_KEY_SWITCH.md`.
+> Coding and wiring are finished. Time to switch to the live Paystack secret key (`sk_live_...`). See `docs/commerce/LIVE_KEY_SWITCH.md`.
 
 ## Primary site
-https://cortex-platforms.netlify.app
+https://cortex-platforms.netlify.app  
+(Live member UI updates only after Netlify credits allow a production deploy.)
