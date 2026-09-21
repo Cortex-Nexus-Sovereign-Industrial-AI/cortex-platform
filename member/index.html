@@ -28,11 +28,7 @@
       flex-wrap: wrap;
       gap: 12px;
     }
-    .header h1 {
-      font-size: 1.1rem;
-      color: var(--teal);
-      letter-spacing: 0.5px;
-    }
+    .header h1 { font-size: 1.1rem; color: var(--teal); letter-spacing: 0.5px; }
     .badge {
       display: inline-block;
       padding: 4px 12px;
@@ -44,14 +40,10 @@
       border: 1px solid var(--teal);
     }
     #member-nav { width: 100%; padding: 8px 0 0; }
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 32px 24px;
-    }
+    .container { max-width: 1100px; margin: 0 auto; padding: 32px 24px; }
     .welcome { margin-bottom: 28px; }
     .welcome h2 { font-size: 1.6rem; margin-bottom: 8px; }
-    .welcome p { color: var(--muted); }
+    .welcome p { color: var(--muted); line-height: 1.5; }
     .status-box {
       background: linear-gradient(135deg, #1a3a52, #0f2940);
       border: 1px solid var(--teal);
@@ -120,7 +112,7 @@
   <div class="container">
     <div class="welcome">
       <h2>Welcome to your Member Dashboard</h2>
-      <p>Protected area for Professional and Enterprise members. Directory, reports and opportunities live here.</p>
+      <p>Home for members, learners and partners. Directory, education and collaboration paths live here — built for recurring value in Ogoja and the wider region.</p>
     </div>
 
     <div class="status-box">
@@ -141,50 +133,45 @@
     <div class="grid">
       <div class="card">
         <h3>Directory</h3>
-        <p>Search local businesses, farmers and government contacts in Ogoja and surrounding areas.</p>
+        <p>Search businesses, farmers, government and community contacts — starter data for Ogoja and region.</p>
         <a href="directory.html">Open Directory →</a>
       </div>
       <div class="card">
-        <h3>Reports & Intelligence</h3>
-        <p>Market and agricultural insights (coming online progressively).</p>
-        <a href="#">Coming soon</a>
-      </div>
-      <div class="card">
         <h3>Education Hub</h3>
-        <p>Learning tracks for AI literacy, business, agriculture and digital skills.</p>
-        <a href="#">Coming soon</a>
+        <p>Tracks for AI literacy, agri-business, digital presence and ecosystem orientation.</p>
+        <a href="education.html">Open Education →</a>
       </div>
       <div class="card">
-        <h3>Alerts & Opportunities</h3>
-        <p>Funding, grants and local opportunity notifications.</p>
-        <a href="#">Coming soon</a>
+        <h3>Partners &amp; Supporters</h3>
+        <p>How partners, funders and members collaborate with clear roles — no hype.</p>
+        <a href="partners.html">View paths →</a>
+      </div>
+      <div class="card">
+        <h3>Alerts &amp; Opportunities</h3>
+        <p>Funding and local programme notices — progressive, verified when available.</p>
+        <a href="#">Coming next</a>
       </div>
     </div>
 
     <div class="flow-note">
-      <strong>Access path (current wiring):</strong><br>
-      Payment → Paystack webhook → signature check with <code>PAYSTACK_SECRET_KEY</code> → access grant → this dashboard.<br>
-      We are still on <strong>test keys</strong>. Live key switch only on Director command. See <code>docs/commerce/ACCESS_FLOW.md</code> and <code>docs/commerce/LIVE_KEY_SWITCH.md</code>.
+      <strong>Access path:</strong> Payment → Paystack webhook → grant → this dashboard.<br>
+      <strong>Audience map:</strong> <code>docs/MEMBER_VALUE_MAP.md</code> · Live key only on Director command · Netlify may lag until credits resume.
     </div>
   </div>
 
   <footer>
-    Cortex Intelligence Nexus · Ogoja, Nigeria · Built for recurring member value
+    Cortex Intelligence Nexus · Ogoja, Nigeria · Members · Partners · Learning · Real value
   </footer>
 
   <script src="_nav.js"></script>
   <script>
     (function () {
-      var planBadge = document.getElementById('planBadge');
-      var planValue = document.getElementById('planValue');
-      var statusValue = document.getElementById('statusValue');
-      var modeValue = document.getElementById('modeValue');
       var plan = localStorage.getItem('cinis_plan') || 'Professional (demo)';
       var status = localStorage.getItem('cinis_status') || 'Active (scaffold)';
-      planBadge.textContent = plan;
-      planValue.textContent = plan;
-      statusValue.textContent = status;
-      modeValue.textContent = 'Test keys — live switch pending Director command';
+      document.getElementById('planBadge').textContent = plan;
+      document.getElementById('planValue').textContent = plan;
+      document.getElementById('statusValue').textContent = status;
+      document.getElementById('modeValue').textContent = 'Test keys — live switch pending Director command';
     })();
   </script>
 </body>

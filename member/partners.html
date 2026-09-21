@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Partners &amp; Supporters | Cortex Member Area</title>
+  <style>
+    :root {
+      --navy: #0a1628;
+      --teal: #00d4ff;
+      --text: #e2e8f0;
+      --muted: #a0aec0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: var(--navy);
+      color: var(--text);
+      min-height: 100vh;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      border-bottom: 1px solid #1e3a5f;
+      background: linear-gradient(135deg, #001a36, #003366);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .header h1 { font-size: 1.1rem; color: var(--teal); }
+    #member-nav { width: 100%; padding: 8px 0 0; }
+    .container { max-width: 800px; margin: 0 auto; padding: 32px 24px; }
+    h2 { margin-bottom: 8px; }
+    .sub { color: var(--muted); margin-bottom: 28px; line-height: 1.55; }
+    .card {
+      background: linear-gradient(135deg, #1a3a52, #0f2940);
+      border: 1px solid #1e3a5f;
+      border-radius: 10px;
+      padding: 22px;
+      margin-bottom: 16px;
+    }
+    .card h3 { color: var(--teal); margin-bottom: 8px; font-size: 1rem; }
+    .card p { color: var(--muted); font-size: 0.9rem; line-height: 1.55; }
+    .note {
+      margin-top: 24px;
+      padding: 16px;
+      border-left: 3px solid var(--teal);
+      background: rgba(0, 212, 255, 0.05);
+      color: var(--muted);
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <h1>Partners &amp; Supporters</h1>
+    <div id="member-nav"></div>
+  </header>
+  <div class="container">
+    <h2>Build with Cortex</h2>
+    <p class="sub">Space for partners, funders and community supporters who want regional impact with clear roles — not hype. Collaboration paths expand as the directory and programmes mature.</p>
+
+    <div class="card">
+      <h3>Local partners</h3>
+      <p>Businesses, cooperatives and organisations that list in the directory, share verified contacts, or co-host learning sessions.</p>
+    </div>
+    <div class="card">
+      <h3>Funders &amp; programme supporters</h3>
+      <p>Transparent regional purpose: skills, connectivity of actors, and durable member value. Reporting and presence grow with real activity — no fabricated outcomes.</p>
+    </div>
+    <div class="card">
+      <h3>Members as ambassadors</h3>
+      <p>Professional and Enterprise members who introduce accurate listings and invite peers into ethical, deliverables-based use of the platform.</p>
+    </div>
+
+    <div class="note">
+      Intake and formal partnership forms will connect here next. For now this page anchors the relationship model. See <code>docs/MEMBER_VALUE_MAP.md</code>.
+    </div>
+  </div>
+  <script src="_nav.js"></script>
+</body>
+</html>
