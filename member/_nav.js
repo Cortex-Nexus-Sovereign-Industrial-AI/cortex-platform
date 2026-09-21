@@ -1,9 +1,11 @@
-/** Shared member-area nav helper — include on member pages */
+/** Shared member-area nav — members, education, partners, profile */
 (function () {
   if (typeof document === 'undefined') return;
   var links = [
     { href: 'index.html', label: 'Dashboard' },
     { href: 'directory.html', label: 'Directory' },
+    { href: 'education.html', label: 'Education' },
+    { href: 'partners.html', label: 'Partners' },
     { href: 'profile.html', label: 'Profile' },
     { href: 'success.html', label: 'After payment' }
   ];

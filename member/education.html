@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Education Hub | Cortex Member Area</title>
+  <style>
+    :root {
+      --navy: #0a1628;
+      --teal: #00d4ff;
+      --text: #e2e8f0;
+      --muted: #a0aec0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: var(--navy);
+      color: var(--text);
+      min-height: 100vh;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      border-bottom: 1px solid #1e3a5f;
+      background: linear-gradient(135deg, #001a36, #003366);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .header h1 { font-size: 1.1rem; color: var(--teal); }
+    #member-nav { width: 100%; padding: 8px 0 0; }
+    .container { max-width: 900px; margin: 0 auto; padding: 32px 24px; }
+    h2 { margin-bottom: 8px; }
+    .sub { color: var(--muted); margin-bottom: 28px; line-height: 1.5; }
+    .track {
+      background: linear-gradient(135deg, #1a3a52, #0f2940);
+      border: 1px solid #1e3a5f;
+      border-radius: 10px;
+      padding: 22px;
+      margin-bottom: 16px;
+    }
+    .track h3 { color: var(--teal); font-size: 1rem; margin-bottom: 8px; }
+    .track p { color: var(--muted); font-size: 0.9rem; line-height: 1.55; }
+    .track .level {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 0.75rem;
+      color: var(--teal);
+      border: 1px solid rgba(0, 212, 255, 0.35);
+      padding: 2px 10px;
+      border-radius: 12px;
+    }
+    .note {
+      margin-top: 28px;
+      padding: 16px;
+      border-left: 3px solid var(--teal);
+      background: rgba(0, 212, 255, 0.05);
+      color: var(--muted);
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <h1>Education Hub</h1>
+    <div id="member-nav"></div>
+  </header>
+  <div class="container">
+    <h2>Learn · Apply · Grow</h2>
+    <p class="sub">Practical tracks for members in Ogoja and beyond — AI literacy, business, agriculture and digital skills. Content expands progressively; no income promises, only skills and clarity.</p>
+
+    <div class="track">
+      <h3>AI literacy for local enterprise</h3>
+      <p>Understand what AI can and cannot do for a small business or cooperative. Safe use of tools, privacy basics, and realistic workflows.</p>
+      <span class="level">Track · Starter</span>
+    </div>
+    <div class="track">
+      <h3>Agri-business &amp; market awareness</h3>
+      <p>Simple frameworks for produce timing, buyer contact discipline, and reading local opportunity notices without hype.</p>
+      <span class="level">Track · Agriculture</span>
+    </div>
+    <div class="track">
+      <h3>Digital presence &amp; client communication</h3>
+      <p>Clear offers, payment paths, and professional follow-up — aligned with Cortex deliverables-only commerce rules.</p>
+      <span class="level">Track · Business</span>
+    </div>
+    <div class="track">
+      <h3>Community &amp; partnership orientation</h3>
+      <p>How members, partners and supporters plug into the directory and regional programmes without confusion.</p>
+      <span class="level">Track · Ecosystem</span>
+    </div>
+
+    <div class="note">
+      <strong>Director note:</strong> Structure first; full modules (guides, links, short lessons) will be filled next. See <code>docs/MEMBER_VALUE_MAP.md</code>. Live key switch only on Director command. Netlify production may lag until credits resume.
+    </div>
+  </div>
+  <script src="_nav.js"></script>
+</body>
+</html>
