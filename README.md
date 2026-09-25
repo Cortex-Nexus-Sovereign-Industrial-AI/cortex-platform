@@ -1,58 +1,56 @@
-# Cortex Intelligence Nexus — cortex-platform
+# Cortex Intelligence Nexus
 
-**Public brand:** Cortex Intelligence Nexus  
-**Product:** Cortex AI Nexus (this repository)  
-**Founder:** Michael Ujuku Morim  
-**Org:** [Cortex-Nexus-Sovereign-Industrial-AI](https://github.com/Cortex-Nexus-Sovereign-Industrial-AI)
-
-Industrial AI engineering, agentic systems, and sovereign automation tools. Based in Ogoja, Cross River State, Nigeria.
+**What we deliver (finished work only)**  
+Electronics & appliance repair · Practical agro / trader automations · Structured digital content systems  
+Based in Ogoja, Cross River State, Nigeria.
 
 ---
 
-## Live surfaces (SSOT)
+## Book / Pay
+
+| Service | How to start | Payment |
+|---------|--------------|---------|
+| **Physical repair** (TV, boards, irons, washers) | WhatsApp 0901 025 1577 or visit shop | Diagnosis fee first, then agreed total (Moniepoint / Opay / cash) |
+| **Agro / trader automation** | WhatsApp or offers page | ₦15,000–₦50,000 on delivery of working system |
+| **30-Day AI Content System** | [Offers page](https://cortex-platforms.netlify.app/offers.html) | ₦22,000 via Paystack |
+
+**Primary site:** https://cortex-platforms.netlify.app  
+**Offers:** https://cortex-platforms.netlify.app/offers.html  
+**Google Business:** [Verified listing](https://maps.google.com/maps?cid=2073161413550473641)
+
+---
+
+## Live surfaces
 
 | Surface | URL |
 |---------|-----|
-| **Primary website** | https://cortex-platforms.netlify.app |
-| **Identity** | https://cortex-platforms.netlify.app/identity.html |
-| **Platform Pulse (Phase 0)** | https://cortex-platforms.netlify.app/metrics-dashboard.html |
-| **Offers** | https://cortex-platforms.netlify.app/offers.html |
-| **GitHub Pages shell** | https://cortex-nexus-sovereign-industrial-ai.github.io/cortex-platform/ |
-| **Google Business** | https://maps.google.com/maps?cid=2073161413550473641 |
-| **Command repo** | https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform |
+| Website | https://cortex-platforms.netlify.app |
+| Offers / Book | https://cortex-platforms.netlify.app/offers.html |
+| Identity | https://cortex-platforms.netlify.app/identity.html |
+| Platform Pulse | https://cortex-platforms.netlify.app/metrics-dashboard.html |
+| Google Business | https://maps.google.com/maps?cid=2073161413550473641 |
+| This repo | https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform |
 
-**Identity source of truth:** [IDENTITY.md](./IDENTITY.md) · **Ops entry:** [COMMAND_CENTER.md](./COMMAND_CENTER.md) · **Health:** [STATUS.md](./STATUS.md)
-
----
-
-## What this repo is
-
-- Static public HTML on Netlify (`publish = "."`) + pure Node functions under `netlify/functions/`
-- Express API under `backend/` (Paystack webhooks, JWT, SQLite when hosted)
-- Edge CBF sources under `edge/`
-- Internal agents under `agents/` (e.g. Mike Complex AI = **runner only**, not public company name)
+**Source of truth for name, contact, and rules:** [IDENTITY.md](./IDENTITY.md)  
+**Ops entry:** [COMMAND_CENTER.md](./COMMAND_CENTER.md)
 
 ---
 
-## Local / deploy notes
+## What this repo contains
 
-```bash
-# No heavy root npm install required for static + functions
-# Netlify: linked to main → auto deploy
-# Secrets: Netlify env only (never commit)
-```
+- Public static pages (Netlify)
+- Payment paths (Paystack)
+- Identity and operating documents
+- Internal agents and edge sources (not public brand names)
 
-Required for payments (founder): `PAYSTACK_SECRET_KEY` on Netlify + Paystack payment link under business name **Cortex Intelligence Nexus**.
-
-Optional: `SOFA_API_KEY`, Shopify tokens — see `backend/.env.example` and `docs/operations/`.
+Secrets stay in Netlify environment variables only. Never commit keys.
 
 ---
 
 ## Policy
 
 - Public name: **Cortex Intelligence Nexus** only  
-- Founder name: **Michael Ujuku Morim** only  
-- Primary website: **https://cortex-platforms.netlify.app**  
-- Do not present Mike Complex AI / mikecomplexai as the company identity  
+- Lead with completed, paid work  
+- No income or follower promises  
 
 © 2026 Cortex Intelligence Nexus
