@@ -1,29 +1,30 @@
 # NEXT ACTIONS
 **Updated:** 2026-09-25
 
-## Done in repo (agents can continue from here)
+## Done in repo
 
-- Identity SSOT restructured: lead with services and delivery, not founder identity
-- README rewritten as business-facing (book / pay table)
-- offers.html expanded: Physical repair + Agro automations + 30-Day AI Content System
-- Platform Pulse Phase 0, Paystack scaffolding, Netlify helpers already in place
+- IDENTITY.md, README.md, offers.html restructured around finished work
+- WEEKLY_OPERATING_CHECKLIST.md created
+- WHATSAPP_SALES_SCRIPT.md expanded for Repair + Agro + 30-Day system
+- OFFER_LADDER.md updated with all three lines
+- Paystack scaffolding already present
 
-## Immediate priority (revenue this week)
+## Do this week (execution)
 
-1. Use the new offers page and WhatsApp scripts daily.
-2. Take only diagnosis-fee or pre-agreed repair jobs. Decline pure multi-day tracing without deposit.
-3. Push 1–2 agro/trader automation quotes this week (WhatsApp groups, local contacts).
-4. Confirm Paystack live link + secret key on Netlify still correct for the ₦22,000 offer.
-5. Record every completed paid job (photo + amount) for proof and Google reviews.
+1. Use WEEKLY_OPERATING_CHECKLIST.md every day.
+2. Copy the repair and agro scripts from `docs/commerce/WHATSAPP_SALES_SCRIPT.md` into your WhatsApp and start using them.
+3. Take only diagnosis-fee or pre-agreed repair jobs.
+4. Send at least 2 agro/trader automation quotes.
+5. Record every completed paid job (photo + amount).
+6. Confirm Paystack secret key is still correct on Netlify if you have not checked recently.
 
 ## Founder-only remaining
 
-- `PAYSTACK_SECRET_KEY` on Netlify (if not already set)
-- Confirm webhook in Paystack dashboard
-- Optional: Shopify store password removal when ready for more traffic
+- PAYSTACK_SECRET_KEY on Netlify (if needed)
+- Webhook confirmation in Paystack dashboard
+- Optional: Shopify password removal when ready
 
-## Optional later
+## Later
 
-- Simple weekly operating checklist file
-- Phase 1 Pulse: GitHub public stats
-- Close or rewrite stale PRs after review
+- Phase 1 Pulse stats
+- Close or rewrite stale PRs
