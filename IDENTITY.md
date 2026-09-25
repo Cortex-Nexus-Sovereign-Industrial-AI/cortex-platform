@@ -1,99 +1,99 @@
-# Cortex Intelligence Nexus — Identity & Verification
+# Cortex Intelligence Nexus — Identity & Business Offerings
 
-**Canonical identity surface for CINIS / Cortex AI Nexus**  
-**Source of truth:** this repository.  
-**Last aligned:** 2026-08-27 (full build alignment)
+**Canonical source of truth for CINIS / Cortex AI Nexus**  
+**Last aligned:** 2026-09-25
 
 ---
 
-## 1. Core Identity
+## 1. Core Business Identity
 
 | Layer | Value |
 |-------|--------|
 | **Legal / Public Name** | Cortex Intelligence Nexus |
 | **Product / Platform** | Cortex AI Nexus (cortex-platform) |
-| **Founder & Sole Authority** | Michael Ujuku Morim |
-| **GitHub (Founder)** | [mikecomplexai-7](https://github.com/mikecomplexai-7) |
+| **Owner** | Michael Ujuku Morim |
 | **Organization** | [Cortex-Nexus-Sovereign-Industrial-AI](https://github.com/Cortex-Nexus-Sovereign-Industrial-AI) |
 | **Command Repository** | [cortex-platform](https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform) |
 | **Live Platform** | [https://cortex-platforms.netlify.app](https://cortex-platforms.netlify.app) |
-| **Identity page (canonical web)** | [https://cortex-platforms.netlify.app/identity.html](https://cortex-platforms.netlify.app/identity.html) |
-| **Member Dashboard** | [https://cortex-platforms.netlify.app/member-dashboard.html](https://cortex-platforms.netlify.app/member-dashboard.html) |
-| **Platform Pulse** | [https://cortex-platforms.netlify.app/metrics-dashboard.html](https://cortex-platforms.netlify.app/metrics-dashboard.html) |
-| **GitHub Pages shell** | [https://cortex-nexus-sovereign-industrial-ai.github.io/cortex-platform/](https://cortex-nexus-sovereign-industrial-ai.github.io/cortex-platform/) |
+| **Identity page** | [https://cortex-platforms.netlify.app/identity.html](https://cortex-platforms.netlify.app/identity.html) |
+| **Offers / Book** | [https://cortex-platforms.netlify.app/offers.html](https://cortex-platforms.netlify.app/offers.html) |
 | **Contact Email** | cortexnexus@proton.me |
-| **Phone** | 0901 025 1577 |
+| **Phone / WhatsApp** | 0901 025 1577 |
 | **HQ** | Ogoja, Cross River State, Nigeria |
-| **X (Founder)** | [@MikeComplexAie](https://x.com/MikeComplexAie) |
-| **X (Company)** | [@CinisIndustry](https://x.com/CinisIndustry) |
-
-Secondary profile hub (optional): [about.me/mikecomplexai](https://about.me/mikecomplexai) — not a substitute for the Netlify identity page.
+| **Google Business** | [Verified listing](https://maps.google.com/maps?cid=2073161413550473641) |
 
 ---
 
-## 2. Core Positioning (use everywhere)
+## 2. What We Deliver (Primary Business Function)
+
+We complete paid work. The focus is finished jobs that put cash in hand, not identity documents.
+
+### A. Physical Services (DARKTRONIX 9V LABS)
+- TV, board, iron, washer and common electronics repair
+- Diagnosis fee first (₦2,000–₦5,000). Full repair only after customer agrees total price.
+- Target net profit per completed set: ₦5,000–₦15,000 after parts
+- Fast-turnaround faults only. Multi-day tracing jobs require higher deposit or are declined.
+
+### B. Agro / Agricultural Technology Services
+- Simple farm and trader automations (WhatsApp order/harvest alerts → Sheet or SMS)
+- Inventory and sales tracking for agro-input shops and produce traders
+- Basic power or monitoring setups for small storage/processing
+- Delivered as working systems with handover. Price range typically ₦15,000–₦50,000 per completed system.
+
+### C. Digital / Content Systems
+- 30-Day AI Content System — ₦22,000 (Paystack)
+- Structured deliverables only. No income or follower promises.
+
+Payment: Paystack under business name **Cortex Intelligence Nexus**. Local cash/Moniepoint/Opay also accepted for physical jobs.
+
+---
+
+## 3. Core Positioning (use on public surfaces)
 
 ```
-Cortex Intelligence Nexus is an industrial AI and autonomous systems platform.
-We build practical tools and structured frameworks so people develop real judgment,
-intuition, and execution skill — instead of remaining dependent on AI apps.
-Based in Ogoja. Serving Nigeria and enterprise operations.
+Cortex Intelligence Nexus delivers finished work:
+• Electronics and appliance repair (Ogoja)
+• Practical agro and trader automations
+• Structured digital content systems
+
+Based in Ogoja, Cross River State. Book via WhatsApp or the offers page. Payment before or on delivery.
 ```
 
 ---
 
-## 3. Google Business Profile (Verified Listing)
+## 4. Google Business Profile (Verified)
 
 | Resource | Value / Link |
 |----------|--------------|
 | **Business Name** | Cortex Intelligence Nexus |
 | **Primary Category** | Software company |
-| **Recommended Additional** | Information technology company, Artificial intelligence company, Business management consultant |
-| **Hours** | 24/7 (including online service) |
-| **Service Area** | Nigeria (primary base: Ogoja, Cross River State) |
-| **Website field** | https://cortex-platforms.netlify.app/ |
-| **Google Maps Profile** | [Open listing](https://maps.google.com/maps?cid=2073161413550473641) |
-| **Direct Review Link** | [Leave a review](https://search.google.com/local/writereview?placeid=ChIJu_fwtQXAO6gRqQG5UFJZxRw) |
+| **Additional** | Electronics repair, Information technology company |
+| **Hours** | Local shop hours + online service |
+| **Service Area** | Ogoja and surrounding, Cross River State |
+| **Website** | https://cortex-platforms.netlify.app/ |
+| **Maps** | [Open listing](https://maps.google.com/maps?cid=2073161413550473641) |
 | **Place ID** | `ChIJu_fwtQXAO6gRqQG5UFJZxRw` |
-| **CID** | `2073161413550473641` |
 
-**Approved Description:**
-
-```
-Cortex Intelligence Nexus delivers industrial AI, agentic systems, and sovereign automation tools. Based in Ogoja, Cross River State, we build scalable platforms, structured capability frameworks, and practical digital infrastructure so businesses and individuals develop real skill instead of dependency. Live platform and services available at our website.
-```
-
----
-
-## 4. Internal Agents (operating roles only)
-
-Not separate legal identities. Not public company names.
-
-| Agent | Role | Function |
-|-------|------|----------|
-| **Mike Complex AI** | The Runner | Execution, deploy checks, scripts, platform delivery |
-| **Target i7** | Analytics Engine | Measurement, pulse reports, diagnostics |
-| **CINIS NEXUS AI** | The Architect | Strategy, coherence, priority setting |
-
-All public output: **Cortex Intelligence Nexus** + **Michael Ujuku Morim**.
+**Approved short description:**
+Cortex Intelligence Nexus provides electronics repair, practical agro automations, and digital systems in Ogoja, Cross River State. Finished jobs only. Book and pay via WhatsApp or website.
 
 ---
 
 ## 5. Commerce Snapshot
 
-- Mid-ticket: **30-Day AI Content System** — ₦22,000  
-- Payment: Paystack  
-- Docs: `docs/commerce/`
+- Physical repairs: diagnosis fee + agreed total (cash / Moniepoint / Opay)
+- Agro automation packages: ₦15,000–₦50,000
+- Mid-ticket digital: 30-Day AI Content System — ₦22,000 (Paystack)
+- Docs: `docs/commerce/` and offers.html
 
 ---
 
 ## 6. Non-negotiable Rules
 
-- Exact public name only: **Cortex Intelligence Nexus**
-- Exact founder name only: **Michael Ujuku Morim**
+- Public name only: **Cortex Intelligence Nexus**
+- Owner name only: **Michael Ujuku Morim**
 - Primary website only: **https://cortex-platforms.netlify.app**
-- Never point to cortex-nexus.com or unrelated domains
-- Never present Mike Complex AI / mikecomplexai as the company identity
+- Lead with completed, paid work — not founder identity statements
 - Source of truth = this file + COMMAND_CENTER.md
 
 ---
@@ -103,7 +103,7 @@ All public output: **Cortex Intelligence Nexus** + **Michael Ujuku Morim**.
 - [COMMAND_CENTER.md](./COMMAND_CENTER.md)  
 - [STATUS.md](./STATUS.md)  
 - [PUBLIC_SURFACES.md](./PUBLIC_SURFACES.md)  
-- [docs/operations/SECTION_ACTIVATION.md](./docs/operations/SECTION_ACTIVATION.md)
+- [offers.html](./offers.html)
 
 **Maintainer:** Michael Ujuku Morim  
 **Repository:** Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform
