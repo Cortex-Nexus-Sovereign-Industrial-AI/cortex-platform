@@ -1,17 +1,93 @@
-# WhatsApp Sales Scripts — 30-Day AI Content System
+# WhatsApp Sales Scripts — Cortex Intelligence Nexus
 **Brand:** Cortex Intelligence Nexus  
-**Price:** ₦22,000  
-**Paystack (live):** https://paystack.shop/pay/cortex-demo  
-**Updated:** 2026-08-30
+**Updated:** 2026-09-25  
+**Contact:** 0901 025 1577
+
+Use the right script for the enquiry. Keep messages short and focused on finished work + payment.
 
 ---
 
-## On reply SYSTEM
+## 1. Repair (TV / board / iron / washer)
 
+### First reply
 ```
 Got you.
 
-The 30-Day AI Content System is the full-month version of what you already started.
+We do diagnosis first (₦2,000–₦5,000).  
+After diagnosis I tell you the full cost.  
+I only continue if you agree the total.
+
+Send:
+• Photo of the set / problem
+• Model if you know it
+• What exactly is happening (no power, sound, display, etc.)
+
+Then I will confirm the diagnosis fee and next step.
+```
+
+### After diagnosis fee paid
+```
+Diagnosis fee received. Thank you.
+
+I will check it and message you the full repair cost today / tomorrow.
+Only after you agree the total will I start the full work.
+```
+
+### When full price is ready
+```
+Diagnosis complete.
+
+Full repair cost: ₦[amount] (includes parts + labour).
+Net after parts keeps the job viable for me.
+
+If you want to proceed, pay the balance and I will finish and test it.
+Payment: Moniepoint / Opay / cash.
+```
+
+---
+
+## 2. Agro / Trader Automation
+
+### First reply / cold outreach
+```
+Good day.
+
+I build simple working automations for traders and agro shops in Ogoja:
+• WhatsApp order or harvest alerts → Google Sheet or SMS
+• Basic inventory / sales tracking
+• Simple power or reminder systems
+
+Price range: ₦15,000 – ₦50,000 depending on what you need.
+I deliver a working system + short handover.
+
+If you want a quote, just reply with:
+1. What you sell or farm
+2. The biggest manual headache right now
+
+I will tell you if I can solve it and the price.
+```
+
+### After they describe the problem
+```
+Understood.
+
+I can do [short description of the system].
+Estimated price: ₦[amount].
+Delivery: working system + how to use it.
+
+If that works, we can start after 50% deposit or full payment.
+Reply YES if you want to proceed.
+```
+
+---
+
+## 3. 30-Day AI Content System (₦22,000)
+
+### On reply SYSTEM or interest
+```
+Got you.
+
+The 30-Day AI Content System is the full-month version.
 
 What you get:
 • 30-day content calendar (topics + post types)
@@ -28,10 +104,7 @@ If that works for you, I’ll send the Paystack link.
 Reply YES and I’ll send it.
 ```
 
----
-
-## On YES
-
+### On YES
 ```
 Perfect.
 
@@ -48,43 +121,15 @@ After payment, send me:
 Once I have that, your 5-day timer starts.
 ```
 
----
-
-## Hesitation
-
+### Hesitation
 ```
 No pressure.
-
-Simple difference:
-• 7-day pack = this week’s posts
-• 30-day system = full month planned + written so you’re not starting from zero every Monday
-
-If you only need this week, the small pack is enough.
-If you want the month handled, this is the one.
 
 I only take a few at a time so delivery stays on time.
 If you want in, reply YES and I’ll send payment.
 ```
 
----
-
-## Discount ask
-
-```
-I keep it at ₦22,000 so quality and the revision pass stay included.
-
-What I can do:
-• Start as soon as you pay and send the brief
-• Deliver inside 5 days
-• One revision pass included
-
-If ₦22k is outside budget now, use the 7-day pack fully first, then upgrade when you’re ready.
-```
-
----
-
-## Results ask
-
+### Results ask
 ```
 I don’t promise sales or followers.
 
@@ -92,13 +137,9 @@ I deliver the system: calendar, captions, hooks, and a weekly plan.
 You publish. Results depend on your niche, consistency, and audience.
 
 If you want assets + structure, this fits.
-If you need guaranteed leads or sales, this is not the offer.
 ```
 
----
-
-## After payment (confirmation)
-
+### After payment
 ```
 Payment received — thank you.
 
@@ -114,10 +155,7 @@ As soon as this is in, I’ll start.
 Delivery target: within 5 days.
 ```
 
----
-
-## On delivery
-
+### On delivery
 ```
 Your 30-Day AI Content System is ready.
 
@@ -134,21 +172,9 @@ You have 7 days for one revision pass — reply with anything to adjust.
 
 ---
 
-## Follow-up (Day 2, unpaid YES only once)
-
-```
-Quick check — still want the 30-day system?
-
-Link is here if yes:
-https://paystack.shop/pay/cortex-demo
-
-If timing is bad, no stress. The 7-day pack still works until you’re ready.
-```
-
----
-
-## Internal note
-- Max concurrent active mid-ticket orders: 5 (adjust as needed).
-- Always confirm payment via Paystack dashboard or webhook log before starting work.
-- Keep delivery promise strict: 5 days from brief receipt.
-- Live Paystack link locked 2026-08-30: https://paystack.shop/pay/cortex-demo
+## Internal notes
+- Always confirm payment before starting full work.
+- Max concurrent 30-day systems: 5 recommended.
+- For repairs: diagnosis fee first, never start multi-day tracing without deposit.
+- Record every completed paid job (photo + amount).
+- Live Paystack link: https://paystack.shop/pay/cortex-demo
