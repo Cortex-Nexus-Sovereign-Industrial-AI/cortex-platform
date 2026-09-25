@@ -74,8 +74,9 @@ Based in Ogoja, Cross River State. Book via WhatsApp or the offers page. Payment
 | **Maps** | [Open listing](https://maps.google.com/maps?cid=2073161413550473641) |
 | **Place ID** | `ChIJu_fwtQXAO6gRqQG5UFJZxRw` |
 
-**Approved short description:**
-Cortex Intelligence Nexus provides electronics repair, practical agro automations, and digital systems in Ogoja, Cross River State. Finished jobs only. Book and pay via WhatsApp or website.
+**Approved Google Business description (paste this):**
+
+Cortex Intelligence Nexus — electronics & appliance repair, practical agro/trader automations, and digital content systems in Ogoja, Cross River State. Diagnosis fee first for repairs. Working systems delivered. Book on WhatsApp 0901 025 1577 or https://cortex-platforms.netlify.app/offers.html. Finished jobs only.
 
 ---
 
@@ -84,6 +85,7 @@ Cortex Intelligence Nexus provides electronics repair, practical agro automation
 - Physical repairs: diagnosis fee + agreed total (cash / Moniepoint / Opay)
 - Agro automation packages: ₦15,000–₦50,000
 - Mid-ticket digital: 30-Day AI Content System — ₦22,000 (Paystack)
+- One-page price list: `CINIS_Price_List.pdf`
 - Docs: `docs/commerce/` and offers.html
 
 ---
@@ -103,7 +105,8 @@ Cortex Intelligence Nexus provides electronics repair, practical agro automation
 - [COMMAND_CENTER.md](./COMMAND_CENTER.md)  
 - [STATUS.md](./STATUS.md)  
 - [PUBLIC_SURFACES.md](./PUBLIC_SURFACES.md)  
-- [offers.html](./offers.html)
+- [offers.html](./offers.html)  
+- [WEEKLY_OPERATING_CHECKLIST.md](./WEEKLY_OPERATING_CHECKLIST.md)
 
 **Maintainer:** Michael Ujuku Morim  
 **Repository:** Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform
