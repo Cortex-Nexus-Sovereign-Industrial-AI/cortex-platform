@@ -1,5 +1,5 @@
 # CINIS NEXUS — Public Surfaces Map
-**Last Updated:** 2026-08-27
+**Last Updated:** 2026-09-27
 
 ## Live
 
@@ -21,11 +21,14 @@
 | Surface | URL | Status |
 |---------|-----|--------|
 | Shopify Admin | https://cortex-intelligence-nexus.myshopify.com | Domain confirmed; seed ready |
+| Offers page | https://cortex-platforms.netlify.app/offers.html | Live |
 
-## Social
+## Social & Channels
 
 | Channel | URL |
 |---------|-----|
+| **WhatsApp Channel** | https://whatsapp.com/channel/0029VbDEbGX60eBkg6WqCG0N |
+| **Telegram** | CortexHrbot |
 | X (Founder) | https://x.com/MikeComplexAie |
 | X (Company) | https://x.com/CinisIndustry |
 | YouTube | https://www.youtube.com/@MikecomplexAI-i2e |
