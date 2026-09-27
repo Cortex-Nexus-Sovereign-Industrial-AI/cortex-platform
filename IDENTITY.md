@@ -1,7 +1,7 @@
 # Cortex Intelligence Nexus — Identity & Business Offerings
 
 **Canonical source of truth for CINIS / Cortex AI Nexus**  
-**Last aligned:** 2026-09-25
+**Last aligned:** 2026-09-27
 
 ---
 
@@ -17,6 +17,8 @@
 | **Live Platform** | [https://cortex-platforms.netlify.app](https://cortex-platforms.netlify.app) |
 | **Identity page** | [https://cortex-platforms.netlify.app/identity.html](https://cortex-platforms.netlify.app/identity.html) |
 | **Offers / Book** | [https://cortex-platforms.netlify.app/offers.html](https://cortex-platforms.netlify.app/offers.html) |
+| **WhatsApp Channel** | [https://whatsapp.com/channel/0029VbDEbGX60eBkg6WqCG0N](https://whatsapp.com/channel/0029VbDEbGX60eBkg6WqCG0N) |
+| **Telegram** | CortexHrbot |
 | **Contact Email** | cortexnexus@proton.me |
 | **Phone / WhatsApp** | 0901 025 1577 |
 | **HQ** | Ogoja, Cross River State, Nigeria |
@@ -73,10 +75,16 @@ Based in Ogoja, Cross River State. Book via WhatsApp or the offers page. Payment
 | **Website** | https://cortex-platforms.netlify.app/ |
 | **Maps** | [Open listing](https://maps.google.com/maps?cid=2073161413550473641) |
 | **Place ID** | `ChIJu_fwtQXAO6gRqQG5UFJZxRw` |
+| **WhatsApp Channel** | https://whatsapp.com/channel/0029VbDEbGX60eBkg6WqCG0N |
+| **Telegram** | CortexHrbot |
 
-**Approved Google Business description (paste this):**
+**Approved Google Business description (no URLs inside description field):**
 
-Cortex Intelligence Nexus — electronics & appliance repair, practical agro/trader automations, and digital content systems in Ogoja, Cross River State. Diagnosis fee first for repairs. Working systems delivered. Book on WhatsApp 0901 025 1577 or https://cortex-platforms.netlify.app/offers.html. Finished jobs only.
+Cortex Intelligence Nexus provides electronics and appliance repair, practical agro and trader automations, and digital content systems in Ogoja, Cross River State. Diagnosis fee first for repairs. Working systems delivered. Book on WhatsApp 0901 025 1577. Finished jobs only.
+
+**Links to add in Google Business Links / Additional links section:**
+- WhatsApp Channel – Skills & Updates → https://whatsapp.com/channel/0029VbDEbGX60eBkg6WqCG0N
+- Telegram – CortexHrbot → (existing linked Telegram)
 
 ---
 
