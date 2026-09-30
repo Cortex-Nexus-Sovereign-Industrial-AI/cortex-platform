@@ -1,3 +1,382 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><title>Cortex Intelligence Nexus — Finished Work · Ogoja</title></head><body><p>Placeholder - full content will follow in next commit if needed.</p></body></html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cortex Intelligence Nexus — Finished Work · Ogoja</title>
+  <meta name="description" content="Cortex Intelligence Nexus delivers finished work in Ogoja, Cross River State: electronics & appliance repair, practical agro and trader automations, and structured digital content systems. Neural Network Learning Lab." />
+  <meta name="theme-color" content="#050d12" />
+  <style>
+    :root {
+      --bg: #050d12; --bg2: #071117; --card: rgba(255,255,255,0.03);
+      --border: rgba(255,255,255,0.1); --teal: #2dd4bf;
+      --teal-dim: rgba(45,212,191,0.15); --text: #e2e8f0; --muted: #94a3b8; --white: #fff;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; min-height: 100vh; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: 72rem; margin: 0 auto; padding: 0 1rem; }
+    @media (min-width: 640px) { .wrap { padding: 0 1.5rem; } }
+    header { position: sticky; top: 0; z-index: 40; border-bottom: 1px solid var(--border); background: rgba(5,13,18,0.9); backdrop-filter: blur(8px); }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; height: 4rem; }
+    .logo { display: flex; align-items: center; gap: 0.65rem; }
+    .logo-mark { width: 2.25rem; height: 2.25rem; border-radius: 0.75rem; background: var(--teal-dim); color: var(--teal); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; }
+    .logo-text strong { display: block; font-size: 0.875rem; color: var(--white); letter-spacing: -0.02em; }
+    .logo-text span { display: block; font-size: 0.7rem; color: rgba(94,234,212,0.8); }
+    nav { display: none; gap: 1.5rem; align-items: center; }
+    @media (min-width: 768px) { nav { display: flex; } }
+    nav a { font-size: 0.875rem; color: #cbd5e1; transition: color 0.15s; }
+    nav a:hover { color: var(--teal); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; border-radius: 0.75rem; padding: 0.65rem 1.25rem; font-size: 0.875rem; font-weight: 600; transition: 0.15s; border: 1px solid transparent; cursor: pointer; }
+    .btn-primary { background: var(--teal); color: #020617; }
+    .btn-primary:hover { background: #5eead4; }
+    .btn-ghost { border-color: rgba(255,255,255,0.15); color: #f1f5f9; }
+    .btn-ghost:hover { border-color: rgba(94,234,212,0.5); color: var(--white); }
+    .btn-outline-teal { border-color: rgba(94,234,212,0.4); background: rgba(45,212,191,0.1); color: #99f6e4; }
+    .btn-outline-teal:hover { background: rgba(45,212,191,0.2); }
+    .hero { position: relative; overflow: hidden; padding: 3.5rem 0 4rem; }
+    .hero-glow { pointer-events: none; position: absolute; top: -8rem; left: 50%; transform: translateX(-50%); width: 42rem; height: 24rem; border-radius: 9999px; background: rgba(20,184,166,0.1); filter: blur(64px); }
+    .hero-grid { display: grid; gap: 2.5rem; align-items: center; }
+    @media (min-width: 1024px) { .hero-grid { grid-template-columns: 1fr 1fr; padding-top: 1.25rem; } }
+    .badge { display: inline-flex; align-items: center; gap: 0.5rem; border-radius: 9999px; border: 1px solid rgba(94,234,212,0.3); background: rgba(45,212,191,0.1); padding: 0.25rem 0.75rem; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--teal); }
+    h1 { margin-top: 1.25rem; font-size: 2.25rem; font-weight: 700; line-height: 1.08; letter-spacing: -0.025em; color: var(--white); }
+    @media (min-width: 640px) { h1 { font-size: 3rem; } }
+    h1 .accent { color: var(--teal); }
+    .lead { margin-top: 1.25rem; max-width: 36rem; font-size: 1.05rem; color: rgba(203,213,225,0.9); line-height: 1.65; }
+    .cta-row { margin-top: 1.75rem; display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .meta-row { margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 1.25rem; font-size: 0.75rem; color: var(--muted); }
+    .stats { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; max-width: 28rem; }
+    .stats dd:first-of-type { font-size: 1.5rem; font-weight: 700; color: var(--white); }
+    .stats dd:last-of-type { font-size: 0.75rem; color: var(--muted); margin-top: 0.2rem; }
+    .hero-card { border-radius: 1rem; border: 1px solid var(--border); background: var(--card); padding: 1.5rem; }
+    .nn-svg { width: 100%; height: auto; }
+    .hero-card p { margin-top: 0.5rem; text-align: center; font-size: 0.75rem; color: var(--muted); }
+    section { padding: 4rem 0; border-top: 1px solid rgba(255,255,255,0.05); }
+    section.alt { background: var(--bg2); }
+    .section-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--teal); }
+    h2 { margin-top: 0.75rem; max-width: 42rem; font-size: 1.875rem; font-weight: 700; letter-spacing: -0.025em; color: var(--white); }
+    @media (min-width: 640px) { h2 { font-size: 2.25rem; } }
+    .section-desc { margin-top: 1rem; max-width: 42rem; color: rgba(203,213,225,0.85); }
+    .cards { margin-top: 2.5rem; display: grid; gap: 1.25rem; }
+    @media (min-width: 640px) { .cards { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .cards.cols-4 { grid-template-columns: repeat(4, 1fr); } }
+    .card { border-radius: 1rem; border: 1px solid var(--border); background: var(--card); padding: 1.5rem; transition: border-color 0.15s; }
+    .card:hover { border-color: rgba(94,234,212,0.4); }
+    .card-icon { width: 2.75rem; height: 2.75rem; border-radius: 0.75rem; background: var(--teal-dim); color: var(--teal); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+    .card h3 { margin-top: 1rem; font-size: 1rem; font-weight: 600; color: var(--white); }
+    .card p { margin-top: 0.5rem; font-size: 0.875rem; color: rgba(203,213,225,0.8); line-height: 1.55; }
+    .path { margin-top: 2rem; position: relative; border-left: 1px solid rgba(94,234,212,0.2); padding-left: 0; }
+    @media (min-width: 640px) { .path { padding-left: 0.5rem; } }
+    .path-item { position: relative; margin-bottom: 1.25rem; border-radius: 1rem; border: 1px solid var(--border); background: var(--card); padding: 1.25rem 1.25rem 1.25rem 1.5rem; }
+    @media (min-width: 640px) { .path-item { margin-left: 1.5rem; padding: 1.5rem; } .path-item::before { content: ""; position: absolute; left: -1.65rem; top: 1.75rem; width: 0.9rem; height: 0.9rem; border-radius: 9999px; border: 2px solid var(--teal); background: var(--bg); } }
+    .path-meta { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
+    .phase { border-radius: 9999px; background: var(--teal-dim); padding: 0.2rem 0.75rem; font-size: 0.75rem; font-weight: 600; color: var(--teal); }
+    .weeks { font-size: 0.75rem; color: var(--muted); }
+    .path-item h3 { margin-top: 0.75rem; font-size: 1.125rem; font-weight: 600; color: var(--white); }
+    .path-item p { margin-top: 0.35rem; font-size: 0.875rem; color: rgba(203,213,225,0.8); }
+    .outcome { margin-top: 0.75rem; font-size: 0.875rem; font-weight: 500; color: var(--teal); }
+    .biz-grid { margin-top: 2.5rem; display: grid; gap: 1.25rem; }
+    @media (min-width: 768px) { .biz-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .biz-grid { grid-template-columns: repeat(3, 1fr); } }
+    .biz-card ul { margin-top: 0.75rem; list-style: none; }
+    .biz-card li { display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.875rem; color: rgba(203,213,225,0.85); margin-bottom: 0.5rem; }
+    .biz-card li::before { content: "✓"; color: var(--teal); font-weight: 700; }
+    .biz-card a { color: rgba(203,213,225,0.85); transition: color 0.15s; word-break: break-all; }
+    .biz-card a:hover { color: var(--teal); }
+    .biz-highlight { border-color: rgba(94,234,212,0.25); background: rgba(45,212,191,0.07); }
+    .cta-band { position: relative; overflow: hidden; border-radius: 1.5rem; border: 1px solid rgba(94,234,212,0.25); background: linear-gradient(to bottom right, rgba(20,184,166,0.15), #0a1a20, #050d12); padding: 2rem; }
+    @media (min-width: 640px) { .cta-band { padding: 3rem; } }
+    .cta-band h2 { margin-top: 0; }
+    .cta-band p { margin-top: 1rem; color: rgba(203,213,225,0.9); max-width: 36rem; }
+    .cta-band .cta-row { margin-top: 2rem; }
+    footer { border-top: 1px solid var(--border); padding: 2.5rem 0 1.25rem; }
+    .footer-top { display: flex; flex-direction: column; gap: 1.5rem; }
+    @media (min-width: 768px) { .footer-top { flex-direction: row; align-items: center; justify-content: space-between; } }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.875rem; color: var(--muted); }
+    .footer-links a:hover { color: var(--teal); }
+    .footer-bottom { margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.75rem; color: #64748b; }
+    .modal-backdrop { display: none; position: fixed; inset: 0; z-index: 50; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); align-items: center; justify-content: center; padding: 1rem; }
+    .modal-backdrop.open { display: flex; }
+    .modal { width: 100%; max-width: 28rem; border-radius: 1rem; border: 1px solid var(--border); background: #0a141a; padding: 1.5rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.4); }
+    .modal h3 { font-size: 1.25rem; font-weight: 600; color: var(--white); }
+    .modal p { margin-top: 0.5rem; font-size: 0.875rem; color: rgba(203,213,225,0.8); }
+    .email-box { margin-top: 1rem; display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; border-radius: 0.75rem; border: 1px solid var(--border); background: rgba(255,255,255,0.04); padding: 0.75rem 1rem; }
+    .email-box code { font-family: ui-monospace, monospace; font-size: 0.875rem; color: #99f6e4; overflow: hidden; text-overflow: ellipsis; }
+    .modal-actions { margin-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
+    @media (min-width: 640px) { .modal-actions { flex-direction: row; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap header-inner">
+      <a href="#top" class="logo">
+        <span class="logo-mark">CN</span>
+        <span class="logo-text">
+          <strong>Cortex Intelligence Nexus</strong>
+          <span>Finished work · Ogoja</span>
+        </span>
+      </a>
+      <nav>
+        <a href="#services">What we do</a>
+        <a href="#lab">Learning Lab</a>
+        <a href="#business">Business</a>
+        <button type="button" class="btn btn-primary" onclick="openModal()">Join us</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="wrap hero-grid">
+        <div>
+          <p class="badge">AI Builder · Ogoja, Nigeria</p>
+          <h1>Finished Work & Neural Intuition — <span class="accent">the Productive Way</span></h1>
+          <p class="lead">
+            Cortex Intelligence Nexus delivers finished work in Ogoja, Cross River State:
+            electronics repair, practical agro and trader automations, and structured digital content systems —
+            plus a Neural Network Learning Lab so you can feel how models learn.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#lab">Enter the Learning Lab →</a>
+            <a class="btn btn-ghost" href="mailto:cortexnexus@proton.me">Contact us</a>
+          </div>
+          <div class="meta-row">
+            <span>cortex-platforms.netlify.app</span>
+            <span>cortexnexus@proton.me</span>
+          </div>
+          <dl class="stats">
+            <div><dd>Ogoja</dd><dd>Cross River HQ</dd></div>
+            <div><dd>₦22k</dd><dd>AI Content System</dd></div>
+            <div><dd>Paystack</dd><dd>live checkout</dd></div>
+          </dl>
+        </div>
+        <div class="hero-card">
+          <svg class="nn-svg" viewBox="0 0 450 300" role="img" aria-label="Decorative neural network">
+            <line stroke="#2dd4bf" stroke-opacity="0.18" stroke-width="1.2" x1="60" y1="70" x2="170" y2="40"/>
+            <line stroke="#2dd4bf" stroke-opacity="0.18" stroke-width="1.2" x1="60" y1="70" x2="170" y2="110"/>
+            <line stroke="#2dd4bf" stroke-opacity="0.18" stroke-width="1.2" x1="60" y1="150" x2="170" y2="110"/>
+            <line stroke="#2dd4bf" stroke-opacity="0.18" stroke-width="1.2" x1="60" y1="150" x2="170" y2="180"/>
+            <line stroke="#2dd4bf" stroke-opacity="0.18" stroke-width="1.2" x1="60" y1="230" x2="170" y2="180"/>
+            <line stroke="#2dd4bf" stroke-opacity="0.18" stroke-width="1.2" x1="60" y1="230" x2="170" y2="250"/>
+            <line stroke="#2dd4bf" stroke-opacity="0.18" stroke-width="1.2" x1="170" y1="40" x2="280" y2="70"/>
+            <line stroke="#2dd4bf" stroke-opacity="0.18" stroke-width="1.2" x1="170" y1="110" x2="280" y2="150"/>
+            <line stroke="#2dd4bf" stroke-opacity="0.18" stroke-width="1.2" x1="170" y1="180" x2="280" y2="230"/>
+            <line stroke="#2dd4bf" stroke-opacity="0.18" stroke-width="1.2" x1="280" y1="70" x2="390" y2="110"/>
+            <line stroke="#2dd4bf" stroke-opacity="0.18" stroke-width="1.2" x1="280" y1="150" x2="390" y2="190"/>
+            <circle fill="rgba(45,212,191,0.12)" stroke="#2dd4bf" stroke-opacity="0.6" stroke-width="1.5" cx="60" cy="70" r="13"/><circle fill="#5eead4" opacity="0.85" cx="60" cy="70" r="4.5"/>
+            <circle fill="rgba(45,212,191,0.12)" stroke="#2dd4bf" stroke-opacity="0.6" stroke-width="1.5" cx="60" cy="150" r="13"/><circle fill="#5eead4" opacity="0.85" cx="60" cy="150" r="4.5"/>
+            <circle fill="rgba(45,212,191,0.12)" stroke="#2dd4bf" stroke-opacity="0.6" stroke-width="1.5" cx="60" cy="230" r="13"/><circle fill="#5eead4" opacity="0.85" cx="60" cy="230" r="4.5"/>
+            <circle fill="rgba(45,212,191,0.12)" stroke="#2dd4bf" stroke-opacity="0.6" stroke-width="1.5" cx="170" cy="40" r="13"/><circle fill="#5eead4" opacity="0.85" cx="170" cy="40" r="4.5"/>
+            <circle fill="rgba(45,212,191,0.12)" stroke="#2dd4bf" stroke-opacity="0.6" stroke-width="1.5" cx="170" cy="110" r="13"/><circle fill="#5eead4" opacity="0.85" cx="170" cy="110" r="4.5"/>
+            <circle fill="rgba(45,212,191,0.12)" stroke="#2dd4bf" stroke-opacity="0.6" stroke-width="1.5" cx="170" cy="180" r="13"/><circle fill="#5eead4" opacity="0.85" cx="170" cy="180" r="4.5"/>
+            <circle fill="rgba(45,212,191,0.12)" stroke="#2dd4bf" stroke-opacity="0.6" stroke-width="1.5" cx="170" cy="250" r="13"/><circle fill="#5eead4" opacity="0.85" cx="170" cy="250" r="4.5"/>
+            <circle fill="rgba(45,212,191,0.12)" stroke="#2dd4bf" stroke-opacity="0.6" stroke-width="1.5" cx="280" cy="70" r="13"/><circle fill="#5eead4" opacity="0.85" cx="280" cy="70" r="4.5"/>
+            <circle fill="rgba(45,212,191,0.12)" stroke="#2dd4bf" stroke-opacity="0.6" stroke-width="1.5" cx="280" cy="150" r="13"/><circle fill="#5eead4" opacity="0.85" cx="280" cy="150" r="4.5"/>
+            <circle fill="rgba(45,212,191,0.12)" stroke="#2dd4bf" stroke-opacity="0.6" stroke-width="1.5" cx="280" cy="230" r="13"/><circle fill="#5eead4" opacity="0.85" cx="280" cy="230" r="4.5"/>
+            <circle fill="rgba(45,212,191,0.12)" stroke="#2dd4bf" stroke-opacity="0.6" stroke-width="1.5" cx="390" cy="110" r="13"/><circle fill="#5eead4" opacity="0.85" cx="390" cy="110" r="4.5"/>
+            <circle fill="rgba(45,212,191,0.12)" stroke="#2dd4bf" stroke-opacity="0.6" stroke-width="1.5" cx="390" cy="190" r="13"/><circle fill="#5eead4" opacity="0.85" cx="390" cy="190" r="4.5"/>
+          </svg>
+          <p>Every connection is a weight. Every weight is a decision the network learned to make.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="alt">
+      <div class="wrap">
+        <p class="section-label">What we do</p>
+        <h2>Finished work for Ogoja and Africa’s next wave of builders</h2>
+        <p class="section-desc">
+          Founded by <strong style="color:#fff">Michael Ujuku Morim</strong>, we complete paid work:
+          electronics & appliance repair, agro/trader automations, and structured digital systems —
+          with a Learning Lab that builds real neural-network intuition.
+        </p>
+        <div class="cards cols-4">
+          <article class="card">
+            <div class="card-icon">🔧</div>
+            <h3>Electronics & Appliance Repair</h3>
+            <p>TV, boards, irons, washers and common electronics. Diagnosis fee first (₦2,000–₦5,000). Full price agreed before work continues. Based in Ogoja.</p>
+          </article>
+          <article class="card">
+            <div class="card-icon">📡</div>
+            <h3>Agro & Trader Automations</h3>
+            <p>Working WhatsApp alerts, tracking and simple monitoring systems for farmers and traders. Delivered systems from ₦15,000.</p>
+          </article>
+          <article class="card">
+            <div class="card-icon">📄</div>
+            <h3>30-Day AI Content System</h3>
+            <p>Structured digital content deliverable — ₦22,000 via Paystack. Practical systems you can run, not theory.</p>
+          </article>
+          <article class="card">
+            <div class="card-icon">⚡</div>
+            <h3>Netlify-Powered Delivery</h3>
+            <p>Instant previews, global edge delivery and continuous deploys for the digital systems we ship.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="lab">
+      <div class="wrap">
+        <p class="section-label">Neural Network Learning Lab</p>
+        <h2>Feel how models learn, then build with that feeling</h2>
+        <p class="section-desc">Inspired by visual intuition — we make the math something you can see and reason about before you train at scale.</p>
+        <div class="path">
+          <div class="path-item">
+            <div class="path-meta"><span class="phase">Phase 1</span><span class="weeks">Weeks 1–2</span></div>
+            <h3>Foundations of Learning</h3>
+            <p>Perceptrons, gradients, and the geometry of loss. Build intuition before frameworks.</p>
+            <p class="outcome">Outcome: read any loss curve with confidence.</p>
+          </div>
+          <div class="path-item">
+            <div class="path-meta"><span class="phase">Phase 2</span><span class="weeks">Weeks 3–4</span></div>
+            <h3>Backprop by Hand</h3>
+            <p>Derive and code backpropagation from scratch in plain Python. No magic, just calculus.</p>
+            <p class="outcome">Outcome: debug training runs from first principles.</p>
+          </div>
+          <div class="path-item">
+            <div class="path-meta"><span class="phase">Phase 3</span><span class="weeks">Weeks 5–6</span></div>
+            <h3>Build Tiny Nets</h3>
+            <p>Train small networks on toy problems. Feel learning rates, init, and regularization directly.</p>
+            <p class="outcome">Outcome: a personal library of working micro-models.</p>
+          </div>
+          <div class="path-item">
+            <div class="path-meta"><span class="phase">Phase 4</span><span class="weeks">Weeks 7–8</span></div>
+            <h3>Train Real Models</h3>
+            <p>Move to real datasets. Manage experiments, track metrics, and compare architectures.</p>
+            <p class="outcome">Outcome: reproducible experiment workflow.</p>
+          </div>
+          <div class="path-item">
+            <div class="path-meta"><span class="phase">Phase 5</span><span class="weeks">Weeks 9–10</span></div>
+            <h3>Deploy on Netlify</h3>
+            <p>Ship models behind fast web apps — previews, edge delivery, and continuous deploys.</p>
+            <p class="outcome">Outcome: a live AI app on your own domain.</p>
+          </div>
+          <div class="path-item">
+            <div class="path-meta"><span class="phase">Phase 6</span><span class="weeks">Weeks 11–12</span></div>
+            <h3>Ship SaaS for Startups</h3>
+            <p>Package your app as a product: pricing, onboarding, and feedback loops with real users.</p>
+            <p class="outcome">Outcome: a startup-ready SaaS demo.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="business" class="alt">
+      <div class="wrap">
+        <p class="section-label">Google Business</p>
+        <h2>Find us, visit us, work with us</h2>
+        <p class="section-desc">Everything a Google Business profile needs — about, services, contact, location, and hours — right here and ready.</p>
+        <div class="biz-grid">
+          <article class="card biz-card">
+            <div class="card-icon">ℹ️</div>
+            <h3>About</h3>
+            <p>Cortex Intelligence Nexus delivers finished work in Ogoja, Cross River State, Nigeria: electronics and appliance repair, practical agro and trader automations, and structured digital content systems. We also run a Neural Network Learning Lab.</p>
+          </article>
+          <article class="card biz-card">
+            <div class="card-icon">🛠️</div>
+            <h3>Services</h3>
+            <ul>
+              <li>Electronics & appliance repair (Ogoja)</li>
+              <li>Practical agro & trader automations</li>
+              <li>30-Day AI Content System (Paystack)</li>
+              <li>Neural Network Learning Lab & workshops</li>
+            </ul>
+          </article>
+          <article class="card biz-card">
+            <div class="card-icon">✉️</div>
+            <h3>Contact</h3>
+            <p style="margin-top:0.75rem">
+              <a href="mailto:cortexnexus@proton.me">cortexnexus@proton.me</a><br/>
+              <a href="https://wa.me/2349010251577" target="_blank" rel="noopener noreferrer">WhatsApp 0901 025 1577</a><br/>
+              <a href="https://maps.google.com/maps?cid=2073161413550473641" target="_blank" rel="noopener noreferrer">Google Business (Ogoja)</a><br/>
+              cortex-platforms.netlify.app
+            </p>
+          </article>
+          <article class="card biz-card">
+            <div class="card-icon">📍</div>
+            <h3>Location</h3>
+            <p>Ogoja, Cross River State, Nigeria — serving learners, traders, and startups across Africa. Remote-first, with local workshops and cohort meetups.</p>
+          </article>
+          <article class="card biz-card">
+            <div class="card-icon">🕐</div>
+            <h3>Hours</h3>
+            <p style="margin-top:0.75rem;font-size:0.875rem;color:rgba(203,213,225,0.85)">
+              Monday – Friday: 9:00 – 17:00 WAT<br/>
+              Saturday: 10:00 – 14:00 WAT<br/>
+              Sunday: Closed
+            </p>
+          </article>
+          <article class="card biz-card biz-highlight">
+            <div class="card-icon">⭐</div>
+            <h3>Reviews & updates</h3>
+            <p>Verified Google Business Profile in Ogoja. Reviews, photos and announcements live there — open the listing or leave a review directly.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="cta-band">
+          <h2>Ready to build with intelligence?</h2>
+          <p>Book a repair, request an agro/trader automation, join a learning cohort, or partner with us — finished work first, practical systems always.</p>
+          <div class="cta-row">
+            <button type="button" class="btn btn-primary" onclick="openModal()">Book / Join →</button>
+            <a class="btn btn-outline-teal" href="https://paystack.shop/pay/cortex-demo" target="_blank" rel="noopener noreferrer">30-Day AI Content — Paystack</a>
+            <a class="btn btn-ghost" href="https://wa.me/2349010251577" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+            <a class="btn btn-ghost" href="https://maps.google.com/maps?cid=2073161413550473641" target="_blank" rel="noopener noreferrer">Google Business</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="logo">
+          <span class="logo-mark">CN</span>
+          <span class="logo-text">
+            <strong>Cortex Intelligence Nexus</strong>
+            <span>Founded by Michael Ujuku Morim · cortex-platforms.netlify.app</span>
+          </span>
+        </div>
+        <div class="footer-links">
+          <a href="#services">What we do</a>
+          <a href="#lab">Learning Lab</a>
+          <a href="#business">Business</a>
+          <a href="mailto:cortexnexus@proton.me">cortexnexus@proton.me</a>
+        </div>
+      </div>
+      <p class="footer-bottom">© <span id="y"></span> Cortex Intelligence Nexus · Ogoja, Cross River State, Nigeria · Finished work. Practical systems.</p>
+    </div>
+  </footer>
+
+  <div class="modal-backdrop" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal">
+      <h3 id="modal-title">Join Cortex Intelligence Nexus</h3>
+      <p>Repair jobs, automation builds, learning cohorts and partner slots open monthly. Tell us whether you need finished work, training, or a partnership — we reply to every note.</p>
+      <div class="email-box">
+        <code>cortexnexus@proton.me</code>
+        <button type="button" class="btn btn-ghost" style="padding:0.35rem 0.75rem;font-size:0.75rem" onclick="copyEmail()">Copy</button>
+      </div>
+      <div class="modal-actions">
+        <a class="btn btn-primary" style="flex:1" href="mailto:cortexnexus@proton.me?subject=Joining%20Cortex%20Intelligence%20Nexus">Write to us</a>
+        <button type="button" class="btn btn-ghost" onclick="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+    function openModal(){ document.getElementById("modal").classList.add("open"); }
+    function closeModal(){ document.getElementById("modal").classList.remove("open"); }
+    document.getElementById("modal").addEventListener("click", function(e){ if(e.target === this) closeModal(); });
+    function copyEmail(){
+      navigator.clipboard.writeText("cortexnexus@proton.me").catch(function(){});
+    }
+  </script>
+</body>
+</html>
