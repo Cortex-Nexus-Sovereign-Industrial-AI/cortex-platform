@@ -6,7 +6,7 @@
   <title>Offers — Cortex Intelligence Nexus</title>
   <meta name="description" content="Book finished work: electronics repair, agro automations, and digital content systems in Ogoja. Deliverables only." />
   <style>
-    body{font-family:system-ui,sans-serif;background:#0b0f14;color:#e8eef5;margin:0;padding:1.5rem;line-height:1.5}.wrap{max-width:640px;margin:0 auto}h1{font-size:1.5rem;margin:0 0 .5rem}.sub{color:#9aa8b8;font-size:.95rem}a{color:#60a5fa}.card,.email-signup{background:#12181f;border:1px solid #1e293b;border-radius:12px;padding:1.25rem;margin-top:1.25rem}.email-signup{background:#1a2332;border:2px solid #00c7b7}.card h2{font-size:1.1rem;margin:0 0 .5rem}.email-signup h2{color:#00c7b7}.price{color:#00c7b7;font-weight:600}.btn-pay,.btn-wa,.btn-channel,.btn-subscribe{display:inline-block;margin-top:1rem;padding:.75rem 1.25rem;font-weight:700;text-decoration:none;border-radius:8px}.btn-pay{background:#00c7b7;color:#0b0f14}.btn-wa{border:1px solid #00c7b7;color:#00c7b7}.btn-channel{background:#25d366;color:#0b0f14}.btn-subscribe{background:#60a5fa;color:#0b0f14;border:0;cursor:pointer;font-size:1rem}ul{margin:.5rem 0 0 1.2rem;padding:0}label{display:block;margin:.8rem 0 .3rem;font-size:.9rem}input{width:100%;box-sizing:border-box;padding:.7rem;background:#0b0f14;border:1px solid #334155;border-radius:6px;color:#e8eef5;font-size:1rem}.form-note,.form-disclaimer{color:#9aa8b8;font-size:.85rem}.status{display:none;margin-top:1rem;padding:.8rem;border-radius:8px}.success{background:#0d472a;color:#86efac}.error{background:#4c1616;color:#fecaca}
+    body{font-family:system-ui,sans-serif;background:#0b0f14;color:#e8eef5;margin:0;padding:1.5rem;line-height:1.5}.wrap{max-width:640px;margin:0 auto}h1{font-size:1.5rem;margin:0 0 .5rem}.sub{color:#9aa8b8;font-size:.95rem}a{color:#60a5fa}.card,.email-signup{background:#12181f;border:1px solid #1e293b;border-radius:12px;padding:1.25rem;margin-top:1.25rem}.email-signup{background:#1a2332;border:2px solid #00c7b7}.card h2{font-size:1.1rem;margin:0 0 .5rem}.email-signup h2{color:#00c7b7}.price{color:#00c7b7;font-weight:600}.btn-pay,.btn-wa,.btn-channel,.btn-subscribe,.btn-voice{display:inline-block;margin-top:1rem;padding:.75rem 1.25rem;font-weight:700;text-decoration:none;border-radius:8px;border:0;cursor:pointer;font-size:1rem}.btn-pay{background:#00c7b7;color:#0b0f14}.btn-wa{border:1px solid #00c7b7;color:#00c7b7;background:transparent}.btn-channel{background:#25d366;color:#0b0f14}.btn-subscribe{background:#60a5fa;color:#0b0f14}.btn-voice{background:#00c7b7;color:#0b0f14}.btn-voice:disabled{opacity:.6;cursor:wait}ul{margin:.5rem 0 0 1.2rem;padding:0}label{display:block;margin:.8rem 0 .3rem;font-size:.9rem}input{width:100%;box-sizing:border-box;padding:.7rem;background:#0b0f14;border:1px solid #334155;border-radius:6px;color:#e8eef5;font-size:1rem}.form-note,.form-disclaimer{color:#9aa8b8;font-size:.85rem}.status{display:none;margin-top:1rem;padding:.8rem;border-radius:8px}.success{background:#0d472a;color:#86efac}.error{background:#4c1616;color:#fecaca}.voice-actions{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center}.voice-status{margin-top:.75rem;font-size:.9rem;color:#9aa8b8;min-height:1.4em}
   </style>
 </head>
 <body>
@@ -14,8 +14,18 @@
     <header>
       <h1>Cortex Intelligence Nexus — Offers</h1>
       <p class="sub">Finished work only · Ogoja, Cross River State · No income promises</p>
-      <p class="sub"><a href="/">Home</a> · <a href="/identity.html">Identity</a> · <a href="/metrics-dashboard.html">Platform Pulse</a> · <a href="https://wa.me/2349010251577">WhatsApp</a> · <a href="https://whatsapp.com/channel/0029VbDEbGX60eBkg6WqCG0N">Channel</a></p>
+      <p class="sub"><a href="/">Home</a> · <a href="/identity.html">Identity</a> · <a href="/learning-lab.html">Learning Lab</a> · <a href="/metrics-dashboard.html">Platform Pulse</a> · <a href="https://wa.me/2349010251577">WhatsApp</a> · <a href="https://whatsapp.com/channel/0029VbDEbGX60eBkg6WqCG0N">Channel</a></p>
     </header>
+
+    <section class="card" id="voice-support" aria-labelledby="voice-title">
+      <h2 id="voice-title">Talk to support</h2>
+      <p>Calm voice agent for booking and questions (Ogoja · repair · agro · AI content). If voice is offline, use WhatsApp — a human always answers.</p>
+      <div class="voice-actions">
+        <button type="button" class="btn-voice" id="btn-voice">Start voice support</button>
+        <a class="btn-wa" href="https://wa.me/2349010251577?text=Hello%20CINIS%20support">WhatsApp 0901 025 1577 →</a>
+      </div>
+      <p class="voice-status" id="voice-status" role="status" aria-live="polite"></p>
+    </section>
 
     <section class="email-signup" aria-labelledby="signup-title">
       <h2 id="signup-title">Join the CINIS Intelligence Network</h2>
@@ -35,14 +45,82 @@
     </section>
 
     <section class="card"><h2>Follow the Official Channel</h2><p>Practical skills, real repair experience, agro automations, and clear systems. No noise.</p><a class="btn-channel" href="https://whatsapp.com/channel/0029VbDEbGX60eBkg6WqCG0N" target="_blank" rel="noopener noreferrer">Join WhatsApp Channel →</a></section>
-    <section class="card"><h2>1. Electronics &amp; Appliance Repair</h2><p class="price">Diagnosis fee ₦2,000–₦5,000 · Full repair by agreement</p><p>TV, boards, pressing irons, washers and common electronics. Diagnosis fee first. Multi-day tracing jobs require higher deposit or are declined.</p><a class="btn-wa" href="https://wa.me/2349010251577?text=I%20want%20to%20book%20a%20repair%20diagnosis">Book repair on WhatsApp →</a></section>
+    <section class="card"><h2>1. Electronics & Appliance Repair</h2><p class="price">Diagnosis fee ₦2,000–₦5,000 · Full repair by agreement</p><p>TV, boards, pressing irons, washers and common electronics. Diagnosis fee first. Multi-day tracing jobs require higher deposit or are declined.</p><a class="btn-wa" href="https://wa.me/2349010251577?text=I%20want%20to%20book%20a%20repair%20diagnosis">Book repair on WhatsApp →</a></section>
     <section class="card"><h2>2. Agro / Trader Automations</h2><p class="price">₦15,000 – ₦50,000 per working system</p><ul><li>WhatsApp order or harvest alerts → Google Sheet / SMS</li><li>Simple inventory and sales tracking</li><li>Basic power or monitoring setups</li></ul><p>Delivered as a working system with short handover. Payment on or before delivery.</p><a class="btn-wa" href="https://wa.me/2349010251577?text=I%20want%20an%20agro%20or%20trader%20automation%20quote">Request quote on WhatsApp →</a></section>
     <section class="card"><h2>3. 30-Day AI Content System</h2><p class="price">₦22,000</p><p>Structured mid-ticket digital deliverable. Payment via Paystack under business name <strong>Cortex Intelligence Nexus</strong>.</p><a class="btn-pay" href="https://paystack.shop/pay/cortex-demo" target="_blank" rel="noopener noreferrer">Pay ₦22,000 →</a></section>
     <p class="sub" style="margin-top:2rem">Contact: <a href="mailto:cortexnexus@proton.me">cortexnexus@proton.me</a> · WhatsApp 0901 025 1577<br>Google Business: <a href="https://maps.google.com/maps?cid=2073161413550473641">Verified listing</a><br>WhatsApp Channel: <a href="https://whatsapp.com/channel/0029VbDEbGX60eBkg6WqCG0N">Follow here</a></p>
   </main>
   <script>
-    const form=document.getElementById('emailSignupForm');
-    form.addEventListener('submit',async(e)=>{e.preventDefault();const button=form.querySelector('button');const error=document.getElementById('errorMessage');error.style.display='none';button.disabled=true;button.textContent='Submitting…';try{const response=await fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:document.getElementById('email').value.trim(),firstName:document.getElementById('firstName').value.trim(),company:document.getElementById('company').value.trim()})});const result=await response.json();if(!response.ok)throw new Error(result.error||'Unable to subscribe.');form.style.display='none';document.getElementById('successMessage').style.display='block'}catch(err){error.textContent=err.message;error.style.display='block';button.disabled=false;button.textContent='Get the Framework PDF →'}});
+    const form = document.getElementById('emailSignupForm');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const button = form.querySelector('button');
+      const error = document.getElementById('errorMessage');
+      error.style.display = 'none';
+      button.disabled = true;
+      button.textContent = 'Submitting…';
+      try {
+        const response = await fetch('/.netlify/functions/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: document.getElementById('email').value.trim(),
+            firstName: document.getElementById('firstName').value.trim(),
+            company: document.getElementById('company').value.trim()
+          })
+        });
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || 'Unable to subscribe.');
+        form.style.display = 'none';
+        document.getElementById('successMessage').style.display = 'block';
+      } catch (err) {
+        error.textContent = err.message;
+        error.style.display = 'block';
+        button.disabled = false;
+        button.textContent = 'Get the Framework PDF →';
+      }
+    });
+
+    (function voiceSupport() {
+      const btn = document.getElementById('btn-voice');
+      const status = document.getElementById('voice-status');
+      if (!btn || !status) return;
+
+      btn.addEventListener('click', async () => {
+        btn.disabled = true;
+        status.textContent = 'Requesting secure voice session…';
+        try {
+          const res = await fetch('/.netlify/functions/realtime-client-secret', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({})
+          });
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok || !data.client_secret) {
+            throw new Error(data.error || 'Voice session unavailable');
+          }
+
+          // Full WebRTC needs @openai/agents/realtime. Try dynamic import; else fall back.
+          try {
+            const mod = await import('/js/voice-support.js');
+            await mod.startVoiceSupport();
+            status.textContent = 'Voice connected. Speak when ready. Use WhatsApp if you prefer text.';
+            btn.textContent = 'Voice active';
+          } catch (sdkErr) {
+            console.warn('Realtime SDK not loaded; secret issued successfully.', sdkErr);
+            status.innerHTML = 'Voice backend is ready. Full browser audio needs the Agents SDK package. ' +
+              '<a href="https://wa.me/2349010251577?text=Hello%20CINIS%20support">Continue on WhatsApp →</a>';
+            btn.disabled = false;
+            btn.textContent = 'Retry voice support';
+          }
+        } catch (err) {
+          status.innerHTML = (err.message || 'Could not start voice') +
+            '. <a href="https://wa.me/2349010251577?text=Hello%20CINIS%20support">Message support on WhatsApp →</a>';
+          btn.disabled = false;
+          btn.textContent = 'Start voice support';
+        }
+      });
+    })();
   </script>
 </body>
 </html>
