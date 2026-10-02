@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cortex-platforms.netlify.app/schemas/syndication-payload.json",
+  "title": "CINIS Syndication Webhook Payload",
+  "description": "Standard payload for n8n/Make/custom scheduler. Public brand is always Cortex Intelligence Nexus.",
+  "type": "object",
+  "required": ["schedule_config", "brand", "post_payload"],
+  "properties": {
+    "schedule_config": {
+      "type": "object",
+      "required": ["execution_cycle", "timezone", "status"],
+      "properties": {
+        "execution_cycle": {
+          "type": "string",
+          "examples": ["Weekend_and_Weekly_Batch", "Daily", "Manual"]
+        },
+        "timezone": {
+          "type": "string",
+          "const": "Africa/Lagos"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["Active", "Paused", "Draft"]
+        }
+      }
+    },
+    "brand": {
+      "type": "object",
+      "required": ["entity_name", "local_flavour", "channels"],
+      "properties": {
+        "entity_name": {
+          "type": "string",
+          "const": "Cortex Intelligence Nexus"
+        },
+        "local_flavour": {
+          "type": "string",
+          "description": "Geography in copy only",
+          "examples": ["Ogoja, Cross River State"]
+        },
+        "target_audience": {
+          "type": "string",
+          "examples": [
+            "Enterprise and tech founders",
+            "Local traders and repair customers in Ogoja"
+          ]
+        },
+        "channels": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "LinkedIn",
+              "Substack",
+              "YouTube",
+              "Telegram",
+              "WhatsApp",
+              "TikTok",
+              "Google_Business_Profile",
+              "X"
+            ]
+          }
+        }
+      }
+    },
+    "post_payload": {
+      "type": "object",
+      "required": ["day", "topic", "headline", "body_text", "cta_link", "media_type"],
+      "properties": {
+        "day": {
+          "type": "string",
+          "enum": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ]
+        },
+        "topic": { "type": "string" },
+        "headline": { "type": "string" },
+        "body_text": { "type": "string" },
+        "cta_link": {
+          "type": "string",
+          "format": "uri",
+          "description": "Prefer offers.html; cortex-demo only for 22k content offer"
+        },
+        "media_type": {
+          "type": "string",
+          "enum": [
+            "Text",
+            "Image",
+            "Image_Carousel",
+            "Short_Video",
+            "Long_Form",
+            "Code_Snippet"
+          ]
+        },
+        "offer_tag": {
+          "type": "string",
+          "enum": ["repair", "agro", "content_22k", "thought", "none"]
+        },
+        "responsible_agent": {
+          "type": "string",
+          "examples": [
+            "Agent-Alpha",
+            "Agent-Beta",
+            "Agent-Gamma",
+            "Agent-Delta",
+            "Agent-Epsilon",
+            "Agent-Zeta"
+          ]
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "schedule_config": {
+        "execution_cycle": "Weekend_and_Weekly_Batch",
+        "timezone": "Africa/Lagos",
+        "status": "Active"
+      },
+      "brand": {
+        "entity_name": "Cortex Intelligence Nexus",
+        "local_flavour": "Ogoja, Cross River State",
+        "target_audience": "Enterprise and local finished-work customers",
+        "channels": ["LinkedIn", "Telegram", "WhatsApp"]
+      },
+      "post_payload": {
+        "day": "Friday",
+        "topic": "Finished work offers",
+        "headline": "Book finished work in Ogoja — repair, agro automation, or a 30-day content system",
+        "body_text": "Cortex Intelligence Nexus delivers diagnosis-first electronics repair, working agro/trader automations from ₦15,000, and a structured 30-Day AI Content System for ₦22,000. No income promises — deliverables only.",
+        "cta_link": "https://cortex-platforms.netlify.app/offers.html",
+        "media_type": "Image_Carousel",
+        "offer_tag": "content_22k",
+        "responsible_agent": "Agent-Epsilon"
+      }
+    }
+  ]
+}

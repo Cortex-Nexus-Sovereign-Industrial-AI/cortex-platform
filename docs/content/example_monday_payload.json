@@ -1,0 +1,23 @@
+{
+  "schedule_config": {
+    "execution_cycle": "Weekend_and_Weekly_Batch",
+    "timezone": "Africa/Lagos",
+    "status": "Draft"
+  },
+  "brand": {
+    "entity_name": "Cortex Intelligence Nexus",
+    "local_flavour": "Ogoja, Cross River State",
+    "target_audience": "Tech founders and operators who want practical systems",
+    "channels": ["LinkedIn", "Substack", "Telegram", "WhatsApp"]
+  },
+  "post_payload": {
+    "day": "Monday",
+    "topic": "Strategic systems that stay simple",
+    "headline": "Multi-agent ideas only matter when they reduce real work",
+    "body_text": "From Ogoja we focus on finished work: electronics diagnosis, agro/trader automations, and structured content systems. Architecture posts should still point to something a customer can book.",
+    "cta_link": "https://cortex-platforms.netlify.app/offers.html",
+    "media_type": "Long_Form",
+    "offer_tag": "thought",
+    "responsible_agent": "Agent-Alpha"
+  }
+}
