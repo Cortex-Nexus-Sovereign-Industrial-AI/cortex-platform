@@ -1,8 +1,9 @@
 # Cortex Intelligence Nexus — LIVE STATUS
-**Updated:** 2026-08-30  
+**Updated:** 2026-10-03  
 **Brand (public only):** Cortex Intelligence Nexus  
 **Founder:** Michael Ujuku Morim · GitHub mikecomplexai-7  
-**Runner agent (not public brand):** Mike Complex AI
+**Runner agent (not public brand):** Mike Complex AI  
+**HQ:** Ogoja, Cross River State, Nigeria
 
 ---
 
@@ -13,10 +14,11 @@
 | **Repository** | https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform |
 | **GitHub Pages shell** | https://cortex-nexus-sovereign-industrial-ai.github.io/cortex-platform/ |
 | **Primary live platform** | https://cortex-platforms.netlify.app |
-| **Identity SSOT** | IDENTITY.md + SSOT.md + /identity.html |
+| **Identity SSOT** | IDENTITY.md + /identity.html |
+| **Products (Paystack titles)** | docs/commerce/PAYSTACK_PRODUCTS.md |
 | **Command entry** | COMMAND_CENTER.md |
 
-All public surfaces, Google Business, social CTAs, and agent outputs resolve to the above. No competing domains as SSOT.
+All public surfaces, Google Business, social CTAs, and agent outputs resolve to the above. No competing public brand names.
 
 ---
 
@@ -24,73 +26,76 @@ All public surfaces, Google Business, social CTAs, and agent outputs resolve to 
 
 | Section | State | Exploit now |
 |---------|--------|-------------|
-| **Identity / GBP** | Verified; IDENTITY.md SSOT; identity.html + aligned index | Use Maps + review links only under company name |
-| **GitHub Pages** | Marketing index aligned (Cortex Intelligence Nexus) | https://cortex-nexus-sovereign-industrial-ai.github.io/cortex-platform/ |
-| **Netlify primary** | cortex-platforms.netlify.app — functions + static | publish = "." (root HTML files live) |
-| **Platform Pulse** | Phase 0 on main (`metrics-dashboard.html`) | Honest registry; no fake live APIs |
-| **JSON-LD / ns** | Custom context merged | Agents: `/ns/context.jsonld`; SEO: Schema.org only |
-| **SOFA** | Env placeholders + Netlify helpers | Set `SOFA_API_KEY` on Netlify if using |
-| **Paystack payment link** | **LIVE** — https://paystack.shop/pay/cortex-demo | offers.html CTA + WhatsApp scripts |
-| **Paystack webhooks** | Code + durable idempotency merged | **Founder:** secret key + webhook URL |
-| **Shopify** | Store + seed scripts; password on | Optional seed; remove password when live |
-| **Commerce docs** | Offer ladder + WhatsApp scripts aligned | Ready for sales |
-| **Member / admin HTML** | Present as static files | Open by path |
-| **Edge CBF / HOCBF** | Theory docs merged | Engineering reference; not a public product page |
-| **Activity tracker** | Dry-run default | Secrets + X creds before live |
-| **Social module** | Spec-heavy under social-media-integration/ | Do not claim all APIs connected |
-| **Open PRs cleaned** | Merged #22, #25, #20, #18 | Stale #9/#12 left open (review before merge) |
+| **Identity / GBP** | Verified; IDENTITY.md SSOT; identity.html + aligned index | Maps + reviews under **Cortex Intelligence Nexus** only |
+| **GitHub Pages** | Marketing shell | https://cortex-nexus-sovereign-industrial-ai.github.io/cortex-platform/ |
+| **Netlify primary** | cortex-platforms.netlify.app — static + functions | Root HTML live |
+| **Offers** | Aligned to exact product titles (2026-10-02) | /offers.html |
+| **Learning Lab** | SSOT-aligned (Ogoja, finished work) | /learning-lab.html |
+| **Platform Pulse** | Phase 0 (`metrics-dashboard.html`) | Honest registry; no fake live APIs |
+| **Paystack payment link** | **LIVE** (test charge succeeded 2026-10-02) | https://paystack.shop/pay/cortex-demo → ₦22k Content System |
+| **Paystack products doc** | Canonical 3 titles locked | PAYSTACK_PRODUCTS.md |
+| **Paystack compliance** | Pending on Cortex Intelligence Nexus business | Founder completes KYC in dashboard |
+| **Paystack webhooks** | Code ready (HMAC-SHA512 + idempotency) | **Founder:** `PAYSTACK_SECRET_KEY` + webhook URL + log check |
+| **Voice support** | Code only (function + client + button on offers) | Needs `OPENAI_API_KEY` later — not required for sales |
+| **Content syndication** | Spec + week drafts + n8n map | docs/content/ — manual post until n8n wired |
+| **Shopify** | Optional; password on | Do not lead public traffic here |
+| **CINIS SOVEREIGN (Paystack)** | Separate verified business — **not** public SSOT | Leave unused for brand clarity |
 
 ---
 
-## Host truth (important)
+## Host truth
 
 | Host | Role |
 |------|------|
-| **https://cortex-platforms.netlify.app** | Primary dynamic + static (IDENTITY website field) |
+| **https://cortex-platforms.netlify.app** | Primary site (IDENTITY website field) |
 | **https://cortex-nexus-sovereign-industrial-ai.github.io/cortex-platform/** | Public shell / marketing |
-| **https://cortex-intelligence-nexus.netlify.app** | Separate Netlify project in account — do not treat as SSOT unless you deliberately alias |
+| **https://cortex-intelligence-nexus.netlify.app** | Separate Netlify project — not SSOT unless deliberately aliased |
 
 ---
 
-## Commerce (payment-ready infrastructure)
+## Commerce
 
 | Asset | State |
 |-------|--------|
-| Merchant profile | Unified under **Cortex Intelligence Nexus** |
-| Shopify | cortex-intelligence-nexus.myshopify.com (password protected) |
-| Offer ladder | docs/commerce/ |
-| Mid-ticket | ₦22,000 — 30-Day AI Content System |
-| Payment link | https://paystack.shop/pay/cortex-demo (**LIVE**) |
-| Webhook function | `/.netlify/functions/paystack-webhook` |
+| Merchant | **Cortex Intelligence Nexus** |
+| Product 1 | **30-Day AI Content System** — ₦22,000 |
+| Product 2 | **Agro / Trader Automation — Starter System** — ₦15,000 |
+| Product 3 | **Electronics Diagnosis Fee** — ₦3,000 typical (₦2k–₦5k band) |
+| Payment link | https://paystack.shop/pay/cortex-demo |
+| Webhook | `/.netlify/functions/paystack-webhook` |
+| Storefront | paystack.shop/cortex-intelligence-nexus — **test banner; do not share** until clean + compliant |
 
-**Founder-only blockers for first naira in:**
+**Founder checklist (cash path):**
 
-1. ~~Create Paystack payment link~~ → LIVE
-2. ~~Paste into WhatsApp scripts~~ → DONE
-3. Set `PAYSTACK_SECRET_KEY` on Netlify (Project configuration → Environment variables) → redeploy
-4. Confirm Paystack webhook URL:  
-   `https://cortex-platforms.netlify.app/.netlify/functions/paystack-webhook`
-5. Optional Shopify seed + remove store password
+1. ~~Payment link live~~  
+2. ~~Test charge success (e.g. ref T456761397718190)~~  
+3. [ ] `PAYSTACK_SECRET_KEY` on Netlify + redeploy  
+4. [ ] Webhook URL in Paystack Test dashboard  
+5. [ ] Function logs show `charge.success`  
+6. [ ] Storefront products match PAYSTACK_PRODUCTS.md (remove ₦500 Custom Solution Access)  
+7. [ ] Compliance complete on **Cortex Intelligence Nexus** for live mode  
 
 ---
 
 ## Platform components
 
-| Component | State |
-|-----------|--------|
-| Edge CBF | edge/cbf/ + HOCBF docs |
-| Member dashboard | /member-dashboard.html |
-| Offers | /offers.html (live Paystack CTA) |
+| Component | Path / note |
+|-----------|-------------|
+| Offers | /offers.html |
 | Identity | /identity.html |
+| Learning Lab | /learning-lab.html |
 | Pulse | /metrics-dashboard.html |
-| SOFA helpers | /api/sofa-status, /api/sofa-session |
+| Voice (optional) | `netlify/functions/realtime-client-secret.js` + `/js/voice-support.js` |
+| Content plan | `docs/content/SYNDICATION_PLAN.md` |
+| Week drafts | `docs/content/DRAFTS_WEEK.md` |
+| n8n map | `docs/content/N8N_NODE_MAP.md` (spec only) |
 
 ---
 
 ## Policy
 
-- Public name: **Cortex Intelligence Nexus** only
-- Mike Complex AI = internal runner only
-- Secrets = environment variables only
-- No fake “all APIs connected” metrics
-- **SSOT locked; commerce link live 2026-08-30** via MikeComplex AI runner under Michael Ujuku Morim authority
+- Public name: **Cortex Intelligence Nexus** only  
+- Mike Complex AI = internal runner only  
+- Secrets = environment variables only  
+- No fake “all APIs connected” metrics  
+- Lead with finished paid work — not software theatre  
