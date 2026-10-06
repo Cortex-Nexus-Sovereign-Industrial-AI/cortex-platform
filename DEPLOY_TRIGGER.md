@@ -1,7 +1,7 @@
 # Deploy Trigger
 
-Triggered: 2026-10-06 (final transition alignment)
-Reason: DARKTRONIX education-first public transition and Cortex integration
+Triggered: 2026-10-06 (single-platform multi-identity architecture)
+Reason: Canonical Cortex platform with distinct DARKTRONIX child-division discovery path
 Requested by: Repository administrator
 
 This commit forces connected continuous-deployment providers to rebuild and redeploy the current repository state.
@@ -11,15 +11,20 @@ Deployment authority:
 - Branch: `main`
 - Primary Netlify host: `https://cortex-platforms.netlify.app`
 
-New public destination:
-- `https://cortex-platforms.netlify.app/darktronix.html`
-- DARKTRONIX 9V LABS is positioned as the Technical Education, Diagnostics & Practical Skills Division of Cortex Intelligence Nexus.
-
-Supporting deployment:
-- `https://cortex-intelligence-nexus.netlify.app` is retained as a secondary/supporting deployment and is not the production authority.
+Canonical architecture:
+- Cortex Intelligence Nexus remains the single technical and web source of truth.
+- DARKTRONIX 9V LABS remains a distinct child business/division identity.
+- No second Netlify production project is required for DARKTRONIX at this stage.
+- Canonical DARKTRONIX destination: `https://cortex-platforms.netlify.app/darktronix.html`
+- Cross-discovery operates through the single Cortex platform while identities remain distinct.
+- Architecture record: `SINGLE_PLATFORM_MULTI_IDENTITY.md`
 
 Google Business:
 - No Google Business profile fields were changed by this deployment.
+- The Cortex and DARKTRONIX identities remain separate.
 - Any future public listing repositioning remains a separate explicit-confirmation step.
+
+Supporting deployment:
+- `https://cortex-intelligence-nexus.netlify.app` remains secondary/supporting and is not the production authority.
 
 Secrets remain provider-managed environment variables and are not committed here.
