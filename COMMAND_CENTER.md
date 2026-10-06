@@ -2,7 +2,7 @@
 
 **Founder:** Michael Ujuku Morim · GitHub **mikecomplexai-7**  
 **Org:** Cortex-Nexus-Sovereign-Industrial-AI  
-**Updated:** 2026-08-27
+**Updated:** 2026-10-06
 
 ---
 
@@ -31,6 +31,21 @@ Full description: [docs/product/CORTEX_AI_NEXUS.md](./docs/product/CORTEX_AI_NEX
 
 ---
 
+
+## Current platform architecture — 2026-10-06
+
+**Single-platform / multi-identity operating model:**
+- **Cortex Intelligence Nexus** is the master technical and web platform.
+- **DARKTRONIX 9V LABS** is a distinct child technical division, not a second parent brand.
+- Canonical DARKTRONIX destination: `https://cortex-platforms.netlify.app/darktronix.html`
+- No second Netlify production project is required for DARKTRONIX at this stage.
+- Cross-discovery is intentional: Cortex → DARKTRONIX for technical education; DARKTRONIX → Cortex for learning, consulting, systems and enquiries.
+- Google Business identities remain separate. Public Google changes require explicit confirmation after destination validation.
+- The physical workshop/lab remains practical origin and credibility; continuous physical repair is not the default economic model.
+
+Architecture record: [SINGLE_PLATFORM_MULTI_IDENTITY.md](./SINGLE_PLATFORM_MULTI_IDENTITY.md)
+
+---
 ## Live surfaces
 
 | Surface | URL |
