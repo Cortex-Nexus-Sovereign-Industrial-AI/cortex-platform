@@ -1,9 +1,15 @@
 # Cortex Intelligence Nexus — LIVE STATUS
-**Updated:** 2026-10-03  
+**Updated:** 2026-10-06  
 **Brand (public only):** Cortex Intelligence Nexus  
 **Founder:** Michael Ujuku Morim · GitHub mikecomplexai-7  
 **Runner agent (not public brand):** Mike Complex AI  
 **HQ:** Ogoja, Cross River State, Nigeria
+
+---
+
+## Deployment Source
+
+The production deployment source is this repository's `main` branch. `netlify.toml` declares `cortex-platforms.netlify.app` as the primary public host.
 
 ---
 
