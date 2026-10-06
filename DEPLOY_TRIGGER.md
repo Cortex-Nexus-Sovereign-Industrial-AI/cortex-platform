@@ -1,7 +1,7 @@
 # Deploy Trigger
 
-Triggered: 2026-10-06 (Layer 3 canonical web platform alignment)
-Reason: Command Center synchronized with the canonical single-platform multi-identity architecture
+Triggered: 2026-10-06 (Layer 4 discovery architecture alignment)
+Reason: Public discovery surfaces synchronized with the canonical single-platform multi-identity architecture
 Requested by: Repository administrator
 
 This commit forces connected continuous-deployment providers to rebuild and redeploy the current repository state.
@@ -18,6 +18,7 @@ Canonical architecture:
 - Canonical DARKTRONIX destination: `https://cortex-platforms.netlify.app/darktronix.html`
 - Cross-discovery operates through the single Cortex platform while identities remain distinct.
 - Architecture record: `SINGLE_PLATFORM_MULTI_IDENTITY.md`
+- Public discovery record: `PUBLIC_SURFACES.md`
 - Command Center is synchronized with this operating model.
 
 Google Business:
