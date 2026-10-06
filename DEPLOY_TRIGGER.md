@@ -1,6 +1,6 @@
 # Deploy Trigger
 
-Triggered: 2026-10-06
+Triggered: 2026-10-06 (final transition alignment)
 Reason: DARKTRONIX education-first public transition and Cortex integration
 Requested by: Repository administrator
 
