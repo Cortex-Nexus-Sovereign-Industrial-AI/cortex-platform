@@ -30,11 +30,15 @@
 
 We complete paid work. The focus is finished jobs that put cash in hand, not identity documents.
 
-### A. Physical Services (DARKTRONIX 9V LABS)
-- TV, board, iron, washer and common electronics repair
-- Diagnosis fee first (₦2,000–₦5,000). Full repair only after customer agrees total price.
-- Target net profit per completed set: ₦5,000–₦15,000 after parts
-- Fast-turnaround faults only. Multi-day tracing jobs require higher deposit or are declined.
+### A. DARKTRONIX 9V LABS — Technical Education, Diagnostics & Practical Skills
+- Technical education in electronics fundamentals and fault-finding reasoning
+- Diagnostic analysis, demonstrations, case studies and component-level learning
+- Technical coaching, technical review and auditing
+- Reusable lessons, guides, checklists and educational content
+- Physical repair experience remains part of the division's practical history and laboratory credibility, but continuous hands-on repair is **not the default public economic model**
+- Public destination: https://cortex-platforms.netlify.app/darktronix.html
+
+**Historical practical capability retained:** TV, board, iron, washer and common electronics repair. Previous diagnosis/repair pricing remains historical operational knowledge and is not the primary public offer during this transition.
 
 ### B. Agro / Agricultural Technology Services
 - Simple farm and trader automations (WhatsApp order/harvest alerts → Sheet or SMS)
@@ -53,12 +57,13 @@ Payment: Paystack under business name **Cortex Intelligence Nexus**. Local cash/
 ## 3. Core Positioning (use on public surfaces)
 
 ```
-Cortex Intelligence Nexus delivers finished work:
-• Electronics and appliance repair (Ogoja)
+Cortex Intelligence Nexus delivers practical systems, education and finished digital work:
+• DARKTRONIX technical education, diagnostics and practical-skills coaching
 • Practical agro and trader automations
 • Structured digital content systems
+• Technical analysis, review and consulting
 
-Based in Ogoja, Cross River State. Book via WhatsApp or the offers page. Payment before or on delivery.
+Based in Ogoja, Cross River State. Start through the relevant public destination or WhatsApp. Physical repair is retained as practical history, not the default economic identity.
 ```
 
 ---
