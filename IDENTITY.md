@@ -113,6 +113,18 @@ Cortex Intelligence Nexus provides electronics and appliance repair, practical a
 
 ---
 
+## 8. DARKTRONIX Transition Rule
+
+DARKTRONIX 9V LABS is a child technical division of Cortex Intelligence Nexus, not a second parent brand. The public direction is education-first.
+
+The physical shop/laboratory in Ogoja remains the origin and practical credibility of the expertise. The preferred monetization path is teaching, coaching, diagnostic reasoning, technical review, auditing, demonstrations, content and knowledge products rather than making continuous physical repair labor the default economic identity.
+
+**Positioning sentence:** “I learned the practical field. Now I teach the reasoning behind it.”
+
+Google Business profile changes are deliberately separate from this repository deployment. Any future public listing repositioning requires explicit confirmation after the new destination is validated.
+
+---
+
 ## 7. Related
 
 - [COMMAND_CENTER.md](./COMMAND_CENTER.md)  
