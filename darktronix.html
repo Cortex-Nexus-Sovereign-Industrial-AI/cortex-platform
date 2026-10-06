@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="DARKTRONIX 9V LABS — Technical Education, Diagnostics & Practical Skills Division of Cortex Intelligence Nexus." />
+  <meta name="theme-color" content="#080b12" />
+  <title>DARKTRONIX 9V LABS — Technical Education & Practical Skills</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #080b12;
+      color: #d7dee9;
+      line-height: 1.65;
+    }
+    a { color: #7dd3fc; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    nav {
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(8,11,18,.94);
+      border-bottom: 1px solid #202938;
+      backdrop-filter: blur(10px);
+    }
+    nav .wrap, main, footer .wrap {
+      width: min(1120px, calc(100% - 32px));
+      margin: auto;
+    }
+    nav .wrap {
+      min-height: 66px;
+      display: flex; align-items: center; justify-content: space-between; gap: 20px;
+    }
+    .brand { color: #f8fafc; font-weight: 850; letter-spacing: .02em; }
+    .brand small { display: block; color: #7dd3fc; font-size: .68rem; letter-spacing: .13em; }
+    nav ul { display: flex; gap: 18px; list-style: none; flex-wrap: wrap; }
+    nav a { color: #a8b3c3; font-size: .9rem; }
+    .hero {
+      padding: 88px 0 72px;
+      border-bottom: 1px solid #202938;
+      background:
+        radial-gradient(circle at 75% 20%, rgba(34,211,238,.10), transparent 35%),
+        radial-gradient(circle at 20% 0%, rgba(125,211,252,.08), transparent 30%);
+    }
+    .eyebrow {
+      color: #67e8f9; text-transform: uppercase; letter-spacing: .16em;
+      font-size: .75rem; font-weight: 800; margin-bottom: 14px;
+    }
+    h1 { color: #f8fafc; font-size: clamp(2.3rem, 7vw, 5rem); line-height: 1.02; max-width: 850px; }
+    .hero h1 span { color: #67e8f9; }
+    .lead { max-width: 760px; margin-top: 22px; font-size: 1.15rem; color: #aeb9c8; }
+    .cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
+    .btn {
+      display: inline-block; padding: 12px 18px; border-radius: 9px;
+      font-weight: 800; border: 1px solid #334155;
+    }
+    .primary { background: #67e8f9; color: #071017; border-color: #67e8f9; }
+    .secondary { color: #d8f7ff; }
+    section { padding: 70px 0; border-bottom: 1px solid #202938; }
+    .kicker { color: #67e8f9; font-size: .75rem; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+    h2 { color: #f8fafc; font-size: clamp(1.7rem, 4vw, 2.5rem); margin: 7px 0 12px; }
+    .intro { color: #91a0b3; max-width: 760px; margin-bottom: 30px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px,1fr)); gap: 16px; }
+    .card {
+      padding: 22px; border: 1px solid #263142; border-radius: 14px;
+      background: #0e141e;
+    }
+    .card h3 { color: #f1f5f9; margin-bottom: 7px; font-size: 1.05rem; }
+    .card p { color: #93a1b3; font-size: .94rem; }
+    .card strong { color: #d9faff; }
+    .statement {
+      border-left: 3px solid #67e8f9; padding: 22px 24px; background: #0d141d;
+      border-radius: 0 12px 12px 0; color: #dbeafe; font-size: 1.1rem;
+    }
+    .steps { counter-reset: step; display: grid; gap: 12px; }
+    .step { display: grid; grid-template-columns: 44px 1fr; gap: 14px; align-items: start; }
+    .step::before {
+      counter-increment: step; content: counter(step);
+      width: 38px; height: 38px; display: grid; place-items: center;
+      border: 1px solid #36536a; border-radius: 50%; color: #67e8f9; font-weight: 850;
+    }
+    .step h3 { color: #f8fafc; margin-bottom: 3px; }
+    .step p { color: #93a1b3; }
+    .boundary { background: #0b1119; }
+    footer { padding: 36px 0 50px; color: #718096; font-size: .9rem; }
+    footer strong { color: #dbeafe; }
+    .tiny { margin-top: 8px; color: #64748b; }
+    @media (max-width: 700px) {
+      nav .wrap { align-items: flex-start; padding: 12px 0; flex-direction: column; }
+      nav ul { gap: 10px 14px; }
+      .hero { padding: 64px 0 54px; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="wrap">
+      <div class="brand">DARKTRONIX 9V LABS<small>TECHNICAL EDUCATION · DIAGNOSTICS · PRACTICAL SKILLS</small></div>
+      <ul>
+        <li><a href="#learn">Learn</a></li>
+        <li><a href="#diagnostics">Diagnostics</a></li>
+        <li><a href="#coaching">Coaching</a></li>
+        <li><a href="#path">Path</a></li>
+        <li><a href="index.html">Cortex</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <main>
+      <div class="eyebrow">A practical division of Cortex Intelligence Nexus</div>
+      <h1>Learn the <span>reasoning</span> behind technical work.</h1>
+      <p class="lead">
+        DARKTRONIX 9V LABS turns real field experience in electronics and diagnostics into
+        structured education, demonstrations, coaching, technical analysis and practical knowledge.
+      </p>
+      <div class="cta">
+        <a class="btn primary" href="#coaching">Explore Coaching</a>
+        <a class="btn secondary" href="https://wa.me/2349010251577">Request a Session</a>
+      </div>
+    </main>
+  </header>
+
+  <section id="learn">
+    <main>
+      <div class="kicker">01 · Learning Lab</div>
+      <h2>From hands-on experience to teachable systems.</h2>
+      <p class="intro">
+        The laboratory is the origin of the experience. The public mission is education:
+        explain how systems work, how faults are reasoned through, and how technical skills
+        can be developed with discipline.
+      </p>
+      <div class="grid">
+        <article class="card"><h3>Electronics Fundamentals</h3><p>Components, circuits, signals, power paths and the logic needed to understand common electronic systems.</p></article>
+        <article class="card"><h3>Fault-Finding Reasoning</h3><p>How to move from symptoms to hypotheses, measurements, evidence and a defensible technical conclusion.</p></article>
+        <article class="card"><h3>Component-Level Thinking</h3><p>Understand why components fail, what their roles are, and how to read a system before replacing anything.</p></article>
+        <article class="card"><h3>Case Studies & Demonstrations</h3><p>Real-world examples converted into lessons, diagrams, explanations and repeatable learning exercises.</p></article>
+      </div>
+    </main>
+  </section>
+
+  <section id="diagnostics">
+    <main>
+      <div class="kicker">02 · Diagnostic Intelligence</div>
+      <h2>Diagnose with evidence, not guesswork.</h2>
+      <p class="intro">
+        DARKTRONIX teaches the analytical layer behind technical diagnosis. The goal is to
+        build people who can reason through a system instead of simply swapping parts.
+      </p>
+      <div class="statement">
+        <strong>Core principle:</strong> observe → isolate → test → interpret → document → decide.
+        A diagnosis is a reasoning process, not a random replacement cycle.
+      </div>
+    </main>
+  </section>
+
+  <section id="coaching">
+    <main>
+      <div class="kicker">03 · Professional Coaching</div>
+      <h2>Turn practical knowledge into professional capability.</h2>
+      <p class="intro">
+        Coaching is designed for learners, technicians, students and small technical teams
+        who want clearer reasoning, stronger documentation and better technical decision-making.
+      </p>
+      <div class="grid">
+        <article class="card"><h3>Technical Coaching</h3><p>Structured sessions around electronics concepts, diagnostic logic and practical problem-solving.</p></article>
+        <article class="card"><h3>Technical Review</h3><p>Review a fault scenario, test plan, documentation or technical approach and identify gaps.</p></article>
+        <article class="card"><h3>Technical Auditing</h3><p>Independent review of a technical process, workflow or learning setup with clear findings and recommendations.</p></article>
+        <article class="card"><h3>Knowledge Products</h3><p>Lessons, guides, demonstrations, checklists and digital learning materials that can be reused beyond one physical job.</p></article>
+      </div>
+      <div class="cta">
+        <a class="btn primary" href="https://wa.me/2349010251577">Book Coaching / Consultation</a>
+      </div>
+    </main>
+  </section>
+
+  <section id="path">
+    <main>
+      <div class="kicker">04 · Content-to-Value Path</div>
+      <h2>One knowledge engine. Multiple professional outputs.</h2>
+      <div class="steps">
+        <div class="step"><div><h3>Free education</h3><p>Short lessons, explanations and demonstrations build public trust and understanding.</p></div></div>
+        <div class="step"><div><h3>Video & community</h3><p>Publish practical technical content through the future DARKTRONIX learning channel and community surfaces.</p></div></div>
+        <div class="step"><div><h3>Paid learning</h3><p>Convert serious learners into structured coaching sessions and knowledge products.</p></div></div>
+        <div class="step"><div><h3>Professional consulting</h3><p>Higher-value diagnostic reviews, technical audits and system consulting become the advanced layer.</p></div></div>
+        <div class="step"><div><h3>Cortex expansion</h3><p>Successful technical knowledge can connect into Cortex AI, automation, education and digital-system opportunities.</p></div></div>
+      </div>
+    </main>
+  </section>
+
+  <section class="boundary">
+    <main>
+      <div class="kicker">Operating Boundary</div>
+      <h2>The practical lab remains the origin — not the default workload.</h2>
+      <p class="intro">
+        DARKTRONIX has a real physical history and practical laboratory origin in Ogoja.
+        That credibility is preserved. The business direction, however, is deliberately
+        education-first: teaching, analysis, coaching, documentation and consulting rather
+        than making continuous physical repair labor the default economic model.
+      </p>
+      <div class="statement">
+        <strong>Positioning:</strong> “I learned the practical field. Now I teach the reasoning behind it.”
+      </div>
+    </main>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <p><strong>DARKTRONIX 9V LABS</strong> · Technical Education, Diagnostics & Practical Skills Division of Cortex Intelligence Nexus</p>
+      <p class="tiny">Ogoja, Cross River State, Nigeria · <a href="index.html">Return to Cortex Intelligence Nexus</a> · <a href="https://wa.me/2349010251577">WhatsApp</a></p>
+      <p class="tiny">This page defines the education-first public direction. Google Business profile changes are intentionally not made by this deployment.</p>
+    </div>
+  </footer>
+</body>
+</html>
