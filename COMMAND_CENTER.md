@@ -26,6 +26,8 @@ Full description: [docs/product/CORTEX_AI_NEXUS.md](./docs/product/CORTEX_AI_NEX
 | [GOVERNANCE.md](./GOVERNANCE.md) | Authority model |
 | [HANDOFF.md](./HANDOFF.md) | Session summary |
 | [README.md](./README.md) | Public overview |
+| [SYSTEM_REGISTRY.md](./SYSTEM_REGISTRY.md) | **Unified connector/system registry** — GitHub, Netlify, Google/Windsor, Magnetly, YouTube |
+| [CHANGE_CONTROL.md](./CHANGE_CONTROL.md) | **Change-control gate** — audit before every public/system write |
 
 ---
 
