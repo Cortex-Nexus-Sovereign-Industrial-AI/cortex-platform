@@ -2,7 +2,7 @@
 
 > **Single Source of Truth (SSOT)**  
 > **Document Status:** Active  
-> **Last Aligned:** 30 August 2026  
+> **Last Aligned:** 07 October 2026  
 > **Founder & Sole Authority:** Michael Ujuku Morim
 
 ---
@@ -28,7 +28,7 @@
 
 ## 2. Core Positioning Architecture
 
-Cortex Intelligence Nexus is an industrial AI and autonomous systems platform. We build practical tools, sovereign automation frameworks, and structured capabilities so individuals and enterprises develop genuine judgment, intuition, and execution skill—rather than relying on passive app dependency.
+Cortex Intelligence Nexus is a practical systems platform combining digital delivery, education, technical reasoning, automation and structured services. We turn clearly defined problems into useful outcomes with clear scope, responsible automation and verifiable completion.
 
 * **Operating Region:** Ogoja, Nigeria (Serving local, national, and global enterprise operations)
 * **Primary GBP Category:** Software company
@@ -41,13 +41,14 @@ Cortex Intelligence Nexus is an industrial AI and autonomous systems platform. W
 
 ---
 
-## 4. Operational Roles & Agent Matrix
+## 4. Operational Core
 
-All internal agents operate strictly under the direction of **Michael Ujuku Morim**. They represent execution functions rather than separate public personas:
+All internal automation and assistants operate under the direction of **Michael Ujuku Morim**. They are execution functions, not separate public brands.
 
-1. **MikeComplex AI** — *Runner* (Execution, technical scripting, media distribution)
-2. **Target i7** — *Analytics* (Metrics tracking, system pulse, and performance signals)
-3. **CINIS NEXUS AI** — *Architect* (Strategic design, system alignment, and coherence)
+- **Strategic Core:** priorities, scope and decisions.
+- **Cognitive Core:** diagnosis, evidence and reasoning.
+- **Delivery Core:** implementation, testing and handover.
+- **Evidence Core:** documentation, metrics and verification.
 
 ---
 
@@ -60,7 +61,13 @@ All internal agents operate strictly under the direction of **Michael Ujuku Mori
 
 ---
 
-## 6. Non-Negotiable System Rules
+## 6. Service Delivery Standard
+
+**Observe → Frame → Solve → Deliver → Verify → Document.**
+
+Every paid engagement should define the problem, scope, deliverable, timing target, verification method and next step. Targets are planning guidance, not guarantees.
+
+## 7. Non-Negotiable System Rules
 
 1. **Strict Naming Compliance:** Always use `Cortex Intelligence Nexus` for public profiles.
 2. **Founder Attribution:** Always maintain `Michael Ujuku Morim` as the singular founder authority.
