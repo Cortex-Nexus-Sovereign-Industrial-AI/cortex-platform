@@ -1,7 +1,7 @@
 # Cortex Intelligence Nexus — Identity & Business Offerings
 
-**Canonical source of truth for CINIS / Cortex AI Nexus**  
-**Last aligned:** 2026-09-27
+**Canonical public identity and operating standard**  
+**Last aligned:** 2026-10-07
 
 ---
 
@@ -26,9 +26,9 @@
 
 ---
 
-## 2. What We Deliver (Primary Business Function)
+## 2. What We Deliver — Problem to Outcome
 
-We complete paid work. The focus is finished jobs that put cash in hand, not identity documents.
+We turn clearly defined problems into structured, usable outcomes. Every service should state the problem, deliverable, next action and completion check.
 
 ### A. DARKTRONIX 9V LABS — Technical Education, Diagnostics & Practical Skills
 - Technical education in electronics fundamentals and fault-finding reasoning
@@ -40,7 +40,7 @@ We complete paid work. The focus is finished jobs that put cash in hand, not ide
 
 **Historical practical capability retained:** TV, board, iron, washer and common electronics repair. Previous diagnosis/repair pricing remains historical operational knowledge and is not the primary public offer during this transition.
 
-### B. Agro / Agricultural Technology Services
+### B. Agro / Trader Automation
 - Simple farm and trader automations (WhatsApp order/harvest alerts → Sheet or SMS)
 - Inventory and sales tracking for agro-input shops and produce traders
 - Basic power or monitoring setups for small storage/processing
@@ -54,10 +54,10 @@ Payment: Paystack under business name **Cortex Intelligence Nexus**. Local cash/
 
 ---
 
-## 3. Core Positioning (use on public surfaces)
+## 3. Core Positioning & Operating Language
 
 ```
-Cortex Intelligence Nexus delivers practical systems, education and finished digital work:
+Cortex Intelligence Nexus builds practical systems, teaches technical reasoning, and delivers finished digital work:
 • DARKTRONIX technical education, diagnostics and practical-skills coaching
 • Practical agro and trader automations
 • Structured digital content systems
@@ -108,7 +108,8 @@ Cortex Intelligence Nexus provides electronics and appliance repair, practical a
 - Public name only: **Cortex Intelligence Nexus**
 - Owner name only: **Michael Ujuku Morim**
 - Primary website only: **https://cortex-platforms.netlify.app**
-- Lead with completed, paid work — not founder identity statements
+- Lead with the customer problem, defined solution and verified outcome
+- Never publish an unsupported guarantee or undefined scope
 - Source of truth = this file + COMMAND_CENTER.md
 
 ---
@@ -120,6 +121,12 @@ DARKTRONIX 9V LABS is a child technical division of Cortex Intelligence Nexus, n
 The physical shop/laboratory in Ogoja remains the origin and practical credibility of the expertise. The preferred monetization path is teaching, coaching, diagnostic reasoning, technical review, auditing, demonstrations, content and knowledge products rather than making continuous physical repair labor the default economic identity.
 
 **Positioning sentence:** “I learned the practical field. Now I teach the reasoning behind it.”
+
+**Operational spine:** Observe → Frame → Solve → Deliver → Verify → Document.
+
+**Service delivery:** Receive → Clarify → Diagnose → Scope → Quote → Confirm → Build → Test → Handover → Verify → Document.
+
+**Timing standard:** acknowledgement as soon as practical; initial scope normally within 1 business day when information is available; simple fixed-scope work targets 1–3 business days after confirmation. Larger work receives a written timeline. These are targets, not guarantees.
 
 Google Business profile changes are deliberately separate from this repository deployment. Any future public listing repositioning requires explicit confirmation after the new destination is validated.
 
