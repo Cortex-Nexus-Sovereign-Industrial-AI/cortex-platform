@@ -42,7 +42,6 @@ jobs:
 
       - name: Confirm Paystack Link (SSOT §5)
         run: |
-          # Locked by founder 2026-08-30: https://paystack.shop/pay/cortex-demo
           if grep -q "paystack.shop/pay/cortex-demo" offers.html; then
             echo "Paystack CTA confirmed in offers.html"
           else
@@ -52,7 +51,7 @@ jobs:
       - name: Deploy to Netlify Primary Hub (SSOT Rule 3)
         uses: nwtgck/actions-netlify@v3.0
         with:
-          publish-dir: './cortex-platform'
+          publish-dir: './'
           production-branch: main
           production-deploy: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
