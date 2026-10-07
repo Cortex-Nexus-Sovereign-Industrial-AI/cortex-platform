@@ -1,6 +1,6 @@
 # Cortex Intelligence Nexus — Unified System Registry
 
-Registry date: 2026-10-06
+Registry date: 2026-10-07
 Purpose: One operational map for identity, source control, deployment, public discovery, lead capture, and external connectors.
 Authority: This file is the operational registry; identity naming remains governed by IDENTITY.md.
 
@@ -29,7 +29,7 @@ Cortex Intelligence Nexus (parent / core service platform)
 
 Canonical repository: Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform
 Default branch: main
-Current verified repository head: 0f1b3bac483b22a10763f313160226fe068fce6b
+Current verified repository head: f20cbbdd8d2b77d495eb04a5798987ad8fbc3844
 Permissions: admin / maintain / push confirmed.
 
 ### Non-canonical repository to treat carefully
