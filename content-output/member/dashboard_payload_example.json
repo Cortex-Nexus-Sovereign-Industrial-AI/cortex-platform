@@ -1,0 +1,27 @@
+{
+  "user_email": "demo.member@example.com",
+  "member_since": "2026-10-09T00:00:00Z",
+  "access_grants": [
+    {
+      "user_email": "demo.member@example.com",
+      "product_name": "30-Day AI Content System",
+      "paystack_reference": "ref_demo_001",
+      "granted_at": "2026-10-09T00:00:00Z",
+      "expires_at": "2026-11-08T00:00:00Z",
+      "status": "active",
+      "access_level": "member"
+    }
+  ],
+  "content": [
+    {
+      "type": "podcast",
+      "id": "CINIS-EP-001",
+      "title": "Cortex Signals #1: Why Your Platform Isn't a Website",
+      "slug": "cortex-signals-1-why-your-platform-isnt-a-website",
+      "path": "/content-output/podcast/cortex_signals_1.md",
+      "created_at": "2026-10-09T00:00:00Z",
+      "status": "unlocked"
+    }
+  ],
+  "message": "Welcome to Cortex Intelligence Nexus. Explore your member content below."
+}
