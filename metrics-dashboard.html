@@ -1,339 +1,190 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Platform Pulse — Cortex Intelligence Nexus</title>
-  <meta name="description" content="Phase 0 platform registry for Cortex Intelligence Nexus. Documented channels and integration status — not live API metrics." />
-  <style>
-    :root {
-      --bg: #0b0f14;
-      --card: #12181f;
-      --text: #e8eef5;
-      --muted: #9aa8b8;
-      --accent: #3b82f6;
-      --border: #1e293b;
-      --ok: #22c55e;
-      --warn: #eab308;
-      --pending: #94a3b8;
-      --manual: #38bdf8;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.5;
-      padding: 1.25rem 1rem 3rem;
-    }
-    .wrap { max-width: 960px; margin: 0 auto; }
-    header { margin-bottom: 1.5rem; }
-    h1 { font-size: 1.5rem; margin: 0 0 0.35rem; }
-    .sub { color: var(--muted); font-size: 0.95rem; margin: 0; }
-    .banner {
-      background: #1a2332;
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--warn);
-      border-radius: 8px;
-      padding: 0.85rem 1rem;
-      margin-bottom: 1.5rem;
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-    .banner strong { color: var(--text); }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 0.85rem;
-      margin-bottom: 1.75rem;
-    }
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1rem 1.1rem;
-    }
-    .card h2 {
-      font-size: 1rem;
-      margin: 0 0 0.4rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.5rem;
-    }
-    .badge {
-      font-size: 0.7rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-      padding: 0.2rem 0.45rem;
-      border-radius: 999px;
-      white-space: nowrap;
-    }
-    .badge.documented { background: #1e293b; color: var(--pending); }
-    .badge.manual { background: #0c4a6e; color: var(--manual); }
-    .badge.api_pending { background: #422006; color: var(--warn); }
-    .badge.connected { background: #14532d; color: var(--ok); }
-    .meta { font-size: 0.85rem; color: var(--muted); margin: 0.35rem 0; }
-    .meta a { color: #60a5fa; text-decoration: none; }
-    .meta a:hover { text-decoration: underline; }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.88rem;
-      margin-bottom: 1.75rem;
-    }
-    th, td {
-      text-align: left;
-      padding: 0.55rem 0.4rem;
-      border-bottom: 1px solid var(--border);
-      vertical-align: top;
-    }
-    th { color: var(--muted); font-weight: 500; }
-    .section-title {
-      font-size: 1.05rem;
-      color: var(--accent);
-      margin: 0 0 0.75rem;
-    }
-    .stream {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1rem 1.1rem;
-      margin-bottom: 1.5rem;
-    }
-    .stream li { margin-bottom: 0.45rem; color: var(--muted); font-size: 0.9rem; }
-    .stream strong { color: var(--text); }
-    footer {
-      margin-top: 2rem;
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
-    footer a { color: #60a5fa; }
-    @media (max-width: 560px) {
-      h1 { font-size: 1.25rem; }
-      table { font-size: 0.8rem; }
-    }
-  </style>
-</head>
-<body>
-  <div class="wrap">
-    <header>
-      <h1>Platform Pulse</h1>
-      <p class="sub">Cortex Intelligence Nexus · Phase 0 registry (truth surface)</p>
-    </header>
+/* ============================================
+   CORTEX PLATFORM PULSE — Metrics & Health Status Dashboard
+   Reads from backend metrics API to display revenue, conversions, engagement
+   ============================================ */
 
-    <div class="banner">
-      <strong>Honest mode.</strong>
-      This page is a documented channel registry — not live subscriber/follower APIs.
-      Status labels: <em>documented</em> (listed in repo), <em>manual</em> (update by hand),
-      <em>api_pending</em> (integration not wired), <em>connected</em> (only after a real check exists).
-      No platform is marked connected in Phase 0.
+document.addEventListener('DOMContentLoaded', async () => {
+  const JWT_TOKEN = localStorage.getItem('cortex_jwt');
+
+  if (!JWT_TOKEN) {
+    document.body.innerHTML = `
+      <div style="text-align: center; margin-top: 50px;">
+        <h1>Cortex Platform Pulse</h1>
+        <p>Please <a href="/index-production.html">log in</a> to view metrics.</p>
+      </div>
+    `;
+    return;
+  }
+
+  try {
+    // Fetch metrics from backend
+    const metricsResponse = await fetch('/api/metrics/pulse', {
+      headers: { 'Authorization': `Bearer ${JWT_TOKEN}` }
+    });
+    const metricsData = metricsResponse.status === 200 ? await metricsResponse.json() : {};
+
+    renderPlatformPulse(metricsData);
+    
+    // Auto-refresh every 5 minutes
+    setInterval(async () => {
+      const updated = await fetch('/api/metrics/pulse', {
+        headers: { 'Authorization': `Bearer ${JWT_TOKEN}` }
+      }).then(r => r.json()).catch(() => ({}));
+      renderPlatformPulse(updated);
+    }, 5 * 60 * 1000);
+  } catch (err) {
+    console.error('Error loading metrics:', err);
+    document.body.innerHTML = `<div style="text-align: center; margin-top: 50px;"><h1>Error Loading Metrics</h1><p>${err.message}</p></div>`;
+  }
+});
+
+function renderPlatformPulse(data) {
+  const periods = (data && data.periods) || { week: {}, month: {}, year: {} };
+  const health = (data && data.health_status) || {};
+  const current = periods.month || {};
+
+  const getColorClass = (status) => {
+    if (status === 'strong' || status === 'excellent') return 'status-strong';
+    if (status === 'growing' || status === 'healthy') return 'status-growing';
+    return 'status-early';
+  };
+
+  let html = `
+    <style>
+      body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; margin: 0; background: #0f1419; color: #fff; }
+      .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+      .header { padding: 30px; margin-bottom: 20px; }
+      .header h1 { margin: 0; font-size: 2.5em; color: #fff; }
+      .header p { margin: 10px 0 0 0; color: #aaa; }
+      .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px; }
+      .metric-card { background: #1a1f29; padding: 20px; border-radius: 8px; border-left: 4px solid #007bff; }
+      .metric-card h3 { margin: 0 0 10px 0; font-size: 0.9em; color: #aaa; text-transform: uppercase; letter-spacing: 1px; }
+      .metric-card .value { font-size: 2.5em; font-weight: bold; color: #fff; }
+      .metric-card .trend { font-size: 0.9em; color: #28a745; margin-top: 5px; }
+      .status-strong { border-left-color: #28a745; }
+      .status-growing { border-left-color: #ffc107; }
+      .status-early { border-left-color: #dc3545; }
+      .health-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 30px; margin-bottom: 30px; }
+      .health-card { background: #1a1f29; padding: 20px; border-radius: 8px; text-align: center; border-top: 3px solid; }
+      .health-card h4 { margin: 0 0 10px 0; color: #aaa; font-size: 0.85em; text-transform: uppercase; }
+      .health-card .status { font-size: 1.8em; font-weight: bold; }
+      .health-strong .status { color: #28a745; border-top-color: #28a745; }
+      .health-growing .status { color: #ffc107; border-top-color: #ffc107; }
+      .health-early .status { color: #dc3545; border-top-color: #dc3545; }
+      .health-optimize .status { color: #17a2b8; border-top-color: #17a2b8; }
+      .section { background: #1a1f29; padding: 30px; border-radius: 8px; margin-bottom: 20px; }
+      .section h2 { margin-top: 0; color: #fff; border-bottom: 2px solid #007bff; padding-bottom: 15px; }
+      .tab-buttons { display: flex; gap: 10px; margin-bottom: 20px; }
+      .tab-btn { padding: 10px 20px; background: #252d3a; color: #aaa; border: none; border-radius: 4px; cursor: pointer; }
+      .tab-btn.active { background: #007bff; color: #fff; }
+      .tab-content { display: none; }
+      .tab-content.active { display: block; }
+      .chart-placeholder { background: #252d3a; padding: 30px; border-radius: 4px; text-align: center; color: #666; min-height: 200px; display: flex; align-items: center; justify-content: center; }
+      .stat-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #252d3a; }
+      .stat-row:last-child { border-bottom: none; }
+      .stat-label { color: #aaa; }
+      .stat-value { font-weight: bold; color: #fff; }
+    </style>
+    <div class="container">
+      <div class="header">
+        <h1>📊 Cortex Platform Pulse</h1>
+        <p>Real-time platform metrics, conversions, and revenue tracking</p>
+      </div>
+
+      <div class="metrics-grid">
+        <div class="metric-card ${getColorClass(health.member_growth)}">
+          <h3>Member Growth</h3>
+          <div class="value">${current.unique_members || 0}</div>
+          <div class="trend">Active members</div>
+        </div>
+        <div class="metric-card ${getColorClass(health.engagement)}">
+          <h3>Engagement</h3>
+          <div class="value">${current.podcast_listens || 0}</div>
+          <div class="trend">Podcast listens</div>
+        </div>
+        <div class="metric-card ${getColorClass(health.revenue)}">
+          <h3>Revenue (30 days)</h3>
+          <div class="value">₦${(current.total_revenue_ngn || 0).toLocaleString()}</div>
+          <div class="trend">${current.conversions || 0} conversions</div>
+        </div>
+        <div class="metric-card ${getColorClass(health.conversion_efficiency)}">
+          <h3>Conversion Rate</h3>
+          <div class="value">${(current.conversion_rate || 0).toFixed(1)}%</div>
+          <div class="trend">Of offer clicks</div>
+        </div>
+      </div>
+
+      <div class="health-grid">
+        <div class="health-card health-${health.member_growth}">
+          <h4>Member Growth</h4>
+          <div class="status">${health.member_growth}</div>
+        </div>
+        <div class="health-card health-${health.engagement}">
+          <h4>Engagement</h4>
+          <div class="status">${health.engagement}</div>
+        </div>
+        <div class="health-card health-${health.revenue}">
+          <h4>Revenue</h4>
+          <div class="status">${health.revenue}</div>
+        </div>
+        <div class="health-card health-${health.conversion_efficiency}">
+          <h4>Conversion</h4>
+          <div class="status">${health.conversion_efficiency}</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>📈 Performance Over Time</h2>
+        <div class="tab-buttons">
+          <button class="tab-btn active" onclick="switchTab('week')">Last 7 Days</button>
+          <button class="tab-btn" onclick="switchTab('month')">Last 30 Days</button>
+          <button class="tab-btn" onclick="switchTab('year')">Year to Date</button>
+        </div>
+
+        ${['week', 'month', 'year'].map(period => `
+          <div class="tab-content ${period === 'month' ? 'active' : ''}" id="tab-${period}">
+            <div class="stat-row">
+              <div class="stat-label">Podcast Listens</div>
+              <div class="stat-value">${periods[period]?.podcast_listens || 0}</div>
+            </div>
+            <div class="stat-row">
+              <div class="stat-label">Content Views</div>
+              <div class="stat-value">${periods[period]?.content_views || 0}</div>
+            </div>
+            <div class="stat-row">
+              <div class="stat-label">Offer Clicks</div>
+              <div class="stat-value">${periods[period]?.offer_clicks || 0}</div>
+            </div>
+            <div class="stat-row">
+              <div class="stat-label">Conversions</div>
+              <div class="stat-value">${periods[period]?.conversions || 0}</div>
+            </div>
+            <div class="stat-row">
+              <div class="stat-label">Total Revenue</div>
+              <div class="stat-value">₦${(periods[period]?.total_revenue_ngn || 0).toLocaleString()}</div>
+            </div>
+            <div class="stat-row">
+              <div class="stat-label">Conversion Rate</div>
+              <div class="stat-value">${(periods[period]?.conversion_rate || 0).toFixed(2)}%</div>
+            </div>
+            <div class="stat-row">
+              <div class="stat-label">Unique Members</div>
+              <div class="stat-value">${periods[period]?.unique_members || 0}</div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
     </div>
 
-    <div class="grid" id="cards"></div>
-
-    <h2 class="section-title">Overview</h2>
-    <div style="overflow-x:auto;">
-      <table>
-        <thead>
-          <tr>
-            <th>Platform</th>
-            <th>Handle / ID</th>
-            <th>Status</th>
-            <th>Primary metric (future)</th>
-            <th>Source</th>
-          </tr>
-        </thead>
-        <tbody id="table-body"></tbody>
-      </table>
-    </div>
-
-    <div class="stream">
-      <h2 class="section-title" style="margin-top:0;">Activity &amp; integration notes</h2>
-      <ul id="stream" style="margin:0;padding-left:1.1rem;"></ul>
-    </div>
-
-    <footer>
-      Canonical identity:
-      <a href="/identity.html">identity.html</a> ·
-      <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/IDENTITY.md">IDENTITY.md</a> ·
-      <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/PUBLIC_SURFACES.md">PUBLIC_SURFACES.md</a><br />
-      Live host: <a href="https://cortex-platforms.netlify.app">cortex-platforms.netlify.app</a>
-      · Google Business:
-      <a href="https://maps.google.com/maps?cid=2073161413550473641" rel="noopener">Maps listing</a>
-      <span id="generated"></span>
-    </footer>
-  </div>
-
-  <script>
-    /** Phase 0 static registry — aligned with IDENTITY.md / PUBLIC_SURFACES.md */
-    const PLATFORMS = [
-      {
-        id: 'youtube',
-        name: 'YouTube',
-        handle: '@MikecomplexAI-i2e',
-        url: 'https://www.youtube.com/@MikecomplexAI-i2e',
-        status: 'documented',
-        primary: 'Subscribers / views',
-        note: 'MEDIA.md also mentions @cinisnexus — resolve handle consistency later',
-        source: 'PUBLIC_SURFACES.md'
-      },
-      {
-        id: 'tiktok',
-        name: 'TikTok',
-        handle: '@cinisnio.ai',
-        url: 'https://www.tiktok.com/@cinisnio.ai',
-        status: 'documented',
-        primary: 'Followers / likes',
-        note: 'No API token in platform env for metrics',
-        source: 'PUBLIC_SURFACES.md'
-      },
-      {
-        id: 'instagram',
-        name: 'Instagram',
-        handle: '—',
-        url: null,
-        status: 'api_pending',
-        primary: 'Followers / reach',
-        note: 'Not listed in PUBLIC_SURFACES canonical table',
-        source: 'gap'
-      },
-      {
-        id: 'facebook',
-        name: 'Facebook',
-        handle: '—',
-        url: null,
-        status: 'api_pending',
-        primary: 'Page fans / engagement',
-        note: 'Not listed in PUBLIC_SURFACES canonical table',
-        source: 'gap'
-      },
-      {
-        id: 'x',
-        name: 'X (Twitter)',
-        handle: '@MikeComplexAie · @CinisIndustry',
-        url: 'https://x.com/MikeComplexAie',
-        status: 'documented',
-        primary: 'Followers / posts',
-        note: 'Founder + company accounts in IDENTITY.md',
-        source: 'IDENTITY.md'
-      },
-      {
-        id: 'linkedin',
-        name: 'LinkedIn',
-        handle: 'michaelujukumorim',
-        url: 'https://www.linkedin.com/in/michaelujukumorim',
-        status: 'documented',
-        primary: 'Connections / posts',
-        note: 'Personal profile listed',
-        source: 'PUBLIC_SURFACES.md'
-      },
-      {
-        id: 'github',
-        name: 'GitHub',
-        handle: 'Cortex-Nexus-Sovereign-Industrial-AI',
-        url: 'https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform',
-        status: 'documented',
-        primary: 'Repos / stars (public API possible in Phase 1)',
-        note: 'Best candidate for first live metric without secrets',
-        source: 'IDENTITY.md'
-      },
-      {
-        id: 'huggingface',
-        name: 'Hugging Face',
-        handle: '—',
-        url: null,
-        status: 'api_pending',
-        primary: 'Models / downloads',
-        note: 'HF helpers exist on Netlify; public metrics not wired to this board',
-        source: 'netlify/functions'
-      },
-      {
-        id: 'google',
-        name: 'Google Business',
-        handle: 'CID 2073161413550473641',
-        url: 'https://maps.google.com/maps?cid=2073161413550473641',
-        status: 'manual',
-        primary: 'Reviews / visibility',
-        note: 'Verified listing; website field → cortex-platforms.netlify.app',
-        source: 'IDENTITY.md'
-      },
-      {
-        id: 'medium',
-        name: 'Medium',
-        handle: '@mikecomplexai',
-        url: 'https://medium.com/@mikecomplexai',
-        status: 'documented',
-        primary: 'Followers / reads',
-        note: 'Publication surface',
-        source: 'PUBLIC_SURFACES.md'
-      },
-      {
-        id: 'netlify',
-        name: 'Live Platform',
-        handle: 'cortex-platforms.netlify.app',
-        url: 'https://cortex-platforms.netlify.app',
-        status: 'documented',
-        primary: 'Deploy health',
-        note: 'Primary public host (dynamic + static)',
-        source: 'COMMAND_CENTER.md'
+    <script>
+      function switchTab(tab) {
+        document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+        document.getElementById('tab-' + tab).classList.add('active');
+        event.target.classList.add('active');
       }
-    ];
+    </script>
+  `;
 
-    const STREAM = [
-      { t: 'Phase 0', d: 'Registry board published — no live API claims.' },
-      { t: 'Sync', d: 'Auto-update intervals (6h / 12h) not scheduled until Phase 1+ APIs exist.' },
-      { t: 'Social module', d: 'social-media-integration/ is documented; metrics UI not connected to this page.' },
-      { t: 'Google', d: 'Business Profile verified; treat as external identity signal, not a metrics API.' },
-      { t: 'Next', d: 'Phase 1 candidate: GitHub public repo stats (no secret required).' }
-    ];
-
-    function badgeClass(s) {
-      return 'badge ' + (s || 'documented');
-    }
-
-    function render() {
-      const cards = document.getElementById('cards');
-      const tbody = document.getElementById('table-body');
-      const stream = document.getElementById('stream');
-
-      cards.innerHTML = PLATFORMS.map(function (p) {
-        const link = p.url
-          ? '<div class="meta"><a href="' + p.url + '" target="_blank" rel="noopener">Open channel</a></div>'
-          : '<div class="meta">No canonical URL in repo yet</div>';
-        return (
-          '<article class="card">' +
-            '<h2><span>' + p.name + '</span><span class="' + badgeClass(p.status) + '">' + p.status.replace('_', ' ') + '</span></h2>' +
-            '<div class="meta">' + p.handle + '</div>' +
-            link +
-            '<div class="meta">' + p.note + '</div>' +
-          '</article>'
-        );
-      }).join('');
-
-      tbody.innerHTML = PLATFORMS.map(function (p) {
-        return (
-          '<tr>' +
-            '<td>' + p.name + '</td>' +
-            '<td>' + p.handle + '</td>' +
-            '<td><span class="' + badgeClass(p.status) + '">' + p.status.replace('_', ' ') + '</span></td>' +
-            '<td>' + p.primary + '</td>' +
-            '<td>' + p.source + '</td>' +
-          '</tr>'
-        );
-      }).join('');
-
-      stream.innerHTML = STREAM.map(function (s) {
-        return '<li><strong>' + s.t + ':</strong> ' + s.d + '</li>';
-      }).join('');
-
-      document.getElementById('generated').textContent =
-        ' · Generated ' + new Date().toISOString().slice(0, 19) + 'Z (client clock)';
-    }
-
-    render();
-  </script>
-</body>
-</html>
+  document.body.innerHTML = html;
+}

@@ -1,157 +1,144 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CINIS NEXUS — Member Dashboard</title>
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    body { background: #0d1117; color: #c9d1d9; font-family: Inter, system-ui, sans-serif; margin: 0; }
-    .wrap { max-width: 720px; margin: 0 auto; padding: 2rem 1rem; }
-    h1 { color: #58a6ff; font-size: 1.5rem; }
-    .card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 1.25rem; margin-bottom: 1rem; }
-    label { display: block; font-size: 0.8rem; opacity: 0.8; margin-bottom: 0.25rem; }
-    input { width: 100%; padding: 0.6rem; border-radius: 6px; border: 1px solid #30363d; background: #0d1117; color: #c9d1d9; box-sizing: border-box; margin-bottom: 0.75rem; }
-    button { background: #238636; color: #fff; border: none; padding: 0.65rem 1.2rem; border-radius: 6px; cursor: pointer; font-weight: 600; }
-    button.secondary { background: #21262d; }
-    button:disabled { opacity: 0.5; cursor: not-allowed; }
-    .error { color: #f85149; font-size: 0.9rem; }
-    .ok { color: #3fb950; font-size: 0.9rem; }
-    .grant { border-left: 3px solid #3fb950; padding-left: 0.75rem; margin: 0.5rem 0; }
-    .muted { opacity: 0.65; font-size: 0.85rem; }
-    a { color: #58a6ff; }
-  </style>
-</head>
-<body>
-  <div class="wrap">
-    <h1>⚡ Member Dashboard</h1>
-    <p class="muted">Bound to <code>GET /api/auth/me</code> · Cortex Platform v2.2</p>
+/* ============================================
+   CORTEX MEMBER DASHBOARD — Content + Access Grants UI
+   Reads from backend APIs to display member content
+   ============================================ */
 
-    <div id="login-card" class="card">
-      <h2 style="margin-top:0;font-size:1.1rem;">Sign in</h2>
-      <label for="email">Email</label>
-      <input id="email" type="email" placeholder="you@example.com" autocomplete="username">
-      <label for="password">Password</label>
-      <input id="password" type="password" placeholder="••••••••" autocomplete="current-password">
-      <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
-        <button id="btn-login" type="button">Login</button>
-        <button id="btn-register" type="button" class="secondary">Register</button>
+document.addEventListener('DOMContentLoaded', async () => {
+  const JWT_TOKEN = localStorage.getItem('cortex_jwt');
+  const userEmail = getUserEmailFromToken();
+
+  if (!JWT_TOKEN || !userEmail) {
+    document.body.innerHTML = `
+      <div style="text-align: center; margin-top: 50px;">
+        <h1>Cortex Member Dashboard</h1>
+        <p>Please <a href="/index-production.html">log in</a> to access member content.</p>
       </div>
-      <p id="auth-msg" class="error" style="display:none;"></p>
-      <p class="muted" style="margin-top:1rem;">API base: <span id="api-base-label"></span></p>
-    </div>
+    `;
+    return;
+  }
 
-    <div id="profile-card" class="card" style="display:none;">
-      <div style="display:flex;justify-content:space-between;align-items:center;">
-        <h2 style="margin:0;font-size:1.1rem;">Profile</h2>
-        <button id="btn-logout" type="button" class="secondary">Logout</button>
+  try {
+    // Fetch member data + access grants
+    const meResponse = await fetch('/api/auth/me', {
+      headers: { 'Authorization': `Bearer ${JWT_TOKEN}` }
+    });
+    const meData = await meResponse.json();
+
+    // Fetch content payload (podcast registry + access grants)
+    const contentResponse = await fetch(`/api/member-payload?email=${encodeURIComponent(userEmail)}`, {
+      headers: { 'Authorization': `Bearer ${JWT_TOKEN}` }
+    });
+    const contentData = contentResponse.status === 200 ? await contentResponse.json() : {};
+
+    renderMemberDashboard(meData, contentData);
+  } catch (err) {
+    console.error('Error loading member dashboard:', err);
+    document.body.innerHTML = `<div style="text-align: center; margin-top: 50px;"><h1>Error Loading Dashboard</h1><p>${err.message}</p></div>`;
+  }
+});
+
+function getUserEmailFromToken() {
+  const token = localStorage.getItem('cortex_jwt');
+  if (!token) return null;
+  try {
+    const parts = token.split('.');
+    const payload = JSON.parse(atob(parts[1]));
+    return payload.email;
+  } catch {
+    return null;
+  }
+}
+
+function renderMemberDashboard(userData, contentData) {
+  const grants = (userData && userData.grants) || (contentData && contentData.access_grants) || [];
+  const content = (contentData && contentData.content) || [];
+  const user = userData && userData.user ? userData.user : {};
+
+  let html = `
+    <style>
+      body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; margin: 0; background: #f5f5f5; }
+      .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+      .header { background: white; padding: 30px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+      .header h1 { margin: 0; color: #333; }
+      .header p { margin: 10px 0 0 0; color: #666; }
+      .section { background: white; padding: 30px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+      .section h2 { margin-top: 0; color: #333; border-bottom: 2px solid #007bff; padding-bottom: 10px; }
+      .grant-item { background: #f9f9f9; padding: 15px; border-left: 4px solid #28a745; margin-bottom: 10px; border-radius: 4px; }
+      .grant-item strong { color: #333; }
+      .grant-item .status { color: #28a745; font-weight: bold; }
+      .grant-item .expires { color: #666; font-size: 0.9em; }
+      .content-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+      .content-card { background: #f9f9f9; padding: 20px; border-radius: 8px; border-left: 4px solid #007bff; cursor: pointer; transition: all 0.3s; }
+      .content-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); transform: translateY(-2px); }
+      .content-card h3 { margin: 0 0 10px 0; color: #333; }
+      .content-card p { margin: 5px 0; color: #666; font-size: 0.9em; }
+      .locked { opacity: 0.5; cursor: not-allowed; }
+      .unlock-btn { display: inline-block; margin-top: 10px; padding: 8px 16px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; text-decoration: none; }
+      .unlock-btn:hover { background: #0056b3; }
+      .cta-btn { display: inline-block; padding: 12px 24px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 1em; text-decoration: none; margin-top: 10px; }
+      .cta-btn:hover { background: #218838; }
+      .empty-state { text-align: center; padding: 40px; color: #666; }
+    </style>
+    <div class="container">
+      <div class="header">
+        <h1>🎙️ Cortex Intelligence Nexus — Member Dashboard</h1>
+        <p><strong>${user.name || 'Member'}</strong> (${user.email})</p>
+        <p>Welcome to your exclusive content library. Stream podcasts, read resources, and access member-only insights.</p>
       </div>
-      <div id="profile-body" style="margin-top:1rem;"></div>
-      <h3 style="font-size:1rem;">Access grants</h3>
-      <div id="grants-body"></div>
-      <p class="muted"><a href="index.html">← Back to platform</a> · <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform/blob/main/STATUS.md" target="_blank">Live status</a></p>
+
+      <div class="section">
+        <h2>✅ Your Access Grants</h2>
+        ${grants && grants.length > 0 ? `
+          ${grants.map((grant, i) => {
+            const expiresDate = new Date(grant.expires_at || grant.granted_at);
+            const daysLeft = Math.max(0, Math.ceil((expiresDate - new Date()) / (1000 * 60 * 60 * 24)));
+            return `
+              <div class="grant-item">
+                <strong>${grant.product_name || grant.product}</strong>
+                <div class="status">✓ Active</div>
+                <div class="expires">${daysLeft > 0 ? `Expires in ${daysLeft} days` : 'Expires today'}</div>
+              </div>
+            `;
+          }).join('')}
+        ` : `
+          <div class="empty-state">
+            <p>No active access grants yet.</p>
+            <p><a href="/offers.html" class="unlock-btn">Subscribe Now — ₦22,000</a></p>
+          </div>
+        `}
+      </div>
+
+      <div class="section">
+        <h2>🎬 Member Content Library</h2>
+        ${content && content.length > 0 ? `
+          <div class="content-grid">
+            ${content.map((item, i) => `
+              <div class="content-card ${item.status !== 'unlocked' ? 'locked' : ''}">
+                <h3>${item.title || 'Episode ' + (i + 1)}</h3>
+                <p><strong>Type:</strong> ${item.type === 'podcast' ? '🎙️ Podcast' : item.type}</p>
+                <p><strong>Added:</strong> ${new Date(item.created_at).toLocaleDateString()}</p>
+                ${item.status === 'unlocked' ? `
+                  <a href="${item.path}" class="unlock-btn">📖 View Full Content</a>
+                ` : `
+                  <div style="color: #999;">🔒 Locked</div>
+                `}
+              </div>
+            `).join('')}
+          </div>
+        ` : `
+          <div class="empty-state">
+            <p>No member content available yet. Check back soon!</p>
+          </div>
+        `}
+      </div>
+
+      <div class="section">
+        <h2>📢 Upgrade Your Membership</h2>
+        <p>Want access to more content? Upgrade your membership or renew your current plan.</p>
+        <a href="/offers.html" class="cta-btn">Explore Offers</a>
+      </div>
     </div>
-  </div>
+  `;
 
-  <script>
-    // Default: same origin when served behind Netlify proxy, else local backend
-    const API_BASE = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
-      ? 'http://localhost:5000'
-      : '';
-
-    document.getElementById('api-base-label').textContent = API_BASE || '(same origin /api)';
-
-    const tokenKey = 'cortex_jwt';
-
-    function showMsg(text, isError) {
-      const el = document.getElementById('auth-msg');
-      el.style.display = 'block';
-      el.className = isError ? 'error' : 'ok';
-      el.textContent = text;
-    }
-
-    async function api(path, options = {}) {
-      const headers = { 'Content-Type': 'application/json', ...(options.headers || {}) };
-      const token = localStorage.getItem(tokenKey);
-      if (token) headers['Authorization'] = 'Bearer ' + token;
-      const res = await fetch(API_BASE + path, { ...options, headers });
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error(data.error || res.statusText || 'Request failed');
-      return data;
-    }
-
-    async function loadMe() {
-      const data = await api('/api/auth/me');
-      const u = data.user;
-      document.getElementById('login-card').style.display = 'none';
-      document.getElementById('profile-card').style.display = 'block';
-      document.getElementById('profile-body').innerHTML =
-        '<p><strong>' + escapeHtml(u.name) + '</strong><br>' +
-        escapeHtml(u.email) +
-        (u.company ? '<br>' + escapeHtml(u.company) : '') +
-        (u.location ? '<br>' + escapeHtml(u.location) : '') +
-        '</p><p class="muted">Member since ' + escapeHtml(u.created_at || '—') + '</p>';
-
-      const grants = data.grants || [];
-      const gEl = document.getElementById('grants-body');
-      if (!grants.length) {
-        gEl.innerHTML = '<p class="muted">No active access grants yet. Complete a payment to unlock products.</p>';
-      } else {
-        gEl.innerHTML = grants.map(g =>
-          '<div class="grant"><strong>' + escapeHtml(g.product) + '</strong><br>' +
-          '<span class="muted">' + escapeHtml(g.order_ref || '') + ' · ' + escapeHtml(g.granted_at || '') + '</span></div>'
-        ).join('');
-      }
-    }
-
-    function escapeHtml(s) {
-      return String(s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-    }
-
-    document.getElementById('btn-login').onclick = async () => {
-      try {
-        const email = document.getElementById('email').value.trim();
-        const password = document.getElementById('password').value;
-        const data = await api('/api/auth/login', {
-          method: 'POST',
-          body: JSON.stringify({ email, password })
-        });
-        localStorage.setItem(tokenKey, data.token);
-        showMsg('Login successful', false);
-        await loadMe();
-      } catch (e) {
-        showMsg(e.message, true);
-      }
-    };
-
-    document.getElementById('btn-register').onclick = async () => {
-      try {
-        const email = document.getElementById('email').value.trim();
-        const password = document.getElementById('password').value;
-        const name = email.split('@')[0] || 'Member';
-        const data = await api('/api/auth/register', {
-          method: 'POST',
-          body: JSON.stringify({ name, email, password })
-        });
-        localStorage.setItem(tokenKey, data.token);
-        showMsg('Registered successfully', false);
-        await loadMe();
-      } catch (e) {
-        showMsg(e.message, true);
-      }
-    };
-
-    document.getElementById('btn-logout').onclick = () => {
-      localStorage.removeItem(tokenKey);
-      document.getElementById('profile-card').style.display = 'none';
-      document.getElementById('login-card').style.display = 'block';
-      showMsg('Logged out', false);
-    };
-
-    // Auto-load if token present
-    if (localStorage.getItem(tokenKey)) {
-      loadMe().catch(() => localStorage.removeItem(tokenKey));
-    }
-  </script>
-</body>
-</html>
+  document.body.innerHTML = html;
+}
