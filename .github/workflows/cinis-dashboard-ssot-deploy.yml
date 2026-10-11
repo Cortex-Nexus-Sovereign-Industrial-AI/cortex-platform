@@ -5,17 +5,28 @@ on:
     branches: [ main ]
     paths:
       - 'SSOT.md'
+      - 'IDENTITY.md'
       - 'cortex-platform/**'
       - 'index.html'
       - 'offers.html'
+      - 'netlify.toml'
+      - 'netlify/functions/**'
+      - 'backend/**'
+      - 'package.json'
+      - 'package-lock.json'
       - '.github/workflows/**'
+      - 'docs/commerce/**'
+      - 'docs/LAUNCH_CHECKLIST.md'
   workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   build-dashboard:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout canonical main source
         uses: actions/checkout@v4
 
       - name: Setup Node
@@ -23,49 +34,52 @@ jobs:
         with:
           node-version: 20
 
-      - name: Verify SSOT Compliance
+      - name: Verify canonical identity and checkout CTA
         run: |
-          echo "SSOT check — Primary Hub must be cortex-platforms.netlify.app"
-          grep -q "cortex-platforms.netlify.app" SSOT.md || (echo "SSOT Primary Hub mismatch" && exit 1)
-          echo "Founder: Michael Ujuku Morim — Verified"
-          echo "Offer lock: 30-Day AI Content System @ ₦22,000 (SSOT §5)"
-          echo "Paystack live link: https://paystack.shop/pay/cortex-demo"
+          set -eu
+          grep -q "cortex-platforms.netlify.app" SSOT.md
+          grep -q "Cortex Intelligence Nexus" IDENTITY.md
+          grep -q "paystack.shop/pay/cortex-demo" offers.html
+          echo "Canonical identity and checkout CTA checks passed."
 
-      - name: Build System Directly - No Local
+      - name: Install dependencies when lockfile exists
         run: |
-          if [ -f package-lock.json ] || [ -f package.json ]; then
-            npm ci || npm install
-            npm run build || echo "Static build — no npm build step required"
+          set -eu
+          if [ -f package-lock.json ]; then
+            npm ci
+          elif [ -f package.json ]; then
+            npm install
           else
-            echo "Pure static / Netlify functions — skip npm"
+            echo "No root package manifest; static site and Netlify functions only."
           fi
 
-      - name: Confirm Paystack Link (SSOT §5)
-        run: |
-          if grep -q "paystack.shop/pay/cortex-demo" offers.html; then
-            echo "Paystack CTA confirmed in offers.html"
-          else
-            echo "WARNING: Paystack link missing from offers.html"
-          fi
+      - name: Run project build if defined
+        run: npm run build --if-present
 
-      - name: Deploy to Netlify Primary Hub (SSOT Rule 3)
-        uses: nwtgck/actions-netlify@v3.0
-        with:
-          publish-dir: './'
-          production-branch: main
-          production-deploy: true
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          deploy-message: "SSOT-aligned deploy — Cortex Intelligence Nexus"
-          enable-pull-request-comment: false
-          enable-commit-comment: true
+      - name: Validate Netlify deployment inputs
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        timeout-minutes: 2
+        run: |
+          set -eu
+          test -n "$NETLIFY_AUTH_TOKEN" || (echo "Missing GitHub Actions secret: NETLIFY_AUTH_TOKEN" && exit 1)
+          test -n "$NETLIFY_SITE_ID" || (echo "Missing GitHub Actions secret: NETLIFY_SITE_ID" && exit 1)
+          test -d netlify/functions || (echo "Netlify functions directory missing" && exit 1)
+          echo "Deployment credentials are present (values are not printed)."
 
-      - name: Deploy to GitHub Pages - Dashboard Shell
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./cortex-platform
-          force_orphan: true
+      - name: Deploy static site and Netlify Functions to primary site
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        run: |
+          set -eu
+          npx --yes netlify-cli deploy \
+            --prod \
+            --dir . \
+            --functions netlify/functions \
+            --site "$NETLIFY_SITE_ID" \
+            --auth "$NETLIFY_AUTH_TOKEN" \
+            --message "SSOT-aligned Cortex Intelligence Nexus deploy"
+
+# This workflow deploys only to the canonical Netlify site.
+# Payment mode and Paystack credentials are intentionally not changed here.
