@@ -23,7 +23,7 @@ services:
       - key: PAYSTACK_PUBLIC_KEY
         sync: false
       - key: PAYSTACK_MODE
-        value: live
+        value: test
       - key: SHOPIFY_ADMIN_TOKEN
         sync: false
       - key: SHOPIFY_STORE_DOMAIN
