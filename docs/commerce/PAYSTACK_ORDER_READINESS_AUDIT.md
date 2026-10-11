@@ -44,6 +44,11 @@ Updated `.github/workflows/cinis-dashboard-ssot-deploy.yml` in commit `af6cab441
 - Stop this workflow from publishing a separate GitHub Pages dashboard shell; this workflow now targets only the canonical Netlify site.
 - Leave all Paystack keys, environment values, and payment-mode settings unchanged.
 
+## Additional CI findings
+
+- The secret-scanning workflow failed because the organization-level Gitleaks GitHub Action required a paid license. Commit `374c809cda03bc9f3efebec68dd8940a7ec8e982` switches it to the pinned, license-free Gitleaks CLI container. The next scan must still pass; if it reports findings, review them securely and rotate any confirmed exposed credentials. Do not print secrets into logs or paste them into chat.
+- The canonical deploy workflow's build and identity/checkout checks passed, but it stopped before deployment because GitHub Actions did not have `NETLIFY_AUTH_TOKEN` (and `NETLIFY_SITE_ID` was empty). This is a private configuration prerequisite, not a code/build failure.
+
 ## Required technical closure — safe work, no owner financial action needed
 
 - [ ] Add `NETLIFY_AUTH_TOKEN` and `NETLIFY_SITE_ID` as GitHub Actions repository secrets using the canonical Netlify site's token and site ID; never put their values in source or chat.
