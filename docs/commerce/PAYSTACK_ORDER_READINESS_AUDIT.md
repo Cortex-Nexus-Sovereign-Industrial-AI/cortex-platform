@@ -29,9 +29,11 @@ This confirms the receipt text and a test-mode payment receipt. It does not by i
 5. `backend/server.js` contains an Express webhook route and SQLite-backed tables for orders, transactions, webhook logs, processed events, and access grants.
 6. The backend webhook currently creates a completed order and access grant for a signed `charge.success` event even when no matching pre-existing order exists. It does not enforce the expected amount/currency/product before granting access. This must be corrected before automated fulfilment is treated as production-safe.
 7. The backend warns that a default JWT secret is used if `JWT_SECRET` is missing. A production deployment must set a strong secret in the backend's private environment and must not rely on the default.
-8. Root `package.json` does not declare `sqlite3`, although the backend tries to load it. The backend also falls back to `backend/lib/sqliteMock` if native SQLite cannot be loaded; that fallback must never be mistaken for durable production storage.
+8. `backend/package.json` declares `sqlite3`; the root `package.json` does not. The backend also falls back to `backend/lib/sqliteMock` if native SQLite cannot be loaded; that fallback must never be mistaken for durable production storage.
 9. `docs/commerce/LIVE_KEY_SWITCH.md` says payment mode is Test and refers to `PAYSTACK_KEYS.md`; that referenced file was not found at the repository root on this audit.
-10. The earlier Netlify deploy record for 11 October reported **“No functions deployed.”** The canonical GitHub Actions workflow has now been updated to include function/config paths and use the Netlify CLI for the primary site's production deployment. Its actual run and function deployment still need a successful run/deploy record to verify.
+10. The currently published Netlify deploy record (`6acaefebc15d91467f3c0958`) reports **“No functions deployed.”** The canonical GitHub Actions workflow includes function/config paths and uses the Netlify CLI for the primary site's production deployment, but its first observed runs failed at the credential validation step because `NETLIFY_AUTH_TOKEN` was missing (and `NETLIFY_SITE_ID` was also empty). No functions were deployed by that workflow run.
+
+11. `render.yaml` previously declared `PAYSTACK_MODE: live`, which conflicted with the owner-provided Test Mode receipt and the instruction not to switch to live without explicit approval. Commit `7f2a49d349e1b0d2e9c121740cdb4da5ea61c49e` changes the blueprint default to `test`. This repository change does **not** prove the existing Render service's private environment is now in test mode; verify the deployed environment in Render before applying/syncing any blueprint.
 
 ## Change made during this audit
 
@@ -44,7 +46,8 @@ Updated `.github/workflows/cinis-dashboard-ssot-deploy.yml` in commit `af6cab441
 
 ## Required technical closure — safe work, no owner financial action needed
 
-- [ ] Confirm the workflow run for the commit above succeeds.
+- [ ] Add `NETLIFY_AUTH_TOKEN` and `NETLIFY_SITE_ID` as GitHub Actions repository secrets using the canonical Netlify site's token and site ID; never put their values in source or chat.
+- [ ] Rerun the canonical workflow and confirm the run succeeds.
 - [ ] Confirm the production deploy lists the expected functions: `health`, `paystack-webhook`, and any other function files present.
 - [ ] Confirm `/api/health` and `/.netlify/functions/health` return the expected JSON.
 - [ ] Confirm Paystack webhook URL configured in the Paystack dashboard matches the deployed endpoint; dashboard state is not visible from this repository.
@@ -56,6 +59,7 @@ Updated `.github/workflows/cinis-dashboard-ssot-deploy.yml` in commit `af6cab441
 - [ ] Add tests for valid/invalid signatures, wrong amount/currency, missing reference, duplicate/replayed event, failed/pending events, backend outage, and successful expected-price test-mode fulfilment.
 - [ ] Confirm the customer-facing receipt/confirmation and fulfilment instructions match what Cortex can actually deliver.
 - [ ] Check the merchant's actual mode and compliance status in the Paystack dashboard; repository notes are not proof of account status.
+- [ ] Verify the existing Render service's actual `PAYSTACK_MODE` and backend URL privately; the blueprint default is now `test`, but existing service environment values may differ.
 
 ## Human-only financial confirmation gate
 
