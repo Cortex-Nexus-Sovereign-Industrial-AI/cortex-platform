@@ -1,7 +1,7 @@
 {
   "skill_id": "cortex-realtime-voice",
-  "version": "0.1.2",
-  "status": "skeleton-runnable-modular",
+  "version": "0.2.0",
+  "status": "real-providers-ready",
   "realtime": {
     "sample_rate": 24000,
     "channels": 1,
@@ -16,19 +16,23 @@
   },
   "providers": {
     "stt": {
-      "provider": "placeholder",
+      "provider": "deepgram",
       "model": "nova-2",
-      "language": "en"
+      "language": "en",
+      "env_key": "DEEPGRAM_API_KEY"
     },
     "llm": {
-      "provider": "placeholder",
-      "model": "gpt-4o-realtime-preview",
-      "temperature": 0.7
+      "provider": "openai",
+      "model": "gpt-4o-mini",
+      "temperature": 0.7,
+      "env_key": "OPENAI_API_KEY"
     },
     "tts": {
-      "provider": "placeholder",
+      "provider": "openai",
+      "model": "tts-1",
       "voice": "alloy",
-      "speed": 1.0
+      "speed": 1.0,
+      "env_key": "OPENAI_API_KEY"
     }
   },
   "session": {

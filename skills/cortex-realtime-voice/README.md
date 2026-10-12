@@ -1,51 +1,63 @@
-# Cortex Realtime Voice Skill (v0.1.2)
+# Cortex Realtime Voice Skill (v0.2.0)
 
-Modular, runnable realtime voice skeleton for Cortex Intelligence Nexus.
+Realtime voice agent for Cortex Intelligence Nexus with **real providers**.
+
+## Providers
+
+| Component | Service | Required env |
+|-----------|---------|--------------|
+| STT | Deepgram (`nova-2`) | `DEEPGRAM_API_KEY` |
+| LLM | OpenAI Chat | `OPENAI_API_KEY` |
+| TTS | OpenAI TTS (`tts-1`) | `OPENAI_API_KEY` |
+
+Missing keys → automatic fallback to placeholders (skill still boots).
 
 ## Quick start
 
 ```bash
 cd skills/cortex-realtime-voice
+cp .env.example .env
+# edit .env with real keys
 npm install
 npm start
 ```
 
-- WebSocket: `ws://localhost:8787`
-- Health: `http://localhost:8787/health`
+Health check reports active providers:
+```bash
+curl http://localhost:8787/health
+```
 
-## Current status
+## Status checklist
 
-- [x] WebSocket server handler
-- [x] Session / turn state machine
-- [x] In-memory session store with TTL
-- [x] Modular STT / LLM / TTS provider stubs
-- [x] Cascaded pipeline (STT → LLM → TTS)
-- [ ] Real STT provider (Deepgram / Whisper / Azure…)
-- [ ] Real LLM provider (OpenAI Realtime or chat)
-- [ ] Real TTS provider (ElevenLabs / Cartesia…)
-- [ ] Metrics & monitoring hooks
+- [x] WebSocket server
+- [x] Session + state machine
+- [x] Session store with TTL
+- [x] Modular providers
+- [x] Cascaded pipeline
+- [x] Real STT (Deepgram)
+- [x] Real LLM (OpenAI)
+- [x] Real TTS (OpenAI)
+- [ ] Streaming STT (live partials)
+- [ ] Metrics & monitoring
 - [ ] Unit + latency tests
 
 ## Message protocol
 
 **Client → Server**
-- Binary frames = audio chunks
+- Binary frames = audio chunks (PCM preferred)
 - `{ "type": "input_audio_buffer.commit" }` – end of user turn
 - `{ "type": "response.cancel" }` – barge-in
 
 **Server → Client**
 - `session.created`
 - `transcript`
-- `state` (`THINKING` | `SPEAKING` | `LISTENING`)
-- `response.audio.delta` (text + base64 audio placeholder)
+- `state` (`THINKING` \| `SPEAKING` \| `LISTENING`)
+- `response.audio.delta` (text + base64 PCM audio)
 
-## Swapping providers
+## Notes on audio format
 
-Edit the files under `providers/`. Each exports a single async function:
-
-- `stt.transcribe(audioBuffer)` → `{ text, isFinal }`
-- `llm.generate(messages)` → `{ text, tool_calls }`
-- `tts.synthesize(text)` → `{ audio, format, sampleRate }`
+Deepgram accepts many formats. For best results send 16-bit PCM or WAV.  
+OpenAI TTS returns 24 kHz PCM16 when `response_format: "pcm"` is used.
 
 ## Related
 

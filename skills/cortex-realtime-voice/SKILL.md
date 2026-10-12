@@ -1,45 +1,45 @@
 # Cortex Realtime Voice Skill
 
 **ID:** `cortex-realtime-voice`  
-**Version:** `0.1.2`  
-**Status:** modular runnable skeleton  
+**Version:** `0.2.0`  
+**Status:** real-providers-ready  
 **Owner:** Cortex Intelligence Nexus  
 **Division:** software-platform-enterprise-intelligence  
 
 ## Purpose
 
 Low-latency, full-duplex voice interaction for Cortex agents.  
-Cascaded pipeline: streaming STT → LLM → TTS with barge-in.
+Cascaded pipeline: Deepgram STT → OpenAI LLM → OpenAI TTS with barge-in.
 
-## Capabilities (v0.1.2)
+## Providers (v0.2.0)
 
-- WebSocket server with binary audio + JSON control messages
-- Session store with sliding TTL
-- Modular providers (`providers/stt.js`, `llm.js`, `tts.js`)
-- Cascaded turn pipeline (`pipeline.js`)
-- Turn state machine (`LISTENING` → `THINKING` → `SPEAKING`)
-- Barge-in support
+| Role | Provider | Env Key |
+|------|----------|--------|
+| STT  | Deepgram nova-2 | `DEEPGRAM_API_KEY` |
+| LLM  | OpenAI (gpt-4o-mini) | `OPENAI_API_KEY` |
+| TTS  | OpenAI tts-1 | `OPENAI_API_KEY` |
+
+When a key is missing the corresponding provider falls back to a safe placeholder so the skill still starts.
 
 ## Quick Start
 
 ```bash
 cd skills/cortex-realtime-voice
+cp .env.example .env   # add your keys
 npm install
 npm start
-# ws://localhost:8787
 ```
+
+- WebSocket: `ws://localhost:8787`
+- Health: `http://localhost:8787/health` (shows which providers are live)
 
 ## Architecture
 
 ```
-Client  ↔→  server.js  →  session-store
-                     ↓
-                 pipeline.js
-              ┌─────────────┐
-              │  STT → LLM → TTS  │
-              └─────────────┘
+Client ↔→ server.js → session-store
+                   ↓
+               pipeline.js
+            ┌─────────────┐
+            │ STT → LLM → TTS │
+            └─────────────┘
 ```
-
-## Lifecycle
-
-`planned → connected → authenticated → tested → production → monitored`

@@ -1,7 +1,7 @@
 {
   "name": "cortex-realtime-voice",
-  "version": "0.1.2",
-  "description": "Realtime voice skill for Cortex Intelligence Nexus",
+  "version": "0.2.0",
+  "description": "Realtime voice skill for Cortex Intelligence Nexus (Deepgram + OpenAI)",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "ws": "^8.18.0",
-    "uuid": "^11.0.3"
+    "uuid": "^11.0.3",
+    "dotenv": "^16.4.5"
   },
   "engines": {
     "node": ">=18"

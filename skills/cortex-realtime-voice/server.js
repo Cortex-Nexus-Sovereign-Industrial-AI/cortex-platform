@@ -1,7 +1,9 @@
 /**
- * Cortex Realtime Voice – WebSocket Server (v0.1.2)
- * Uses modular providers + session store + cascaded pipeline
+ * Cortex Realtime Voice – WebSocket Server (v0.2.0)
+ * Real providers: Deepgram STT + OpenAI LLM/TTS (via env keys)
  */
+
+require('dotenv').config();
 
 const http = require('http');
 const { WebSocketServer } = require('ws');
@@ -16,8 +18,13 @@ const server = http.createServer((req, res) => {
     res.end(JSON.stringify({
       status: 'ok',
       skill: 'cortex-realtime-voice',
-      version: '0.1.2',
-      sessions: sessionStore.store.size
+      version: '0.2.0',
+      sessions: sessionStore.store.size,
+      providers: {
+        stt: process.env.DEEPGRAM_API_KEY ? 'deepgram' : 'placeholder',
+        llm: process.env.OPENAI_API_KEY ? 'openai' : 'placeholder',
+        tts: process.env.OPENAI_API_KEY ? 'openai' : 'placeholder'
+      }
     }));
     return;
   }
@@ -42,7 +49,6 @@ wss.on('connection', (ws, req) => {
 
   send({ type: 'session.created', session: session.toJSON() });
 
-  // Collect audio chunks until commit
   let audioChunks = [];
 
   ws.on('message', async (raw) => {
@@ -57,7 +63,6 @@ wss.on('connection', (ws, req) => {
 
       switch (msg.type) {
         case 'input_audio_buffer.append':
-          // already handled via binary
           break;
 
         case 'input_audio_buffer.commit': {
@@ -104,6 +109,9 @@ wss.on('connection', (ws, req) => {
 });
 
 server.listen(PORT, () => {
-  console.log(`Cortex Realtime Voice v0.1.2 listening on ws://localhost:${PORT}`);
+  console.log(`Cortex Realtime Voice v0.2.0 listening on ws://localhost:${PORT}`);
   console.log(`Health: http://localhost:${PORT}/health`);
+  console.log(`STT : ${process.env.DEEPGRAM_API_KEY ? 'Deepgram' : 'placeholder'}`);
+  console.log(`LLM : ${process.env.OPENAI_API_KEY ? 'OpenAI' : 'placeholder'}`);
+  console.log(`TTS : ${process.env.OPENAI_API_KEY ? 'OpenAI' : 'placeholder'}`);
 });
