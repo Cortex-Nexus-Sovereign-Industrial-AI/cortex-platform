@@ -1,6 +1,6 @@
-# Cortex Realtime Voice Skill (v0.1.1)
+# Cortex Realtime Voice Skill (v0.1.2)
 
-Minimal but **runnable** scaffold for a production realtime voice agent.
+Modular, runnable realtime voice skeleton for Cortex Intelligence Nexus.
 
 ## Quick start
 
@@ -10,41 +10,44 @@ npm install
 npm start
 ```
 
-- WebSocket endpoint: `ws://localhost:8787`
-- Health check: `http://localhost:8787/health`
-- Optional query param: `?session_id=your-id`
+- WebSocket: `ws://localhost:8787`
+- Health: `http://localhost:8787/health`
 
-## What works right now
+## Current status
 
-- Session creation & state machine (`LISTENING` → `THINKING` → `SPEAKING`)
-- Binary audio frame acknowledgement
-- JSON control messages (`input_audio_buffer.commit`, `response.cancel` for barge-in)
-- Placeholder response simulation
+- [x] WebSocket server handler
+- [x] Session / turn state machine
+- [x] In-memory session store with TTL
+- [x] Modular STT / LLM / TTS provider stubs
+- [x] Cascaded pipeline (STT → LLM → TTS)
+- [ ] Real STT provider (Deepgram / Whisper / Azure…)
+- [ ] Real LLM provider (OpenAI Realtime or chat)
+- [ ] Real TTS provider (ElevenLabs / Cartesia…)
+- [ ] Metrics & monitoring hooks
+- [ ] Unit + latency tests
 
-## Next implementation steps
-
-- [x] Add WebSocket server handler
-- [x] Add session / turn state machine
-- [ ] Integrate chosen STT streaming client
-- [ ] Integrate LLM (OpenAI Realtime API or cascaded STT→LLM→TTS)
-- [ ] Integrate TTS streaming
-- [ ] Add session store (Redis or in-memory TTL)
-- [ ] Add metrics / monitoring hooks
-- [ ] Write unit + latency tests
-
-## Message protocol (minimal)
+## Message protocol
 
 **Client → Server**
 - Binary frames = audio chunks
-- `{ "type": "input_audio_buffer.commit" }` – user finished speaking
+- `{ "type": "input_audio_buffer.commit" }` – end of user turn
 - `{ "type": "response.cancel" }` – barge-in
 
 **Server → Client**
-- `{ "type": "session.created", "session": {...} }`
-- `{ "type": "state", "state": "THINKING" | "SPEAKING" | "LISTENING" }`
-- `{ "type": "response.audio.delta", "text": "..." }` (placeholder)
+- `session.created`
+- `transcript`
+- `state` (`THINKING` | `SPEAKING` | `LISTENING`)
+- `response.audio.delta` (text + base64 audio placeholder)
+
+## Swapping providers
+
+Edit the files under `providers/`. Each exports a single async function:
+
+- `stt.transcribe(audioBuffer)` → `{ text, isFinal }`
+- `llm.generate(messages)` → `{ text, tool_calls }`
+- `tts.synthesize(text)` → `{ audio, format, sampleRate }`
 
 ## Related
 
 - Cortex Pulse YouTube Monitor
-- Enterprise registry: `cortex-enterprise-registry.json`
+- Enterprise registry

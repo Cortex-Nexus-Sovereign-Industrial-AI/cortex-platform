@@ -1,7 +1,7 @@
 {
   "name": "cortex-realtime-voice",
-  "version": "0.1.1",
-  "description": "Minimal realtime voice skill skeleton for Cortex Intelligence Nexus",
+  "version": "0.1.2",
+  "description": "Realtime voice skill for Cortex Intelligence Nexus",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

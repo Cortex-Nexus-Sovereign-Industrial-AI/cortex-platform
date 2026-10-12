@@ -1,20 +1,24 @@
 /**
- * Cortex Realtime Voice – Minimal WebSocket Server Skeleton
- * Listens for audio frames, manages sessions, and echoes state.
- * Replace the placeholder STT / LLM / TTS sections with real providers.
+ * Cortex Realtime Voice – WebSocket Server (v0.1.2)
+ * Uses modular providers + session store + cascaded pipeline
  */
 
 const http = require('http');
 const { WebSocketServer } = require('ws');
-const { VoiceSession } = require('./session');
+const sessionStore = require('./session-store');
+const { runTurn } = require('./pipeline');
 
 const PORT = process.env.PORT || 8787;
-const sessions = new Map();
 
 const server = http.createServer((req, res) => {
   if (req.url === '/health') {
     res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({ status: 'ok', skill: 'cortex-realtime-voice', version: '0.1.1' }));
+    res.end(JSON.stringify({
+      status: 'ok',
+      skill: 'cortex-realtime-voice',
+      version: '0.1.2',
+      sessions: sessionStore.store.size
+    }));
     return;
   }
   res.writeHead(404);
@@ -24,35 +28,28 @@ const server = http.createServer((req, res) => {
 const wss = new WebSocketServer({ server });
 
 wss.on('connection', (ws, req) => {
-  const url = new URL(req.url, `http://${req.headers.host}`);
-  const sessionId = url.searchParams.get('session_id') || null;
-
-  let session = sessionId && sessions.get(sessionId);
-  if (!session) {
-    session = new VoiceSession(sessionId);
-    sessions.set(session.id, session);
-  }
+  const url = new URL(req.url || '/', `http://${req.headers.host}`);
+  const requestedId = url.searchParams.get('session_id');
+  const session = sessionStore.getOrCreate(requestedId);
 
   console.log(`[+] Session connected: ${session.id}`);
 
-  // Send initial state
-  ws.send(JSON.stringify({
-    type: 'session.created',
-    session: session.toJSON()
-  }));
+  const send = (obj) => {
+    if (ws.readyState === ws.OPEN) {
+      ws.send(JSON.stringify(obj));
+    }
+  };
+
+  send({ type: 'session.created', session: session.toJSON() });
+
+  // Collect audio chunks until commit
+  let audioChunks = [];
 
   ws.on('message', async (raw) => {
     try {
-      // Expect either binary audio or JSON control messages
       if (Buffer.isBuffer(raw) || raw instanceof ArrayBuffer) {
-        // === PLACEHOLDER: STT ===
-        // In production: stream this chunk to Deepgram / Whisper / etc.
-        // For now we just acknowledge receipt.
-        ws.send(JSON.stringify({
-          type: 'audio.received',
-          bytes: raw.byteLength || raw.length,
-          state: session.state
-        }));
+        audioChunks.push(Buffer.from(raw));
+        send({ type: 'audio.received', bytes: raw.byteLength || raw.length });
         return;
       }
 
@@ -60,61 +57,45 @@ wss.on('connection', (ws, req) => {
 
       switch (msg.type) {
         case 'input_audio_buffer.append':
-          // Client is sending audio (already handled above if binary)
+          // already handled via binary
           break;
 
-        case 'input_audio_buffer.commit':
-          // User finished speaking → move to THINKING
-          session.setState('THINKING');
-          ws.send(JSON.stringify({ type: 'state', state: 'THINKING' }));
+        case 'input_audio_buffer.commit': {
+          const fullAudio = Buffer.concat(audioChunks);
+          audioChunks = [];
 
-          // === PLACEHOLDER: LLM + TTS ===
-          // 1. Run STT on buffered audio
-          // 2. Call LLM with transcript + history
-          // 3. Stream TTS audio back
-          // For skeleton we simulate a short reply
-          setTimeout(() => {
-            session.setState('SPEAKING');
-            ws.send(JSON.stringify({
-              type: 'response.audio.delta',
-              // In real impl this would be binary audio frames
-              text: 'This is a placeholder response from Cortex Realtime Voice.',
-              state: 'SPEAKING'
-            }));
+          if (fullAudio.length === 0) {
+            send({ type: 'error', message: 'No audio received' });
+            return;
+          }
 
-            setTimeout(() => {
-              session.setState('LISTENING');
-              ws.send(JSON.stringify({ type: 'state', state: 'LISTENING' }));
-            }, 1500);
-          }, 400);
+          await runTurn(session, fullAudio, send);
           break;
+        }
 
         case 'response.cancel':
-          // Barge-in
           if (session.canBargeIn()) {
             session.setState('LISTENING');
-            ws.send(JSON.stringify({ type: 'state', state: 'LISTENING', reason: 'barge_in' }));
+            audioChunks = [];
+            send({ type: 'state', state: 'LISTENING', reason: 'barge_in' });
           }
           break;
 
         case 'session.update':
-          // Allow client to update config (voice, language, etc.)
-          ws.send(JSON.stringify({ type: 'session.updated', session: session.toJSON() }));
+          send({ type: 'session.updated', session: session.toJSON() });
           break;
 
         default:
-          ws.send(JSON.stringify({ type: 'error', message: `Unknown message type: ${msg.type}` }));
+          send({ type: 'error', message: `Unknown message type: ${msg.type}` });
       }
     } catch (err) {
       console.error('Message error:', err);
-      ws.send(JSON.stringify({ type: 'error', message: err.message }));
+      send({ type: 'error', message: err.message });
     }
   });
 
   ws.on('close', () => {
     console.log(`[-] Session closed: ${session.id}`);
-    // Optional: keep session for a short TTL instead of deleting immediately
-    // sessions.delete(session.id);
   });
 
   ws.on('error', (err) => {
@@ -123,6 +104,6 @@ wss.on('connection', (ws, req) => {
 });
 
 server.listen(PORT, () => {
-  console.log(`Cortex Realtime Voice skill listening on ws://localhost:${PORT}`);
-  console.log(`Health check: http://localhost:${PORT}/health`);
+  console.log(`Cortex Realtime Voice v0.1.2 listening on ws://localhost:${PORT}`);
+  console.log(`Health: http://localhost:${PORT}/health`);
 });
