@@ -1,7 +1,7 @@
 {
   "skill_id": "cortex-realtime-voice",
-  "version": "0.1.0",
-  "status": "skeleton",
+  "version": "0.1.1",
+  "status": "skeleton-runnable",
   "realtime": {
     "sample_rate": 24000,
     "channels": 1,
@@ -34,5 +34,9 @@
   "session": {
     "max_history_turns": 20,
     "system_prompt_path": "system-prompt.md"
+  },
+  "server": {
+    "port": 8787,
+    "path": "/"
   }
 }

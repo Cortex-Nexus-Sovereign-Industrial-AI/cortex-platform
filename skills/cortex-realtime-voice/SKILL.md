@@ -1,8 +1,8 @@
 # Cortex Realtime Voice Skill
 
 **ID:** `cortex-realtime-voice`  
-**Version:** `0.1.0`  
-**Status:** skeleton / implementation-ready  
+**Version:** `0.1.1`  
+**Status:** skeleton + runnable WebSocket server  
 **Owner:** Cortex Intelligence Nexus  
 **Division:** software-platform-enterprise-intelligence  
 
@@ -11,13 +11,23 @@
 Provide low-latency, full-duplex voice interaction for Cortex agents.  
 Supports streaming speech-to-text → reasoning → text-to-speech with barge-in capability.
 
-## Capabilities (v0.1)
+## Capabilities (v0.1.1)
 
-- Accept streaming audio input
-- Emit streaming audio output
-- Maintain conversation turn state (LISTENING → THINKING → SPEAKING)
+- Accept streaming audio input (binary frames)
+- Emit streaming audio / text output
+- Maintain conversation turn state (`LISTENING` → `THINKING` → `SPEAKING`)
 - Support interruption (barge-in)
 - Expose simple tool-calling interface for downstream Cortex skills
+- Runnable Node.js WebSocket skeleton (`server.js`)
+
+## Quick Start
+
+```bash
+cd skills/cortex-realtime-voice
+npm install
+npm start
+# → ws://localhost:8787
+```
 
 ## Inputs
 
