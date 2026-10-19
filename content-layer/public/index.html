@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cinis Nexus A18+ · Content Layer</title>
+  <style>
+    :root {
+      --bg: #05080c;
+      --card: #0c1219;
+      --border: #1a2733;
+      --accent: #00e5ff;
+      --accent2: #22c55e;
+      --text: #e8f0f5;
+      --muted: #7a8b9a;
+      --success: #22c55e;
+      --danger: #f43f5e;
+      --glow: 0 0 24px rgba(0, 229, 255, 0.25);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Inter", system-ui, -apple-system, sans-serif;
+      background: radial-gradient(ellipse at 30% 20%, #0a1620 0%, var(--bg) 55%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .shell {
+      width: 100%;
+      max-width: 460px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      margin-bottom: 1.25rem;
+      justify-content: center;
+    }
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #00e5ff 0%, #0ea5e9 50%, #22c55e 100%);
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 0.7rem;
+      color: #021018;
+      box-shadow: var(--glow);
+    }
+    .brand-text {
+      text-align: left;
+    }
+    .brand-text strong {
+      display: block;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+    }
+    .brand-text span {
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 1.75rem 1.5rem 1.5rem;
+      box-shadow: 0 30px 60px -20px rgb(0 0 0 / 0.7), inset 0 1px 0 rgba(255,255,255,0.03);
+      text-align: center;
+    }
+    h1 {
+      font-size: 1.15rem;
+      font-weight: 650;
+      margin-bottom: 0.35rem;
+      letter-spacing: -0.01em;
+    }
+    .subtitle {
+      color: var(--muted);
+      font-size: 0.8rem;
+      line-height: 1.45;
+      margin-bottom: 1.5rem;
+    }
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      justify-content: center;
+      margin-bottom: 1.35rem;
+    }
+    .badge {
+      font-size: 0.65rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      background: rgba(0,0,0,0.25);
+    }
+    .badge.accent { border-color: rgba(0,229,255,0.35); color: var(--accent); }
+    .badge.green { border-color: rgba(34,197,94,0.35); color: var(--accent2); }
+    #status {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+      min-height: 1.4em;
+    }
+    #status.connected { color: var(--success); }
+    #status.error { color: var(--danger); }
+    button {
+      appearance: none;
+      border: none;
+      border-radius: 12px;
+      padding: 0.9rem 1.4rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.15s, transform 0.1s, box-shadow 0.15s;
+    }
+    button:active { transform: scale(0.98); }
+    button:disabled { opacity: 0.45; cursor: not-allowed; }
+    #start {
+      background: linear-gradient(135deg, #00c4d8, #0ea5e9);
+      color: #021018;
+      width: 100%;
+      box-shadow: var(--glow);
+    }
+    #start:hover:not(:disabled) { box-shadow: 0 0 32px rgba(0, 229, 255, 0.4); }
+    #end {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      margin-top: 0.65rem;
+      width: 100%;
+      display: none;
+    }
+    #end.visible { display: block; }
+    .dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--muted);
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+    .dot.live {
+      background: var(--success);
+      box-shadow: 0 0 10px var(--success);
+      animation: pulse 1.6s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.55; }
+    }
+    .footer {
+      margin-top: 1.25rem;
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      text-align: center;
+    }
+    .footer span { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="brand">
+      <div class="brand-mark">A18+</div>
+      <div class="brand-text">
+        <strong>CINIS NEXUS</strong>
+        <span>Content Layer · Shadow-Vault</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h1>Professional Knowledge Session</h1>
+      <p class="subtitle">
+        Realtime voice interface for deep professional core knowledge,<br/>
+        content generating, and channel deployment pipelines.
+      </p>
+
+      <div class="badge-row">
+        <span class="badge accent">A18+ Core</span>
+        <span class="badge green">Platinum</span>
+        <span class="badge">API Pipelines</span>
+        <span class="badge">X-Connected Server</span>
+      </div>
+
+      <p id="status"><span class="dot" id="indicator"></span>Ready · Knowledge Priority ON</p>
+      <button id="start">Start Knowledge Session</button>
+      <button id="end">End Session</button>
+    </div>
+
+    <p class="footer">
+      By <span>Cortex HRbot</span> · Cinis Nexus Industry · Absolute Sovereignty
+    </p>
+  </div>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
