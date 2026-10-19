@@ -1,0 +1,27 @@
+{
+  "name": "cinis-nexus-content-layer",
+  "version": "1.0.0",
+  "description": "Cinis Nexus A18+ Sovereign Core — Professional Knowledge Content Layer & Realtime Voice Interface (Cortex HRbot). API-pipeline content generation, channel deployment, platinum learning platform under trusted x-connected server.",
+  "type": "module",
+  "main": "server.mjs",
+  "scripts": {
+    "start": "node server.mjs",
+    "dev": "node --watch server.mjs"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0"
+  },
+  "keywords": [
+    "cinis-nexus",
+    "a18-core",
+    "shadow-vault",
+    "cortex-hrbot",
+    "professional-knowledge",
+    "content-layer",
+    "realtime-voice",
+    "api-pipelines",
+    "channel-deployment"
+  ]
+}
