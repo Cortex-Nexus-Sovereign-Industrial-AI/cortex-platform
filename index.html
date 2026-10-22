@@ -1,309 +1,85 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Reveal human hidden potential through AI with electronics diagnosis, agro and trader automation, and structured AI content systems from Cortex Intelligence Nexus in Ogoja, Nigeria." />
-  <meta name="theme-color" content="#0b0f14" />
-  <title>Cortex Intelligence Nexus | Practical AI &amp; Technical Solutions</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: system-ui, -apple-system, sans-serif;
-      background: #0b0f14;
-      color: #cbd5e1;
-      line-height: 1.6;
-    }
-    a { color: #00C7B7; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-
-    nav {
-      position: fixed; top: 0; width: 100%;
-      background: rgba(11, 15, 20, 0.95);
-      border-bottom: 1px solid #1e293b;
-      z-index: 1000;
-      padding: 0.9rem 1.5rem;
-    }
-    nav .wrap {
-      max-width: 1100px; margin: 0 auto;
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    nav .logo { font-weight: 700; color: #f8fafc; font-size: 1.1rem; }
-    nav .logo span { color: #00C7B7; font-size: 0.75rem; margin-left: 0.4rem; }
-    nav ul { display: flex; gap: 1.4rem; list-style: none; flex-wrap: wrap; }
-    nav a { color: #94a3b8; font-size: 0.9rem; }
-    nav a:hover { color: #00C7B7; text-decoration: none; }
-
-    .hero {
-      margin-top: 64px;
-      padding: 5rem 1.5rem 4rem;
-      text-align: center;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .hero h1 {
-      font-size: clamp(1.9rem, 6vw, 2.8rem);
-      color: #f8fafc;
-      margin-bottom: 0.75rem;
-      font-weight: 800;
-    }
-    .hero .tagline {
-      color: #00C7B7;
-      font-size: 1.15rem;
-      margin-bottom: 1.25rem;
-      font-weight: 600;
-    }
-    .hero p { color: #94a3b8; margin-bottom: 0.5rem; }
-    .cta-row {
-      display: flex; gap: 0.9rem; justify-content: center; flex-wrap: wrap;
-      margin-top: 2rem;
-    }
-    .btn {
-      display: inline-block;
-      padding: 0.75rem 1.5rem;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 0.95rem;
-    }
-    .btn-primary { background: #00C7B7; color: #0b0f14; }
-    .btn-primary:hover { opacity: 0.9; text-decoration: none; }
-    .btn-outline {
-      border: 1px solid #00C7B7;
-      color: #00C7B7;
-    }
-    .btn-outline:hover { background: rgba(0,199,183,0.1); text-decoration: none; }
-
-    section {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 3.5rem 1.5rem;
-    }
-    .section-title {
-      font-size: 1.5rem;
-      color: #f8fafc;
-      margin-bottom: 0.5rem;
-      font-weight: 700;
-    }
-    .section-sub {
-      color: #64748b;
-      font-size: 0.95rem;
-      margin-bottom: 2rem;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.25rem;
-    }
-    .card {
-      background: #12181f;
-      border: 1px solid #1e293b;
-      border-radius: 12px;
-      padding: 1.4rem;
-    }
-    .card:hover { border-color: #334155; }
-    .card h3 {
-      color: #f8fafc;
-      font-size: 1.05rem;
-      margin-bottom: 0.4rem;
-    }
-    .card p { color: #94a3b8; font-size: 0.9rem; }
-
-    .channel-box {
-      background: #12181f;
-      border: 1px solid #25D366;
-      border-radius: 12px;
-      padding: 1.75rem;
-      text-align: center;
-    }
-    .channel-box h3 { color: #f8fafc; margin-bottom: 0.5rem; }
-    .btn-channel {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: 0.75rem 1.5rem;
-      background: #25D366;
-      color: #0b0f14;
-      font-weight: 700;
-      border-radius: 8px;
-    }
-    .btn-channel:hover { opacity: 0.9; text-decoration: none; }
-
-    .assistant-box {
-      background: #12181f;
-      border: 1px solid #1e293b;
-      border-radius: 12px;
-      padding: 1.75rem;
-      text-align: center;
-    }
-    .assistant-box h3 { color: #f8fafc; margin-bottom: 0.4rem; }
-
-    footer {
-      border-top: 1px solid #1e293b;
-      padding: 2.5rem 1.5rem;
-      text-align: center;
-      color: #64748b;
-      font-size: 0.9rem;
-    }
-    footer a { color: #94a3b8; }
-
-    @media (max-width: 640px) {
-      nav ul { gap: 0.8rem; font-size: 0.8rem; }
-      .cta-row { flex-direction: column; align-items: center; }
-      .btn { width: 100%; max-width: 280px; text-align: center; }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#050b1c">
+<meta name="description" content="Cortex Intelligence Nexus — a unified command interface for AI-assisted learning, property workflows, commerce, content, analytics and automation.">
+<title>Cortex Intelligence Nexus | Command OS</title>
+<style>
+:root{color-scheme:dark;--bg:#050916;--panel:#0a1428;--panel2:#0d1b33;--line:#19365d;--text:#edf6ff;--muted:#94abc9;--cyan:#38e6f5;--blue:#4b82ff;--violet:#a56bff;--green:#45e6ad;--amber:#ffc76b;--radius:20px;--shadow:0 20px 60px #0005}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 75% -10%,#12326b55,transparent 40%),radial-gradient(ellipse at 10% 45%,#33216b22,transparent 35%),var(--bg);color:var(--text);font:15px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{color:inherit;text-decoration:none}button,input{font:inherit}button,a,input{ -webkit-tap-highlight-color:transparent}a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}.shell{display:grid;grid-template-columns:252px minmax(0,1fr);min-height:100vh}.sidebar{position:sticky;top:0;height:100vh;overflow:auto;padding:22px 15px;border-right:1px solid #193052;background:#060d1cf2;display:flex;flex-direction:column;gap:22px}.brand{display:flex;align-items:center;gap:11px;padding:3px 8px 18px;border-bottom:1px solid #172b49}.brand-mark{width:42px;height:42px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(145deg,#152e67,#10152f);border:1px solid #427bff88;color:var(--cyan);font-size:22px;box-shadow:0 0 25px #266bff30}.brand strong{display:block;font-size:14px;letter-spacing:.08em}.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:.16em}.nav-label{margin:0 10px 8px;color:#647fa5;font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}.nav{display:grid;gap:5px}.nav a{display:flex;align-items:center;gap:12px;padding:10px 12px;border:1px solid transparent;border-radius:12px;color:#a8bad4;font-size:13px;transition:.2s}.nav a:hover,.nav a.active{background:linear-gradient(90deg,#17366c99,#10254a66);border-color:#2b5ca4;color:#fff}.nav .ico{width:24px;text-align:center;font-size:17px}.sidebar-foot{margin-top:auto;padding:15px;border:1px solid #1c3a60;border-radius:15px;background:linear-gradient(145deg,#0c1c39,#081124)}.pulse{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 12px #45e6ad;margin-right:7px}.sidebar-foot b{font-size:12px}.sidebar-foot p{margin:6px 0 0;color:var(--muted);font-size:11px}.main{min-width:0}.topbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:16px;padding:15px clamp(16px,3vw,34px);background:#050b1ce8;backdrop-filter:blur(18px);border-bottom:1px solid #193052}.mobile-brand{display:none;font-weight:800}.search{flex:1;max-width:620px;position:relative}.search input{width:100%;padding:12px 15px 12px 42px;border:1px solid #203e69;border-radius:13px;background:#0b1730;color:var(--text)}.search input::placeholder{color:#7289aa}.search-icon{position:absolute;left:14px;top:10px;color:var(--cyan)}.top-actions{margin-left:auto;display:flex;align-items:center;gap:10px}.top-link{border:1px solid #25456d;border-radius:11px;padding:9px 12px;color:#c3d4ed;font-size:12px}.profile{display:flex;align-items:center;gap:9px;color:#d8e6fa;font-size:12px}.avatar{width:32px;height:32px;display:grid;place-items:center;border-radius:50%;background:linear-gradient(135deg,#426dff,#9b5cff);font-weight:800}.content{max-width:1600px;margin:auto;padding:clamp(16px,3vw,34px);display:grid;gap:22px}.eyebrow{display:flex;align-items:center;gap:8px;color:var(--cyan);font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:800}.hero{position:relative;overflow:hidden;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(260px,.75fr);gap:22px;padding:clamp(24px,4vw,46px);border:1px solid #24538a;border-radius:26px;background:radial-gradient(ellipse at 83% 48%,#1b4fc955,transparent 38%),linear-gradient(125deg,#0b1b39,#071124 70%);box-shadow:var(--shadow)}.hero:after{content:"";position:absolute;width:320px;height:320px;border:1px solid #38e6f522;border-radius:50%;right:7%;top:8%;box-shadow:0 0 0 25px #38e6f508,0 0 0 55px #38e6f505;pointer-events:none}.hero-copy,.orbit{position:relative;z-index:1}.hero h1{margin:12px 0 10px;font-size:clamp(30px,4vw,52px);line-height:1.08;letter-spacing:-.045em}.gradient-text{background:linear-gradient(90deg,#fff 5%,#8deeff 58%,#a990ff);-webkit-background-clip:text;background-clip:text;color:transparent}.hero p{max-width:690px;color:#b1c5e1;margin:0}.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid #2c598a;border-radius:12px;padding:11px 16px;font-weight:750;font-size:12px;transition:transform .2s,border-color .2s}.btn:hover{transform:translateY(-2px);border-color:var(--cyan)}.btn-primary{background:linear-gradient(100deg,#1ca9e8,#4d76ff);border-color:transparent;color:#fff;box-shadow:0 9px 24px #257eff25}.btn-secondary{background:#0b1a32;color:#d8e8ff}.hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:25px}.tag{padding:7px 10px;border:1px solid #25466f;border-radius:9px;background:#09152a;color:#afc8e7;font-size:10px}.orbit{min-height:230px;display:grid;place-items:center}.core{width:164px;height:164px;display:grid;place-items:center;text-align:center;border-radius:50%;border:1px solid #3ddcf6aa;background:radial-gradient(circle,#153e7c 0,#0b1d42 52%,#081126 72%);box-shadow:0 0 35px #1e9dff55,inset 0 0 25px #4d72ff33;position:relative}.core:before,.core:after{content:"";position:absolute;inset:-18px;border:1px solid #31dff766;border-radius:50%;transform:rotateX(66deg) rotate(25deg)}.core:after{inset:-31px;border-color:#8d68ff77;transform:rotateX(68deg) rotate(-35deg)}.core span{font-size:38px;display:block}.core b{font-size:12px;letter-spacing:.14em}.orbit-node{position:absolute;z-index:2;padding:8px 11px;border:1px solid #3672a9;border-radius:10px;background:#091832eF;font-size:10px;color:#d7f5ff;box-shadow:0 5px 22px #0005}.n1{top:10%;left:6%}.n2{top:12%;right:3%}.n3{bottom:14%;left:1%}.n4{bottom:8%;right:7%}.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px}.section-head h2{margin:0;font-size:19px;letter-spacing:-.02em}.section-head p{margin:3px 0 0;color:var(--muted);font-size:12px}.text-link{color:var(--cyan);font-size:12px;font-weight:700}.quick-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.quick{min-height:115px;padding:17px;border:1px solid #1e3c64;border-radius:16px;background:linear-gradient(145deg,#0d1c36,#081326);transition:.2s}.quick:hover{transform:translateY(-3px);border-color:#3a7ac4;box-shadow:0 12px 30px #0003}.quick .qico{font-size:23px}.quick h3{margin:9px 0 2px;font-size:13px}.quick p{margin:0;color:var(--muted);font-size:11px}.module-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.module{display:flex;gap:14px;padding:18px;border:1px solid #1b3558;border-radius:17px;background:#09152a;min-width:0;transition:.2s}.module:hover{border-color:#3875b8;background:#0c1b34}.module-icon{flex:0 0 43px;height:43px;display:grid;place-items:center;border-radius:13px;background:#122b51;border:1px solid #2b5788;font-size:21px}.module h3{margin:1px 0 4px;font-size:13px}.module p{margin:0;color:var(--muted);font-size:11px}.module .status{display:inline-block;margin-top:9px;color:#8aa7ca;font-size:10px}.status:before{content:"";display:inline-block;width:5px;height:5px;margin:0 6px 1px 0;border-radius:50%;background:#7094c2}.status.ready:before{background:var(--green)}.lower-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}.panel{padding:20px;border:1px solid #1b3558;border-radius:18px;background:linear-gradient(145deg,#0b1830,#081225)}.panel h2{margin:0;font-size:16px}.panel .sub{margin:4px 0 16px;color:var(--muted);font-size:11px}.property-preview{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:center}.property-art{min-height:150px;border-radius:13px;border:1px solid #284d7d;background:linear-gradient(135deg,#163f66,#102344 55%,#1e2851);display:grid;place-items:center;text-align:center;padding:15px}.property-art .building{font-size:45px;filter:drop-shadow(0 8px 15px #0006)}.property-art strong{display:block;margin-top:8px;font-size:12px}.property-art small{color:#a8c4e6;font-size:10px}.property-copy p{color:var(--muted);font-size:12px}.property-copy .btn{margin-top:5px}.mini-list{display:grid;gap:9px}.mini-row{display:flex;align-items:center;gap:10px;padding:10px;border:1px solid #193556;border-radius:11px;background:#0a1830}.mini-row .mi{font-size:17px}.mini-row b{display:block;font-size:11px}.mini-row small{display:block;color:var(--muted);font-size:10px}.callout{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 22px;border:1px solid #2d4c8b;border-radius:18px;background:linear-gradient(100deg,#10234a,#111839 70%,#1b1741)}.callout h2{margin:0;font-size:17px}.callout p{margin:4px 0 0;color:#a7bcdb;font-size:12px}.footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding:18px 4px 6px;border-top:1px solid #182d4c;color:#7f96b7;font-size:10px}.footer a{color:#a8c3e7}.empty{padding:22px;text-align:center;color:var(--muted);border:1px dashed #2a4a70;border-radius:14px;grid-column:1/-1}.hidden{display:none!important}
+@media(max-width:1100px){.shell{grid-template-columns:215px minmax(0,1fr)}.quick-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.module-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{grid-template-columns:1fr}.orbit{min-height:210px}.hero:after{right:10%;top:45%}}
+@media(max-width:760px){.shell{display:block}.sidebar{position:fixed;z-index:40;left:0;top:0;width:min(290px,86vw);transform:translateX(-105%);transition:transform .25s;height:100dvh;box-shadow:var(--shadow)}body.menu-open .sidebar{transform:translateX(0)}.mobile-brand{display:block}.topbar{gap:10px;padding:12px 14px}.profile span:last-child{display:none}.top-link{display:none}.content{padding:15px;gap:17px}.hero{padding:24px 20px;border-radius:20px}.hero h1{font-size:34px}.orbit{min-height:195px}.core{width:130px;height:130px}.orbit-node{font-size:9px;padding:7px}.module-grid{grid-template-columns:1fr}.lower-grid{grid-template-columns:1fr}.property-preview{grid-template-columns:1fr}.property-art{min-height:120px}.callout{align-items:flex-start;flex-direction:column}.section-head h2{font-size:17px}}
+@media(max-width:420px){.search input{padding:11px 10px 11px 34px;font-size:12px}.search-icon{left:11px}.hero h1{font-size:29px}.quick-grid{gap:8px}.quick{padding:13px;min-height:105px}.hero-actions .btn{width:100%}.hero-tags{gap:6px}.tag{font-size:9px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+</style>
 </head>
 <body>
-
-  <nav>
-    <div class="wrap">
-      <div class="logo">Cortex Intelligence Nexus <span>CINIS</span></div>
-      <ul>
-        <li><a href="#system">System</a></li>
-        <li><a href="#offers">Offers</a></li>
-        <li><a href="learning-lab.html">Learning Lab</a></li>
-        <li><a href="content-engine.html">Content Engine</a></li>
-        <li><a href="operations-data.html">Operations</a></li>
-        <li><a href="commerce-delivery.html">Commerce</a></li>
-        <li><a href="network-expansion.html">Network</a></li>
-        <li><a href="governance.html">Governance</a></li>
-        <li><a href="darktronix.html">DARKTRONIX Lab</a></li>
-        <li><a href="#channel">Channel</a></li>
-        <li><a href="offers.html">Book</a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <header class="hero">
-    <h1>Cortex Intelligence Nexus</h1>
-    <p class="tagline">Reveal human hidden potential through AI.</p>
-    <p>Practical AI systems and technical solutions that turn ideas, problems, and everyday work into measurable progress.</p>
-    <p>Electronics &amp; appliance diagnosis · Agro / trader automation · 30-day AI content systems</p>
-    <p>Verified business · Ogoja, Cross River State · Practical, delivery-focused service</p>
-    <div class="cta-row">
-      <a href="offers.html" class="btn btn-primary">Explore Services &amp; Book Now</a>
-      <a href="https://wa.me/2349010251577?text=Hello%20Cortex%20Intelligence%20Nexus%2C%20I%20want%20to%20discuss%20a%20service." class="btn btn-outline">Discuss Your Project</a>
-      <a href="https://whatsapp.com/channel/0029VbDEbGX60eBkg6WqCG0N" class="btn btn-outline">Follow Updates</a>
-    </div>
-  </header>
-
-  <section id="system">
-    <h2 class="section-title">System Map</h2>
-    <p class="section-sub">Current operating layers</p>
-    <div class="grid">
-      <div class="card">
-        <h3>Public Face</h3>
-        <p>WhatsApp Channel, website, and Google Business. Calm and professional presence.</p>
-      </div>
-      <div class="card">
-        <h3>Trigger &amp; Automation</h3>
-        <p>HTML bridge → webhook router → processing core. Built for free-tier operation.</p>
-      </div>
-      <div class="card">
-        <h3>Knowledge Layer</h3>
-        <p>Structured video and documentation modules for real capability, not casual viewing.</p>
-      </div>
-      <div class="card">
-        <h3>Human Boundary</h3>
-        <p>Automation handles routine work. Human confirms financial and high-stakes actions.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="offers">
-    <h2 class="section-title">Current Offers</h2>
-    <p class="section-sub">Choose a practical next step. Clear scope, direct communication, and agreed delivery.</p>
-    <div class="grid">
-      <div class="card">
-        <h3>Electronics &amp; Appliance Repair</h3>
-        <p>Diagnosis fee first (₦2,000–₦5,000). Full price agreed before work continues.</p>
-      </div>
-      <div class="card">
-        <h3>Agro / Trader Automations</h3>
-        <p>Working systems from ₦15,000. WhatsApp alerts, tracking, simple monitoring.</p>
-      </div>
-      <div class="card">
-        <h3>30-Day AI Content System</h3>
-        <p>Structured deliverable — ₦22,000 via Paystack.</p>
-      </div>
-    </div>
-    <div style="text-align:center; margin-top:1.75rem;">
-      <a href="offers.html" class="btn btn-primary">Compare Services &amp; Book →</a>
-    </div>
-  </section>
-
-  <section id="content-engine">
-    <div class="assistant-box">
-      <h3>Content &amp; Education Engine</h3>
-      <p>Structured lessons, demonstrations, technical reasoning and practical knowledge — built to teach first and create professional value responsibly.</p>
-      <p style="margin-top:1rem;"><a href="content-engine.html" class="btn btn-primary">Open Content Engine →</a></p>
-    </div>
-  </section>
-
-  <section id="knowledge">
-    <h2 class="section-title">Knowledge</h2>
-    <p class="section-sub">Structured modules (expanding)</p>
-    <div class="grid">
-      <div class="card">
-        <h3>Neural Network Learning Lab</h3>
-        <p>Hands-on path to feel how models learn — foundations, backprop, tiny nets, deploy.</p>
-        <p style="margin-top:0.75rem"><a href="learning-lab.html">Enter the Lab →</a></p>
-      </div>
-      <div class="card">
-        <h3>Documentation</h3>
-        <p>Master System Map and operational references live in the command repository.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="darktronix">
-    <div class="assistant-box">
-      <h3>DARKTRONIX 9V LABS — Technical Education &amp; Practical Skills</h3>
-      <p>Learn the reasoning behind electronics, diagnostics, demonstrations and practical technical problem-solving. The physical lab is the origin of the experience; education and professional coaching are the public direction.</p>
-      <p style="margin-top:1rem;"><a href="darktronix.html" class="btn btn-primary">Enter DARKTRONIX Learning Lab →</a></p>
-    </div>
-  </section>
-
-  <section id="channel">
-    <div class="channel-box">
-      <h3>Official WhatsApp Channel</h3>
-      <p>Practical skills, real experience, and clear updates. No noise.</p>
-      <a href="https://whatsapp.com/channel/0029VbDEbGX60eBkg6WqCG0N" class="btn-channel">Follow the Channel →</a>
-    </div>
-  </section>
-
-  <section>
-    <div class="assistant-box">
-      <h3>Book or partner</h3>
-      <p>Repair jobs, automation builds, and digital systems. Payment before or on delivery.</p>
-      <p style="margin-top:0.75rem; font-size:0.9rem; color:#64748b;">
-        WhatsApp 0901 025 1577 · cortexnexus@proton.me · <a href="https://maps.google.com/maps?cid=2073161413550473641">Google Business</a>
-      </p>
-    </div>
-  </section>
-
-  <footer>
-    <p><strong>Cortex Intelligence Nexus</strong> · Ogoja, Cross River State</p>
-    <p style="margin-top:0.5rem;">
-      <a href="offers.html">Offers</a> ·
-      <a href="learning-lab.html">Learning Lab</a> ·
-      <a href="identity.html">Identity</a> ·
-      <a href="https://wa.me/2349010251577">WhatsApp</a> ·
-      <a href="https://whatsapp.com/channel/0029VbDEbGX60eBkg6WqCG0N">Channel</a> ·
-      <a href="https://maps.google.com/maps?cid=2073161413550473641">Google Business</a> ·
-      <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform">Repository</a>
-    </p>
-    <p style="margin-top:1rem;">© 2026 Cortex Intelligence Nexus · Reveal potential. Build practical systems.</p>
-  </footer>
-
-
-<style id="cinis-giftvault-launcher-style">
-.cinis-giftvault-launcher{position:fixed;right:18px;bottom:18px;z-index:9998;display:inline-flex;align-items:center;gap:9px;padding:12px 15px;border:1px solid #64e6ff55;border-radius:13px;background:#0b1728;color:#eaf7ff;font:700 12px Inter,system-ui,sans-serif;box-shadow:0 12px 32px #0006;text-decoration:none}
-.cinis-giftvault-launcher span{color:#64e6ff;font-size:16px}
-.cinis-giftvault-launcher:hover{border-color:#64e6ff;transform:translateY(-1px)}
-</style>
-<a class="cinis-giftvault-launcher" href="giftvault/" aria-label="Open GiftVault and Ad Auto-Runner">GiftVault &amp; Ad Auto-Runner <span aria-hidden="true">↗</span></a>
+<div class="shell">
+<aside class="sidebar" id="sidebar" aria-label="Main navigation">
+<a class="brand" href="#home"><span class="brand-mark">⌘</span><span><strong>CORTEX</strong><small>INTELLIGENCE NEXUS</small></span></a>
+<div><p class="nav-label">Command</p><nav class="nav">
+<a class="active" href="#home"><span class="ico">⌂</span>Home Navigator</a>
+<a href="#agents"><span class="ico">✺</span>AI Orchestration</a>
+<a href="#properties"><span class="ico">⌂</span>Property & Assets</a>
+<a href="commerce-delivery.html"><span class="ico">▣</span>Commerce & Store</a>
+<a href="content-engine.html"><span class="ico">◈</span>Marketing & Content</a>
+<a href="learning-lab.html"><span class="ico">✧</span>Learning & Education</a>
+<a href="operations-data.html"><span class="ico">⌁</span>Analytics & Insights</a>
+<a href="#automation"><span class="ico">⟳</span>Automation</a>
+<a href="offers.html"><span class="ico">＄</span>Offers & Payments</a>
+<a href="network-expansion.html"><span class="ico">◎</span>Network & Community</a>
+<a href="governance.html"><span class="ico">⬡</span>Governance & Security</a>
+</nav></div>
+<div class="sidebar-foot"><b><span class="pulse"></span>Command interface ready</b><p>Navigation is available. External services and agent execution depend on their configured integrations.</p></div>
+</aside>
+<main class="main" id="home">
+<header class="topbar">
+<button class="top-link" id="menuToggle" aria-label="Open navigation" aria-expanded="false">☰</button>
+<span class="mobile-brand">CORTEX <span style="color:var(--cyan)">/ OS</span></span>
+<form class="search" id="searchForm" role="search"><span class="search-icon">⌕</span><input id="appSearch" type="search" placeholder="Find a module, tool, or workflow…" aria-label="Search modules"><button type="submit" class="hidden">Search</button></form>
+<div class="top-actions"><a class="top-link" href="identity.html">Identity & profile ↗</a><div class="profile"><span class="avatar">C</span><span>CINIS Workspace</span></div></div>
+</header>
+<div class="content">
+<section class="hero" aria-labelledby="hero-title">
+<div class="hero-copy"><div class="eyebrow"><span class="pulse"></span> Unified AI command environment</div><h1 id="hero-title"><span class="gradient-text">One Nexus.</span><br>Many capabilities. One system.</h1><p>A coherent home navigator for learning, property workflows, commerce, content, analytics and automation—designed to help you move from intent to the right workspace without losing the bigger picture.</p>
+<div class="hero-actions"><a class="btn btn-primary" href="#modules">Explore workspaces <span>→</span></a><a class="btn btn-secondary" href="offers.html">Services & opportunities ↗</a></div>
+<div class="hero-tags"><span class="tag">◈ Modular navigation</span><span class="tag">⌘ Human-governed actions</span><span class="tag">▣ Mobile-first interface</span></div></div>
+<div class="orbit" aria-label="Conceptual Cortex orchestration diagram"><span class="orbit-node n1">LEARN</span><span class="orbit-node n2">BUILD</span><span class="orbit-node n3">ANALYZE</span><span class="orbit-node n4">AUTOMATE</span><div class="core"><div><span>⌘</span><b>CORTEX</b></div></div></div>
+</section>
+<section id="quick-access"><div class="section-head"><div><h2>Quick launch</h2><p>Go straight to a core workspace.</p></div><a class="text-link" href="#modules">All workspaces ↓</a></div><div class="quick-grid" style="margin-top:13px">
+<a class="quick" href="#agents" data-searchable="ai agents orchestration"><span class="qico">✺</span><h3>AI Orchestration</h3><p>Agent workflows & coordination</p></a>
+<a class="quick" href="#properties" data-searchable="property homes assets tenants"><span class="qico">⌂</span><h3>Property & Assets</h3><p>Property workflow entry point</p></a>
+<a class="quick" href="commerce-delivery.html" data-searchable="store commerce orders products"><span class="qico">▣</span><h3>Commerce</h3><p>Products & delivery systems</p></a>
+<a class="quick" href="content-engine.html" data-searchable="marketing content social publishing"><span class="qico">◈</span><h3>Content Studio</h3><p>Content & campaign workspace</p></a>
+</div></section>
+<section id="modules"><div class="section-head"><div><h2>Application navigator</h2><p>Each workspace has its own route and clear purpose.</p></div><span class="text-link" id="resultCount" aria-live="polite">11 workspaces</span></div>
+<div class="module-grid" id="moduleGrid" style="margin-top:13px">
+<a class="module" href="#agents" data-searchable="ai agents orchestrator automation coordination"><span class="module-icon">✺</span><span><h3>AI Orchestration</h3><p>Organize agent roles, handoffs, approvals and task visibility.</p><span class="status">Workspace entry</span></span></a>
+<a class="module" href="#properties" data-searchable="property management real estate homes tenants maintenance"><span class="module-icon">⌂</span><span><h3>Property & Asset Management</h3><p>A dedicated entry point for property records, occupancy, maintenance and rent workflows.</p><span class="status">Foundation view</span></span></a>
+<a class="module" href="commerce-delivery.html" data-searchable="commerce store products orders delivery"><span class="module-icon">▣</span><span><h3>Commerce & Delivery</h3><p>Explore product, store and fulfillment workflows.</p><span class="status ready">Open module</span></span></a>
+<a class="module" href="content-engine.html" data-searchable="content engine marketing social publishing"><span class="module-icon">◈</span><span><h3>Marketing & Content</h3><p>Plan content, shape campaigns and organize publishing work.</p><span class="status ready">Open module</span></span></a>
+<a class="module" href="learning-lab.html" data-searchable="learning education courses neural networks"><span class="module-icon">✧</span><span><h3>Learning & Education</h3><p>Structured lessons, technical demonstrations and AI learning.</p><span class="status ready">Open module</span></span></a>
+<a class="module" href="operations-data.html" data-searchable="analytics insights operations data"><span class="module-icon">⌁</span><span><h3>Analytics & Operations</h3><p>Access operations and data-focused resources.</p><span class="status ready">Open module</span></span></a>
+<a class="module" href="#automation" data-searchable="automation workflows integrations"><span class="module-icon">⟳</span><span><h3>Automation Workflows</h3><p>Map repetitive tasks, integrations and human approval points.</p><span class="status">Workspace entry</span></span></a>
+<a class="module" href="offers.html" data-searchable="offers services payments bookings revenue"><span class="module-icon">＄</span><span><h3>Services & Opportunities</h3><p>Review available services and start a direct inquiry.</p><span class="status ready">Open offers</span></span></a>
+<a class="module" href="network-expansion.html" data-searchable="network community global expansion"><span class="module-icon">◎</span><span><h3>Network & Community</h3><p>Explore network and community development resources.</p><span class="status ready">Open module</span></span></a>
+<a class="module" href="governance.html" data-searchable="governance security privacy access"><span class="module-icon">⬡</span><span><h3>Governance & Security</h3><p>Find governance references and security-oriented workflows.</p><span class="status ready">Open module</span></span></a>
+<a class="module" href="darktronix.html" data-searchable="darktronix electronics technical lab"><span class="module-icon">⌁</span><span><h3>DARKTRONIX Learning Lab</h3><p>Technical education, diagnostic reasoning and practical skills.</p><span class="status ready">Open module</span></span></a>
+<a class="module" href="identity.html" data-searchable="identity profile business brand"><span class="module-icon">◉</span><span><h3>Identity & Governance</h3><p>Business identity and platform reference information.</p><span class="status ready">Open module</span></span></a>
+</div><div id="emptyState" class="empty hidden">No matching workspaces. Try another search term.</div>
+</section>
+<div class="lower-grid">
+<section class="panel" id="properties"><h2>Property & Asset Navigator</h2><p class="sub">A clear starting point for property-related work.</p><div class="property-preview"><div class="property-art"><div><div class="building">⌂</div><strong>Property workspace</strong><small>Real estate · Assets · Maintenance</small></div></div><div class="property-copy"><p>Use this entry point to scope property listings, tenant records, maintenance requests and rent tracking. Live records and transactions must be connected before operational data can appear here.</p><a class="btn btn-primary" href="https://wa.me/2349010251577?text=Hello%20Cortex%2C%20I%20want%20to%20discuss%20a%20property%20management%20workflow.">Discuss a property workflow ↗</a></div></div></section>
+<section class="panel" id="agents"><h2>Autonomous orchestration</h2><p class="sub">A governed pattern for coordinated AI work.</p><div class="mini-list"><div class="mini-row"><span class="mi">⌕</span><span><b>Research & planning</b><small>Gather context and propose the next action.</small></span></div><div class="mini-row"><span class="mi">✧</span><span><b>Build & validate</b><small>Prepare changes, then test before release.</small></span></div><div class="mini-row"><span class="mi">⬡</span><span><b>Human approval gates</b><small>Keep financial, destructive and sensitive actions controlled.</small></span></div></div></section>
+</div>
+<section class="panel" id="automation"><div class="section-head"><div><h2>Automation control principles</h2><p class="sub" style="margin-bottom:0">Designed for traceable, safer execution—not simulated live status.</p></div></div><div class="quick-grid" style="margin-top:15px"><div class="quick"><span class="qico">①</span><h3>Plan</h3><p>Define the goal, scope and success criteria.</p></div><div class="quick"><span class="qico">②</span><h3>Execute</h3><p>Run only against configured tools and permissions.</p></div><div class="quick"><span class="qico">③</span><h3>Verify</h3><p>Check outputs, links, errors and deployment state.</p></div><div class="quick"><span class="qico">④</span><h3>Approve</h3><p>Require confirmation for consequential actions.</p></div></div></section>
+<div class="callout"><div><h2>Build practical systems. Keep the whole picture visible.</h2><p>Start with a service, learning module or a defined automation problem.</p></div><a class="btn btn-primary" href="offers.html">Explore services →</a></div>
+<footer class="footer"><span>© 2026 Cortex Intelligence Nexus · CINIS</span><span>Ogoja, Cross River State, Nigeria</span><span><a href="https://maps.google.com/maps?cid=2073161413550473641">Google Business</a> · <a href="https://github.com/Cortex-Nexus-Sovereign-Industrial-AI/cortex-platform">Source repository</a></span></footer>
+</div></main></div>
+<script>
+(()=>{const body=document.body;const menu=document.getElementById('menuToggle');const search=document.getElementById('appSearch');const form=document.getElementById('searchForm');const cards=[...document.querySelectorAll('[data-searchable]')];const modules=[...document.querySelectorAll('#moduleGrid .module')];const count=document.getElementById('resultCount');const empty=document.getElementById('emptyState');function filter(){const q=search.value.trim().toLowerCase();let shown=0;cards.forEach(el=>{const match=!q||(el.dataset.searchable+' '+el.innerText).toLowerCase().includes(q);el.classList.toggle('hidden',!match);if(match&&el.classList.contains('module'))shown++});count.textContent=q?shown+' matching workspaces':modules.length+' workspaces';empty.classList.toggle('hidden',shown!==0)}search.addEventListener('input',filter);form.addEventListener('submit',e=>{e.preventDefault();filter();document.getElementById('modules').scrollIntoView({behavior:'smooth'})});menu.addEventListener('click',()=>{const open=body.classList.toggle('menu-open');menu.setAttribute('aria-expanded',String(open));menu.setAttribute('aria-label',open?'Close navigation':'Open navigation')});document.querySelectorAll('.sidebar a').forEach(a=>a.addEventListener('click',()=>{body.classList.remove('menu-open');menu.setAttribute('aria-expanded','false')}));document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();search.focus()}if(e.key==='Escape'){body.classList.remove('menu-open');menu.setAttribute('aria-expanded','false')}});})();
+</script>
 </body>
 </html>
