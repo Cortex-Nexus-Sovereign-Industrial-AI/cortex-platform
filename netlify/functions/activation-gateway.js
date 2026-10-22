@@ -8,7 +8,21 @@ import * as sessionService from './lib/session-service.js';
 import * as youtubeService from './lib/youtube-service.js';
 import * as educationService from './lib/education-service.js';
 import { errorHandler } from './lib/error-handler.js';
-import welcomeDashboard from './views/welcome-dashboard.html';
+import { readFileSync } from 'fs';
+import { join } from 'path';
+
+// HTML can't be imported as a module by the bundler; read it from disk instead.
+// The file is shipped with the function via `included_files` in netlify.toml.
+let welcomeDashboardCache;
+function loadWelcomeDashboard() {
+  if (!welcomeDashboardCache) {
+    welcomeDashboardCache = readFileSync(
+      join(process.cwd(), 'netlify/functions/views/welcome-dashboard.html'),
+      'utf8'
+    );
+  }
+  return welcomeDashboardCache;
+}
 
 export const handler = async (event, context) => {
   try {
@@ -73,7 +87,7 @@ export const handler = async (event, context) => {
     }
 
     // 6. Render welcome dashboard with video content
-    let html = welcomeDashboard
+    let html = loadWelcomeDashboard()
       .replace('{{ACTIVATION_CODE}}', code)
       .replace('{{SESSION_ID}}', sessionId)
       .replace('{{CAMPAIGN}}', activationRecord.campaign_id || 'CINIS')
