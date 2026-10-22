@@ -7,7 +7,7 @@
  *
  * Env: OPENAI_API_KEY (required)
  */
-const crypto = require("crypto");
+import crypto from "crypto";
 
 const CORS = {
   "Access-Control-Allow-Origin": "*",
@@ -45,19 +45,18 @@ function hashUserId(id) {
   return crypto.createHash("sha256").update(String(id || "anonymous")).digest("hex");
 }
 
-function json(statusCode, body) {
-  return {
-    statusCode,
+function json(status, body) {
+  return new Response(JSON.stringify(body), {
+    status,
     headers: { ...CORS, "Content-Type": "application/json" },
-    body: JSON.stringify(body),
-  };
+  });
 }
 
-exports.handler = async (event) => {
-  if (event.httpMethod === "OPTIONS") {
-    return { statusCode: 200, headers: CORS, body: "" };
+export default async (req) => {
+  if (req.method === "OPTIONS") {
+    return new Response("", { status: 200, headers: CORS });
   }
-  if (event.httpMethod !== "POST") {
+  if (req.method !== "POST") {
     return json(405, { error: "Method not allowed" });
   }
 
@@ -70,8 +69,9 @@ exports.handler = async (event) => {
   // Replace with real auth when ready. Must yield a stable user id for safety hashing.
   let userId = "anon";
   try {
-    if (event.body) {
-      const parsed = JSON.parse(event.body);
+    const raw = await req.text();
+    if (raw) {
+      const parsed = JSON.parse(raw);
       if (parsed && parsed.userId) userId = String(parsed.userId).slice(0, 128);
     }
   } catch (_)
