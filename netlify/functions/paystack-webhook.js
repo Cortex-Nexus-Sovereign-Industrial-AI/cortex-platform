@@ -1,34 +1,22 @@
 /**
- * CINIS NEXUS — Paystack Webhook (Netlify Function)
- * Idempotent: same event+reference returns 200 without re-side-effects on warm isolates.
- * Durable store = Express API when API_BASE_URL is set.
+ * Cortex Intelligence Nexus — Paystack webhook ingress.
  *
- * URL: https://cortex-platforms.netlify.app/.netlify/functions/paystack-webhook
- * Env: PAYSTACK_SECRET_KEY (test or live — switch via Netlify env only)
- * Optional: API_BASE_URL to forward charge.success for durable access grants
+ * This function verifies Paystack's signature, validates the primary fixed offer,
+ * and forwards verified events to the durable API. It does not itself grant access.
  *
- * Live key switch: only after Director reminder — see docs/commerce/LIVE_KEY_SWITCH.md
+ * Primary offer: 30-Day AI Content System — NGN 22,000 (2,200,000 kobo).
+ * Secrets are configured only in Netlify environment settings.
  */
-
 const crypto = require('crypto');
 
 const seen = global.__paystackSeen || (global.__paystackSeen = new Map());
 const SEEN_TTL_MS = 24 * 60 * 60 * 1000;
-
-function pruneSeen() {
-  const now = Date.now();
-  for (const [k, t] of seen.entries()) {
-    if (now - t > SEEN_TTL_MS) seen.delete(k);
-  }
-}
+const PRIMARY_OFFER_AMOUNT_KOBO = 2200000;
+const PRIMARY_OFFER_CURRENCY = 'NGN';
 
 exports.handler = async function (event) {
-  if (event.httpMethod === 'OPTIONS') {
-    return { statusCode: 204, headers: corsHeaders(), body: '' };
-  }
-  if (event.httpMethod !== 'POST') {
-    return json(405, { error: 'Method not allowed' });
-  }
+  if (event.httpMethod === 'OPTIONS') return { statusCode: 204, headers: corsHeaders(), body: '' };
+  if (event.httpMethod !== 'POST') return json(405, { error: 'Method not allowed' });
 
   const secret = process.env.PAYSTACK_SECRET_KEY;
   if (!secret) {
@@ -36,15 +24,9 @@ exports.handler = async function (event) {
     return json(500, { error: 'Server misconfigured' });
   }
 
-  const keyMode = String(secret).startsWith('sk_live_') ? 'live' : 'test';
-
-  const raw =
-    event.isBase64Encoded && event.body
-      ? Buffer.from(event.body, 'base64').toString('utf8')
-      : typeof event.body === 'string'
-        ? event.body
-        : JSON.stringify(event.body || {});
-
+  const raw = event.isBase64Encoded && event.body
+    ? Buffer.from(event.body, 'base64').toString('utf8')
+    : typeof event.body === 'string' ? event.body : JSON.stringify(event.body || {});
   const headers = normalizeHeaders(event.headers || {});
   const signature = headers['x-paystack-signature'] || '';
   const expected = crypto.createHmac('sha512', secret).update(raw).digest('hex');
@@ -55,109 +37,95 @@ exports.handler = async function (event) {
   }
 
   let payload;
-  try {
-    payload = JSON.parse(raw);
-  } catch {
-    return json(400, { error: 'Invalid JSON' });
-  }
+  try { payload = JSON.parse(raw); }
+  catch { return json(400, { error: 'Invalid JSON' }); }
 
   const eventName = payload.event || 'unknown';
   const data = payload.data || {};
-  const reference = data.reference || null;
-  const email = (data.customer && data.customer.email) || null;
-  const amountNgn = typeof data.amount === 'number' ? data.amount / 100 : null;
-  const idemKey = reference ? `${eventName}::${reference}` : null;
+  const reference = typeof data.reference === 'string' ? data.reference : null;
+  const keyMode = secret.startsWith('sk_live_') ? 'live' : 'test';
+
+  // Non-success events do not trigger paid fulfilment.
+  if (eventName !== 'charge.success') {
+    console.log('[paystack-webhook] verified non-success event', { event: eventName, reference, keyMode });
+    return json(200, { received: true, event: eventName, reference, keyMode, fulfilment: 'not_applicable' });
+  }
+
+  // Validate before any dedupe or backend side effect. Do not silently fulfil
+  // a different product, amount, or currency through the primary-offer path.
+  if (data.status !== 'success' || !reference) {
+    console.warn('[paystack-webhook] charge.success payload missing success status/reference', { reference });
+    return json(400, { error: 'Invalid successful charge payload' });
+  }
+  if (data.amount !== PRIMARY_OFFER_AMOUNT_KOBO || data.currency !== PRIMARY_OFFER_CURRENCY) {
+    console.error('[paystack-webhook] payment requires manual reconciliation', {
+      reference, amount: data.amount, currency: data.currency, keyMode
+    });
+    // Acknowledge receipt to avoid endless retries, but explicitly do not forward
+    // this unmatched payment into the primary offer's fulfilment path.
+    return json(200, {
+      received: true, event: eventName, reference, keyMode,
+      fulfilment: 'blocked_amount_or_currency_mismatch',
+      manualReviewRequired: true
+    });
+  }
 
   pruneSeen();
-  if (idemKey && seen.has(idemKey)) {
-    console.log('[paystack-webhook] idempotent warm-skip', idemKey);
-    return json(200, {
-      received: true,
-      idempotent: true,
-      event: eventName,
-      reference,
-      keyMode,
-      message: 'Already handled on this isolate'
-    });
+  const idemKey = `${eventName}::${reference}`;
+  if (seen.has(idemKey)) {
+    return json(200, { received: true, idempotent: true, event: eventName, reference, keyMode });
   }
 
-  console.log('[paystack-webhook]', {
-    event: eventName,
-    reference,
-    amountNgn,
-    email,
-    keyMode
-  });
+  const apiBase = process.env.API_BASE_URL;
+  if (!apiBase) {
+    console.error('[paystack-webhook] API_BASE_URL missing; verified event not durably recorded');
+    // Return 5xx so Paystack retries. Do not mark the event as seen in memory.
+    return json(500, { error: 'Durable payment processor unavailable; retry required' });
+  }
 
-  let grantForwarded = false;
-  let grantNote = 'logged_only';
-
-  if (eventName === 'charge.success') {
-    // Membership intent: successful charge → access should be granted
-    console.log('[paystack-webhook] MEMBERSHIP_GRANT_INTENT', {
-      reference,
-      email,
-      amountNgn,
-      keyMode,
-      next: 'forward_to_API_if_set_or_record_locally'
+  try {
+    const res = await fetch(apiBase.replace(/\\/$/, '') + '/api/webhooks/paystack', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-paystack-signature': signature },
+      body: raw
     });
-
-    const apiBase = process.env.API_BASE_URL;
-    if (apiBase) {
-      try {
-        const res = await fetch(apiBase.replace(/\/$/, '') + '/api/webhooks/paystack', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'x-paystack-signature': signature
-          },
-          body: raw
-        });
-        const body = await res.text();
-        console.log('[paystack-webhook] forwarded to API', res.status, body.slice(0, 200));
-        grantForwarded = res.ok;
-        grantNote = res.ok ? 'forwarded_ok' : 'forward_failed_' + res.status;
-      } catch (err) {
-        console.warn('[paystack-webhook] Forward failed', err.message);
-        grantNote = 'forward_error';
-      }
-    } else {
-      // No durable API yet — event is verified and logged; member area is ready
-      grantNote = 'verified_logged_no_API_BASE_URL';
-      console.log('[paystack-webhook] No API_BASE_URL — grant recorded in logs only. Member area scaffold is live under /member/');
+    const responseText = await res.text();
+    if (!res.ok) {
+      console.error('[paystack-webhook] durable API rejected event', { status: res.status, reference });
+      return json(502, { error: 'Durable payment processor rejected event; retry required' });
     }
+
+    // Only suppress duplicates after the durable API accepted the event.
+    seen.set(idemKey, Date.now());
+    console.log('[paystack-webhook] durable API accepted event', { reference, keyMode });
+    return json(200, {
+      received: true, idempotent: false, event: eventName, reference, keyMode,
+      durableProcessorAccepted: true
+    });
+  } catch (err) {
+    console.error('[paystack-webhook] durable API unavailable', { reference, message: err.message });
+    return json(502, { error: 'Durable payment processor unavailable; retry required' });
   }
-
-  if (idemKey) seen.set(idemKey, Date.now());
-
-  return json(200, {
-    received: true,
-    idempotent: false,
-    event: eventName,
-    reference,
-    keyMode,
-    grantForwarded,
-    grantNote
-  });
 };
 
-function normalizeHeaders(h) {
-  const out = {};
-  for (const k of Object.keys(h)) out[k.toLowerCase()] = h[k];
-  return out;
-}
-
-function safeEqual(a, b) {
-  try {
-    const ba = Buffer.from(String(a), 'utf8');
-    const bb = Buffer.from(String(b), 'utf8');
-    if (ba.length !== bb.length) return false;
-    return crypto.timingSafeEqual(ba, bb);
-  } catch {
-    return false;
+function pruneSeen() {
+  const now = Date.now();
+  for (const [key, timestamp] of seen.entries()) {
+    if (now - timestamp > SEEN_TTL_MS) seen.delete(key);
   }
 }
-
+function normalizeHeaders(headers) {
+  const out = {};
+  for (const key of Object.keys(headers)) out[key.toLowerCase()] = headers[key];
+  return out;
+}
+function safeEqual(a, b) {
+  try {
+    const left = Buffer.from(String(a), 'utf8');
+    const right = Buffer.from(String(b), 'utf8');
+    return left.length === right.length && crypto.timingSafeEqual(left, right);
+  } catch { return false; }
+}
 function corsHeaders() {
   return {
     'Access-Control-Allow-Origin': '*',
@@ -165,11 +133,10 @@ function corsHeaders() {
     'Access-Control-Allow-Methods': 'POST, OPTIONS'
   };
 }
-
 function json(statusCode, body) {
   return {
     statusCode,
-    headers: { 'Content-Type': 'application/json', ...corsHeaders() },
+    headers: { 'Content-Type': 'application/json', ...corsHeaders(), 'Cache-Control': 'no-store' },
     body: JSON.stringify(body)
   };
 }
