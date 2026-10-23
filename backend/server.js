@@ -372,7 +372,6 @@ app.post('/api/webhooks/paystack', async (req, res) => {
     const data = (req.body && req.body.data) || {};
     const reference = data.reference || null;
 
-    // Atomic durable claim — first writer wins under concurrent retries
     const claim = await claimWebhookEvent(
       { dbRun, dbGet },
       {
@@ -526,10 +525,6 @@ app.get('/api/stats', verifyToken, async (req, res) => {
   }
 });
 
-// ============================================
-// MEMBER DASHBOARD API
-// ============================================
-
 app.get('/api/member-payload', verifyToken, async (req, res) => {
   try {
     const userEmail = req.query.email || req.user.email;
@@ -537,26 +532,22 @@ app.get('/api/member-payload', verifyToken, async (req, res) => {
       return res.status(400).json({ error: 'Email required' });
     }
 
-    // Get access grants for user
     const grants = await dbAll(
       'SELECT product, order_ref, granted_at, active FROM access_grants WHERE email = ? AND active = 1',
       [userEmail]
     );
 
-    // Get member stats
     const user = await dbGet(
       'SELECT id, email, name, created_at FROM users WHERE email = ?',
       [userEmail]
     );
 
-    // Load podcast registry
     let podcasts = [];
     const podcastRegistryPath = path.join(__dirname, '..', 'content-output', 'podcast', 'registry.json');
     if (fs.existsSync(podcastRegistryPath)) {
       podcasts = JSON.parse(fs.readFileSync(podcastRegistryPath, 'utf-8'));
     }
 
-    // Filter podcasts to those user has access to
     const hasContentAccess = grants.some(g => g.product === '30-Day AI Content System' || g.product === 'Cortex Platform');
     const accessibleContent = hasContentAccess ? podcasts.map(p => ({
       type: 'podcast',
@@ -581,14 +572,10 @@ app.get('/api/member-payload', verifyToken, async (req, res) => {
   }
 });
 
-// ============================================
-// METRICS DASHBOARD API
-// ============================================
-
 app.get('/api/metrics/pulse', verifyToken, async (req, res) => {
   try {
     const metricsDir = path.join(__dirname, '..', 'content-output', 'metrics');
-    
+
     if (!fs.existsSync(metricsDir)) {
       return res.json({
         brand: 'Cortex Intelligence Nexus',
@@ -602,12 +589,10 @@ app.get('/api/metrics/pulse', verifyToken, async (req, res) => {
       });
     }
 
-    // Load and aggregate metrics
     const calculatePeriodMetrics = (days) => {
       const cutoffDate = new Date(Date.now() - days * 24 * 60 * 60 * 1000);
       const metrics = { podcast_listens: 0, content_views: 0, offer_clicks: 0, conversions: 0, total_revenue_ngn: 0, unique_members: new Set() };
 
-      // Count listens
       const listensPath = path.join(metricsDir, 'podcast_listens.json');
       if (fs.existsSync(listensPath)) {
         const listens = JSON.parse(fs.readFileSync(listensPath, 'utf-8'));
@@ -619,7 +604,6 @@ app.get('/api/metrics/pulse', verifyToken, async (req, res) => {
         });
       }
 
-      // Count views
       const viewsPath = path.join(metricsDir, 'content_views.json');
       if (fs.existsSync(viewsPath)) {
         const views = JSON.parse(fs.readFileSync(viewsPath, 'utf-8'));
@@ -631,7 +615,6 @@ app.get('/api/metrics/pulse', verifyToken, async (req, res) => {
         });
       }
 
-      // Count clicks
       const clicksPath = path.join(metricsDir, 'offer_clicks.json');
       if (fs.existsSync(clicksPath)) {
         const clicks = JSON.parse(fs.readFileSync(clicksPath, 'utf-8'));
@@ -642,7 +625,6 @@ app.get('/api/metrics/pulse', verifyToken, async (req, res) => {
         });
       }
 
-      // Count conversions + revenue
       const conversionsPath = path.join(metricsDir, 'conversions.json');
       if (fs.existsSync(conversionsPath)) {
         const conversions = JSON.parse(fs.readFileSync(conversionsPath, 'utf-8'));
@@ -664,7 +646,6 @@ app.get('/api/metrics/pulse', verifyToken, async (req, res) => {
     const month = calculatePeriodMetrics(30);
     const year = calculatePeriodMetrics(365);
 
-    // Calculate health status
     const health = {
       member_growth: month.unique_members > 50 ? 'strong' : month.unique_members > 10 ? 'growing' : 'early',
       engagement: month.podcast_listens > month.conversions * 5 ? 'strong' : month.podcast_listens > 0 ? 'active' : 'warming_up',
@@ -684,7 +665,6 @@ app.get('/api/metrics/pulse', verifyToken, async (req, res) => {
   }
 });
 
-// SOFA endpoints compatibility (mirrors Netlify functions)
 app.get('/api/sofa-status', (req, res) => {
   const configured = Boolean(process.env.SOFA_API_KEY);
   res.json({
@@ -715,11 +695,43 @@ app.post('/api/sofa-session', (req, res) => {
   });
 });
 
-// Serve static frontend files from project root
+const LEGACY_STATIC_PATHS = new Set([
+  'index (2)-1.html',
+  'index (2).html',
+  'index-10.html',
+  'index-15-1.html',
+  'index-15.html',
+  'index-9.html',
+  'index_complete.html',
+  'index-production.html',
+  'funnel-lane.html',
+  'funnel-lane (1).html',
+  'funnel-lane (2).html',
+  'funnel-lane (3).html',
+  'funnel-lane (4).html',
+  'funnel-lane (5).html',
+  'funnel-lane (7).html',
+  'funnel-lane (8).html',
+  'style-1.css',
+  'styles (2)-1.css',
+  'styles-3-1.css'
+]);
+
+app.use((req, res, next) => {
+  const fileName = decodeURIComponent((req.path || '/').replace(/^\/+/, ''));
+  if (LEGACY_STATIC_PATHS.has(fileName)) {
+    return res.status(410).json({
+      error: 'Legacy page archived',
+      archived: true,
+      canonical: 'Use the canonical live routes only.'
+    });
+  }
+  return next();
+});
+
 const staticDir = path.join(__dirname, '..');
 app.use(express.static(staticDir, { extensions: ['html'] }));
 
-// Fallback to index.html for non-API web routes
 app.get('*', (req, res, next) => {
   if (req.path.startsWith('/api/')) {
     return next();
