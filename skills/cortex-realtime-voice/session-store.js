@@ -4,7 +4,8 @@
 
 const { VoiceSession } = require('./session');
 
-const DEFAULT_TTL_MS = 30 * 60 * 1000; // 30 minutes
+const DEFAULT_TTL_MS = Number(process.env.VOICE_SESSION_TTL_MS || 30 * 60 * 1000);
+const MAX_SESSIONS = Number(process.env.VOICE_MAX_SESSIONS || 200);
 const store = new Map();
 
 function get(sessionId) {
@@ -14,11 +15,16 @@ function get(sessionId) {
     store.delete(sessionId);
     return null;
   }
-  entry.expiresAt = Date.now() + DEFAULT_TTL_MS; // sliding TTL
+  entry.expiresAt = Date.now() + DEFAULT_TTL_MS;
   return entry.session;
 }
 
 function create(sessionId = null) {
+  if (store.size >= MAX_SESSIONS) {
+    const oldestKey = [...store.entries()].sort((a, b) => a[1].expiresAt - b[1].expiresAt)[0]?.[0];
+    if (oldestKey) store.delete(oldestKey);
+  }
+
   const session = new VoiceSession(sessionId);
   store.set(session.id, {
     session,
@@ -39,7 +45,6 @@ function remove(sessionId) {
   store.delete(sessionId);
 }
 
-// Periodic cleanup
 setInterval(() => {
   const now = Date.now();
   for (const [id, entry] of store.entries()) {

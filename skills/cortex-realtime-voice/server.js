@@ -11,6 +11,8 @@ const sessionStore = require('./session-store');
 const { runTurn } = require('./pipeline');
 
 const PORT = process.env.PORT || 8787;
+const MAX_AUDIO_BYTES_PER_TURN = Number(process.env.MAX_AUDIO_BYTES_PER_TURN || 20 * 1024 * 1024);
+const MAX_AUDIO_CHUNKS_PER_TURN = Number(process.env.MAX_AUDIO_CHUNKS_PER_TURN || 256);
 
 const server = http.createServer((req, res) => {
   if (req.url === '/health') {
@@ -24,6 +26,10 @@ const server = http.createServer((req, res) => {
         stt: process.env.DEEPGRAM_API_KEY ? 'deepgram' : 'placeholder',
         llm: process.env.OPENAI_API_KEY ? 'openai' : 'placeholder',
         tts: process.env.OPENAI_API_KEY ? 'openai' : 'placeholder'
+      },
+      limits: {
+        maxAudioBytesPerTurn: MAX_AUDIO_BYTES_PER_TURN,
+        maxAudioChunksPerTurn: MAX_AUDIO_CHUNKS_PER_TURN
       }
     }));
     return;
@@ -50,12 +56,25 @@ wss.on('connection', (ws, req) => {
   send({ type: 'session.created', session: session.toJSON() });
 
   let audioChunks = [];
+  let audioBytes = 0;
 
   ws.on('message', async (raw) => {
     try {
       if (Buffer.isBuffer(raw) || raw instanceof ArrayBuffer) {
-        audioChunks.push(Buffer.from(raw));
-        send({ type: 'audio.received', bytes: raw.byteLength || raw.length });
+        const chunk = Buffer.from(raw);
+        audioBytes += chunk.length;
+
+        if (audioBytes > MAX_AUDIO_BYTES_PER_TURN || audioChunks.length >= MAX_AUDIO_CHUNKS_PER_TURN) {
+          send({
+            type: 'error',
+            message: `Audio exceeds configured limit (${MAX_AUDIO_BYTES_PER_TURN} bytes / ${MAX_AUDIO_CHUNKS_PER_TURN} chunks)`
+          });
+          ws.close();
+          return;
+        }
+
+        audioChunks.push(chunk);
+        send({ type: 'audio.received', bytes: chunk.length || raw.byteLength || raw.length });
         return;
       }
 
@@ -68,9 +87,16 @@ wss.on('connection', (ws, req) => {
         case 'input_audio_buffer.commit': {
           const fullAudio = Buffer.concat(audioChunks);
           audioChunks = [];
+          audioBytes = 0;
 
           if (fullAudio.length === 0) {
             send({ type: 'error', message: 'No audio received' });
+            return;
+          }
+
+          if (fullAudio.length > MAX_AUDIO_BYTES_PER_TURN) {
+            send({ type: 'error', message: `Audio exceeds configured limit (${MAX_AUDIO_BYTES_PER_TURN} bytes)` });
+            ws.close();
             return;
           }
 
@@ -82,6 +108,7 @@ wss.on('connection', (ws, req) => {
           if (session.canBargeIn()) {
             session.setState('LISTENING');
             audioChunks = [];
+            audioBytes = 0;
             send({ type: 'state', state: 'LISTENING', reason: 'barge_in' });
           }
           break;
@@ -101,6 +128,7 @@ wss.on('connection', (ws, req) => {
 
   ws.on('close', () => {
     console.log(`[-] Session closed: ${session.id}`);
+    sessionStore.remove(session.id);
   });
 
   ws.on('error', (err) => {
@@ -114,4 +142,5 @@ server.listen(PORT, () => {
   console.log(`STT : ${process.env.DEEPGRAM_API_KEY ? 'Deepgram' : 'placeholder'}`);
   console.log(`LLM : ${process.env.OPENAI_API_KEY ? 'OpenAI' : 'placeholder'}`);
   console.log(`TTS : ${process.env.OPENAI_API_KEY ? 'OpenAI' : 'placeholder'}`);
+  console.log(`Audio limit: ${MAX_AUDIO_BYTES_PER_TURN} bytes per turn`);
 });
