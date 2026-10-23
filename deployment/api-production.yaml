@@ -1,0 +1,26 @@
+name: cortex-platform-api
+services:
+  api:
+    runtime: node
+    build:
+      command: npm install
+    start:
+      command: node backend/server.js
+    env:
+      - NODE_ENV=production
+      - PORT=3000
+      - JWT_SECRET
+      - FRONTEND_URL
+      - ALLOWED_ORIGINS
+      - DATABASE_URL
+      - PAYSTACK_SECRET_KEY
+      - PAYSTACK_PUBLIC_KEY
+      - MAX_JSON_BYTES
+      - MAX_URLENCODED_BYTES
+      - SOFA_API_KEY
+      - SOFA_SITE
+    health_check:
+      path: /api/health
+      interval: 60
+      timeout: 20
+      retries: 3
