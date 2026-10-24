@@ -47,7 +47,7 @@ app.use(cors({
     if (!allowedOrigins.length || allowedOrigins.includes(origin)) {
       return callback(null, true);
     }
-    return callback(new Error(`Origin ${origin} not allowed by CORS`));
+    return callback(new Error('Origin not allowed by CORS'));
   },
   credentials: true
 }));
@@ -62,3 +62,745 @@ app.use(
   })
 );
 app.use(express.urlencoded({ extended: true, limit: `${MAX_URLENCODED_BYTES}bytes` }));
+
+const dbPath = path.join(__dirname, 'data', 'cortex.db');
+const db = new sqlite3.Database(dbPath, (err) => {
+  if (err) {
+    console.error('Database connection error:', err.message);
+    process.exit(1);
+  }
+  console.log('SQLite database connected');
+  initializeDatabase();
+});
+
+const dbRun = (sql, params = []) => {
+  return new Promise((resolve, reject) => {
+    db.run(sql, params, function (err) {
+      if (err) reject(err);
+      else resolve({ id: this.lastID, changes: this.changes });
+    });
+  });
+};
+
+const dbGet = (sql, params = []) => {
+  return new Promise((resolve, reject) => {
+    db.get(sql, params, (err, row) => {
+      if (err) reject(err);
+      else resolve(row);
+    });
+  });
+};
+
+const dbAll = (sql, params = []) => {
+  return new Promise((resolve, reject) => {
+    db.all(sql, params, (err, rows) => {
+      if (err) reject(err);
+      else resolve(rows || []);
+    });
+  });
+};
+
+function initializeDatabase() {
+  db.serialize(() => {
+    db.run(`
+      CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        email TEXT UNIQUE NOT NULL,
+        password TEXT NOT NULL,
+        name TEXT NOT NULL,
+        company TEXT,
+        location TEXT,
+        is_guest BOOLEAN DEFAULT 0,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
+
+    db.run(`
+      CREATE TABLE IF NOT EXISTS orders (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER,
+        order_ref TEXT UNIQUE NOT NULL,
+        customer_name TEXT NOT NULL,
+        email TEXT NOT NULL,
+        phone TEXT,
+        product TEXT NOT NULL,
+        amount_ngn REAL NOT NULL,
+        amount_kobo INTEGER NOT NULL,
+        currency TEXT DEFAULT 'NGN',
+        status TEXT DEFAULT 'pending',
+        paystack_ref TEXT,
+        paystack_transaction_id INTEGER,
+        payment_channel TEXT,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        paid_at DATETIME,
+        FOREIGN KEY (user_id) REFERENCES users(id)
+      )
+    `);
+
+    db.run(`
+      CREATE TABLE IF NOT EXISTS transactions (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        order_id INTEGER,
+        user_id INTEGER,
+        reference TEXT UNIQUE NOT NULL,
+        amount_ngn REAL NOT NULL,
+        gateway TEXT DEFAULT 'paystack',
+        status TEXT DEFAULT 'pending',
+        raw_response TEXT,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        verified_at DATETIME,
+        FOREIGN KEY (order_id) REFERENCES orders(id),
+        FOREIGN KEY (user_id) REFERENCES users(id)
+      )
+    `);
+
+    db.run(`
+      CREATE TABLE IF NOT EXISTS webhook_logs (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        event_type TEXT NOT NULL,
+        data TEXT NOT NULL,
+        signature TEXT,
+        verified BOOLEAN DEFAULT 0,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
+
+    db.run(`
+      CREATE TABLE IF NOT EXISTS access_grants (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        email TEXT NOT NULL,
+        product TEXT NOT NULL,
+        order_ref TEXT,
+        transaction_reference TEXT,
+        granted_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        active INTEGER DEFAULT 1
+      )
+    `);
+
+    db.run(`
+      CREATE TABLE IF NOT EXISTS processed_webhooks (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        event_type TEXT NOT NULL,
+        reference TEXT NOT NULL,
+        paystack_id TEXT,
+        status TEXT DEFAULT 'processed',
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        UNIQUE(event_type, reference)
+      )
+    `);
+
+    db.run(`CREATE UNIQUE INDEX IF NOT EXISTS idx_orders_paystack_ref ON orders(paystack_ref) WHERE paystack_ref IS NOT NULL`);
+    db.run(`CREATE UNIQUE INDEX IF NOT EXISTS idx_access_grants_tx_ref ON access_grants(transaction_reference) WHERE transaction_reference IS NOT NULL`);
+    db.run(`CREATE UNIQUE INDEX IF NOT EXISTS idx_transactions_reference ON transactions(reference)`);
+
+    console.log('Database schema initialized (durable idempotent webhooks)');
+  });
+}
+
+const verifyToken = (req, res, next) => {
+  const token = req.headers['authorization']?.split(' ')[1];
+  if (!token) return res.status(401).json({ error: 'Token required' });
+  try {
+    const decoded = jwt.verify(token, JWT_SECRET);
+    req.user = decoded;
+    next();
+  } catch (err) {
+    res.status(401).json({ error: 'Invalid token' });
+  }
+};
+
+app.get('/api/health', (req, res) => {
+  res.json({
+    status: 'ok',
+    platform: 'Cortex Platform v2.3',
+    idempotency: 'durable-sqlite',
+    timestamp: new Date().toISOString(),
+    database: 'SQLite3',
+    paystack_mode: process.env.PAYSTACK_SECRET_KEY && process.env.PAYSTACK_SECRET_KEY.startsWith('sk_live_') ? 'LIVE' : 'TEST_OR_UNCONFIGURED'
+  });
+});
+
+app.post('/api/auth/register', async (req, res) => {
+  try {
+    const { name, email, password, company, location } = req.body;
+    if (!email || !password || !name) {
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+    const existing = await dbGet('SELECT id FROM users WHERE email = ?', [email]);
+    if (existing) {
+      return res.status(409).json({ error: 'Email already registered' });
+    }
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const result = await dbRun(
+      `INSERT INTO users (name, email, password, company, location) VALUES (?, ?, ?, ?, ?)`,
+      [name, email, hashedPassword, company || null, location || null]
+    );
+    const token = jwt.sign({ id: result.id, email, name }, JWT_SECRET, { expiresIn: '30d' });
+    res.status(201).json({
+      message: 'User registered successfully',
+      user: { id: result.id, name, email },
+      token
+    });
+  } catch (err) {
+    console.error('Register error:', err);
+    res.status(500).json({ error: 'Registration failed' });
+  }
+});
+
+app.post('/api/auth/login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    if (!email || !password) {
+      return res.status(400).json({ error: 'Email and password required' });
+    }
+    const user = await dbGet('SELECT * FROM users WHERE email = ?', [email]);
+    if (!user) return res.status(401).json({ error: 'Invalid credentials' });
+    const validPassword = await bcrypt.compare(password, user.password);
+    if (!validPassword) return res.status(401).json({ error: 'Invalid credentials' });
+    const token = jwt.sign(
+      { id: user.id, email: user.email, name: user.name },
+      JWT_SECRET,
+      { expiresIn: '30d' }
+    );
+    res.json({
+      message: 'Login successful',
+      user: { id: user.id, name: user.name, email: user.email },
+      token
+    });
+  } catch (err) {
+    console.error('Login error:', err);
+    res.status(500).json({ error: 'Login failed' });
+  }
+});
+
+app.get('/api/auth/me', verifyToken, async (req, res) => {
+  try {
+    const user = await dbGet(
+      'SELECT id, email, name, company, location, created_at FROM users WHERE id = ?',
+      [req.user.id]
+    );
+    if (!user) return res.status(404).json({ error: 'User not found' });
+    const grants = await dbAll(
+      'SELECT product, order_ref, granted_at, active FROM access_grants WHERE email = ? AND active = 1 ORDER BY granted_at DESC',
+      [user.email]
+    );
+    res.json({ user, grants });
+  } catch (err) {
+    console.error('auth/me error:', err);
+    res.status(500).json({ error: 'Failed to load profile' });
+  }
+});
+
+app.post('/api/orders', async (req, res) => {
+  try {
+    const { customer_name, email, phone, product, amount_ngn } = req.body;
+    if (!customer_name || !email || !product || !amount_ngn) {
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+    if (amount_ngn < 100) {
+      return res.status(400).json({ error: 'Minimum amount is ₦100' });
+    }
+    const order_ref = `CORTEX-${Date.now()}-${Math.random().toString(36).substr(2, 6).toUpperCase()}`;
+    const amount_kobo = Math.round(amount_ngn * 100);
+    const result = await dbRun(
+      `INSERT INTO orders (order_ref, customer_name, email, phone, product, amount_ngn, amount_kobo, status)
+       VALUES (?, ?, ?, ?, ?, ?, ?, 'pending')`,
+      [order_ref, customer_name, email, phone || null, product, amount_ngn, amount_kobo]
+    );
+    res.status(201).json({
+      message: 'Order created',
+      order: {
+        id: result.id,
+        order_ref,
+        customer_name,
+        email,
+        product,
+        amount_ngn,
+        status: 'pending'
+      }
+    });
+  } catch (err) {
+    console.error('Order creation error:', err);
+    res.status(500).json({ error: 'Failed to create order' });
+  }
+});
+
+app.get('/api/orders', verifyToken, async (req, res) => {
+  try {
+    const orders = await dbAll('SELECT * FROM orders ORDER BY created_at DESC');
+    res.json({ count: orders.length, orders });
+  } catch (err) {
+    console.error('Get orders error:', err);
+    res.status(500).json({ error: 'Failed to fetch orders' });
+  }
+});
+
+app.get('/api/orders/:id', async (req, res) => {
+  try {
+    const order = await dbGet(
+      'SELECT id, order_ref, customer_name, email, product, amount_ngn, status, created_at, paid_at FROM orders WHERE id = ? OR order_ref = ?',
+      [req.params.id, req.params.id]
+    );
+    if (!order) return res.status(404).json({ error: 'Order not found' });
+    res.json(order);
+  } catch (err) {
+    console.error('Get order error:', err);
+    res.status(500).json({ error: 'Failed to fetch order' });
+  }
+});
+
+const PAYSTACK_SECRET_KEY = process.env.PAYSTACK_SECRET_KEY || '';
+
+app.post('/api/webhooks/paystack', async (req, res) => {
+  try {
+    const rawBody =
+      typeof req.rawBody === 'string' && req.rawBody.length
+        ? req.rawBody
+        : JSON.stringify(req.body || {});
+    const signature = req.headers['x-paystack-signature'] || '';
+
+    if (!PAYSTACK_SECRET_KEY) {
+      console.error('[paystack-webhook] PAYSTACK_SECRET_KEY not set');
+      return res.status(500).json({ error: 'Server misconfigured' });
+    }
+
+    const isValid = verifyPaystackRaw(rawBody, signature, PAYSTACK_SECRET_KEY);
+
+    await dbRun(
+      `INSERT INTO webhook_logs (event_type, data, signature, verified) VALUES (?, ?, ?, ?)`,
+      [
+        (req.body && req.body.event) || 'unknown',
+        rawBody,
+        signature,
+        isValid ? 1 : 0
+      ]
+    );
+
+    if (!isValid) {
+      console.warn('Invalid Paystack signature');
+      return res.status(401).json({ error: 'Invalid signature' });
+    }
+
+    const event = (req.body && req.body.event) || 'unknown';
+    const data = (req.body && req.body.data) || {};
+    const reference = data.reference || null;
+
+    // Atomic durable claim — first writer wins under concurrent retries
+    const claim = await claimWebhookEvent(
+      { dbRun, dbGet },
+      {
+        eventType: event,
+        reference,
+        paystackId: data.id != null ? String(data.id) : null
+      }
+    );
+
+    if (!claim.claimed) {
+      console.log(
+        `[idempotent] skip ${event} ${reference} (processed_webhooks#${claim.existing && claim.existing.id})`
+      );
+      return res.status(200).json({
+        success: true,
+        idempotent: true,
+        message: 'Event already processed',
+        reference,
+        processed_at: claim.existing && claim.existing.created_at
+      });
+    }
+
+    if (event === 'charge.success') {
+      if (!reference || data.status !== 'success') {
+        await markWebhookProcessed({ dbRun }, { eventType: event, reference });
+        return res.status(200).json({
+          success: true, fulfilment: 'blocked_invalid_charge_payload',
+          manualReviewRequired: true
+        });
+      }
+
+      const amount = data.amount;
+      const currency = data.currency;
+      const customer = data.customer || {};
+      const metadata = data.metadata || {};
+      const amountNgn = typeof amount === 'number' ? amount / 100 : null;
+      const expectedProduct = '30-Day AI Content System';
+      const expectedAmountKobo = 2200000;
+      const expectedCurrency = 'NGN';
+      const metadataOrderRef = typeof metadata.order_ref === 'string' ? metadata.order_ref.trim() : '';
+
+      // Only a pre-existing pending order with a matching reference, product,
+      // amount, currency, and customer can receive access. Never create paid
+      // orders from webhook metadata alone.
+      let order = await dbGet('SELECT * FROM orders WHERE paystack_ref = ?', [reference]);
+      if (!order && metadataOrderRef) {
+        order = await dbGet('SELECT * FROM orders WHERE order_ref = ?', [metadataOrderRef]);
+      }
+
+      const customerEmail = String(customer.email || metadata.email || '').trim().toLowerCase();
+      const orderEmail = String((order && order.email) || '').trim().toLowerCase();
+      const isMatch = Boolean(
+        order &&
+        order.product === expectedProduct &&
+        order.amount_kobo === expectedAmountKobo &&
+        order.currency === expectedCurrency &&
+        amount === expectedAmountKobo &&
+        currency === expectedCurrency &&
+        customerEmail &&
+        customerEmail === orderEmail &&
+        (!order.paystack_ref || order.paystack_ref === reference)
+      );
+
+      if (!isMatch) {
+        await markWebhookProcessed({ dbRun }, { eventType: event, reference });
+        console.warn('[paystack-webhook] payment received but no matching order; manual reconciliation required', {
+          reference, amount, currency, product: metadata.product || null
+        });
+        return res.status(200).json({
+          success: true,
+          reference,
+          fulfilment: 'blocked_order_mismatch',
+          manualReviewRequired: true
+        });
+      }
+
+      if (order.status !== 'completed') {
+        await dbRun(
+          `UPDATE orders
+             SET status = 'completed',
+                 paystack_ref = ?,
+                 paystack_transaction_id = ?,
+                 payment_channel = 'paystack',
+                 paid_at = CURRENT_TIMESTAMP
+           WHERE id = ? AND status = 'pending'`,
+          [reference, data.id || null, order.id]
+        );
+      }
+
+      try {
+        await dbRun(
+          `INSERT OR IGNORE INTO transactions (order_id, reference, amount_ngn, gateway, status, verified_at, raw_response)
+           VALUES (?, ?, ?, 'paystack', 'verified', CURRENT_TIMESTAMP, ?)`,
+          [order.id, reference, amountNgn, JSON.stringify({
+            id: data.id || null, reference, amount, currency, status: data.status,
+            customer: { email: customerEmail }
+          })]
+        );
+      } catch (txErr) {
+        console.log(`[idempotent] transaction insert race for ${reference}`);
+      }
+
+      await dbRun(
+        `INSERT OR IGNORE INTO access_grants (email, product, order_ref, transaction_reference, active)
+         VALUES (?, ?, ?, ?, 1)`,
+        [order.email, expectedProduct, order.order_ref, reference]
+      );
+
+      await markWebhookProcessed({ dbRun }, { eventType: event, reference });
+      console.log(`Payment verified + matching order fulfilled: ${reference}`);
+      return res.status(200).json({
+        success: true, idempotent: false,
+        message: 'Payment verified and matching order fulfilled',
+        reference, order_ref: order.order_ref
+      });
+    }
+    await markWebhookProcessed({ dbRun }, { eventType: event, reference });
+    res.status(200).json({ success: true, event });
+  } catch (err) {
+    console.error('Webhook error:', err);
+    res.status(500).json({ error: 'Webhook processing failed' });
+  }
+});
+
+app.post('/api/payments/verify', async (req, res) => {
+  try {
+    const { reference } = req.body;
+    if (!reference) return res.status(400).json({ error: 'Reference required' });
+    const transaction = await dbGet(
+      'SELECT t.*, o.order_ref, o.product, o.email FROM transactions t LEFT JOIN orders o ON t.order_id = o.id WHERE t.reference = ?',
+      [reference]
+    );
+    if (!transaction) return res.status(404).json({ error: 'Transaction not found' });
+    res.json({
+      verified: transaction.status === 'verified',
+      transaction: {
+        reference,
+        amount_ngn: transaction.amount_ngn,
+        status: transaction.status,
+        verified_at: transaction.verified_at,
+        product: transaction.product,
+        email: transaction.email
+      }
+    });
+  } catch (err) {
+    console.error('Verify payment error:', err);
+    res.status(500).json({ error: 'Verification failed' });
+  }
+});
+
+app.get('/api/stats', verifyToken, async (req, res) => {
+  try {
+    const totalOrders = await dbGet('SELECT COUNT(*) as count FROM orders');
+    const completedOrders = await dbGet('SELECT COUNT(*) as count FROM orders WHERE status = "completed"');
+    const totalRevenue = await dbGet('SELECT SUM(amount_ngn) as total FROM orders WHERE status = "completed"');
+    const pendingOrders = await dbGet('SELECT COUNT(*) as count FROM orders WHERE status = "pending"');
+    const grants = await dbGet('SELECT COUNT(*) as count FROM access_grants WHERE active = 1');
+    res.json({
+      total_orders: totalOrders.count || 0,
+      completed_orders: completedOrders.count || 0,
+      pending_orders: pendingOrders.count || 0,
+      total_revenue_ngn: totalRevenue.total || 0,
+      active_access_grants: grants.count || 0,
+      platform: 'Cortex v2.3',
+      timestamp: new Date().toISOString()
+    });
+  } catch (err) {
+    console.error('Stats error:', err);
+    res.status(500).json({ error: 'Failed to fetch stats' });
+  }
+});
+
+// ============================================
+// MEMBER DASHBOARD API
+// ============================================
+
+app.get('/api/member-payload', verifyToken, async (req, res) => {
+  try {
+    const userEmail = req.query.email || req.user.email;
+    if (!userEmail) {
+      return res.status(400).json({ error: 'Email required' });
+    }
+
+    // Get access grants for user
+    const grants = await dbAll(
+      'SELECT product, order_ref, granted_at, active FROM access_grants WHERE email = ? AND active = 1',
+      [userEmail]
+    );
+
+    // Get member stats
+    const user = await dbGet(
+      'SELECT id, email, name, created_at FROM users WHERE email = ?',
+      [userEmail]
+    );
+
+    // Load podcast registry
+    let podcasts = [];
+    const podcastRegistryPath = path.join(__dirname, '..', 'content-output', 'podcast', 'registry.json');
+    if (fs.existsSync(podcastRegistryPath)) {
+      podcasts = JSON.parse(fs.readFileSync(podcastRegistryPath, 'utf-8'));
+    }
+
+    // Filter podcasts to those user has access to
+    const hasContentAccess = grants.some(g => g.product === '30-Day AI Content System' || g.product === 'Cortex Platform');
+    const accessibleContent = hasContentAccess ? podcasts.map(p => ({
+      type: 'podcast',
+      id: p.episode_id,
+      title: p.title,
+      slug: p.slug,
+      path: `/content-output/podcast/${p.filename}`,
+      created_at: p.created_at,
+      status: 'unlocked'
+    })) : [];
+
+    res.json({
+      user_email: userEmail,
+      member_since: user?.created_at || new Date().toISOString(),
+      access_grants: grants,
+      content: accessibleContent,
+      message: `Welcome to Cortex Intelligence Nexus. You have ${grants.length} active subscription(s).`
+    });
+  } catch (err) {
+    console.error('Member payload error:', err);
+    res.status(500).json({ error: 'Failed to load member data' });
+  }
+});
+
+// ============================================
+// METRICS DASHBOARD API
+// ============================================
+
+app.get('/api/metrics/pulse', verifyToken, async (req, res) => {
+  try {
+    const metricsDir = path.join(__dirname, '..', 'content-output', 'metrics');
+    
+    if (!fs.existsSync(metricsDir)) {
+      return res.json({
+        brand: 'Cortex Intelligence Nexus',
+        generated_at: new Date().toISOString(),
+        periods: {
+          week: { podcast_listens: 0, content_views: 0, offer_clicks: 0, conversions: 0, total_revenue_ngn: 0, conversion_rate: 0, unique_members: 0 },
+          month: { podcast_listens: 0, content_views: 0, offer_clicks: 0, conversions: 0, total_revenue_ngn: 0, conversion_rate: 0, unique_members: 0 },
+          year: { podcast_listens: 0, content_views: 0, offer_clicks: 0, conversions: 0, total_revenue_ngn: 0, conversion_rate: 0, unique_members: 0 }
+        },
+        health_status: { member_growth: 'early', engagement: 'warming_up', revenue: 'early', conversion_efficiency: 'optimize' }
+      });
+    }
+
+    // Load and aggregate metrics
+    const calculatePeriodMetrics = (days) => {
+      const cutoffDate = new Date(Date.now() - days * 24 * 60 * 60 * 1000);
+      const metrics = { podcast_listens: 0, content_views: 0, offer_clicks: 0, conversions: 0, total_revenue_ngn: 0, unique_members: new Set() };
+
+      // Count listens
+      const listensPath = path.join(metricsDir, 'podcast_listens.json');
+      if (fs.existsSync(listensPath)) {
+        const listens = JSON.parse(fs.readFileSync(listensPath, 'utf-8'));
+        listens.forEach(e => {
+          if (new Date(e.timestamp) > cutoffDate) {
+            metrics.podcast_listens++;
+            metrics.unique_members.add(e.user_email);
+          }
+        });
+      }
+
+      // Count views
+      const viewsPath = path.join(metricsDir, 'content_views.json');
+      if (fs.existsSync(viewsPath)) {
+        const views = JSON.parse(fs.readFileSync(viewsPath, 'utf-8'));
+        views.forEach(e => {
+          if (new Date(e.timestamp) > cutoffDate) {
+            metrics.content_views++;
+            metrics.unique_members.add(e.user_email);
+          }
+        });
+      }
+
+      // Count clicks
+      const clicksPath = path.join(metricsDir, 'offer_clicks.json');
+      if (fs.existsSync(clicksPath)) {
+        const clicks = JSON.parse(fs.readFileSync(clicksPath, 'utf-8'));
+        clicks.forEach(e => {
+          if (new Date(e.timestamp) > cutoffDate) {
+            metrics.offer_clicks++;
+          }
+        });
+      }
+
+      // Count conversions + revenue
+      const conversionsPath = path.join(metricsDir, 'conversions.json');
+      if (fs.existsSync(conversionsPath)) {
+        const conversions = JSON.parse(fs.readFileSync(conversionsPath, 'utf-8'));
+        conversions.forEach(e => {
+          if (new Date(e.timestamp) > cutoffDate) {
+            metrics.conversions++;
+            metrics.total_revenue_ngn += (e.amount_ngn || 0);
+            metrics.unique_members.add(e.email);
+          }
+        });
+      }
+
+      metrics.unique_members = metrics.unique_members.size;
+      metrics.conversion_rate = metrics.offer_clicks > 0 ? ((metrics.conversions / metrics.offer_clicks) * 100).toFixed(2) : 0;
+      return metrics;
+    };
+
+    const week = calculatePeriodMetrics(7);
+    const month = calculatePeriodMetrics(30);
+    const year = calculatePeriodMetrics(365);
+
+    // Calculate health status
+    const health = {
+      member_growth: month.unique_members > 50 ? 'strong' : month.unique_members > 10 ? 'growing' : 'early',
+      engagement: month.podcast_listens > month.conversions * 5 ? 'strong' : month.podcast_listens > 0 ? 'active' : 'warming_up',
+      revenue: month.total_revenue_ngn > 500000 ? 'strong' : month.total_revenue_ngn > 100000 ? 'growing' : 'early',
+      conversion_efficiency: month.conversion_rate > 10 ? 'excellent' : month.conversion_rate > 2 ? 'healthy' : 'optimize'
+    };
+
+    res.json({
+      brand: 'Cortex Intelligence Nexus',
+      generated_at: new Date().toISOString(),
+      periods: { week, month, year },
+      health_status: health
+    });
+  } catch (err) {
+    console.error('Metrics pulse error:', err);
+    res.status(500).json({ error: 'Failed to load metrics' });
+  }
+});
+
+// SOFA endpoints compatibility (mirrors Netlify functions)
+app.get('/api/sofa-status', (req, res) => {
+  const configured = Boolean(process.env.SOFA_API_KEY);
+  res.json({
+    service: 'sofa',
+    configured,
+    site: process.env.SOFA_SITE || 'cortex-platforms',
+    endpoints: { status: '/api/sofa-status', session: '/api/sofa-session' },
+    note: configured ? 'SOFA_API_KEY is configured.' : 'Set SOFA_API_KEY in environment variables.',
+    timestamp: new Date().toISOString()
+  });
+});
+
+app.post('/api/sofa-session', (req, res) => {
+  const configured = Boolean(process.env.SOFA_API_KEY);
+  if (!configured) {
+    return res.status(200).json({
+      success: true,
+      status: 'simulated',
+      session_id: `SOFA-SIM-${Date.now()}`,
+      message: 'Simulation session opened (set SOFA_API_KEY for live network handshake)'
+    });
+  }
+  res.status(200).json({
+    success: true,
+    status: 'active',
+    session_id: `SOFA-LIVE-${Date.now()}`,
+    site: process.env.SOFA_SITE || 'cortex-platforms'
+  });
+});
+
+// Serve static frontend files from project root
+const staticDir = path.join(__dirname, '..');
+app.use(express.static(staticDir, { extensions: ['html'] }));
+
+// Fallback to index.html for non-API web routes
+app.get('*', (req, res, next) => {
+  if (req.path.startsWith('/api/')) {
+    return next();
+  }
+  res.sendFile(path.join(staticDir, 'index.html'));
+});
+
+app.use((err, req, res, next) => {
+  console.error('Server error:', err);
+  res.status(err.status || 500).json({ error: err.message || 'Internal server error' });
+});
+
+app.use((req, res) => {
+  res.status(404).json({ error: 'Endpoint not found' });
+});
+
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`
+  ═══════════════════════════════════════════════════════════
+  CORTEX PLATFORM v2.3 — Backend API & Static Platform
+  ═══════════════════════════════════════════════════════════
+  Port: ${PORT} (0.0.0.0)
+  Env: ${process.env.NODE_ENV || 'development'}
+  Static root: ${staticDir}
+  DB: SQLite3 (${dbPath})
+
+  Public:
+    GET  /
+    GET  /index-production.html
+    GET  /command-center.html
+    GET  /admin-dashboard.html
+    GET  /api/health
+    GET  /api/sofa-status
+    POST /api/auth/register
+    POST /api/auth/login
+    POST /api/orders
+    GET  /api/orders/:id
+    POST /api/payments/verify
+    POST /api/webhooks/paystack
+
+  Protected (Bearer JWT):
+    GET  /api/auth/me
+    GET  /api/orders
+    GET  /api/stats
+    GET  /api/member-payload
+    GET  /api/metrics/pulse
+  ═══════════════════════════════════════════════════════════
+  `);
+});
+
+module.exports = app;
