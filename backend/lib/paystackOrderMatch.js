@@ -10,6 +10,7 @@ function matchesPrimaryOfferOrder({ order, data, customerEmail }) {
   const orderEmail = String(order.email || '').trim().toLowerCase();
 
   return Boolean(
+    ['pending', 'completed'].includes(order.status) &&
     order.product === PRIMARY_OFFER.product &&
     Number(order.amount_kobo) === PRIMARY_OFFER.amountKobo &&
     order.currency === PRIMARY_OFFER.currency &&
