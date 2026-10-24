@@ -42,3 +42,7 @@ test('rejects a reference conflict', () => {
 test('rejects non-success event status', () => {
   assert.equal(matchesPrimaryOfferOrder({ order, data: { ...data, status: 'pending' }, customerEmail: 'buyer@example.com' }), false);
 });
+
+test('rejects refunded or otherwise ineligible order status', () => {
+  assert.equal(matchesPrimaryOfferOrder({ order: { ...order, status: 'refunded' }, data, customerEmail: 'buyer@example.com' }), false);
+});
