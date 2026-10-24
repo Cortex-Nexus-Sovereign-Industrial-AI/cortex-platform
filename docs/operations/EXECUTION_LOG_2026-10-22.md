@@ -15,7 +15,8 @@
 3. Updated `.github/workflows/cinis-dashboard-ssot-deploy.yml` to run the webhook safety tests before checking deployment credentials.
 4. Restored the complete `backend/server.js` after the current branch version was found truncated at the middleware setup. The restored version retains the current request-size limits and CORS allowlist configuration.
 5. Hardened `/api/webhooks/paystack`: it no longer creates an order or grants access from webhook metadata alone. Automated fulfilment now requires a pre-existing order matching the expected product, amount, currency, order reference, payment reference, and customer email. Unmatched charges are flagged for manual reconciliation.
-6. Updated the health endpoint's payment-mode indicator so it no longer defaults to claiming LIVE when no live secret is configured.
+6. Extracted payment/order validation into `backend/lib/paystackOrderMatch.js`; nine unit cases cover exact match, missing order, amount, currency, product, customer, reference, payment status, and ineligible order status.
+7. Updated the health endpoint's payment-mode indicator so it no longer defaults to claiming LIVE when no live secret is configured.
 
 ## Relevant commits
 
@@ -31,7 +32,7 @@
 - The connected Netlify account currently returns no matching `cortex-platforms` project. The published deploy, linked repository, and deployment state therefore remain unverified through the available connection.
 - The GitHub deployment workflow requires the owner to configure `NETLIFY_AUTH_TOKEN` and `NETLIFY_SITE_ID` as Actions secrets. Do not commit or paste these secret values into chat.
 - The public offer page still links to a static Paystack payment page. It does not yet establish a matching pending order before checkout. Until a server-side checkout/order-correlation flow exists, successful charges without a matching order will be recorded for manual reconciliation and will not automatically grant access.
-- The current CI workflow's Netlify-function tests have been committed, but their run result has not been confirmed in this execution. The Express webhook path also needs dedicated automated tests before live commerce is approved.
+- The CI workflow now runs both Netlify webhook tests and the nine backend order-matcher unit tests. Their actual GitHub Actions result has not yet been confirmed. The full Express/SQLite webhook route still needs integration tests before live commerce is approved.
 - No production deployment, live payment, or end-to-end delivery test has been confirmed.
 
 ## Release decision
