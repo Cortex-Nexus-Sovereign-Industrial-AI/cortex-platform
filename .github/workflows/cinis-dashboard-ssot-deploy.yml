@@ -61,6 +61,7 @@ jobs:
         run: |
           node --test netlify/functions/paystack-webhook.test.js
           node --test backend/lib/paystackOrderMatch.test.js
+          node --test backend/lib/webhookIdempotency.test.js
 
       - name: Validate Netlify deployment inputs
         env:
