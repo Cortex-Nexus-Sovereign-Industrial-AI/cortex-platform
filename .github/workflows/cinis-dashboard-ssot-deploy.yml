@@ -57,8 +57,10 @@ jobs:
       - name: Run project build if defined
         run: npm run build --if-present
 
-      - name: Run Paystack webhook safety tests
-        run: node --test netlify/functions/paystack-webhook.test.js
+      - name: Run Paystack webhook and order-matching safety tests
+        run: |
+          node --test netlify/functions/paystack-webhook.test.js
+          node --test backend/lib/paystackOrderMatch.test.js
 
       - name: Validate Netlify deployment inputs
         env:
