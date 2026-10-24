@@ -398,6 +398,17 @@ app.post('/api/webhooks/paystack', async (req, res) => {
     );
 
     if (!claim.claimed) {
+      if (!claim.alreadyProcessed) {
+        console.warn('[paystack-webhook] matching event is still processing; ask Paystack to retry', {
+          event, reference
+        });
+        return res.status(503).json({
+          success: false,
+          retry: true,
+          message: 'Webhook processing is in progress; retry later',
+          reference
+        });
+      }
       console.log(
         `[idempotent] skip ${event} ${reference} (processed_webhooks#${claim.existing && claim.existing.id})`
       );
