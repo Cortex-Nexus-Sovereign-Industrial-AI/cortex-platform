@@ -43,11 +43,34 @@ async function claimWebhookEvent(db, { eventType, reference, paystackId }) {
     [eventType || 'unknown', reference, paystackId != null ? String(paystackId) : null]
   );
   if (result.changes === 0) {
-    const existing = await db.dbGet(
+    let existing = await db.dbGet(
       'SELECT id, status, created_at FROM processed_webhooks WHERE event_type = ? AND reference = ?',
       [eventType || 'unknown', reference]
     );
-    return { claimed: false, existing };
+
+    if (existing && existing.status === 'processed') {
+      return { claimed: false, existing, alreadyProcessed: true };
+    }
+
+    // Recover a claim left behind by a crashed/failed handler. The guarded
+    // update is atomic; only one retry can reclaim an expired processing row.
+    const reclaimed = await db.dbRun(
+      `UPDATE processed_webhooks
+          SET status = 'processing', created_at = CURRENT_TIMESTAMP,
+              paystack_id = COALESCE(?, paystack_id)
+        WHERE event_type = ? AND reference = ? AND status != 'processed'
+          AND datetime(created_at) < datetime('now', '-2 minutes')`,
+      [paystackId != null ? String(paystackId) : null, eventType || 'unknown', reference]
+    );
+    if (reclaimed.changes > 0) {
+      return { claimed: true, id: existing && existing.id, reclaimed: true };
+    }
+
+    existing = await db.dbGet(
+      'SELECT id, status, created_at FROM processed_webhooks WHERE event_type = ? AND reference = ?',
+      [eventType || 'unknown', reference]
+    );
+    return { claimed: false, existing, alreadyProcessed: Boolean(existing && existing.status === 'processed') };
   }
   return { claimed: true, id: result.id };
 }
