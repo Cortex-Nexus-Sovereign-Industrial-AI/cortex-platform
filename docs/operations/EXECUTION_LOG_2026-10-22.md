@@ -23,6 +23,8 @@
 - Regression tests: `474b665dfe3894a4ebb4d58b56d61da3f6c0684a`
 - CI test gate: `008af3187f36a256d42d8d576aa3664420bec274`
 - Restore backend and require matching order: `23d6fdeb36f5fd465318566465b41a8b9fcb9935`
+- Extract and test order matcher: `be0a0c96d0be262d703e47dd73dcf46309159453`, `a79e076b52e6f101e92f28ec9f0269e6768f9063`, `79c5fb8174344ddd6c756d1bc8cf7524b74869d2`
+- Add backend matcher test to CI: `82a017eaa391337294461ce3dcb9823a86cc1fb7`
 
 ## Release blockers still open
 
