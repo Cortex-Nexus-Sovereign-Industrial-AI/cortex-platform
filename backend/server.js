@@ -424,9 +424,6 @@ app.post('/api/webhooks/paystack', async (req, res) => {
       const customer = data.customer || {};
       const metadata = data.metadata || {};
       const amountNgn = typeof amount === 'number' ? amount / 100 : null;
-      const expectedProduct = '30-Day AI Content System';
-      const expectedAmountKobo = 2200000;
-      const expectedCurrency = 'NGN';
       const metadataOrderRef = typeof metadata.order_ref === 'string' ? metadata.order_ref.trim() : '';
 
       // Only a pre-existing pending order with a matching reference, product,
@@ -438,7 +435,6 @@ app.post('/api/webhooks/paystack', async (req, res) => {
       }
 
       const customerEmail = String(customer.email || metadata.email || '').trim().toLowerCase();
-      const orderEmail = String((order && order.email) || '').trim().toLowerCase();
       const isMatch = matchesPrimaryOfferOrder({
         order,
         data,
