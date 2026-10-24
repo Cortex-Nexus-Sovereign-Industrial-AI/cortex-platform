@@ -24,6 +24,7 @@ const {
   claimWebhookEvent,
   markWebhookProcessed
 } = require('./lib/webhookIdempotency');
+const { matchesPrimaryOfferOrder } = require('./lib/paystackOrderMatch');
 
 dotenv.config();
 
@@ -438,17 +439,11 @@ app.post('/api/webhooks/paystack', async (req, res) => {
 
       const customerEmail = String(customer.email || metadata.email || '').trim().toLowerCase();
       const orderEmail = String((order && order.email) || '').trim().toLowerCase();
-      const isMatch = Boolean(
-        order &&
-        order.product === expectedProduct &&
-        order.amount_kobo === expectedAmountKobo &&
-        order.currency === expectedCurrency &&
-        amount === expectedAmountKobo &&
-        currency === expectedCurrency &&
-        customerEmail &&
-        customerEmail === orderEmail &&
-        (!order.paystack_ref || order.paystack_ref === reference)
-      );
+      const isMatch = matchesPrimaryOfferOrder({
+        order,
+        data,
+        customerEmail
+      });
 
       if (!isMatch) {
         await markWebhookProcessed({ dbRun }, { eventType: event, reference });
